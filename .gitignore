@@ -1,1 +1,4 @@
-.suo
+server/x64/*
+server/.vs/*
+server/server/x64/*
+*.user
