@@ -7,7 +7,7 @@ public:
 
   static Type& GetInstance()
   {
-    static Type instance();
+    static Type instance;
     return instance;
   }
 };

@@ -4,9 +4,12 @@
 
 #pragma pack(push, 1)
 
-struct PacketHeader
+namespace packet
 {
-  int16_t packetSize;
-};
+  struct PacketHeader
+  {
+    int16_t packetSize;
+  };
+}
 
 #pragma pack(pop)
