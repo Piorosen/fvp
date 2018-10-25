@@ -60,10 +60,7 @@ void UserSession::on_connected()
   packet::Connect conn;
   conn.set_network_id(networkId);
 
-  if (SerializeToPacketBuffer(conn))
-  {
-    EventProcessor::GetInstance().PushEvent(packetBuffer, currentPacketSize);
-  }
+  PushEvent(conn);
 }
 
 void UserSession::on_disconnected()
@@ -71,15 +68,14 @@ void UserSession::on_disconnected()
 	packet::Disconnect disconn;
 	disconn.set_network_id(networkId);
 
-	if (SerializeToPacketBuffer(disconn))
-	{
-		EventProcessor::GetInstance().PushEvent(packetBuffer, currentPacketSize);
-	}
+  PushEvent(disconn);
 }
 
-bool UserSession::SerializeToPacketBuffer(const google::protobuf::Message& message)
+void UserSession::PushEvent(const google::protobuf::Message& message)
 {
-  const bool res = message.SerializeToArray(packetBuffer, sizeof(packetBuffer));
-  currentPacketSize = res ? message.ByteSize() : 0;
-  return res;
+  const auto size = message.ByteSize();
+  if (message.SerializeToArray(packetBuffer, sizeof(packetBuffer)))
+  {
+    EventProcessor::GetInstance().PushEvent(packetBuffer, size);
+  }
 }

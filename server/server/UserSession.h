@@ -17,11 +17,10 @@ public:
   virtual void on_sent(const boost::system::error_code & err) override;
   virtual void on_connected() override;
   virtual void on_disconnected() override;
+  void PushEvent(const google::protobuf::Message& message);
 
 private:
 
-  bool SerializeToPacketBuffer(const google::protobuf::Message& message);
-  
   int32_t packetSize = 0;
   int32_t currentPacketSize = 0;
   char packetBuffer[MaxPacketSize] = {0,};

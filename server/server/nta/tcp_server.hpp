@@ -80,7 +80,7 @@ namespace nta
         resources = static_cast<socket_resource*>(::operator new(sizeof(socket_resource) * size));
         sessions = static_cast<SessionType*>(::operator new(sizeof(SessionType) * size));
 
-        for (auto i = size; i != 0; --i)
+        for (unsigned int i = 0; i != size; ++i)
         {
           new (&resources[i]) socket_resource(server->context, *this);
         }
