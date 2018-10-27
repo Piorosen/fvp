@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <google/protobuf/message.h>
+#include <packet.pb.h>
 #include "nta/tcp_session.hpp"
 
 class UserSession : public nta::tcp_session
@@ -17,14 +18,13 @@ public:
   virtual void on_sent(const boost::system::error_code & err) override;
   virtual void on_connected() override;
   virtual void on_disconnected() override;
-  void PushEvent(const google::protobuf::Message& message);
+  void PushEvent(packet::Type type, const google::protobuf::Message& message);
 
 private:
 
-  int32_t packetSize = 0;
-  int32_t currentPacketSize = 0;
+  int32_t bufferSize = 0;
   char packetBuffer[MaxPacketSize] = {0,};
   int64_t networkId = 0;
-  inline static int64_t NetworkIdAllocator;
+  inline static std::atomic_int64_t NetworkIdAllocator;
 };
 

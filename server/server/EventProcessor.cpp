@@ -1,6 +1,9 @@
 #include "EventProcessor.h"
+#include <iostream>
+#include "PacketBuilder.h"
+#include "PacketReader.h"
 
-
+using namespace std;
 
 EventProcessor::EventProcessor()
 {
@@ -8,6 +11,7 @@ EventProcessor::EventProcessor()
 
 EventProcessor::~EventProcessor()
 {
+  eventBuffer.reserve(20);
   WaitForStop();
 }
 
@@ -27,19 +31,19 @@ void EventProcessor::Start()
 
 void EventProcessor::Update()
 {
-  int count = 0;
+  eventBuffer.clear();
   {
     LockGuard guard(queueMutex);
     while (!eventQueue.empty())
     {
+      eventBuffer.push_back(std::move(eventQueue.front()));
       eventQueue.pop();
-      ++count;
     }
   }
 
-  for (; count != 0; --count)
+  for (const auto& evt : eventBuffer)
   {
-    //DispatchEvent();
+    DispatchEvent(evt.data(), static_cast<int>(evt.size()));
   }
 }
 
@@ -67,6 +71,18 @@ void EventProcessor::WaitForStop()
   }
 }
 
-void EventProcessor::ProcessEvent(const void* src, size_t size)
+void EventProcessor::DispatchEvent(const void* src, int size)
 {
+  packet::PacketReader reader(src, size);
+  const packet::PacketHeader& header = *reader.GetPacketHeader();
+  
+  auto it = handlers.find(static_cast<packet::Type>(header.messageType));
+  if (it != handlers.end())
+  {
+    it->second(reader.GetSerializedMessagePtr(), header.messageSize);
+  }
+  else
+  {
+    HandleDefaultEvent(src, size);
+  }
 }
