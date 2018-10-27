@@ -33,7 +33,7 @@ void UserSession::on_received(const boost::system::error_code & err, const void 
 
   while (sizeof(packet::PacketHeader) <= bufferSize)
   {
-	  const packet::PacketHeader* header = reinterpret_cast<packet::PacketHeader*>(bufferReadPos); // @todo: 패킷을 읽는 건 마지막으로 읽은 위치에서 읽도록 하자
+    const packet::PacketHeader* header = reinterpret_cast<packet::PacketHeader*>(bufferReadPos);
     if (header->messageSize < 0)
     {
       shutdown();
@@ -46,7 +46,7 @@ void UserSession::on_received(const boost::system::error_code & err, const void 
       return;
     }
 
-    RelayServerEventProcessor::GetInstance().PushEvent(bufferReadPos, packetSize);
+    RelayServerEventProcessor::GetInstance().PushEvent(networkId, bufferReadPos, packetSize);
 
     bufferSize = bufferSize - packetSize;
     bufferReadPos = bufferReadPos + packetSize;
@@ -85,5 +85,5 @@ void UserSession::PushEvent(packet::Type type, const google::protobuf::Message& 
   packet::PacketBuilder builder;
   builder.BuildPacket(type, message);
 
-  RelayServerEventProcessor::GetInstance().PushEvent(builder.GetPacketPtr(), builder.GetPacketByteSize());
+  RelayServerEventProcessor::GetInstance().PushEvent(networkId, builder.GetPacketPtr(), builder.GetPacketByteSize());
 }

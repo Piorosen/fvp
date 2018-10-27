@@ -7,13 +7,13 @@ class RelayServerEventProcessor : public EventProcessor, public Singleton<RelayS
 {
 public:
 
-  void HandleLogin(const packet::Login& message);
+  void HandleLogin(int64_t networkId, const packet::Login& message);
 
 protected:
 
   virtual void Start();
   virtual void Update();
-  virtual void HandleDefaultEvent(const void* src, int size);
+  virtual void HandleDefaultEvent(int64_t networkId, const void* src, int size);
 
 private:
 };

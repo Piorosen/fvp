@@ -9,10 +9,10 @@ void RelayServerEventProcessor::Update()
 {
 }
 
-void RelayServerEventProcessor::HandleDefaultEvent(const void* src, int size)
+void RelayServerEventProcessor::HandleDefaultEvent(int64_t networkId, const void* src, int size)
 {
 }
 
-void RelayServerEventProcessor::HandleLogin(const packet::Login& message)
+void RelayServerEventProcessor::HandleLogin(int64_t networkId, const packet::Login& message)
 {
 }

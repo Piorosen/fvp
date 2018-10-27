@@ -15,14 +15,14 @@ EventProcessor::~EventProcessor()
   WaitForStop();
 }
 
-void EventProcessor::PushEvent(const void* src, size_t size)
+void EventProcessor::PushEvent(int64_t networkId, const void* src, size_t size)
 {
   std::vector<char> buffer;
   buffer.resize(size);
   memcpy(buffer.data(), src, size);
 
   LockGuard guard(queueMutex);
-  eventQueue.push(std::move(buffer));
+  eventQueue.emplace(networkId, std::move(buffer));
 }
 
 void EventProcessor::Start()
@@ -41,9 +41,9 @@ void EventProcessor::Update()
     }
   }
 
-  for (const auto& evt : eventBuffer)
+  for (auto&& [networkId, packet] : eventBuffer)
   {
-    DispatchEvent(evt.data(), static_cast<int>(evt.size()));
+    DispatchEvent(networkId, packet.data(), packet.size());
   }
 }
 
@@ -71,7 +71,7 @@ void EventProcessor::WaitForStop()
   }
 }
 
-void EventProcessor::DispatchEvent(const void* src, int size)
+void EventProcessor::DispatchEvent(int64_t networkId, const void* src, int size)
 {
   packet::PacketReader reader(src, size);
   const packet::PacketHeader& header = *reader.GetPacketHeader();
@@ -79,10 +79,10 @@ void EventProcessor::DispatchEvent(const void* src, int size)
   auto it = handlers.find(static_cast<packet::Type>(header.messageType));
   if (it != handlers.end())
   {
-    it->second(reader.GetSerializedMessagePtr(), header.messageSize);
+    it->second(networkId, reader.GetSerializedMessagePtr(), header.messageSize);
   }
   else
   {
-    HandleDefaultEvent(src, size);
+    HandleDefaultEvent(networkId, src, size);
   }
 }
