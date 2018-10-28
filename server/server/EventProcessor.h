@@ -39,7 +39,8 @@ protected:
   virtual void HandleDefaultEvent(int64_t networkId, const void* src, int size) = 0;
 
 private:
-
+  
+  void PostUpdate();
   void DispatchEvent(int64_t networkId, const void* src, int size);
 
   using LockGuard = std::lock_guard<std::mutex>;
@@ -50,6 +51,5 @@ private:
   std::thread thread;
   bool shouldStop = false;
   std::map<packet::Type, std::function<void(int64_t, const void*, int)>> handlers;
-  //std::chrono::duration<int32_t> timeLimit;
-  //std::chrono::time_point<std::chrono::steady_clock>;
+//  std::chrono::milliseconds timeLimitMs;
 };

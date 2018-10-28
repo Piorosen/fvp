@@ -16,4 +16,6 @@ protected:
   virtual void HandleDefaultEvent(int64_t networkId, const void* src, int size);
 
 private:
+
+  int count = 0;
 };

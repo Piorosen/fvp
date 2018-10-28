@@ -40,7 +40,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -141,6 +141,7 @@
     <ClInclude Include="RelayServerEventProcessor.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="UserSession.h" />
   </ItemGroup>
   <ItemGroup>

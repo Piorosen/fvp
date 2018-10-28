@@ -2,6 +2,7 @@
 #include <iostream>
 #include "PacketBuilder.h"
 #include "PacketReader.h"
+#include "ThreadPool.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ EventProcessor::EventProcessor()
 
 EventProcessor::~EventProcessor()
 {
-  eventBuffer.reserve(20);
+  eventBuffer.reserve(1024);
   WaitForStop();
 }
 
@@ -31,13 +32,17 @@ void EventProcessor::Start()
 
 void EventProcessor::Update()
 {
-  eventBuffer.clear();
   {
+    eventBuffer.clear();
     LockGuard guard(queueMutex);
     while (!eventQueue.empty())
     {
       eventBuffer.push_back(std::move(eventQueue.front()));
       eventQueue.pop();
+      if (eventBuffer.size() == eventBuffer.capacity())
+      {
+        break;
+      }
     }
   }
 
@@ -49,13 +54,19 @@ void EventProcessor::Update()
 
 void EventProcessor::Run()
 {
-  this->thread = std::thread([this]() {
-    Start();
-    while (!shouldStop)
-    {
+  Start();
+  PostUpdate();
+}
+
+void EventProcessor::PostUpdate()
+{
+  if (!shouldStop)
+  {
+    ThreadPool::GetInstance().Post([this] {
       Update();
-    }
-  });
+      PostUpdate();
+    });
+  }
 }
 
 void EventProcessor::Stop()
