@@ -5,10 +5,6 @@
 
 int main()
 {
-  //boost::asio::io_context context;
-  //boost::asio::io_context::work work(context);
-  //context.run();
-
   Server server;
   server.Run();
 

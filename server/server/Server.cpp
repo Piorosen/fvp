@@ -12,7 +12,6 @@ Server::Server()
 Server::~Server()
 {
   RelayServerEventProcessor::GetInstance().Stop();
-  RelayServerEventProcessor::GetInstance().WaitForStop();
   ThreadPool::GetInstance().Stop();
 }
 

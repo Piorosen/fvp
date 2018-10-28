@@ -8,12 +8,11 @@ using namespace std;
 
 EventProcessor::EventProcessor()
 {
+  eventBuffer.reserve(1024);
 }
 
 EventProcessor::~EventProcessor()
 {
-  eventBuffer.reserve(1024);
-  WaitForStop();
 }
 
 void EventProcessor::PushEvent(int64_t networkId, const void* src, size_t size)
@@ -72,14 +71,6 @@ void EventProcessor::PostUpdate()
 void EventProcessor::Stop()
 {
   shouldStop = true;
-}
-
-void EventProcessor::WaitForStop()
-{
-  if (this->thread.joinable())
-  {
-    thread.join();
-  }
 }
 
 void EventProcessor::DispatchEvent(int64_t networkId, const void* src, int size)

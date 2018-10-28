@@ -17,7 +17,6 @@ public:
   void PushEvent(int64_t networkId, const void* src, size_t size);
   void Run();
   void Stop();
-  void WaitForStop();
 
   template < typename ProcessorType, typename MessageType >
   inline void BindHandler(packet::Type type, void(ProcessorType::*handler)(int64_t networkId, const MessageType&))
@@ -48,7 +47,6 @@ private:
   std::mutex queueMutex;
   std::queue<std::pair<int64_t, std::vector<char>>> eventQueue;
   std::vector<std::pair<int64_t, std::vector<char>>> eventBuffer;
-  std::thread thread;
   bool shouldStop = false;
   std::map<packet::Type, std::function<void(int64_t, const void*, int)>> handlers;
 //  std::chrono::milliseconds timeLimitMs;
