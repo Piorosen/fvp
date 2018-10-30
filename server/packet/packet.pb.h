@@ -68,7 +68,7 @@ namespace packet {
 
 enum Type {
   NONE = 0,
-  LOGIN_REQ = 1,
+  LOGIN = 1,
   CONNECT = 2,
   DISCONNECT = 3,
   Type_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,

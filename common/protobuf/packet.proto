@@ -5,9 +5,10 @@ package packet;
 enum Type
 {
   NONE = 0;
-  LOGIN_REQ = 1;
+  LOGIN = 1;
   CONNECT = 2;
   DISCONNECT = 3;
+  MATCH = 4;
 }
 
 message Connect
@@ -24,4 +25,26 @@ message Login
 {
   int64 network_id = 1;
   string name = 2;
+}
+
+message LoginAck
+{
+  int64 network_id = 1;
+  string name = 2;
+}
+
+message RoomUser
+{
+  int64 network_id = 2;
+  string name = 1;
+}
+
+message Match
+{
+}
+
+message MatchAck
+{
+  string room_id = 1;
+  repeated RoomUser users = 2;
 }

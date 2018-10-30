@@ -1,4 +1,5 @@
 
+#include <boost/asio.hpp>
 #include <google/protobuf/stubs/common.h>
 #include "Server.h"
 

@@ -145,11 +145,11 @@ void AddDescriptorsImpl() {
       "\n\014packet.proto\022\006packet\"\035\n\007Connect\022\022\n\nnet"
       "work_id\030\001 \001(\003\" \n\nDisconnect\022\022\n\nnetwork_i"
       "d\030\001 \001(\003\")\n\005Login\022\022\n\nnetwork_id\030\001 \001(\003\022\014\n\004"
-      "name\030\002 \001(\t*<\n\004Type\022\010\n\004NONE\020\000\022\r\n\tLOGIN_RE"
-      "Q\020\001\022\013\n\007CONNECT\020\002\022\016\n\nDISCONNECT\020\003b\006proto3"
+      "name\030\002 \001(\t*8\n\004Type\022\010\n\004NONE\020\000\022\t\n\005LOGIN\020\001\022"
+      "\013\n\007CONNECT\020\002\022\016\n\nDISCONNECT\020\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 200);
+      descriptor, 196);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet.proto", &protobuf_RegisterTypes);
 }

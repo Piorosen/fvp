@@ -23,6 +23,9 @@
     <ClCompile Include="EventProcessor.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="RelayServerEventProcessor.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -41,6 +44,18 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="PacketHeader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketBuilder.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketReader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RelayServerEventProcessor.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

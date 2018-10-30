@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="EventProcessor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RelayServerEventProcessor.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="UserSession.cpp" />
   </ItemGroup>
@@ -134,9 +135,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EventProcessor.h" />
+    <ClInclude Include="PacketBuilder.h" />
     <ClInclude Include="PacketHeader.h" />
+    <ClInclude Include="PacketReader.h" />
+    <ClInclude Include="RelayServerEventProcessor.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="UserSession.h" />
   </ItemGroup>
   <ItemGroup>

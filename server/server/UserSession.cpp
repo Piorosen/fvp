@@ -1,7 +1,7 @@
 #include "UserSession.h"
 #include <packet.pb.h>
-#include "EventProcessor.h"
-#include "PacketHeader.h"
+#include "RelayServerEventProcessor.h"
+#include "PacketBuilder.h"
 
 UserSession::UserSession()
 {
@@ -20,32 +20,41 @@ void UserSession::on_received(const boost::system::error_code & err, const void 
     return;
   }
 
-  if (MaxPacketSize - currentPacketSize < size)
+  if ((MaxPacketSize - bufferSize) < size)
   {
     shutdown();
     return;
   }
 
-  memcpy(packetBuffer + currentPacketSize, data, size);
-  currentPacketSize += static_cast<int32_t>(size);
+  memcpy(&packetBuffer[0] + bufferSize, data, size);
+  bufferSize += static_cast<int32_t>(size);
 
-  if (sizeof(packet::PacketHeader) <= currentPacketSize)
+  char* bufferReadPos = &packetBuffer[0];
+
+  while (sizeof(packet::PacketHeader) <= bufferSize)
   {
-	  const packet::PacketHeader* header = reinterpret_cast<packet::PacketHeader*>(packetBuffer);
-    if (header->packetSize < 0)
+    const packet::PacketHeader* header = reinterpret_cast<packet::PacketHeader*>(bufferReadPos);
+    if (header->messageSize < 0)
     {
       shutdown();
       return;
     }
-	  if (currentPacketSize <= header->packetSize)
-	  {// 패킷이 완성됐다면
-		  const auto remainingSize = currentPacketSize - header->packetSize;
-		  
-      EventProcessor::GetInstance().PushEvent(packetBuffer + sizeof(packet::PacketHeader), header->packetSize);
-		  
-      memmove(packetBuffer, packetBuffer + header->packetSize, remainingSize);
-		  currentPacketSize = remainingSize;
-	  }
+
+    const int packetSize = header->messageSize + sizeof(packet::PacketHeader);
+    if (bufferSize < packetSize)
+    {
+      return;
+    }
+
+    RelayServerEventProcessor::GetInstance().PushEvent(networkId, bufferReadPos, packetSize);
+
+    bufferSize = bufferSize - packetSize;
+    bufferReadPos = bufferReadPos + packetSize;
+  }
+
+  if (0 < bufferSize)
+  {
+    memmove(packetBuffer, bufferReadPos, bufferSize);
   }
 }
 
@@ -60,10 +69,7 @@ void UserSession::on_connected()
   packet::Connect conn;
   conn.set_network_id(networkId);
 
-  if (SerializeToPacketBuffer(conn))
-  {
-    EventProcessor::GetInstance().PushEvent(packetBuffer, currentPacketSize);
-  }
+  PushEvent(packet::Type::CONNECT, conn);
 }
 
 void UserSession::on_disconnected()
@@ -71,15 +77,13 @@ void UserSession::on_disconnected()
 	packet::Disconnect disconn;
 	disconn.set_network_id(networkId);
 
-	if (SerializeToPacketBuffer(disconn))
-	{
-		EventProcessor::GetInstance().PushEvent(packetBuffer, currentPacketSize);
-	}
+  PushEvent(packet::Type::DISCONNECT, disconn);
 }
 
-bool UserSession::SerializeToPacketBuffer(const google::protobuf::Message& message)
+void UserSession::PushEvent(packet::Type type, const google::protobuf::Message& message)
 {
-  const bool res = message.SerializeToArray(packetBuffer, sizeof(packetBuffer));
-  currentPacketSize = res ? message.ByteSize() : 0;
-  return res;
+  packet::PacketBuilder builder;
+  builder.BuildPacket(type, message);
+
+  RelayServerEventProcessor::GetInstance().PushEvent(networkId, builder.GetPacketPtr(), builder.GetPacketByteSize());
 }
