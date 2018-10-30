@@ -9,40 +9,23 @@ class ThreadPool : public Singleton<ThreadPool>
 {
 public:
 
+  friend class Singleton<ThreadPool>;
+
+  ~ThreadPool();
+
   template < typename Func >
-  void Post(Func&& func)
+  inline void Post(Func&& func)
   {
     context.post(std::forward<Func>(func));
   }
 
-  void Stop()
-  {
-    context.stop();
-    for (auto& t : threads)
-    {
-      if (t.joinable())
-      {
-        t.join();
-      }
-    }
-    context.reset();
-  }
+  void Stop();
 
-  void Run(int numThreads)
-  {
-    //auto work = boost::asio::make_work_guard(context);
-    threads.resize(numThreads);
-    for (auto& t : threads)
-    {
-      t = std::thread([this] {
-        boost::asio::io_context::work work(context);
-        context.run();
-        std::cout << "thread closed" << std::endl;
-      });
-    }
-  }
+  void Run(int numThreads);
 
 private:
+
+  ThreadPool();
 
   boost::asio::io_context context;
   std::vector<std::thread> threads;

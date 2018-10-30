@@ -19,5 +19,4 @@ void RelayServerEventProcessor::HandleDefaultEvent(int64_t networkId, const void
 void RelayServerEventProcessor::HandleLogin(int64_t networkId, const packet::Login& message)
 {
   auto id = std::this_thread::get_id();
-  std::cout << id << ": "<< count++ << std::endl;
 }

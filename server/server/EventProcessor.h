@@ -19,7 +19,7 @@ public:
   void Stop();
 
   template < typename ProcessorType, typename MessageType >
-  inline void BindHandler(packet::Type type, void(ProcessorType::*handler)(int64_t networkId, const MessageType&))
+  inline void BindHandler(packet::Type type, void(ProcessorType::*handler)(int64_t, const MessageType&))
   {
     handlers[type] = [this, handler](int64_t networkId, const void* data, int size) {
       MessageType message;

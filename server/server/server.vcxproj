@@ -126,6 +126,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RelayServerEventProcessor.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="UserSession.cpp" />
   </ItemGroup>
   <ItemGroup>

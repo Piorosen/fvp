@@ -1,5 +1,4 @@
 #include "EventProcessor.h"
-#include <iostream>
 #include "PacketBuilder.h"
 #include "PacketReader.h"
 #include "ThreadPool.h"
@@ -47,7 +46,7 @@ void EventProcessor::Update()
 
   for (auto&& [networkId, packet] : eventBuffer)
   {
-    DispatchEvent(networkId, packet.data(), packet.size());
+    DispatchEvent(networkId, packet.data(), static_cast<int>(packet.size()));
   }
 }
 

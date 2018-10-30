@@ -7,6 +7,8 @@ class RelayServerEventProcessor : public EventProcessor, public Singleton<RelayS
 {
 public:
 
+  friend class Singleton<RelayServerEventProcessor>;
+
   void HandleLogin(int64_t networkId, const packet::Login& message);
 
 protected:
@@ -14,8 +16,4 @@ protected:
   virtual void Start();
   virtual void Update();
   virtual void HandleDefaultEvent(int64_t networkId, const void* src, int size);
-
-private:
-
-  int count = 0;
 };

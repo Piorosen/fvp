@@ -26,6 +26,9 @@
     <ClCompile Include="RelayServerEventProcessor.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
