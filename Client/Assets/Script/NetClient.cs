@@ -4,6 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using Google.Protobuf;
+
+public struct PacketInfo
+{
+    public short Type;
+    public byte[] Payload;
+}
 
 public class NetClient
 {
@@ -18,6 +25,7 @@ public class NetClient
     int readBufferLength = 0;
     byte[] sendBuffer = new byte[SendBufferCapacity];
     IPEndPoint endpoint;
+    Queue<PacketInfo> readQueue = new Queue<PacketInfo>();
 
     public NetClient(string addr, int port)
     {
@@ -58,8 +66,15 @@ public class NetClient
         sendQueue.Enqueue(buf);
     }
 
-    bool TryGetPacket()
+    public bool TryGetPacket(out PacketInfo packet)
     {
+        if (readQueue.Count != 0)
+        {
+            var info = readQueue.Dequeue();
+            packet = info;
+            return true;
+        }
+        packet = new PacketInfo() { Payload = null, Type = 0 };
         return false;
     }
 
@@ -79,6 +94,28 @@ public class NetClient
                 {
                     int bytesTransferred = stream.Read(readBuffer, readBufferLength, readBufferRemainingLength);
                     readBufferLength += bytesTransferred;
+
+                    int headerSize = 4;
+                    int readIndex = 0;
+                    while (readBufferLength < headerSize)
+                    {
+                        short payloadSize = BitConverter.ToInt16(readBuffer, readIndex);
+                        short type = BitConverter.ToInt16(readBuffer, readIndex + sizeof(short));
+                        int packetSize = headerSize + payloadSize;
+                        if (packetSize < readBufferLength)
+                        {
+                            byte[] payload = new byte[payloadSize];
+                            Array.Copy(readBuffer, readIndex + headerSize, payload, 0, payloadSize);
+                            readQueue.Enqueue(new PacketInfo() { Payload = payload, Type = type });
+                            readBufferLength -= packetSize;
+                            readIndex += packetSize;
+                        }
+                        else
+                        {
+                            Array.ConstrainedCopy(readBuffer, readIndex, readBuffer, 0, readBufferLength);
+                            break;
+                        }
+                    }
                 }
             }
         }
