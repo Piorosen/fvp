@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{277C243F-D564-5F05-1F95-059263E4BAB7}</ProjectGuid>
+    <ProjectGuid>{12F44184-A422-5F27-22E6-507969043F15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,19 +62,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Character.cs" />
+    <Compile Include="Assets\Script\NetClient.cs" />
+    <Compile Include="Assets\Script\PlayerPool.cs" />
     <None Include="Assets\Asset\Things need to add in Beta.txt" />
     <None Include="Assets\Asset\Standard Information.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/ak/Desktop/FVP/fvp/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/ak/Desktop/Git/fvp/trunk/Client/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/ak/Desktop/FVP/fvp/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/ak/Desktop/Git/fvp/trunk/Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/ak/Desktop/FVP/fvp/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/ak/Desktop/Git/fvp/trunk/Client/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/ak/Desktop/FVP/fvp/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/ak/Desktop/Git/fvp/trunk/Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -276,6 +278,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>/Users/ak/Desktop/Git/fvp/trunk/Client/Assets/Plugins/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>/Users/ak/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
