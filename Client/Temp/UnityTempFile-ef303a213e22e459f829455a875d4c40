@@ -307,4 +307,5 @@
 'Assets/NGUI/Scripts/UI/UIViewport.cs'
 'Assets/Script/Character.cs'
 'Assets/Script/NetClient.cs'
+'Assets/Script/PlayerPool.cs'
 -lib:'/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity'

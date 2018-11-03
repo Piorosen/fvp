@@ -16,7 +16,7 @@ public class Character : MonoBehaviour {
     SpriteRenderer Renderer;
     BoxCollider2D playerCollider;
 
-    int? UID = null;
+    public int? UID = null;
 
     void Awake()
     {
