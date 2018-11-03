@@ -4,88 +4,82 @@ Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
+Cmd: preprocess
+  insize=1655 outsize=940 ok=1
+Cmd: preprocess
+  insize=1884 outsize=951 ok=1
+Cmd: preprocess
+  insize=219 outsize=219 ok=1
+Cmd: preprocess
+  insize=1606 outsize=555 ok=1
+Cmd: preprocess
+  insize=1912 outsize=909 ok=1
+Cmd: preprocess
+  insize=479 outsize=479 ok=1
+Cmd: preprocess
+  insize=1917 outsize=927 ok=1
+Cmd: preprocess
+  insize=1545 outsize=556 ok=1
+Cmd: preprocess
+  insize=1958 outsize=947 ok=1
+Cmd: preprocess
+  insize=1888 outsize=937 ok=1
+Cmd: preprocess
+  insize=1881 outsize=934 ok=1
+Cmd: preprocess
+  insize=3042 outsize=1917 ok=1
+Cmd: preprocess
+  insize=1954 outsize=948 ok=1
+Cmd: preprocess
+  insize=1974 outsize=912 ok=1
+Cmd: preprocess
+  insize=435 outsize=435 ok=1
+Cmd: preprocess
+  insize=1185 outsize=500 ok=1
+Cmd: preprocess
+  error: 2 plat 21 at (41): Too many texture interpolators would be used for ForwardBase pass (9 out of max 8), try adding #pragma target 3.0
+  insize=5994 outsize=4469 ok=0
+Cmd: preprocess
+  insize=1607 outsize=936 ok=1
+Cmd: preprocess
+  insize=2361 outsize=2421 ok=1
+Cmd: preprocess
+  insize=1324 outsize=543 ok=1
+Cmd: preprocess
+  insize=1750 outsize=980 ok=1
+Cmd: preprocess
+  insize=1655 outsize=940 ok=1
+Cmd: preprocess
+  insize=1884 outsize=951 ok=1
+Cmd: preprocess
+  insize=1606 outsize=555 ok=1
+Cmd: preprocess
+  insize=1912 outsize=909 ok=1
+Cmd: preprocess
+  insize=1917 outsize=927 ok=1
+Cmd: preprocess
+  insize=1545 outsize=556 ok=1
+Cmd: preprocess
+  insize=1958 outsize=947 ok=1
+Cmd: preprocess
+  insize=1888 outsize=937 ok=1
+Cmd: preprocess
+  insize=1881 outsize=934 ok=1
+Cmd: preprocess
+  insize=1954 outsize=948 ok=1
+Cmd: preprocess
+  insize=1974 outsize=912 ok=1
+Cmd: preprocess
+  insize=1185 outsize=500 ok=1
+Cmd: preprocess
+  error: 2 plat 21 at (41): Too many texture interpolators would be used for ForwardBase pass (9 out of max 8), try adding #pragma target 3.0
+  insize=5994 outsize=4469 ok=0
+Cmd: preprocess
+  insize=1607 outsize=936 ok=1
+Cmd: preprocess
+  insize=1324 outsize=543 ok=1
+Cmd: preprocess
+  insize=1750 outsize=980 ok=1
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
