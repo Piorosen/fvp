@@ -58,7 +58,7 @@ public class PlayerPool : UnityEngine.MonoBehaviour
         Vector3 AvgLocation = new Vector3();
         int UserCount = 0;
 
-        Vector2 Max = new Vector2();
+        Vector2 Max = new Vector2(float.MinValue, float.MinValue);
         Vector2 Min = new Vector2(float.MaxValue, float.MaxValue);
 
         for (int i = 0; i < Pool.Count; i++){
@@ -68,24 +68,25 @@ public class PlayerPool : UnityEngine.MonoBehaviour
 
                 if (Max.x < Pool[i].transform.position.x){
                     Max.x = Pool[i].transform.position.x;
-                }else if (Max.y < Pool[i].transform.position.y){
+                }
+                if (Max.y < Pool[i].transform.position.y){
                     Max.y = Pool[i].transform.position.y;
                 }
                 if (Min.x > Pool[i].transform.position.x){
                     Min.x = Pool[i].transform.position.x;
-                }else if (Min.y > Pool[i].transform.position.y){
+                }
+                if (Min.y > Pool[i].transform.position.y){
                     Min.y = Pool[i].transform.position.y;
                 }
 
-
                 UserCount++;
             }
-            Debug.Log(AvgLocation.ToString());
+            Debug.Log(AvgLocation / UserCount);
         }
         var Character = Camera.GetComponent<InGameCamera>();
 
         Character.Target = AvgLocation / UserCount;
-        Character.NeedSize = new Vector2(Mathf.Abs(Max.x - Min.x), Max.y - Min.y);
+        Character.NeedSize = new Vector2(Mathf.Abs(Max.x - Min.x), Mathf.Abs(Max.y - Min.y));
     }
 
 
