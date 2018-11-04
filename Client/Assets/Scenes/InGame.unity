@@ -700,8 +700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {x: 0, y: 0, z: 0}
   Speed: 1
-  MaxSize: {x: 0, y: 0}
-  MinSize: {x: 0, y: 0}
+  MaxSize: 10
+  MinSize: 3
   NeedSize: {x: 0, y: 0}
 --- !u!20 &519420031
 Camera:
@@ -727,7 +727,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.857753
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

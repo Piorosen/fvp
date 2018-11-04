@@ -5,12 +5,11 @@ using System.Linq;
 
 public class PlayerPool : UnityEngine.MonoBehaviour
 {
-    public static PlayerPool SinglePlayerPool = null;
+    public static PlayerPool Instance = null;
+
     public List<GameObject> Prefab = new List<GameObject>(1);
     public List<Vector2> SpawnLocation = new List<Vector2>(8);
-
     private List<GameObject> Pool = new List<GameObject>(8);
-
     public GameObject Camera;
 
     int PlayerUID = -1;
@@ -21,9 +20,9 @@ public class PlayerPool : UnityEngine.MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        if (SinglePlayerPool == null)
+        if (Instance == null)
         {
-            SinglePlayerPool = this;
+            Instance = this;
             for (int i = 0; i < Pool.Capacity; i++)
             {
                 Pool.Add(null);
