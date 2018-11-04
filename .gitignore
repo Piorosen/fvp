@@ -2,6 +2,8 @@ x64/
 .vs/
 packages/
 *.user
+Debug/
+Release/
 
 Client/Client.sln
 Client/*.csproj
