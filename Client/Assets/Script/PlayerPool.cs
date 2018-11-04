@@ -23,7 +23,6 @@ public class PlayerPool : UnityEngine.MonoBehaviour
             Instance = this;
 
             Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
-
             for (int i = 0; i < Pool.Capacity; i++)
             {
                 Pool.Add(null);
@@ -42,15 +41,29 @@ public class PlayerPool : UnityEngine.MonoBehaviour
             try
             {
                 Client.Connect();
-                Packet.Login login = new Packet.Login();
-                login.NetworkId = UID.Value;
-                login.Name = System.IO.Path.GetRandomFileName();
-                Client.Send(Packet.Type.Login, login);
-                Debug.Log("Login Successs  " + login.Name + " : " + login.NetworkId);
+                
+                Packet.LoginReq login = new Packet.LoginReq
+                {
+                    NetworkId = UID.Value,
+                    Name = System.IO.Path.GetRandomFileName()
+                };
+
+                Client.Send(Packet.Type.LoginReq, login);
+                Client.Update();
+                PacketInfo info = new PacketInfo();
+                if (Client.TryGetPacket(out info))
+                {
+                    Debug.Log("Login Successs  " + login.Name + " : " + login.NetworkId);
+                }
+                else
+                {
+                    Debug.Log("Login Fail");
+                }
+                
             }
             catch (Exception)
             {
-                Debug.Log("Character : Start : Client Error! : " + UID.Value);
+                Debug.Log("Character : Start : Server Error! : " + UID.Value);
                 Client.Close();
                 Client = null;
             }
@@ -76,35 +89,48 @@ public class PlayerPool : UnityEngine.MonoBehaviour
 
     IEnumerator ServerRequest()
     {
+        Debug.Log("코루틴 시작");
         if (Client != null)
         {
+            Debug.Log("널아님");
             while (true)
             {
-                Packet.Move move = new Packet.Move();
-                
-                move.Pos = new Packet.Vector3()
+                Vector3 location = new Vector3();
+
+                location = Pool
+                    .First((item) => item.GetComponent<Character>().UID == PlayerUID)
+                    .GetComponent<Character>().transform.position;
+
+                Packet.MoveReq move = new Packet.MoveReq
                 {
-                    X = transform.position.x,
-                    Y = transform.position.y,
-                    Z = transform.position.z
+                    Position = new Packet.Vector3()
+                    {
+                        X = location.x,
+                        Y = location.y,
+                        Z = location.z
+                    }
                 };
 
-                Client.Send(Packet.Type.Move, move);
+                Client.Send(Packet.Type.MoveReq, move);
+                Client.Update();
+
                 PacketInfo info = new PacketInfo();
                 if (Client.TryGetPacket(out info))
                 {
+                    
                     if (info.Type == Packet.Type.MoveAck)
                     {
                         Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
-                        Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Pos.ToString());
+                        Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Position.ToString());
                     }
-                    Debug.Log("Type : " + info.Type);
+                    
                 }
-                
-                yield return new WaitForSeconds(0.100f);
-            }
 
+                yield return new WaitForSeconds(0.1f);
+
+            }
         }
+        Debug.Log("코루틴 종료");
     }
 
     private void FixedUpdate()

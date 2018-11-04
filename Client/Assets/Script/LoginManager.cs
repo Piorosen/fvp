@@ -15,14 +15,17 @@ public class LoginManager : MonoBehaviour {
 	}
 
     public void OnClicked(){
-        NetClient client = new NetClient("127.0.0.1", 16333);
+        NetClient client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
         try
         {
             client.Connect();
-            Packet.Login login = new Packet.Login();
-            login.NetworkId = 0;
-            login.Name = this.GetHashCode().ToString();
-            client.Send(Packet.Type.Login, login);
+
+            Packet.LoginReq login = new Packet.LoginReq
+            {
+                NetworkId = 0,
+                Name = this.GetHashCode().ToString()
+            };
+            client.Send(Packet.Type.LoginReq, login);
             Debug.Log("Send");
 
             PacketInfo info = new PacketInfo();
