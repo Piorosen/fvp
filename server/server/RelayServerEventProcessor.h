@@ -14,6 +14,7 @@ public:
   void HandleDisconnect(int64_t networkId, const packet::Disconnect& message);
   void HandleLogin(int64_t networkId, const packet::LoginReq& message);
   void HandleMove(int64_t networkId, const packet::MoveReq& message);
+  void Send(int64_t networkId, packet::Type type, const google::protobuf::Message& message);
 
 protected:
 
