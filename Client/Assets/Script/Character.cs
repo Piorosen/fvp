@@ -48,12 +48,10 @@ public class Character : MonoBehaviour {
         anime.SetBool("Down", false);
     }
 
-    // Update is called once per frame
-    void FixedUpdate () {
+    public void Movement(Vector4 data){
         transform.rotation = Quaternion.identity;
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        Vector3 Movement = new Vector3(x, y, this.transform.position.z);
+        float x = data.x;
+        float y = data.y;
 
         float Acc = Accelerate * Time.deltaTime;
 
@@ -78,7 +76,9 @@ public class Character : MonoBehaviour {
             {
                 Speed += Acc;
             }
-        }else{
+        }
+        else
+        {
             if (Speed > 0.01)
             {
                 Speed -= Acc * 2;
@@ -87,14 +87,18 @@ public class Character : MonoBehaviour {
             {
                 Speed += Acc * 2;
             }
-            else{
+            else
+            {
                 Speed = 0.0f;
             }
         }
 
-        if (Speed > 0){
+        if (Speed > 0)
+        {
             Renderer.flipX = true;
-        }else if (Speed < 0){
+        }
+        else if (Speed < 0)
+        {
             Renderer.flipX = false;
         }
 
@@ -107,5 +111,10 @@ public class Character : MonoBehaviour {
         }
 
         rigidBody.transform.Translate(Vector3.right * Speed);
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
+
 	}
 }
