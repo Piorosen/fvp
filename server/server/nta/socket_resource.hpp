@@ -2,7 +2,9 @@
 
 #include <queue>
 #include <vector>
-#include <boost/asio.hpp>
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/io_context_strand.hpp>
+#include <boost/asio/ip/tcp.hpp>
 #include "object_pool.hpp"
 #include "event_handler.hpp"
 
@@ -26,8 +28,8 @@ namespace nta
     boost::asio::ip::tcp::socket socket;
     object_pool& pool;
     std::vector<char> recvBuf;
-    nta::event_handler* handler = nullptr;
     std::queue<std::vector<char>> sendQueue;
     std::vector<std::vector<char>> sendBuffers;
+	std::vector<boost::asio::const_buffer> sendBuffers2;
   };
 }
