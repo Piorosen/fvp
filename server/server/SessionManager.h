@@ -9,7 +9,7 @@ class SessionManager : public Singleton<SessionManager>
 {
 public:
   
-  friend class SessionManager;
+  friend class Singleton<SessionManager>;
 
   using LockGuard = std::lock_guard<std::mutex>;
 
