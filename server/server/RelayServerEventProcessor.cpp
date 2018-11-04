@@ -9,16 +9,31 @@ void RelayServerEventProcessor::HandleLogin(int64_t networkId, const packet::Log
 	return;
   }
 
-  RoomUser user;
-  user.name = message.name();
-  user.networkId = networkId;
-  AddLoginUser(networkId, std::move(user));
+  RoomUser newUser;
+  newUser.name = message.name();
+  newUser.networkId = networkId;
 
-  packet::LoginAck ack;
-  ack.set_name(message.name());
-  ack.set_network_id(networkId);
+  AddLoginUser(networkId, std::move(newUser));
   
-  SendAll(packet::Type::LOGIN_ACK, ack);
+  packet::LoginAck loginAck;
+  loginAck.set_name(message.name());
+  loginAck.set_network_id(networkId);
+  for (auto& item : users)
+  {
+	auto& user = item.second;
+	auto addUser = loginAck.add_users();
+	*(addUser->mutable_position()) = user.position;
+	addUser->set_network_id(user.networkId);
+  }
+  Send(networkId, packet::Type::LOGIN_ACK, loginAck);
+  
+  RoomUser& user = GetLoginUser(networkId);
+  packet::EnterNewUserAck enterAck;
+  enterAck.set_new_user_name(user.name);
+  auto mutNewUser = enterAck.mutable_new_user();
+  mutNewUser->set_network_id(networkId);
+  *mutNewUser->mutable_position() = user.position;
+  SendAll(packet::Type::ENTER_NEW_USER_ACK, enterAck);
 }
 
 void RelayServerEventProcessor::HandleMove(int64_t networkId, const packet::MoveReq & message)
