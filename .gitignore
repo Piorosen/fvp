@@ -2,3 +2,41 @@ x64/
 .vs/
 packages/
 *.user
+
+Client/Client.sln
+Client/*.csproj
+
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+GraphicsSettings.asset
+ProjectSettings.asset
+ProjectVersion.txt

@@ -1,12 +1,17 @@
 #pragma once
 
-#include <boost/asio.hpp>
+#include <thread>
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/ip/tcp.hpp>
 #include "socket_resource.hpp"
 #include "object_pool.hpp"
-#include "ref.hpp"
 
 namespace nta
 {
+  namespace details
+  {
+  }
+
   template < typename SessionType >
   class tcp_server
   {
@@ -27,6 +32,10 @@ namespace nta
 
     ~tcp_server()
     {
+	  if (!context.stopped())
+	  {
+		context.stop();
+	  }
     }
 
     void run()
@@ -35,104 +44,94 @@ namespace nta
       acceptor.bind(endpoint);
       acceptor.listen();
 
-      std::vector<std::thread> subThreads;
-      subThreads.reserve(threadCount - 1);
-      for (auto& subThread : subThreads)
-      {
-        subThread = std::thread([this] { context.run(); });
-      }
+	  resource_pool pool(this, maxSessionCount);
+	  pool.accept_all();
 
-      resource_pool pool(this, maxSessionCount);
-      pool.accept_all();
-
+	  std::vector<std::thread> subThreads;
+	  if (1 < threadCount)
+	  {
+		subThreads.reserve(threadCount - 1);
+		for (unsigned int i = 1; i != threadCount; ++i)
+		{
+		  subThreads.emplace_back([this] { context.run(); });
+		}
+	  }
       context.run();
 
-      for (auto& subThread : subThreads)
+      for (std::thread& subThread : subThreads)
       {
         subThread.join();
       }
-
-      acceptor.close();
-      context.reset();
     }
 
     void stop()
     {
       context.stop();
+	  acceptor.close();
     }
 
     template < typename Func >
-    void post(Func&& func)
+    inline void post(Func&& func)
     {
       context.post(std::forward<Func>(func));
     }
 
   private:
 
-    class resource_pool : public object_pool
-    {
-    public:
+	class resource_pool : public object_pool
+	{
+	public:
 
-      resource_pool(tcp_server* server, unsigned int size) : 
-        size(size), 
-        server(server)
-      {
-        resources = static_cast<socket_resource*>(::operator new(sizeof(socket_resource) * size));
-        sessions = static_cast<SessionType*>(::operator new(sizeof(SessionType) * size));
+	  resource_pool(tcp_server* server, unsigned int size) :
+		size(size),
+		server(server)
+	  {
+		resources = static_cast<socket_resource*>(::operator new(sizeof(socket_resource) * size));
+		for (unsigned int i = 0; i != size; ++i)
+		{
+		  new (&resources[i]) socket_resource(server->context, *this);
+		}
+	  }
 
-        for (unsigned int i = 0; i != size; ++i)
-        {
-          new (&resources[i]) socket_resource(server->context, *this);
-        }
-      }
+	  ~resource_pool()
+	  {
+		for (auto i = size; i != 0; --i)
+		{
+		  resources[i].~socket_resource();
+		}
+		::operator delete(resources);
+	  }
 
-      ~resource_pool()
-      {
-        for (auto i = size; i != 0; --i)
-        {
-          resources[i].~socket_resource();
-        }
-        ::operator delete(resources);
+	  void accept_all()
+	  {
+		for (auto i = size; i != 0; --i)
+		{
+		  server->accept(resources + i);
+		}
+	  }
 
-        for (auto i = size; i != 0; --i)
-        {
-          sessions[i].~SessionType();
-        }
-        ::operator delete(sessions);
-      }
+	  void* alloc() override
+	  {
+		return nullptr;
+	  }
 
-      void accept_all()
-      {
-        for (auto i = size; i != 0; --i)
-        {
-          server->accept(sessions + i, resources + i);
-        }
-      }
-
-      void* alloc() override
-      {
-        return nullptr;
-      }
-
-      void dealloc(void* obj) override
-      {
-        SessionType* session = static_cast<SessionType*>(obj);
-        socket_resource* resource = session->get_socket_resource();
-        {
-          if (resource->socket.is_open())
-          {
-            resource->socket.close();
-          }
-          resource->sendBuffers.clear();
-          while (!resource->sendQueue.empty())
-          {
-            resource->sendQueue.pop();
-          }
-          resource->recvBuf.clear();
-        }
-        session->~SessionType();
-        server->accept(session, resource);
-      }
+	  void dealloc(void* obj) override
+	  {
+		socket_resource* resource = static_cast<socket_resource*>(obj);
+		{
+		  if (resource->socket.is_open())
+		  {
+			resource->socket.close();
+		  }
+		  resource->sendBuffers.clear();
+		  while (!resource->sendQueue.empty())
+		  {
+			resource->sendQueue.pop();
+		  }
+		  resource->recvBuf.clear();
+		}
+		server->accept(resource);
+	  }
 
     private:
 
@@ -142,31 +141,29 @@ namespace nta
       const unsigned int size;
     };
 
-    void accept(SessionType* session, socket_resource* resource)
+    void accept(socket_resource* resource)
     {
-      acceptor.async_accept(resource->socket, [this, resource, session](const auto& err)
+      acceptor.async_accept(resource->socket, [this, resource](const auto& err)
       {
         if (!err)
         {
-          new (session)SessionType();
-          resource->handler = static_cast<nta::event_handler*>(session);
-          nta::ref<SessionType> s(session);
-          s->run(resource);
+		  std::make_shared<SessionType>()->run(resource);
         }
         else
         {
           if (acceptor.is_open())
           {
-            accept(session, resource);
+            accept(resource);
           }
         }
       });
     }
 
-    boost::asio::ip::tcp::endpoint endpoint;
+    const boost::asio::ip::tcp::endpoint endpoint;
     boost::asio::io_context context;
     boost::asio::ip::tcp::acceptor acceptor;
-    unsigned int threadCount;
-    unsigned int maxSessionCount;
+    const unsigned int threadCount;
+    const unsigned int maxSessionCount;
+	
   };
 }
