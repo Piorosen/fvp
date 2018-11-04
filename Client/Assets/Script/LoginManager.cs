@@ -13,4 +13,25 @@ public class LoginManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void OnClicked(){
+        NetClient client = new NetClient("127.0.0.1", 16333);
+        try
+        {
+            client.Connect();
+            Packet.Login login = new Packet.Login();
+            login.NetworkId = 0;
+            login.Name = this.GetHashCode().ToString();
+            client.Send(Packet.Type.Login, login);
+        }catch (System.Exception e){
+
+        }
+        PacketInfo info = new PacketInfo();
+        client.TryGetPacket(out info);
+
+        if (info.Type == Packet.Type.LoginAck){
+
+        }
+
+    }
 }

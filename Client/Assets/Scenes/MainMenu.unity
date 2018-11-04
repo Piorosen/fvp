@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 114915271}
   - component: {fileID: 114915270}
   m_Layer: 5
-  m_Name: InputField (1)
+  m_Name: Text_PW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 261122524}
   - component: {fileID: 261122523}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: Text_ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 527358097}
   - component: {fileID: 527358096}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Label_PW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,8 +829,9 @@ GameObject:
   - component: {fileID: 690356500}
   - component: {fileID: 690356499}
   - component: {fileID: 690356498}
+  - component: {fileID: 690356501}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Btn_Login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,12 +895,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 690356501}
+        m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -941,6 +942,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 690356496}
   m_CullTransparentMesh: 0
+--- !u!114 &690356501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690356496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59940ff524e5243a1ab19f343c7b1192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &976620069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,7 +1178,7 @@ GameObject:
   - component: {fileID: 1725131280}
   - component: {fileID: 1725131279}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Label_ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
