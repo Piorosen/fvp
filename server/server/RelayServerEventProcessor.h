@@ -26,6 +26,12 @@ public:
   void Send(int64_t networkId, packet::Type type, const google::protobuf::Message& message);
   void SendAll(packet::Type type, const google::protobuf::Message& message);
 
+  template < typename Filter >
+  void SendAll(packet::Type type, const google::protobuf::Message& message, Filter&& filter)
+  {
+	filter();
+  }
+
   bool IsLoggedInUser(int64_t networkId) const;
   void AddLoginUser(int64_t networkId, RoomUser user);
   void RemoveLoggedInUser(int64_t networkId);

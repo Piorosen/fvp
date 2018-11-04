@@ -11,6 +11,7 @@ enum Type
   
   LOGIN_REQ = 100;
   LOGIN_ACK = 101;
+  ENTER_NEW_USER_ACK = 103;
   MOVE_REQ = 105;
   MOVE_ACK = 106;
 }
@@ -22,7 +23,7 @@ message Vector3
   float z = 3;
 }
 
-message IngamePlayer
+message RoomUser
 {
   int64 network_id = 1;
   Vector3 position = 2;
@@ -31,7 +32,6 @@ message IngamePlayer
 message ErrorAck
 {
   Type type = 1;
-
 }
 
 message Connect
@@ -54,6 +54,13 @@ message LoginAck
 {
   int64 network_id = 1;
   string name = 2;
+  repeated RoomUser users = 3;
+}
+
+message EnterNewUserAck
+{
+  string new_user_name = 1;
+  RoomUser new_user = 2;
 }
 
 message MoveReq
@@ -65,10 +72,4 @@ message MoveAck
 {
   int64 network_id = 1;
   Vector3 position = 2;
-}
-
-message RoomUser
-{
-  int64 network_id = 2;
-  string name = 1;
 }
