@@ -1,22 +1,34 @@
 #include "RelayServerEventProcessor.h"
-#include <iostream>
-#include <thread>
 
-void RelayServerEventProcessor::Start()
+void RelayServerEventProcessor::HandleLogin(int64_t networkId, const packet::LoginReq & message)
 {
-  BindHandler(packet::Type::LOGIN, &RelayServerEventProcessor::HandleLogin);
 }
 
-void RelayServerEventProcessor::Update()
+void RelayServerEventProcessor::HandleMove(int64_t networkId, const packet::MoveReq & message)
 {
-  EventProcessor::Update();
 }
 
 void RelayServerEventProcessor::HandleDefaultEvent(int64_t networkId, const void* src, int size)
 {
 }
 
-void RelayServerEventProcessor::HandleLogin(int64_t networkId, const packet::Login& message)
+void RelayServerEventProcessor::HandleConnect(int64_t networkId, const packet::Connect & message)
 {
-  auto id = std::this_thread::get_id();
+}
+
+void RelayServerEventProcessor::HandleDisconnect(int64_t networkId, const packet::Disconnect & message)
+{
+}
+
+void RelayServerEventProcessor::Start()
+{
+  BindHandler(packet::Type::LOGIN_REQ, &RelayServerEventProcessor::HandleLogin);
+  BindHandler(packet::Type::MOVE_REQ, &RelayServerEventProcessor::HandleMove);
+  BindHandler(packet::Type::DISCONNECT, &RelayServerEventProcessor::HandleDisconnect);
+  BindHandler(packet::Type::CONNECT, &RelayServerEventProcessor::HandleConnect);
+}
+
+void RelayServerEventProcessor::Update()
+{
+  EventProcessor::Update();
 }

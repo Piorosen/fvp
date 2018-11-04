@@ -4,8 +4,6 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
-
-#include <packet.pb.h>
 #include "Singleton.h"
 
 class EventProcessor
