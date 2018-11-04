@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 using Google.Protobuf;
 
 public struct PacketInfo
 {
-    public short Type;
+    public Packet.Type Type;
     public byte[] Payload;
 }
 
@@ -16,6 +16,7 @@ public class NetClient
 {
     const int ReadBufferCapacity = 1024 * 8 * 2;
     const int SendBufferCapacity = 1024 * 8;
+    const int HeaderSize = 4;
 
     TcpClient tcpClient;
     NetworkStream stream;
@@ -39,19 +40,39 @@ public class NetClient
         stream = tcpClient.GetStream();
         readBufferLength = 0;
         sendQueue.Clear();
+        readQueue.Clear();
         sendQueueReadIndex = 0;
     }
 
     public void Close()
     {
-        if (tcpClient != null)
+        if(tcpClient != null)
         {
-            stream.Close();
+            if(stream != null)
+            {
+                stream.Close();
+            }
             tcpClient.Close();
             stream = null;
             tcpClient = null;
         }
         sendQueue.Clear();
+        readQueue.Clear();
+    }
+
+    public void Send(Packet.Type type, IMessage message)
+    {
+        short messageSize = (short)message.CalculateSize();
+
+        byte[] buffer = new byte[HeaderSize + messageSize];
+
+        MemoryStream ms = new MemoryStream(buffer);
+        BinaryWriter binaryStream = new BinaryWriter(ms);
+        binaryStream.Write(messageSize);
+        binaryStream.Write((short)type);
+        message.WriteTo(ms);
+
+        Send(buffer, 0, (int)ms.Position);
     }
 
     public void Send(byte[] buffer)
@@ -68,7 +89,7 @@ public class NetClient
 
     public bool TryGetPacket(out PacketInfo packet)
     {
-        if (readQueue.Count != 0)
+        if(readQueue.Count != 0)
         {
             var info = readQueue.Dequeue();
             packet = info;
@@ -97,7 +118,7 @@ public class NetClient
 
                     int headerSize = 4;
                     int readIndex = 0;
-                    while (readBufferLength < headerSize)
+                    while (headerSize <= readBufferLength)
                     {
                         short payloadSize = BitConverter.ToInt16(readBuffer, readIndex);
                         short type = BitConverter.ToInt16(readBuffer, readIndex + sizeof(short));
@@ -106,7 +127,7 @@ public class NetClient
                         {
                             byte[] payload = new byte[payloadSize];
                             Array.Copy(readBuffer, readIndex + headerSize, payload, 0, payloadSize);
-                            readQueue.Enqueue(new PacketInfo() { Payload = payload, Type = type });
+                            readQueue.Enqueue(new PacketInfo() { Payload = payload, Type = (Packet.Type)type });
                             readBufferLength -= packetSize;
                             readIndex += packetSize;
                         }
@@ -145,7 +166,7 @@ public class NetClient
                 }
             }
 
-            if (0 < sendBufferValidLength)
+            if(0 < sendBufferValidLength)
             {
                 stream.Write(sendBuffer, 0, sendBufferValidLength);
             }
