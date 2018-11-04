@@ -25,6 +25,7 @@
     <ClInclude Include="packet.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\common\protobuf\packet.proto" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -5,10 +5,33 @@ package packet;
 enum Type
 {
   NONE = 0;
-  LOGIN = 1;
   CONNECT = 2;
   DISCONNECT = 3;
-  MATCH = 4;
+  ERROR_ACK = 4;
+  
+  LOGIN_REQ = 100;
+  LOGIN_ACK = 101;
+  MOVE_REQ = 105;
+  MOVE_ACK = 106;
+}
+
+message Vector3
+{
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message IngamePlayer
+{
+  int64 network_id = 1;
+  Vector3 position = 2;
+}
+
+message ErrorAck
+{
+  Type type = 1;
+
 }
 
 message Connect
@@ -21,7 +44,7 @@ message Disconnect
   int64 network_id = 1;
 }
 
-message Login
+message LoginReq
 {
   int64 network_id = 1;
   string name = 2;
@@ -33,18 +56,19 @@ message LoginAck
   string name = 2;
 }
 
+message MoveReq
+{
+  Vector3 position = 1;
+}
+
+message MoveAck
+{
+  int64 network_id = 1;
+  Vector3 position = 2;
+}
+
 message RoomUser
 {
   int64 network_id = 2;
   string name = 1;
-}
-
-message Match
-{
-}
-
-message MatchAck
-{
-  string room_id = 1;
-  repeated RoomUser users = 2;
 }

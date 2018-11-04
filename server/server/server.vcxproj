@@ -126,6 +126,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RelayServerEventProcessor.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="SessionManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="UserSession.cpp" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="PacketReader.h" />
     <ClInclude Include="RelayServerEventProcessor.h" />
     <ClInclude Include="Server.h" />
+    <ClInclude Include="SessionManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="UserSession.h" />
