@@ -1,5 +1,6 @@
 #include "UserSession.h"
 #include <packet.pb.h>
+#include "SessionManager.h"
 #include "RelayServerEventProcessor.h"
 #include "PacketBuilder.h"
 
@@ -66,6 +67,8 @@ void UserSession::on_connected()
 {
   networkId = ++NetworkIdAllocator;
 
+  SessionManager::GetInstance().RegisterSession(networkId, std::static_pointer_cast<UserSession>(shared_from_this()));
+
   packet::Connect conn;
   conn.set_network_id(networkId);
 
@@ -74,8 +77,10 @@ void UserSession::on_connected()
 
 void UserSession::on_disconnected()
 {
-	packet::Disconnect disconn;
-	disconn.set_network_id(networkId);
+  SessionManager::GetInstance().UnregisterSession(networkId);
+
+  packet::Disconnect disconn;
+  disconn.set_network_id(networkId);
 
   PushEvent(packet::Type::DISCONNECT, disconn);
 }
