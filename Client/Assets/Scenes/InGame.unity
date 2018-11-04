@@ -422,7 +422,7 @@ MonoBehaviour:
   Prefab:
   - {fileID: 1114331206105656, guid: b85971463f5f047f1a82ee42392f4b5d, type: 2}
   SpawnLocation:
-  - {x: 1, y: -2}
+  - {x: 1, y: 2}
   Camera: {fileID: 519420028}
 --- !u!4 &368312696
 Transform:
@@ -699,9 +699,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {x: 0, y: 0, z: 0}
-  Speed: 0.2
-  MaxSize: {x: 10, y: 10}
-  MinSize: {x: 2, y: 2}
+  Speed: 1
+  MaxSize: {x: 0, y: 0}
+  MinSize: {x: 0, y: 0}
+  NeedSize: {x: 0, y: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
