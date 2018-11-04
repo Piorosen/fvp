@@ -23,15 +23,25 @@ public class LoginManager : MonoBehaviour {
             login.NetworkId = 0;
             login.Name = this.GetHashCode().ToString();
             client.Send(Packet.Type.Login, login);
-        }catch (System.Exception e){
+            Debug.Log("Send");
 
+            PacketInfo info = new PacketInfo();
+            client.TryGetPacket(out info);
+
+            if (info.Type == Packet.Type.LoginAck)
+            {
+                Debug.Log("Respond");
+            }
         }
-        PacketInfo info = new PacketInfo();
-        client.TryGetPacket(out info);
-
-        if (info.Type == Packet.Type.LoginAck){
-
+        catch (System.Exception){
+            Debug.Log("Error");
         }
+        finally
+        {
+            client.Close();
+        }
+        
 
+        
     }
 }

@@ -14,8 +14,7 @@ public class Character : MonoBehaviour {
     Animator anime;
     Rigidbody2D rigidBody;
     SpriteRenderer Renderer;
-    BoxCollider2D playerCollider;
-
+    
     public int? UID = null;
 
     void Awake()
@@ -27,7 +26,6 @@ public class Character : MonoBehaviour {
         anime = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         Renderer = GetComponent<SpriteRenderer>();
-        playerCollider = GetComponent<BoxCollider2D>();
 	}
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -111,6 +109,8 @@ public class Character : MonoBehaviour {
         }
 
         rigidBody.transform.Translate(Vector3.right * Speed);
+       
+
     }
 
     // Update is called once per frame

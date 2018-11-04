@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class PlayerPool : UnityEngine.MonoBehaviour
 {
@@ -12,29 +13,49 @@ public class PlayerPool : UnityEngine.MonoBehaviour
     private List<GameObject> Pool = new List<GameObject>(8);
     public GameObject Camera;
 
+    NetClient Client;
+
     int PlayerUID = -1;
 
-    void Awake(){
-
-    }
-
-	// Use this for initialization
-	void Start () {
+    void Awake() {
         if (Instance == null)
         {
             Instance = this;
+
+            Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
+
             for (int i = 0; i < Pool.Capacity; i++)
             {
                 Pool.Add(null);
             }
             int? UID = AddPlayer(Prefab[0], SpawnLocation[0]);
             UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-            if (UID != null){
+            if (UID != null)
+            {
                 PlayerUID = UID.Value;
-            }else{
+            }
+            else
+            {
                 Debug.Log("PlayerPool : Start : UID : null");
             }
 
+            try
+            {
+                Client.Connect();
+                Packet.Login login = new Packet.Login();
+                login.NetworkId = UID.Value;
+                login.Name = System.IO.Path.GetRandomFileName();
+                Client.Send(Packet.Type.Login, login);
+                Debug.Log("Login Successs  " + login.Name + " : " + login.NetworkId);
+            }
+            catch (Exception)
+            {
+                Debug.Log("Character : Start : Client Error! : " + UID.Value);
+                Client.Close();
+                Client = null;
+            }
+
+            
             DontDestroyOnLoad(this);
         }
         else
@@ -43,9 +64,49 @@ public class PlayerPool : UnityEngine.MonoBehaviour
         }
     }
 
+	// Use this for initialization
+	void Start () {
+        StartCoroutine("ServerRequest");
+    }
+
     /// <summary>
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
+    /// 
+
+    IEnumerator ServerRequest()
+    {
+        if (Client != null)
+        {
+            while (true)
+            {
+                Packet.Move move = new Packet.Move();
+                
+                move.Pos = new Packet.Vector3()
+                {
+                    X = transform.position.x,
+                    Y = transform.position.y,
+                    Z = transform.position.z
+                };
+
+                Client.Send(Packet.Type.Move, move);
+                PacketInfo info = new PacketInfo();
+                if (Client.TryGetPacket(out info))
+                {
+                    if (info.Type == Packet.Type.MoveAck)
+                    {
+                        Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
+                        Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Pos.ToString());
+                    }
+                    Debug.Log("Type : " + info.Type);
+                }
+                
+                yield return new WaitForSeconds(0.100f);
+            }
+
+        }
+    }
+
     private void FixedUpdate()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -80,7 +141,7 @@ public class PlayerPool : UnityEngine.MonoBehaviour
 
                 UserCount++;
             }
-            Debug.Log(AvgLocation / UserCount);
+           // Debug.Log(AvgLocation / UserCount);
         }
         var Character = Camera.GetComponent<InGameCamera>();
 

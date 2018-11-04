@@ -1,0 +1,2 @@
+﻿  packet.pb.cc
+c:\users\aoika\desktop\fvp\server\packet\packet.pb.h(9): fatal error C1083: 포함 파일을 열 수 없습니다. 'google/protobuf/stubs/common.h': No such file or directory
