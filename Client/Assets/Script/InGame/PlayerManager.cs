@@ -4,18 +4,15 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class PlayerPool : UnityEngine.MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    public static PlayerPool Instance = null;
+    public static PlayerManager Instance = null;
 
-    public List<GameObject> Prefab = new List<GameObject>(1);
-    public List<Vector2> SpawnLocation = new List<Vector2>(8);
-    private List<GameObject> Pool = new List<GameObject>(8);
     public GameObject Camera;
+    public MovementManager Movement = new MovementManager();
 
-    NetClient Client;
+    NetClient Client = null;
 
-    int PlayerUID = -1;
 
     void Awake() {
         if (Instance == null)
@@ -23,53 +20,13 @@ public class PlayerPool : UnityEngine.MonoBehaviour
             Instance = this;
 
             Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
-            for (int i = 0; i < Pool.Capacity; i++)
-            {
-                Pool.Add(null);
-            }
-            int? UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-            UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-            if (UID != null)
-            {
-                PlayerUID = UID.Value;
-            }
-            else
-            {
-                Debug.Log("PlayerPool : Start : UID : null");
-            }
-
             try
             {
                 Client.Connect();
-                
-                Packet.LoginReq login = new Packet.LoginReq
-                {
-                    NetworkId = UID.Value,
-                    Name = System.IO.Path.GetRandomFileName()
-                };
-
-                Client.Send(Packet.Type.LoginReq, login);
-                Client.Update();
-                PacketInfo info = new PacketInfo();
-                if (Client.TryGetPacket(out info))
-                {
-                    Debug.Log("Login Successs  " + login.Name + " : " + login.NetworkId);
-                }
-                else
-                {
-                    Debug.Log("Login Fail");
-                }
-                
-            }
-            catch (Exception)
-            {
-                Debug.Log("Character : Start : Server Error! : " + UID.Value);
+            }catch (Exception){
                 Client.Close();
                 Client = null;
             }
-
-            
-            DontDestroyOnLoad(this);
         }
         else
         {
@@ -97,8 +54,7 @@ public class PlayerPool : UnityEngine.MonoBehaviour
             {
                 Vector3 location = new Vector3();
 
-                location = Pool
-                    .First((item) => item.GetComponent<Character>().UID == PlayerUID)
+                location = Movement.ClientPlayer
                     .GetComponent<Character>().transform.position;
 
                 Packet.MoveReq move = new Packet.MoveReq
@@ -133,68 +89,19 @@ public class PlayerPool : UnityEngine.MonoBehaviour
         Debug.Log("코루틴 종료");
     }
 
+
     private void FixedUpdate()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        Movement.ClientMove();
 
-        var User = Pool.First(item => item.GetComponent<Character>().UID == PlayerUID);
-        User.GetComponent<Character>().Movement(new Vector4(x, y));
 
-        Vector3 AvgLocation = new Vector3();
-        int UserCount = 0;
-
-        Vector2 Max = new Vector2(float.MinValue, float.MinValue);
-        Vector2 Min = new Vector2(float.MaxValue, float.MaxValue);
-
-        for (int i = 0; i < Pool.Count; i++){
-            if (Pool[i] != null)
-            {
-                AvgLocation += Pool[i].transform.position;
-
-                if (Max.x < Pool[i].transform.position.x){
-                    Max.x = Pool[i].transform.position.x;
-                }
-                if (Max.y < Pool[i].transform.position.y){
-                    Max.y = Pool[i].transform.position.y;
-                }
-                if (Min.x > Pool[i].transform.position.x){
-                    Min.x = Pool[i].transform.position.x;
-                }
-                if (Min.y > Pool[i].transform.position.y){
-                    Min.y = Pool[i].transform.position.y;
-                }
-
-                UserCount++;
-            }
-           // Debug.Log(AvgLocation / UserCount);
-        }
         var Character = Camera.GetComponent<InGameCamera>();
 
-        Character.Target = AvgLocation / UserCount;
-        Character.NeedSize = new Vector2(Mathf.Abs(Max.x - Min.x), Mathf.Abs(Max.y - Min.y));
+        Character.Target = Movement.LocationAverage;
+
+        Character.NeedSize = Movement.LocationCamera;
     }
 
-
-    int? AddPlayer(GameObject @object, Vector2 Location){
-        for (int i = 0; i < Pool.Count; i++)
-            if (Pool[i] == null){
-                Pool[i] = Instantiate(@object, Location, Quaternion.identity);
-                return Pool[i].GetComponent<Character>().UID;
-            }
-        return null;
-    }
-
-    bool DelPlayer(GameObject @object){
-        return Pool.Remove(Pool.First((item) =>
-                               item.GetComponent<Character>().UID == @object.GetComponent<Character>().UID));
-    }
-
-    bool DelPlayer(int UID)
-    {
-        return Pool.Remove(Pool.First((item) =>
-                               item.GetComponent<Character>().UID == UID));
-    }
 
 
 

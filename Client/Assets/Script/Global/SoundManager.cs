@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    public AudioSource p = new AudioSource();
+
 	// Use this for initialization
 	void Start () {
 		

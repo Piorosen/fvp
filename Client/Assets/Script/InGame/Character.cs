@@ -4,6 +4,7 @@ using System;
 
 using UnityEngine;
 
+
 public class Character : MonoBehaviour {
 
     public float MaxSpeed;
@@ -21,6 +22,8 @@ public class Character : MonoBehaviour {
     {
         UID = this.GetHashCode();
     }
+    
+    
 
     void Start () {
         anime = GetComponent<Animator>();
@@ -46,8 +49,9 @@ public class Character : MonoBehaviour {
         anime.SetBool("Down", false);
     }
 
+
+
     public void Movement(Vector4 data){
-        transform.rotation = Quaternion.identity;
         float x = data.x;
         float y = data.y;
 
@@ -98,6 +102,13 @@ public class Character : MonoBehaviour {
         else if (Speed < 0)
         {
             Renderer.flipX = false;
+        }
+
+        if (Speed != 0.0f){
+            anime.SetBool("Walking", true);
+        }
+        else{
+            anime.SetBool("Walking", false);
         }
 
         if (!anime.GetBool("Jump"))
