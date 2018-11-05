@@ -2,6 +2,7 @@
 #include <packet.pb.h>
 #include "SessionManager.h"
 #include "RelayServerEventProcessor.h"
+#include "PacketHeader.h"
 #include "PacketBuilder.h"
 
 UserSession::UserSession()

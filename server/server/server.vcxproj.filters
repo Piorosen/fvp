@@ -20,16 +20,16 @@
     <ClCompile Include="UserSession.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="EventProcessor.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="RelayServerEventProcessor.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadPool.cpp">
+    <ClCompile Include="SessionManager.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="SessionManager.cpp">
+    <ClCompile Include="UserGroup.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,28 +43,19 @@
     <ClInclude Include="UserSession.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="EventProcessor.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketHeader.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketBuilder.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketReader.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="RelayServerEventProcessor.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadPool.h">
+    <ClInclude Include="SessionManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SessionManager.h">
+    <ClInclude Include="RoomUser.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserGroup.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

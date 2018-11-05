@@ -3,15 +3,8 @@
 #include <google/protobuf/message.h>
 #include <packet.pb.h>
 #include "EventProcessor.h"
+#include "RoomUser.h"
 
-class RoomUser
-{
-public:
-
-  int64_t networkId;
-  std::string name;
-  packet::Vector3 position;
-};
 
 class RelayServerEventProcessor : public EventProcessor, public Singleton<RelayServerEventProcessor>
 {
@@ -25,12 +18,6 @@ public:
   void HandleMove(int64_t networkId, const packet::MoveReq& message);
   void Send(int64_t networkId, packet::Type type, const google::protobuf::Message& message);
   void SendAll(packet::Type type, const google::protobuf::Message& message);
-
-  template < typename Filter >
-  void SendAll(packet::Type type, const google::protobuf::Message& message, Filter&& filter)
-  {
-	filter();
-  }
 
   bool IsLoggedInUser(int64_t networkId) const;
   void AddLoginUser(int64_t networkId, RoomUser user);

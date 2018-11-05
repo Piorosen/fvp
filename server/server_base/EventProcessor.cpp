@@ -44,8 +44,10 @@ void EventProcessor::Update()
     }
   }
 
-  for (auto&& [networkId, packet] : eventBuffer)
+  for (const auto& item : eventBuffer)
   {
+		const int64_t networkId = item.first;
+		const auto& packet = item.second;
     DispatchEvent(networkId, packet.data(), static_cast<int>(packet.size()));
   }
 }
