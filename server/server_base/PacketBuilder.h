@@ -1,7 +1,7 @@
 #pragma once
 
 #include <google/protobuf/message.h>
-#include <packet.pb.h>
+#include <packet_type.pb.h>
 
 namespace packet
 {

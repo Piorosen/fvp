@@ -29,8 +29,8 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "packet_type.pb.h"
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_packet_2eproto 
 
@@ -94,34 +94,6 @@ template<> ::packet::Vector3* Arena::CreateMaybeMessage<::packet::Vector3>(Arena
 }  // namespace google
 namespace packet {
 
-enum Type {
-  NONE = 0,
-  CONNECT = 2,
-  DISCONNECT = 3,
-  ERROR_ACK = 4,
-  LOGIN_REQ = 100,
-  LOGIN_ACK = 101,
-  ENTER_NEW_USER_ACK = 103,
-  MOVE_REQ = 105,
-  MOVE_ACK = 106,
-  Type_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  Type_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool Type_IsValid(int value);
-const Type Type_MIN = NONE;
-const Type Type_MAX = MOVE_ACK;
-const int Type_ARRAYSIZE = Type_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* Type_descriptor();
-inline const ::std::string& Type_Name(Type value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Type_descriptor(), value);
-}
-inline bool Type_Parse(
-    const ::std::string& name, Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Type>(
-    Type_descriptor(), name, value);
-}
 // ===================================================================
 
 class Vector3 : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:packet.Vector3) */ {
@@ -328,6 +300,20 @@ class RoomUser : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
+  // string name = 3;
+  void clear_name();
+  static const int kNameFieldNumber = 3;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
   // .packet.Vector3 position = 2;
   bool has_position() const;
   void clear_position();
@@ -350,6 +336,7 @@ class RoomUser : public ::google::protobuf::Message /* @@protoc_insertion_point(
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
   ::packet::Vector3* position_;
   ::google::protobuf::int64 network_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -1387,6 +1374,59 @@ inline void RoomUser::set_allocated_position(::packet::Vector3* position) {
   // @@protoc_insertion_point(field_set_allocated:packet.RoomUser.position)
 }
 
+// string name = 3;
+inline void RoomUser::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RoomUser::name() const {
+  // @@protoc_insertion_point(field_get:packet.RoomUser.name)
+  return name_.GetNoArena();
+}
+inline void RoomUser::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:packet.RoomUser.name)
+}
+#if LANG_CXX11
+inline void RoomUser::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:packet.RoomUser.name)
+}
+#endif
+inline void RoomUser::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:packet.RoomUser.name)
+}
+inline void RoomUser::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:packet.RoomUser.name)
+}
+inline ::std::string* RoomUser::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:packet.RoomUser.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RoomUser::release_name() {
+  // @@protoc_insertion_point(field_release:packet.RoomUser.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RoomUser::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:packet.RoomUser.name)
+}
+
 // -------------------------------------------------------------------
 
 // ErrorAck
@@ -1879,18 +1919,6 @@ inline void MoveAck::set_allocated_position(::packet::Vector3* position) {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace packet
-
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::packet::Type> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::packet::Type>() {
-  return ::packet::Type_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

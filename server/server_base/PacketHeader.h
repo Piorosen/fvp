@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <packet.pb.h>
 
 #pragma pack(push, 1)
 

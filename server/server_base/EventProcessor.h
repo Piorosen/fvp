@@ -6,7 +6,7 @@
 #include <chrono>
 #include <map>
 #include <functional>
-#include <packet.pb.h>
+#include <packet_type.pb.h>
 #include "Singleton.h"
 
 class EventProcessor

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package packet;
+
+enum Type
+{
+  NONE = 0;
+  CONNECT = 2;
+  DISCONNECT = 3;
+  ERROR_ACK = 4;
+  
+  LOGIN_REQ = 100;
+  LOGIN_ACK = 101;
+  ENTER_NEW_USER_ACK = 103;
+  MOVE_REQ = 105;
+  MOVE_ACK = 106;
+}

@@ -235,7 +235,6 @@ void InitDefaults() {
 }
 
 ::google::protobuf::Metadata file_level_metadata[10];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -253,6 +252,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::RoomUser, network_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::RoomUser, position_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::RoomUser, name_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::ErrorAck, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -310,14 +310,14 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::packet::Vector3)},
   { 8, -1, sizeof(::packet::RoomUser)},
-  { 15, -1, sizeof(::packet::ErrorAck)},
-  { 21, -1, sizeof(::packet::Connect)},
-  { 27, -1, sizeof(::packet::Disconnect)},
-  { 33, -1, sizeof(::packet::LoginReq)},
-  { 40, -1, sizeof(::packet::LoginAck)},
-  { 48, -1, sizeof(::packet::EnterNewUserAck)},
-  { 55, -1, sizeof(::packet::MoveReq)},
-  { 61, -1, sizeof(::packet::MoveAck)},
+  { 16, -1, sizeof(::packet::ErrorAck)},
+  { 22, -1, sizeof(::packet::Connect)},
+  { 28, -1, sizeof(::packet::Disconnect)},
+  { 34, -1, sizeof(::packet::LoginReq)},
+  { 41, -1, sizeof(::packet::LoginAck)},
+  { 49, -1, sizeof(::packet::EnterNewUserAck)},
+  { 56, -1, sizeof(::packet::MoveReq)},
+  { 62, -1, sizeof(::packet::MoveAck)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -337,7 +337,7 @@ void protobuf_AssignDescriptors() {
   AddDescriptors();
   AssignDescriptors(
       "packet.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, file_level_enum_descriptors, NULL);
+      file_level_metadata, NULL, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
@@ -354,29 +354,27 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\014packet.proto\022\006packet\"*\n\007Vector3\022\t\n\001x\030\001"
-      " \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\"A\n\010RoomUser\022\022"
-      "\n\nnetwork_id\030\001 \001(\003\022!\n\010position\030\002 \001(\0132\017.p"
-      "acket.Vector3\"&\n\010ErrorAck\022\032\n\004type\030\001 \001(\0162"
-      "\014.packet.Type\"\035\n\007Connect\022\022\n\nnetwork_id\030\001"
-      " \001(\003\" \n\nDisconnect\022\022\n\nnetwork_id\030\001 \001(\003\","
-      "\n\010LoginReq\022\022\n\nnetwork_id\030\001 \001(\003\022\014\n\004name\030\002"
-      " \001(\t\"M\n\010LoginAck\022\022\n\nnetwork_id\030\001 \001(\003\022\014\n\004"
-      "name\030\002 \001(\t\022\037\n\005users\030\003 \003(\0132\020.packet.RoomU"
-      "ser\"L\n\017EnterNewUserAck\022\025\n\rnew_user_name\030"
-      "\001 \001(\t\022\"\n\010new_user\030\002 \001(\0132\020.packet.RoomUse"
-      "r\",\n\007MoveReq\022!\n\010position\030\001 \001(\0132\017.packet."
-      "Vector3\"@\n\007MoveAck\022\022\n\nnetwork_id\030\001 \001(\003\022!"
-      "\n\010position\030\002 \001(\0132\017.packet.Vector3*\216\001\n\004Ty"
-      "pe\022\010\n\004NONE\020\000\022\013\n\007CONNECT\020\002\022\016\n\nDISCONNECT\020"
-      "\003\022\r\n\tERROR_ACK\020\004\022\r\n\tLOGIN_REQ\020d\022\r\n\tLOGIN"
-      "_ACK\020e\022\026\n\022ENTER_NEW_USER_ACK\020g\022\014\n\010MOVE_R"
-      "EQ\020i\022\014\n\010MOVE_ACK\020jb\006proto3"
+      "\n\014packet.proto\022\006packet\032\021packet_type.prot"
+      "o\"*\n\007Vector3\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030"
+      "\003 \001(\002\"O\n\010RoomUser\022\022\n\nnetwork_id\030\001 \001(\003\022!\n"
+      "\010position\030\002 \001(\0132\017.packet.Vector3\022\014\n\004name"
+      "\030\003 \001(\t\"&\n\010ErrorAck\022\032\n\004type\030\001 \001(\0162\014.packe"
+      "t.Type\"\035\n\007Connect\022\022\n\nnetwork_id\030\001 \001(\003\" \n"
+      "\nDisconnect\022\022\n\nnetwork_id\030\001 \001(\003\",\n\010Login"
+      "Req\022\022\n\nnetwork_id\030\001 \001(\003\022\014\n\004name\030\002 \001(\t\"M\n"
+      "\010LoginAck\022\022\n\nnetwork_id\030\001 \001(\003\022\014\n\004name\030\002 "
+      "\001(\t\022\037\n\005users\030\003 \003(\0132\020.packet.RoomUser\"L\n\017"
+      "EnterNewUserAck\022\025\n\rnew_user_name\030\001 \001(\t\022\""
+      "\n\010new_user\030\002 \001(\0132\020.packet.RoomUser\",\n\007Mo"
+      "veReq\022!\n\010position\030\001 \001(\0132\017.packet.Vector3"
+      "\"@\n\007MoveAck\022\022\n\nnetwork_id\030\001 \001(\003\022!\n\010posit"
+      "ion\030\002 \001(\0132\017.packet.Vector3b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 706);
+      descriptor, 594);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet.proto", &protobuf_RegisterTypes);
+  ::protobuf_packet_5ftype_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {
@@ -391,27 +389,6 @@ struct StaticDescriptorInitializer {
 } static_descriptor_initializer;
 }  // namespace protobuf_packet_2eproto
 namespace packet {
-const ::google::protobuf::EnumDescriptor* Type_descriptor() {
-  protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_packet_2eproto::file_level_enum_descriptors[0];
-}
-bool Type_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 2:
-    case 3:
-    case 4:
-    case 100:
-    case 101:
-    case 103:
-    case 105:
-    case 106:
-      return true;
-    default:
-      return false;
-  }
-}
-
 
 // ===================================================================
 
@@ -717,6 +694,7 @@ void RoomUser::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RoomUser::kNetworkIdFieldNumber;
 const int RoomUser::kPositionFieldNumber;
+const int RoomUser::kNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RoomUser::RoomUser()
@@ -730,6 +708,10 @@ RoomUser::RoomUser(const RoomUser& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
   if (from.has_position()) {
     position_ = new ::packet::Vector3(*from.position_);
   } else {
@@ -740,6 +722,7 @@ RoomUser::RoomUser(const RoomUser& from)
 }
 
 void RoomUser::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&position_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&network_id_) -
       reinterpret_cast<char*>(&position_)) + sizeof(network_id_));
@@ -751,6 +734,7 @@ RoomUser::~RoomUser() {
 }
 
 void RoomUser::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete position_;
 }
 
@@ -774,6 +758,7 @@ void RoomUser::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && position_ != NULL) {
     delete position_;
   }
@@ -818,6 +803,22 @@ bool RoomUser::MergePartialFromCodedStream(
         break;
       }
 
+      // string name = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "packet.RoomUser.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -855,6 +856,16 @@ void RoomUser::SerializeWithCachedSizes(
       2, this->_internal_position(), output);
   }
 
+  // string name = 3;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "packet.RoomUser.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->name(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -881,6 +892,17 @@ void RoomUser::SerializeWithCachedSizes(
         2, this->_internal_position(), deterministic, target);
   }
 
+  // string name = 3;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "packet.RoomUser.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->name(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -898,6 +920,13 @@ size_t RoomUser::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // string name = 3;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
   // .packet.Vector3 position = 2;
   if (this->has_position()) {
     total_size += 1 +
@@ -939,6 +968,10 @@ void RoomUser::MergeFrom(const RoomUser& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
   if (from.has_position()) {
     mutable_position()->::packet::Vector3::MergeFrom(from.position());
   }
@@ -971,6 +1004,8 @@ void RoomUser::Swap(RoomUser* other) {
 }
 void RoomUser::InternalSwap(RoomUser* other) {
   using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(position_, other->position_);
   swap(network_id_, other->network_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

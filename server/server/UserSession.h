@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <google/protobuf/message.h>
-#include <packet.pb.h>
+#include <packet_type.pb.h>
 #include "nta/tcp_session.hpp"
 
 class UserSession : public nta::tcp_session
