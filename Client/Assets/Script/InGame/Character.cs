@@ -5,31 +5,95 @@ using System;
 using UnityEngine;
 
 
-public class Character : MonoBehaviour {
+public delegate void ChangeStatus(float now, float max);
+public class Character : MonoBehaviour
+{
+    public event ChangeStatus ChangeHP;
+    public event ChangeStatus ChangeMP;
+
+    void OnChangeHP(float old, float now)
+    {
+        if (ChangeHP != null)
+            ChangeHP.Invoke(old, now);
+    }
+    void OnChangeMP(float old, float now)
+    {
+        if (ChangeMP != null)
+            ChangeMP.Invoke(old, now);
+    }
 
     public float MaxSpeed;
     public float Jump;
     public float Accelerate = 3.0f;
-    public float Speed = 0;
+    public float Speed;
+
+    public float MaxHP = 100.0f;
+    public float HP
+    {
+        get
+        {
+            return _HP;
+        }
+        set
+        {
+            if (value > MaxHP)
+            {
+                value = MaxHP;
+            }
+            else if (value < 0)
+            {
+                value = 0;
+            }
+            OnChangeHP(value, MaxHP);
+            _HP = value;
+        }
+    }
+
+    public float MaxMP = 100.0f;
+    public float MP
+    {
+        get
+        {
+            return _MP;
+        }
+        set
+        {
+            if (value > MaxMP)
+            {
+                value = MaxMP;
+            }
+            else if (value < 0)
+            {
+                value = 0;
+            }
+            OnChangeMP(value, MaxMP);
+            _MP = value;
+        }
+    }
+
 
     Animator anime;
     Rigidbody2D rigidBody;
     SpriteRenderer Renderer;
-    
+
     public int? UID = null;
+    private float _HP = 100.0f;
+    private float _MP = 100.0f;
 
     void Awake()
     {
         UID = this.GetHashCode();
     }
-    
-    
 
-    void Start () {
+
+
+
+    void Start()
+    {
         anime = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         Renderer = GetComponent<SpriteRenderer>();
-	}
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -53,22 +117,25 @@ public class Character : MonoBehaviour {
         }
     }
 
-    public void Movement(Vector4 data){
+    public void Movement(Vector4 data)
+    {
 
         float x = InputManager.DivX;
         float y = InputManager.DivY;
-        if (data.z != 0){
+        if (data.z != 0)
+        {
             x = data.x;
             y = data.y;
         }
 
         anime.SetFloat("DivX", x);
-       anime.SetFloat("DivY", y);
+        anime.SetFloat("DivY", y);
 
         float Acc = Accelerate * Time.deltaTime;
-
+        #region Move
         if (x < 0)
         {
+            MP -= 10 * Time.deltaTime;
             if (Speed < -MaxSpeed)
             {
                 Speed = -MaxSpeed;
@@ -80,6 +147,7 @@ public class Character : MonoBehaviour {
         }
         else if (x > 0)
         {
+            MP -= 3 * Time.deltaTime;
             if (Speed > MaxSpeed)
             {
                 Speed = MaxSpeed;
@@ -104,6 +172,7 @@ public class Character : MonoBehaviour {
                 Speed = 0.0f;
             }
         }
+        #endregion
 
         if (Speed > 0)
         {
@@ -123,32 +192,30 @@ public class Character : MonoBehaviour {
             anime.SetBool("Walking", false);
         }
 
+        if (rigidBody.velocity.y == 0){
+            anime.SetBool("Jump", false);
+        }
+
         if (!anime.GetBool("Jump"))
         {
             if (y > 0)
             {
-                rigidBody.AddForce(new Vector2(0, Jump));
+                if (MP >= 30)
+                {
+                    MP -= 30;
+                    rigidBody.AddForce(new Vector2(0, Jump));
+                    anime.SetBool("Jump", true);
+                }
             }
         }
+        MP += Time.deltaTime * 15;
 
-        Vector2 Start = transform.position;
-        Vector2 End = new Vector2(Start.x + Speed, Start.y);
-
-
-        RaycastHit2D hit = Physics2D.Linecast(Start, End);
-        if (hit.transform == null)
-        {
-            Debug.Log("A");
-            return;
-
-        }
         rigidBody.transform.Translate(Vector3.right * Speed);
-
-
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
 
     }
 }

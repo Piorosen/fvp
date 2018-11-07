@@ -68,8 +68,9 @@
     <Compile Include="Assets\Script\InGame\Character.cs" />
     <Compile Include="Assets\Script\InGame\InGameCamera.cs" />
     <Compile Include="Assets\Script\InGame\InputManager.cs" />
-    <Compile Include="Assets\Script\InGame\MovementManager.cs" />
+    <Compile Include="Assets\Script\InGame\ObjectManager.cs" />
     <Compile Include="Assets\Script\InGame\PlayerManager.cs" />
+    <Compile Include="Assets\Script\InGame\UIManager.cs" />
     <Compile Include="Assets\Script\MainMenu\LoginManager.cs" />
     <None Include="Assets\Asset\Things need to add in Beta.txt" />
     <None Include="Assets\Asset\Standard Information.txt" />

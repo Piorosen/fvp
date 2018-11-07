@@ -1,113 +1,171 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager Instance = null;
+    List<GameObject> Pool = new List<GameObject>(8);
+    public List<GameObject> Prefab;
+    public List<Vector2> SpawnLocation;
+    public UIManager UserInterface;
 
-    public GameObject Camera;
-    public MovementManager Movement;
-
-    NetClient Client = null;
+    public int? PlayerUID;
+    public float IsDebug;
 
 
-    void Awake() {
-        if (Instance == null)
+    void Awake()
+    {
+        for (int i = 0; i < 8; i++)
         {
-            Instance = this;
+            Pool.Add(null);
+        }
 
-            Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
-            try
-            {
-                Client.Connect();
-            }catch (Exception){
-                Client.Close();
-                Client = null;
-            }
+        int? UID = AddPlayer(Prefab[0], SpawnLocation[0]);
+        Debug.Log(UID);
+        if (UID != null)
+        {
+            PlayerUID = UID.Value;
+
+            Pool[ClientPlayerIndex].GetComponent<Character>().ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
+            Pool[ClientPlayerIndex].GetComponent<Character>().ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
         }
         else
         {
-            Destroy(this.gameObject);
+            Debug.Log("PlayerPool : Start : UID : null");
         }
     }
 
-	// Use this for initialization
-	void Start () {
-        StartCoroutine("ServerRequest");
-    }
-
-    /// <summary>
-    /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
-    /// </summary>
-    /// 
-
-    IEnumerator ServerRequest()
+    public GameObject ClientPlayer
     {
-        Debug.Log("코루틴 시작");
-        if (Client != null)
+        get
         {
-            Debug.Log("널아님");
-            while (true)
-            {
-                Vector3 location = new Vector3();
-
-                location = Movement.ClientPlayer
-                    .GetComponent<Character>().transform.position;
-
-                Packet.MoveReq move = new Packet.MoveReq
-                {
-                    Position = new Packet.Vector3()
-                    {
-                        X = location.x,
-                        Y = location.y,
-                        Z = location.z
-                    }
-                };
-
-                Client.Send(Packet.Type.MoveReq, move);
-                Client.Update();
-
-                PacketInfo info = new PacketInfo();
-                if (Client.TryGetPacket(out info))
-                {
-                    
-                    if (info.Type == Packet.Type.MoveAck)
-                    {
-                        Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
-                        Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Position.ToString());
-                    }
-                    
-                }
-
-                yield return new WaitForSeconds(0.1f);
-
-            }
+            return Pool.First((item) => item.GetComponent<Character>().UID == PlayerUID);
         }
-        Debug.Log("코루틴 종료");
+    }
+    public int ClientPlayerIndex
+    {
+        get
+        {
+            int index = Pool.FindIndex((item) => item.GetComponent<Character>().UID == PlayerUID);
+
+            return index;
+        }
+    }
+    public int PoolCount
+    {
+        get
+        {
+            return Pool.Count;
+        }
+    }
+    public Vector3 LocationAverage
+    {
+        get
+        {
+            Vector3 Result = new Vector3();
+            int user = 0;
+            for (int i = 0; i < Pool.Count; i++)
+                if (Pool[i] != null)
+                {
+                    Result += Pool[i].transform.position;
+                    user++;
+                }
+            return Result / user;
+        }
+    }
+    Vector2 LocationMax
+    {
+        get 
+        {
+            Vector2 Result = new Vector2(float.MinValue, float.MinValue);
+
+            for (int i = 0; i < Pool.Count; i++)
+            {
+                if (Pool[i] != null)
+                {
+                    if (Result.x < Pool[i].transform.position.x)
+                        Result.x = Pool[i].transform.position.x;
+                    {
+                    }
+                    if (Result.y < Pool[i].transform.position.y)
+                    {
+                        Result.y = Pool[i].transform.position.y;
+                    }
+                }
+            }
+            return Result;
+        }
+    }
+    Vector2 LocationMin
+    {
+        get
+        {
+            Vector2 Result = new Vector2(float.MaxValue, float.MaxValue);
+            for (int i = 0; i < Pool.Count; i++)
+            {
+                if (Pool[i] != null)
+                {
+                    if (Result.x > Pool[i].transform.position.x)
+                    {
+                        Result.x = Pool[i].transform.position.x;
+                    }
+                    if (Result.y > Pool[i].transform.position.y)
+                    {
+                        Result.y = Pool[i].transform.position.y;
+                    }
+                }
+            }
+            return Result;
+        }
+    }
+    public Vector2 LocationCamera
+    {
+        get
+        {
+            var x = LocationMax - LocationMin;
+            return new Vector2(Mathf.Abs(x.x), Mathf.Abs(x.y));
+        }
     }
 
+    public void ClientMove(){
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        Vector4 data = new Vector4(x, y, IsDebug);
+        Pool[ClientPlayerIndex].GetComponent<Character>().Movement(data);
+    }
+
+    public void ServerMove(){
+
+    }
 
     private void FixedUpdate()
     {
-
-        Movement.ClientMove();
-
-        var Character = Camera.GetComponent<InGameCamera>();
-
-        Character.Target = Movement.LocationAverage;
-
-        Character.NeedSize = Movement.LocationCamera;
+        ClientMove();
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
+    int? AddPlayer(GameObject @object, Vector2 Location)
     {
-		
-	}
+        for (int i = 0; i < Pool.Count; i++)
+            if (Pool[i] == null)
+            {
+                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity);
+                return Pool[i].GetComponent<Character>().UID;
+            }
+        return null;
+    }
+
+    bool DelPlayer(GameObject @object)
+    {
+        return Pool.Remove(Pool.First((item) =>
+                               item.GetComponent<Character>().UID == @object.GetComponent<Character>().UID));
+    }
+
+    bool DelPlayer(int UID)
+    {
+        return Pool.Remove(Pool.First((item) =>
+                               item.GetComponent<Character>().UID == UID));
+    }
+
 }
