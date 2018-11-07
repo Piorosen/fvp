@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeed: 0.05
-  Jump: 200
+  Jump: 400
   Accelerate: 0.1
   Speed: 0
   MaxHP: 100

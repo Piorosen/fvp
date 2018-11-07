@@ -132,6 +132,17 @@ public class PlayerManager : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
+        if (Input.GetKey(KeyCode.A) == true){
+            x = -1;
+        }else if (Input.GetKey(KeyCode.D) == true){
+            x = 1;
+        }
+        if (Input.GetKey(KeyCode.S) == true){
+            y = -1;
+        }else if (Input.GetKey(KeyCode.W) == true){
+            y = 1;
+        }
+
         Vector4 data = new Vector4(x, y, IsDebug);
         Pool[ClientPlayerIndex].GetComponent<Character>().Movement(data);
     }

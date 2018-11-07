@@ -147,7 +147,7 @@ public class Character : MonoBehaviour
         }
         else if (x > 0)
         {
-            MP -= 3 * Time.deltaTime;
+            MP -= 10 * Time.deltaTime;
             if (Speed > MaxSpeed)
             {
                 Speed = MaxSpeed;

@@ -17,11 +17,13 @@ public class InputManager : MonoBehaviour
 
     public void Vertical(float y)
     {
+        Debug.Log(y);
         DivY = y;
     }
 
     public void Horizontal(float x)
     {
+        Debug.Log(x);
         DivX = x;
     }
 }
