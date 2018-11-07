@@ -2,28 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    public static Vector3 InputVector = new Vector3();
+    Image BgImage;
+    Image JoyStickImg;
 
-    public static float DivX = 0.0f;
-    public static float DivY = 0.0f;
-
-    // Use this for initialization
     void Start()
     {
-
+        Debug.Log("123");
+        BgImage = GetComponent<Image>();
+        JoyStickImg = transform.GetChild(0).GetComponent<Image>();
     }
 
-    public void Vertical(float y)
+    public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(y);
-        DivY = y;
+        Vector2 pos;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(BgImage.rectTransform
+                                                                    , eventData.position
+                                                                    , eventData.pressEventCamera
+                                                                    , out pos))
+        {
+            pos.x = (pos.x / BgImage.rectTransform.sizeDelta.x);
+            pos.y = (pos.y / BgImage.rectTransform.sizeDelta.y);
+
+            InputVector = new Vector3(pos.x * 2 + 1, pos.y * 2 - 1, 0);
+
+            InputVector = (InputVector.magnitude > 1.0f)
+                            ? InputVector.normalized
+                            : InputVector;
+
+            JoyStickImg.rectTransform.anchoredPosition = new Vector3(
+                InputVector.x * BgImage.rectTransform.sizeDelta.x / 2
+                , InputVector.y * BgImage.rectTransform.sizeDelta.y / 2
+                , 0);
+        }
     }
 
-    public void Horizontal(float x)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log(x);
-        DivX = x;
+        OnDrag(eventData);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        InputVector = Vector3.zero;
+        JoyStickImg.rectTransform.anchoredPosition = Vector3.zero;
     }
 }

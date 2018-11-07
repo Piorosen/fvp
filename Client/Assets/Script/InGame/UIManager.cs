@@ -18,9 +18,15 @@ public class UIManager : MonoBehaviour {
 	}
 
     public void ChangeHP(float now, float maxValue){
-        HealthPoint.GetComponent<Slider>().value = now / maxValue;
+        float t = Vector2.Lerp(new Vector2(HealthPoint.GetComponent<Slider>().value, 0)
+                             , new Vector2(now / maxValue, 0)
+                             , 50 * Time.deltaTime).x;
+        HealthPoint.GetComponent<Slider>().value = t;
     }
     public void ChangeMP(float now, float maxValue){
+        float t = Vector2.Lerp(new Vector2(ManaPoint.GetComponent<Slider>().value, 0)
+                             , new Vector2(now / maxValue, 0)
+                             , 50 * Time.deltaTime).x;
         ManaPoint.GetComponent<Slider>().value = now / maxValue;
     }
 }

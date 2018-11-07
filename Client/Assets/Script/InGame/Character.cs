@@ -120,8 +120,8 @@ public class Character : MonoBehaviour
     public void Movement(Vector4 data)
     {
 
-        float x = InputManager.DivX;
-        float y = InputManager.DivY;
+        float x = InputManager.InputVector.x;
+        float y = InputManager.InputVector.y;
         if (data.z != 0)
         {
             x = data.x;
@@ -198,11 +198,12 @@ public class Character : MonoBehaviour
 
         if (!anime.GetBool("Jump"))
         {
-            if (y > 0)
+            if (y > 0.5f)
             {
                 if (MP >= 30)
                 {
                     MP -= 30;
+                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
                     rigidBody.AddForce(new Vector2(0, Jump));
                     anime.SetBool("Jump", true);
                 }
