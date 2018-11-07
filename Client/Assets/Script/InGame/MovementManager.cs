@@ -11,7 +11,9 @@ public class MovementManager : MonoBehaviour
     public List<Vector2> SpawnLocation;
 
     public int? PlayerUID = null;
-     
+
+    public float IsDebug;
+
     void Awake()
     {
         for (int i = 0; i < Pool.Capacity; i++)
@@ -20,10 +22,6 @@ public class MovementManager : MonoBehaviour
         }
 
         int? UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-        UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-        UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-        UID = AddPlayer(Prefab[0], SpawnLocation[0]);
-        UID = AddPlayer(Prefab[0], SpawnLocation[0]);
 
 
 
@@ -42,7 +40,6 @@ public class MovementManager : MonoBehaviour
             return Pool.First((item) => item.GetComponent<Character>().UID == PlayerUID);
         }
     }
-
     public int PoolCount
     {
         get
@@ -50,7 +47,6 @@ public class MovementManager : MonoBehaviour
             return Pool.Count;
         }
     }
-
     public Vector3 LocationAverage
     {
         get
@@ -66,7 +62,6 @@ public class MovementManager : MonoBehaviour
             return Result / user;
         }
     }
-
     public Vector2 LocationMax
     {
         get 
@@ -90,7 +85,6 @@ public class MovementManager : MonoBehaviour
             return Result;
         }
     }
-
     public Vector2 LocationMin
     {
         get
@@ -113,7 +107,6 @@ public class MovementManager : MonoBehaviour
             return Result;
         }
     }
-
     public Vector2 LocationCamera
     {
         get
@@ -127,8 +120,11 @@ public class MovementManager : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        Vector4 data = new Vector4(x,y);
+
+
+        Vector4 data = new Vector4(x, y, IsDebug);
         ClientPlayer.GetComponent<Character>().Movement(data);
+
     }
 
     public void ServerMove(){
@@ -141,7 +137,7 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < Pool.Count; i++)
             if (Pool[i] == null)
             {
-                Pool[i] = Instantiate(@object, Location, Quaternion.identity);
+                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity);
                 return Pool[i].GetComponent<Character>().UID;
             }
         return null;
@@ -159,15 +155,4 @@ public class MovementManager : MonoBehaviour
                                item.GetComponent<Character>().UID == UID));
     }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

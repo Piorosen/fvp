@@ -35,6 +35,7 @@ public class Character : MonoBehaviour {
     {
         if (rigidBody.velocity.y > 0)
         {
+            Debug.Log("공중부양상태");
             anime.SetBool("Jump", true);
         }
         else if (rigidBody.velocity.y < 0)
@@ -45,15 +46,24 @@ public class Character : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Attach" + collision.gameObject.layer);
-        anime.SetBool("Jump", false);
-        anime.SetBool("Down", false);
+        if (collision.gameObject.layer == 8)
+        {
+            anime.SetBool("Jump", false);
+            anime.SetBool("Down", false);
+        }
     }
 
-
-
     public void Movement(Vector4 data){
-        float x = data.x;
-        float y = data.y;
+
+        float x = InputManager.DivX;
+        float y = InputManager.DivY;
+        if (data.z != 0){
+            x = data.x;
+            y = data.y;
+        }
+
+        anime.SetFloat("DivX", x);
+       anime.SetFloat("DivY", y);
 
         float Acc = Accelerate * Time.deltaTime;
 
@@ -83,11 +93,11 @@ public class Character : MonoBehaviour {
         {
             if (Speed > 0.01)
             {
-                Speed -= Acc * 2;
+                Speed -= Acc * 3;
             }
             else if (Speed < -0.01)
             {
-                Speed += Acc * 2;
+                Speed += Acc * 3;
             }
             else
             {
@@ -104,10 +114,12 @@ public class Character : MonoBehaviour {
             Renderer.flipX = false;
         }
 
-        if (Speed != 0.0f){
+        if (Speed != 0.0f)
+        {
             anime.SetBool("Walking", true);
         }
-        else{
+        else
+        {
             anime.SetBool("Walking", false);
         }
 
@@ -119,13 +131,24 @@ public class Character : MonoBehaviour {
             }
         }
 
+        Vector2 Start = transform.position;
+        Vector2 End = new Vector2(Start.x + Speed, Start.y);
+
+
+        RaycastHit2D hit = Physics2D.Linecast(Start, End);
+        if (hit.transform == null)
+        {
+            Debug.Log("A");
+            return;
+
+        }
         rigidBody.transform.Translate(Vector3.right * Speed);
-       
+
 
     }
 
     // Update is called once per frame
     void FixedUpdate () {
 
-	}
+    }
 }

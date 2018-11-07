@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance = null;
 
     public GameObject Camera;
-    public MovementManager Movement = new MovementManager();
+    public MovementManager Movement;
 
     NetClient Client = null;
 
@@ -92,8 +92,8 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement.ClientMove();
 
+        Movement.ClientMove();
 
         var Character = Camera.GetComponent<InGameCamera>();
 

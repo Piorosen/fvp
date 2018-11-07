@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: 89cc93ebaa7db4cf3a55669c60eeb5bb
+guid: 5b67c7b2a73914699aed63d3fd1d9978
 TextureImporter:
   fileIDToRecycleName:
-    21300000: User Interface_0
+    21300000: Gray_Move
+    21300002: Red_Move
+    21300004: Blue_Move
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -33,7 +35,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -42,7 +44,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 10
+  spriteExtrude: 8
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -107,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: User Interface_0
+      name: Gray_Move
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 482
-        height: 312
+        x: 3
+        y: 8
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,7 +123,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14b995686ad6f4435afc2eb196dd7719
+      spriteID: f7460b9e4b1f74e3fa777d19b98f8198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Red_Move
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 8
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a50f33cc82bb4a099f8284e47af4638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue_Move
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 8
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 829d1bd4740414aada19c0c97898078b
       vertices: []
       indices: 
       edges: []
@@ -129,7 +171,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 25d864bc60fb542f89dd37c3402f9e82
+    spriteID: 2bccbfddab2084913ad85dcef72a19d4
     vertices: []
     indices: 
     edges: []
