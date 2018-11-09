@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,6 +187,7 @@ public class PlayerManager : MonoBehaviour
             if (Pool[i] == null)
             {
                 Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity).GetComponent<Character>();
+
                 return Pool[i].UID;
             }
         return null;
@@ -194,14 +197,14 @@ public class PlayerManager : MonoBehaviour
     {
         int index = Pool.IndexOf(Pool.First((item) =>
                                   item.UID == @object.UID));
-        return Pool[index] = null;
+        return (Pool[index] = null);
     }
 
     bool DelPlayer(int UID)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
                                   item.UID == UID));
-        return Pool[index] = null;
+        return (Pool[index] = null);
     }
 
 }

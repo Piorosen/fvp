@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using System;
 
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public delegate void ChangeStatus(float now, float max);
 public class Character : MonoBehaviour
-{
+{ 
     // 이벤트
     public event ChangeStatus ChangeHP;
     public event ChangeStatus ChangeMP;
 
+    public Slider HealthObject;
+
     // 이벤트 발생 시키는 함수
     // 체력이 변화 가 되었을 경우 UI에 변화를 주어야함.
-    void OnChangeHP(float old, float now)
+    void OnChangeHP(float now, float max)
     {
         if (ChangeHP != null)
-            ChangeHP.Invoke(old, now);
+        {
+            Debug.Log(now / max);
+            HealthObject.value = now / max;
+            ChangeHP.Invoke(now, max);
+        }
     }
     // 기력이 변화가 되었을 경우에 UI에 변화를 주는 함수.
-    void OnChangeMP(float old, float now)
+    void OnChangeMP(float now, float max)
     {
         if (ChangeMP != null)
-            ChangeMP.Invoke(old, now);
+        {
+            ChangeMP.Invoke(now, max);
+        }
     }
 
     // 캐릭터가 이동할 수 있는 최대 속도.
@@ -109,6 +117,8 @@ public class Character : MonoBehaviour
         anime = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         Renderer = GetComponent<SpriteRenderer>();
+
+        HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
     }
 
     // 2번째의 RigidBody가 속도에 따라서 Jump 인지 Down인지 체크함.
@@ -117,6 +127,7 @@ public class Character : MonoBehaviour
         if (rigidBody.velocity.y > 0)
         {
             Debug.Log("공중부양상태");
+            HP = HP - 5;
             anime.SetBool("Jump", true);
         }
         else if (rigidBody.velocity.y < 0)
@@ -134,6 +145,11 @@ public class Character : MonoBehaviour
             anime.SetBool("Jump", false);
             anime.SetBool("Down", false);
         }
+    }
+
+    void Update()
+    {
+
     }
 
     // FixedUpdate에서 처리하지 않고

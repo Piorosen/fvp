@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 89cc93ebaa7db4cf3a55669c60eeb5bb
+guid: 36c3f4efc3223de4a8c2ed611edb1708
 TextureImporter:
   fileIDToRecycleName:
-    21300000: User Interface_0
+    21300000: Tag
+    21300002: portrait_0
+    21300004: portrait_1
+    21300006: portrait_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -33,7 +36,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -42,11 +45,11 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 10
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 5
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,21 +110,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: User Interface_0
+      name: Tag
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 482
-        height: 312
+        x: 39
+        y: 66
+        width: 93
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14b995686ad6f4435afc2eb196dd7719
+      spriteID: 95a44ccae40ab044da4e852603cba349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_0
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 142
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2feb6f9023443d46ad905a063bff000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 142
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720d93a0edd945a4e9323c23b9e19217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_2
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 141
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfc4e7cf0e7124c45ab98a9154237259
       vertices: []
       indices: 
       edges: []
@@ -129,7 +192,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 25d864bc60fb542f89dd37c3402f9e82
+    spriteID: 4590ecf193cbdbe418d470a8a59379ed
     vertices: []
     indices: 
     edges: []
