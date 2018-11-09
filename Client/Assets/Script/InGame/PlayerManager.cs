@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PlayerManager : MonoBehaviour
 {
-    List<GameObject> Pool = new List<GameObject>(8);
+    List<Character> Pool = new List<Character>(8);
     public List<GameObject> Prefab;
     public List<Vector2> SpawnLocation;
     public UIManager UserInterface;
@@ -27,8 +27,8 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerUID = UID.Value;
 
-            Pool[ClientPlayerIndex].GetComponent<Character>().ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
-            Pool[ClientPlayerIndex].GetComponent<Character>().ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
+            Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
+            Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
         }
         else
         {
@@ -36,22 +36,32 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public GameObject ClientPlayer
+    /// <summary>
+    /// 클라이언트의 플레이어 정보를 가져옵니다.
+    /// </summary>
+    public Character ClientPlayer
     {
         get
         {
-            return Pool.First((item) => item.GetComponent<Character>().UID == PlayerUID);
+
+            return Pool.First((item) => item.UID == PlayerUID);
         }
     }
+    /// <summary>
+    /// 클라이언트 플레이어의 Pool의 인덱스를 가져옵니다.
+    /// </summary>
     public int ClientPlayerIndex
     {
         get
         {
-            int index = Pool.FindIndex((item) => item.GetComponent<Character>().UID == PlayerUID);
+            int index = Pool.FindIndex((item) => item.UID == PlayerUID);
 
             return index;
         }
     }
+    /// <summary>
+    ///  Pool의 갯수를 가져옵니다.
+    /// </summary>
     public int PoolCount
     {
         get
@@ -59,6 +69,9 @@ public class PlayerManager : MonoBehaviour
             return Pool.Count;
         }
     }
+    /// <summary>
+    /// 네트워크 플레이어 포함 평균 위치 자표를 가져옵니다.
+    /// </summary>
     public Vector3 LocationAverage
     {
         get
@@ -74,6 +87,9 @@ public class PlayerManager : MonoBehaviour
             return Result / user;
         }
     }
+    /// <summary>
+    /// 네트워크 플레이어의 x,y좌표 최대값을 가져옵니다.
+    /// </summary>
     Vector2 LocationMax
     {
         get 
@@ -86,17 +102,16 @@ public class PlayerManager : MonoBehaviour
                 {
                     if (Result.x < Pool[i].transform.position.x)
                         Result.x = Pool[i].transform.position.x;
-                    {
-                    }
                     if (Result.y < Pool[i].transform.position.y)
-                    {
                         Result.y = Pool[i].transform.position.y;
-                    }
                 }
             }
             return Result;
         }
     }
+    /// <summary>
+    /// 네트워크 플레이어의 x,y좌표 최소값을 가져옵니다.
+    /// </summary>
     Vector2 LocationMin
     {
         get
@@ -107,18 +122,17 @@ public class PlayerManager : MonoBehaviour
                 if (Pool[i] != null)
                 {
                     if (Result.x > Pool[i].transform.position.x)
-                    {
                         Result.x = Pool[i].transform.position.x;
-                    }
                     if (Result.y > Pool[i].transform.position.y)
-                    {
                         Result.y = Pool[i].transform.position.y;
-                    }
                 }
             }
             return Result;
         }
     }
+    /// <summary>
+    /// 현재 카메라의 위치를 나타냅니다.
+    /// </summary>
     public Vector2 LocationCamera
     {
         get
@@ -127,7 +141,10 @@ public class PlayerManager : MonoBehaviour
             return new Vector2(Mathf.Abs(x.x), Mathf.Abs(x.y));
         }
     }
-
+    
+    /// <summary>
+    /// 클라이언트의 움직임을 처리합니다.
+    /// </summary>
     public void ClientMove(){
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
@@ -144,15 +161,21 @@ public class PlayerManager : MonoBehaviour
         }
 
         Vector4 data = new Vector4(x, y, IsDebug);
-        Pool[ClientPlayerIndex].GetComponent<Character>().Movement(data);
+        Pool[ClientPlayerIndex].Movement(data);
     }
 
-    public void ServerMove(){
+    /// <summary>
+    /// 서버의 움직임을 처리합니다.
+    /// </summary>
+    public void ServerMove()
+    {
 
     }
 
+    // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
     {
+        ServerMove();
         ClientMove();
     }
 
@@ -161,22 +184,24 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < Pool.Count; i++)
             if (Pool[i] == null)
             {
-                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity);
-                return Pool[i].GetComponent<Character>().UID;
+                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity).GetComponent<Character>();
+                return Pool[i].UID;
             }
         return null;
     }
 
-    bool DelPlayer(GameObject @object)
+    bool DelPlayer(Character @object)
     {
-        return Pool.Remove(Pool.First((item) =>
-                               item.GetComponent<Character>().UID == @object.GetComponent<Character>().UID));
+        int index = Pool.IndexOf(Pool.First((item) =>
+                                  item.UID == @object.UID));
+        return Pool[index] = null;
     }
 
     bool DelPlayer(int UID)
     {
-        return Pool.Remove(Pool.First((item) =>
-                               item.GetComponent<Character>().UID == UID));
+        int index = Pool.IndexOf(Pool.First((item) =>
+                                  item.UID == UID));
+        return Pool[index] = null;
     }
 
 }

@@ -10,7 +10,7 @@ public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
 
-    public GameObject Camera;
+    public InGameCamera Camera;
     public PlayerManager PlayerManage;
 
     NetClient Client = null;    
@@ -45,7 +45,6 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     /// 
-
     IEnumerator ServerRequest()
     {
         Debug.Log("코루틴 시작");
@@ -56,8 +55,7 @@ public class ObjectManager : MonoBehaviour
             {
                 Vector3 location = new Vector3();
 
-                location = PlayerManage.ClientPlayer
-                    .GetComponent<Character>().transform.position;
+                location = PlayerManage.ClientPlayer.transform.position;
 
                 Packet.MoveReq move = new Packet.MoveReq
                 {
@@ -94,18 +92,7 @@ public class ObjectManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var Character = Camera.GetComponent<InGameCamera>();
-
-        Character.Target = PlayerManage.LocationAverage;
-        Character.NeedSize = PlayerManage.LocationCamera;
+        Camera.Target = PlayerManage.LocationAverage;
+        Camera.NeedSize = PlayerManage.LocationCamera;
     }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-		
-	}
 }

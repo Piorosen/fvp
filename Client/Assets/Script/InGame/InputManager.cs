@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public static Vector3 InputVector = new Vector3();
+    // 어디서나 읽을수 있는 정적인 데이터입니다.
+    public static Vector3 InputVector;
+    
+    // 방향키의 이미지
     Image BgImage;
+    // 조이스틱 가운데 흰색 버튼입니다.
     Image JoyStickImg;
 
     void Start()
     {
-        Debug.Log("123");
         BgImage = GetComponent<Image>();
         JoyStickImg = transform.GetChild(0).GetComponent<Image>();
     }
