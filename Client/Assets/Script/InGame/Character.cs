@@ -159,13 +159,13 @@ public class Character : MonoBehaviour
         }
         else
         {
-            if (Speed > 0.01)
+            if (Speed > 0.05)
             {
-                Speed -= Acc * 3;
+                Speed -= Acc * 1.3f;
             }
-            else if (Speed < -0.01)
+            else if (Speed < -0.05)
             {
-                Speed += Acc * 3;
+                Speed += Acc * 1.3f;
             }
             else
             {
