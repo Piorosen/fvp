@@ -1,22 +1,9 @@
 syntax = "proto3";
 
 import "packet_type.proto";
+import "packet_data.proto";
 
 package packet;
-
-message Vector3
-{
-  float x = 1;
-  float y = 2;
-  float z = 3;
-}
-
-message RoomUser
-{
-  int64 network_id = 1;
-  Vector3 position = 2;
-  string name = 3;
-}
 
 message ErrorAck
 {
@@ -61,4 +48,28 @@ message MoveAck
 {
   int64 network_id = 1;
   Vector3 position = 2;
+}
+
+message RoomListReq
+{
+}
+
+message RoomListAck
+{
+  repeated Room rooms = 1;
+}
+
+message EnterRoomReq
+{
+  int64 room_id = 1;
+}
+
+message EnterRoomReq
+{
+  int64 room_id = 1;
+}
+
+message RenameRoomReq
+{
+  string new_name = 1;
 }

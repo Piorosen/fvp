@@ -11,7 +11,13 @@ enum Type
   
   LOGIN_REQ = 100;
   LOGIN_ACK = 101;
+  
+  ENTER_NEW_USER_REQ = 102;
   ENTER_NEW_USER_ACK = 103;
+  
   MOVE_REQ = 105;
   MOVE_ACK = 106;
+
+  ENTER_ROOM_REQ = 107;
+  ENTER_ROOM_ACK = 108;
 }
