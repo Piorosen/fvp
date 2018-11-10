@@ -82,8 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../packet</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -143,7 +142,11 @@
       <Project>{0d4f018e-40ab-4f6b-990c-86b441697c86}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\vcpkg-export-20181023-111653.1.0.0\build\native\vcpkg-export-20181023-111653.targets" Condition="Exists('..\packages\vcpkg-export-20181023-111653.1.0.0\build\native\vcpkg-export-20181023-111653.targets')" />
   </ImportGroup>
 </Project>
