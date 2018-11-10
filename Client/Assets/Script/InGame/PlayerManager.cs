@@ -1,113 +1,210 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager Instance = null;
+    List<Character> Pool = new List<Character>(8);
+    public List<GameObject> Prefab;
+    public List<Vector2> SpawnLocation;
+    public UIManager UserInterface;
 
-    public GameObject Camera;
-    public MovementManager Movement = new MovementManager();
-
-    NetClient Client = null;
+    public int? PlayerUID;
+    public float IsDebug;
 
 
-    void Awake() {
-        if (Instance == null)
+    void Awake()
+    {
+        for (int i = 0; i < 8; i++)
         {
-            Instance = this;
+            Pool.Add(null);
+        }
+        string PlayerName = PlayerPrefs.GetString("PlayerName");
+        int? UID = AddPlayer(Prefab[0], SpawnLocation[0], PlayerName);
+        Debug.Log(UID);
+        if (UID != null)
+        {
+            PlayerUID = UID.Value;
 
-            Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
-            try
-            {
-                Client.Connect();
-            }catch (Exception){
-                Client.Close();
-                Client = null;
-            }
+            Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
+            Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
         }
         else
         {
-            Destroy(this.gameObject);
+            Debug.Log("PlayerPool : Start : UID : null");
         }
-    }
-
-	// Use this for initialization
-	void Start () {
-        StartCoroutine("ServerRequest");
     }
 
     /// <summary>
-    /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
+    /// 클라이언트의 플레이어 정보를 가져옵니다.
     /// </summary>
-    /// 
-
-    IEnumerator ServerRequest()
+    public Character ClientPlayer
     {
-        Debug.Log("코루틴 시작");
-        if (Client != null)
+        get
         {
-            Debug.Log("널아님");
-            while (true)
-            {
-                Vector3 location = new Vector3();
 
-                location = Movement.ClientPlayer
-                    .GetComponent<Character>().transform.position;
-
-                Packet.MoveReq move = new Packet.MoveReq
-                {
-                    Position = new Packet.Vector3()
-                    {
-                        X = location.x,
-                        Y = location.y,
-                        Z = location.z
-                    }
-                };
-
-                Client.Send(Packet.Type.MoveReq, move);
-                Client.Update();
-
-                PacketInfo info = new PacketInfo();
-                if (Client.TryGetPacket(out info))
-                {
-                    
-                    if (info.Type == Packet.Type.MoveAck)
-                    {
-                        Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
-                        Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Position.ToString());
-                    }
-                    
-                }
-
-                yield return new WaitForSeconds(0.1f);
-
-            }
+            return Pool.First((item) => item.UID == PlayerUID);
         }
-        Debug.Log("코루틴 종료");
+    }
+    /// <summary>
+    /// 클라이언트 플레이어의 Pool의 인덱스를 가져옵니다.
+    /// </summary>
+    public int ClientPlayerIndex
+    {
+        get
+        {
+            int index = Pool.FindIndex((item) => item.UID == PlayerUID);
+
+            return index;
+        }
+    }
+    /// <summary>
+    ///  Pool의 갯수를 가져옵니다.
+    /// </summary>
+    public int PoolCount
+    {
+        get
+        {
+            return Pool.Count;
+        }
+    }
+    /// <summary>
+    /// 네트워크 플레이어 포함 평균 위치 자표를 가져옵니다.
+    /// </summary>
+    public Vector3 LocationAverage
+    {
+        get
+        {
+            Vector3 Result = new Vector3();
+            int user = 0;
+            for (int i = 0; i < Pool.Count; i++)
+                if (Pool[i] != null)
+                {
+                    Result += Pool[i].transform.position;
+                    user++;
+                }
+            return Result / user;
+        }
+    }
+    /// <summary>
+    /// 네트워크 플레이어의 x,y좌표 최대값을 가져옵니다.
+    /// </summary>
+    Vector2 LocationMax
+    {
+        get 
+        {
+            Vector2 Result = new Vector2(float.MinValue, float.MinValue);
+
+            for (int i = 0; i < Pool.Count; i++)
+            {
+                if (Pool[i] != null)
+                {
+                    if (Result.x < Pool[i].transform.position.x)
+                        Result.x = Pool[i].transform.position.x;
+                    if (Result.y < Pool[i].transform.position.y)
+                        Result.y = Pool[i].transform.position.y;
+                }
+            }
+            return Result;
+        }
+    }
+    /// <summary>
+    /// 네트워크 플레이어의 x,y좌표 최소값을 가져옵니다.
+    /// </summary>
+    Vector2 LocationMin
+    {
+        get
+        {
+            Vector2 Result = new Vector2(float.MaxValue, float.MaxValue);
+            for (int i = 0; i < Pool.Count; i++)
+            {
+                if (Pool[i] != null)
+                {
+                    if (Result.x > Pool[i].transform.position.x)
+                        Result.x = Pool[i].transform.position.x;
+                    if (Result.y > Pool[i].transform.position.y)
+                        Result.y = Pool[i].transform.position.y;
+                }
+            }
+            return Result;
+        }
+    }
+    /// <summary>
+    /// 현재 카메라의 위치를 나타냅니다.
+    /// </summary>
+    public Vector2 LocationCamera
+    {
+        get
+        {
+            var x = LocationMax - LocationMin;
+            return new Vector2(Mathf.Abs(x.x), Mathf.Abs(x.y));
+        }
+    }
+    
+    /// <summary>
+    /// 클라이언트의 움직임을 처리합니다.
+    /// </summary>
+    public void ClientMove(){
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        if (Input.GetKey(KeyCode.A) == true){
+            x = -1;
+        }else if (Input.GetKey(KeyCode.D) == true){
+            x = 1;
+        }
+        if (Input.GetKey(KeyCode.S) == true){
+            y = -1;
+        }else if (Input.GetKey(KeyCode.W) == true){
+            y = 1;
+        }
+
+        Vector4 data = new Vector4(x, y, IsDebug);
+        Pool[ClientPlayerIndex].Movement(data);
     }
 
+    /// <summary>
+    /// 서버의 움직임을 처리합니다.
+    /// </summary>
+    public void ServerMove()
+    {
 
+    }
+
+    // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
     {
-        Movement.ClientMove();
-
-
-        var Character = Camera.GetComponent<InGameCamera>();
-
-        Character.Target = Movement.LocationAverage;
-
-        Character.NeedSize = Movement.LocationCamera;
+        ServerMove();
+        ClientMove();
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
+    int? AddPlayer(GameObject @object, Vector2 Location, string PlayerName)
     {
-		
-	}
+        for (int i = 0; i < Pool.Count; i++)
+            if (Pool[i] == null)
+            {
+                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity).GetComponent<Character>();
+                Pool[i].PlayerName = PlayerName;
+                return Pool[i].UID;
+            }
+        return null;
+    }
+
+    bool DelPlayer(Character @object)
+    {
+        int index = Pool.IndexOf(Pool.First((item) =>
+                                  item.UID == @object.UID));
+        return (Pool[index] = null);
+    }
+
+    bool DelPlayer(int UID)
+    {
+        int index = Pool.IndexOf(Pool.First((item) =>
+                                  item.UID == UID));
+        return (Pool[index] = null);
+    }
+
 }
