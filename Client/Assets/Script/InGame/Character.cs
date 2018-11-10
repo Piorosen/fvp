@@ -11,9 +11,7 @@ public class Character : MonoBehaviour
     // 이벤트
     public event ChangeStatus ChangeHP;
     public event ChangeStatus ChangeMP;
-
-    public Slider HealthObject;
-
+    
     // 이벤트 발생 시키는 함수
     // 체력이 변화 가 되었을 경우 UI에 변화를 주어야함.
     void OnChangeHP(float now, float max)
@@ -33,6 +31,8 @@ public class Character : MonoBehaviour
             ChangeMP.Invoke(now, max);
         }
     }
+
+    public Slider HealthObject;
 
     // 캐릭터가 이동할 수 있는 최대 속도.
     public float MaxSpeed;
@@ -67,7 +67,6 @@ public class Character : MonoBehaviour
             }
         }
     }
-
     public float MaxMP = 100.0f;
     public float MP
     {
@@ -105,6 +104,8 @@ public class Character : MonoBehaviour
     private float _HP = 100.0f;
     private float _MP = 100.0f;
 
+    public string PlayerName;
+
     // 젤 처음 프로그램 실행이 될 코드. 각 캐릭터의 고유 정보를 가져옴.
     void Awake()
     {
@@ -119,6 +120,7 @@ public class Character : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
 
         HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
+        transform.GetChild(1).GetChild(1).GetComponent<Text>().text = PlayerName;
     }
 
     // 2번째의 RigidBody가 속도에 따라서 Jump 인지 Down인지 체크함.

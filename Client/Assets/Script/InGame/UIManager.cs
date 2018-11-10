@@ -6,13 +6,14 @@ public class UIManager : MonoBehaviour {
 
     public Slider HealthPoint;
     public Slider ManaPoint;
+    public Text PlayerName;
 
     // 체력바, 기력바의 변화량 속도
     public float Speed;
 
 	// Use this for initialization
 	void Start () {
-		
+        PlayerName.text = PlayerPrefs.GetString("PlayerName");
 	}
 
     float NowHP = 1;

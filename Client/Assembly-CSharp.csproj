@@ -64,6 +64,7 @@
      <Compile Include="Assets\Script\InGame\PlayerManager.cs" />
      <Compile Include="Assets\Script\InGame\UIManager.cs" />
      <Compile Include="Assets\Script\MainMenu\LoginManager.cs" />
+     <Compile Include="Assets\Script\MainMenu\StartGame.cs" />
      <None Include="Assets\Asset\Things need to add in Beta.txt" />
      <None Include="Assets\Asset\Standard Information.txt" />
  <Reference Include="UnityEditor.StandardEvents">

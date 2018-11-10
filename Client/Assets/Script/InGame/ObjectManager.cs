@@ -13,21 +13,21 @@ public class ObjectManager : MonoBehaviour
     public InGameCamera Camera;
     public PlayerManager PlayerManage;
 
-    NetClient Client = null;    
+    // NetClient Client = null;    
 
     void Awake() {
         if (Instance == null)
         {
             Instance = this;
 
-            Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
+           // Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
             try
             {
-                Client.Connect();
+           //     Client.Connect();
             }
             catch (Exception){
-                Client.Close();
-                Client = null;
+            //    Client.Close();
+            //     Client = null;
             }
         }
         else
@@ -38,7 +38,7 @@ public class ObjectManager : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine("ServerRequest");
+     //   StartCoroutine("ServerRequest");
     }
 
     /// <summary>
@@ -48,7 +48,8 @@ public class ObjectManager : MonoBehaviour
     IEnumerator ServerRequest()
     {
         Debug.Log("코루틴 시작");
-        if (Client != null)
+        // Client
+        if (null != null)
         {
             Debug.Log("널아님");
             while (true)
@@ -67,11 +68,11 @@ public class ObjectManager : MonoBehaviour
                     }
                 };
 
-                Client.Send(Packet.Type.MoveReq, move);
-                Client.Update();
+               // Client.Send(Packet.Type.MoveReq, move);
+               // Client.Update();
 
                 PacketInfo info = new PacketInfo();
-                if (Client.TryGetPacket(out info))
+               // if (Client.TryGetPacket(out info))
                 {
                     
                     if (info.Type == Packet.Type.MoveAck)

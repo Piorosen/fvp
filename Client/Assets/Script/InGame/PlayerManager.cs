@@ -22,8 +22,8 @@ public class PlayerManager : MonoBehaviour
         {
             Pool.Add(null);
         }
-
-        int? UID = AddPlayer(Prefab[0], SpawnLocation[0]);
+        string PlayerName = PlayerPrefs.GetString("PlayerName");
+        int? UID = AddPlayer(Prefab[0], SpawnLocation[0], PlayerName);
         Debug.Log(UID);
         if (UID != null)
         {
@@ -181,13 +181,13 @@ public class PlayerManager : MonoBehaviour
         ClientMove();
     }
 
-    int? AddPlayer(GameObject @object, Vector2 Location)
+    int? AddPlayer(GameObject @object, Vector2 Location, string PlayerName)
     {
         for (int i = 0; i < Pool.Count; i++)
             if (Pool[i] == null)
             {
                 Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity).GetComponent<Character>();
-
+                Pool[i].PlayerName = PlayerName;
                 return Pool[i].UID;
             }
         return null;
