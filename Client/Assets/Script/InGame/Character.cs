@@ -98,7 +98,7 @@ public class Character : MonoBehaviour
     SpriteRenderer Renderer;
 
     // 고유 정보
-    public int? UID = null;
+    public long? NetworkId = null;
     
     // 현재 스테이터스
     private float _HP = 100.0f;
@@ -106,11 +106,7 @@ public class Character : MonoBehaviour
 
     public string PlayerName;
 
-    // 젤 처음 프로그램 실행이 될 코드. 각 캐릭터의 고유 정보를 가져옴.
-    void Awake()
-    {
-        UID = this.GetHashCode();
-    }
+    Vector3 arive;
 
     // 실행이 되면은 각 컴포넌트의 정보를 가져옴.
     void Start()
@@ -149,9 +145,33 @@ public class Character : MonoBehaviour
         }
     }
 
-    void Update()
+    public void ServerMovement(Vector3 data)
     {
+        arive = data;
+    }
 
+    public IEnumerator SM()
+    {
+        while (true)
+        {
+            Vector3 Move = transform.position;
+            if (transform.position.x * 0.99 <= arive.x &&
+                arive.x <= transform.position.x * 1.01)
+            {
+                Move.x = arive.x;
+            }
+            if (transform.position.y * 0.99 <= arive.y &&
+                arive.y <= transform.position.y * 1.01)
+            {
+                Move.y = arive.y;
+            }
+            Move.z = 1000;
+            arive.z = 1000;
+            Move = Vector3.Lerp(Move, arive, Time.fixedDeltaTime * MaxSpeed);
+            Move.z = transform.position.z;
+            transform.position = Move;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     // FixedUpdate에서 처리하지 않고
@@ -177,7 +197,7 @@ public class Character : MonoBehaviour
         anime.SetFloat("DivY", y);
 
         // 캐릭터의 이동 함수
-        float Acc = Accelerate * Time.deltaTime;
+        float Acc = Accelerate * Time.fixedDeltaTime;
         // 이동관련 함수 처리
         #region Move
         if (x < 0)
@@ -267,7 +287,7 @@ public class Character : MonoBehaviour
             }
         }
         // 초당 MP는 15씩 증가하는 코드.
-        MP += Time.deltaTime * 15;
+        MP += Time.fixedDeltaTime * 15;
 
         // 그외 변화된 좌우 값을 설정합니다.
         rigidBody.transform.Translate(Vector3.right * Speed);

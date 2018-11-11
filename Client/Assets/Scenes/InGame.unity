@@ -357,7 +357,7 @@ MonoBehaviour:
   HealthPoint: {fileID: 83911227}
   ManaPoint: {fileID: 996119498}
   PlayerName: {fileID: 706230759}
-  Speed: 50
+  Speed: 1
 --- !u!4 &368312696
 Transform:
   m_ObjectHideFlags: 0
@@ -386,7 +386,9 @@ MonoBehaviour:
   - {fileID: 1373023226113786, guid: 3af30fe883118ac46b23bcdad88ac493, type: 2}
   SpawnLocation:
   - {x: -14, y: -190}
+  - {x: 65, y: -190}
   UserInterface: {fileID: 368312695}
+  ClientName: 
   IsDebug: 0
 --- !u!114 &368312698
 MonoBehaviour:
@@ -1371,7 +1373,7 @@ Prefab:
     - target: {fileID: 224959600270919992, guid: ce35caf686278064baedb4cdcd636627,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -47.7
+      value: -47.69995
       objectReference: {fileID: 0}
     - target: {fileID: 224959600270919992, guid: ce35caf686278064baedb4cdcd636627,
         type: 2}

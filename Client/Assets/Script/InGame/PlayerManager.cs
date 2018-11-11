@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> Prefab;
     public List<Vector2> SpawnLocation;
     public UIManager UserInterface;
-
-    public int? PlayerUID;
+    public Queue<Vector4> MovementQueue = new Queue<Vector4>();
+    public long? ClientNetworkId;
+    public string ClientName;
     public float IsDebug;
 
 
@@ -22,20 +24,12 @@ public class PlayerManager : MonoBehaviour
         {
             Pool.Add(null);
         }
-        string PlayerName = PlayerPrefs.GetString("PlayerName");
-        int? UID = AddPlayer(Prefab[0], SpawnLocation[0], PlayerName);
-        Debug.Log(UID);
-        if (UID != null)
-        {
-            PlayerUID = UID.Value;
 
-            Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
-            Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
-        }
-        else
-        {
-            Debug.Log("PlayerPool : Start : UID : null");
-        }
+        string PlayerName = PlayerPrefs.GetString("PlayerName");
+
+        // Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
+        // Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
+
     }
 
     /// <summary>
@@ -45,8 +39,7 @@ public class PlayerManager : MonoBehaviour
     {
         get
         {
-
-            return Pool.First((item) => item.UID == PlayerUID);
+            return Pool.First((item) => item.NetworkId == ClientNetworkId);
         }
     }
     /// <summary>
@@ -56,11 +49,14 @@ public class PlayerManager : MonoBehaviour
     {
         get
         {
-            int index = Pool.FindIndex((item) => item.UID == PlayerUID);
-
-            return index;
+            return Pool.FindIndex((item) => item.NetworkId == ClientNetworkId);
         }
     }
+    public Character FindPlayer(long? NetworkId)
+    {
+        return Pool.First((item) => item.NetworkId == NetworkId);
+    }
+
     /// <summary>
     ///  Pool의 갯수를 가져옵니다.
     /// </summary>
@@ -69,6 +65,20 @@ public class PlayerManager : MonoBehaviour
         get
         {
             return Pool.Count;
+        }
+    }
+
+    public int PlayerCount
+    {
+        get
+        {
+            int Result = 0;
+            for (int i = 0; i < Pool.Count; i++)
+            {
+                if (Pool[i] != null)
+                    Result++;
+            }
+            return Result;
         }
     }
     /// <summary>
@@ -163,32 +173,62 @@ public class PlayerManager : MonoBehaviour
         }
 
         Vector4 data = new Vector4(x, y, IsDebug);
-        Pool[ClientPlayerIndex].Movement(data);
+        if (ClientNetworkId != null)
+        {
+            ClientPlayer.Movement(data);
+        }
+        
     }
 
     /// <summary>
     /// 서버의 움직임을 처리합니다.
     /// </summary>
-    public void ServerMove()
+    public IEnumerator ServerMove()
     {
+        while (true)
+        {
+            if (MovementQueue.Count == 0)
+            {
+                yield return new WaitForSeconds(0.001f);
+                continue;
+            }
 
+            var data = MovementQueue.Dequeue();
+            if (data.w != ClientNetworkId)
+            {
+                var character = FindPlayer(Convert.ToInt64(data.w));
+                character.transform.position = data;
+            }
+        }
     }
+    
+    void Start()
+    {
+        StartCoroutine(ServerMove());
+    }
+
 
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
     {
-        ServerMove();
         ClientMove();
     }
 
-    int? AddPlayer(GameObject @object, Vector2 Location, string PlayerName)
+    public long? AddPlayer(int Object, int Location, string PlayerName, long? NetworkId)
     {
         for (int i = 0; i < Pool.Count; i++)
             if (Pool[i] == null)
             {
-                Pool[i] = Instantiate(@object, new Vector3(Location.x, Location.y, -1), Quaternion.identity).GetComponent<Character>();
+                Pool[i] = Instantiate(Prefab[Object], new Vector3(SpawnLocation[Location].x
+                                                                , SpawnLocation[Location].y, -1)
+                                                                , Quaternion.identity).GetComponent<Character>();
                 Pool[i].PlayerName = PlayerName;
-                return Pool[i].UID;
+                Pool[i].NetworkId = NetworkId;
+                if (ClientNetworkId != NetworkId)
+                {
+                    // StartCoroutine(Pool[i].SM());
+                }
+                return Pool[i].NetworkId;
             }
         return null;
     }
@@ -196,14 +236,14 @@ public class PlayerManager : MonoBehaviour
     bool DelPlayer(Character @object)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
-                                  item.UID == @object.UID));
+                                  item.NetworkId == @object.NetworkId));
         return (Pool[index] = null);
     }
 
-    bool DelPlayer(int UID)
+    bool DelPlayer(long? UID)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
-                                  item.UID == UID));
+                                  item.NetworkId == UID));
         return (Pool[index] = null);
     }
 

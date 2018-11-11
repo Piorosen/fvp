@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerName.text = PlayerPrefs.GetString("PlayerName");
+        
 	}
 
     float NowHP = 1;
@@ -44,7 +44,8 @@ public class UIManager : MonoBehaviour {
     void Update()
     {
         // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowHP, MaxHP, 0.99f) <= HealthPoint.value)
+        if (Convert(NowHP, MaxHP, 0.99f) <= HealthPoint.value
+            && HealthPoint.value <= Convert(NowHP, MaxHP, 1.01f))
         {
             HealthPoint.value = Convert(NowHP, MaxHP);
         }
@@ -56,7 +57,8 @@ public class UIManager : MonoBehaviour {
         }
 
         // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowMP, MaxMP, 0.99f) <= ManaPoint.value)
+        if (Convert(NowMP, MaxMP, 0.99f) <= ManaPoint.value
+            && ManaPoint.value <= Convert(NowMP, MaxMP, 1.01f))
         {
             ManaPoint.value = Convert(NowMP, MaxMP);
         }
