@@ -147,33 +147,18 @@ public class Character : MonoBehaviour
 
     public void ServerMovement(Vector3 data)
     {
-        arive = data;
-    }
-
-    public IEnumerator SM()
-    {
-        while (true)
+        var i = data - transform.position;
+        if (i.x > 0)
         {
-            Vector3 Move = transform.position;
-            if (transform.position.x * 0.99 <= arive.x &&
-                arive.x <= transform.position.x * 1.01)
-            {
-                Move.x = arive.x;
-            }
-            if (transform.position.y * 0.99 <= arive.y &&
-                arive.y <= transform.position.y * 1.01)
-            {
-                Move.y = arive.y;
-            }
-            Move.z = 1000;
-            arive.z = 1000;
-            Move = Vector3.Lerp(Move, arive, Time.fixedDeltaTime * MaxSpeed);
-            Move.z = transform.position.z;
-            transform.position = Move;
-            yield return new WaitForFixedUpdate();
+            Renderer.flipX = true;
+            
+        }else if (i.x < 0)
+        {
+            Renderer.flipX = false;
         }
+        transform.position = data;
     }
-
+    
     // FixedUpdate에서 처리하지 않고
     // 독자적인 Movement에서 처리를 함.
     // PlayerManager의 FixedUpdate에 종속됨.

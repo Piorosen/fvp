@@ -13,7 +13,10 @@ public class PlayerManager : MonoBehaviour
     public List<Vector2> SpawnLocation;
     public UIManager UserInterface;
     public Queue<Vector4> MovementQueue = new Queue<Vector4>();
+
+
     public long? ClientNetworkId;
+    
     public string ClientName;
     public float IsDebug;
 
@@ -27,9 +30,12 @@ public class PlayerManager : MonoBehaviour
 
         string PlayerName = PlayerPrefs.GetString("PlayerName");
 
-        // Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
-        // Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
+    }
 
+    public void Initialize()
+    {
+        Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
+        Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
     }
 
     /// <summary>
@@ -52,11 +58,15 @@ public class PlayerManager : MonoBehaviour
             return Pool.FindIndex((item) => item.NetworkId == ClientNetworkId);
         }
     }
+    /// <summary>
+    /// 특정 네트워크 아이디를 가진 플레이어를 리턴합니다.
+    /// </summary>
+    /// <param name="NetworkId">네트워크 아이디를 입력받습니다.</param>
+    /// <returns></returns>
     public Character FindPlayer(long? NetworkId)
     {
         return Pool.First((item) => item.NetworkId == NetworkId);
     }
-
     /// <summary>
     ///  Pool의 갯수를 가져옵니다.
     /// </summary>
@@ -67,7 +77,9 @@ public class PlayerManager : MonoBehaviour
             return Pool.Count;
         }
     }
-
+    /// <summary>
+    /// 현재 진행중인 플레이어의 수를 리턴 합니다.
+    /// </summary>
     public int PlayerCount
     {
         get
@@ -183,34 +195,24 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// 서버의 움직임을 처리합니다.
     /// </summary>
-    public IEnumerator ServerMove()
+    public void ServerMove()
     {
-        while (true)
+        while (MovementQueue.Count > 0)
         {
-            if (MovementQueue.Count == 0)
-            {
-                yield return new WaitForSeconds(0.001f);
-                continue;
-            }
-
             var data = MovementQueue.Dequeue();
             if (data.w != ClientNetworkId)
             {
                 var character = FindPlayer(Convert.ToInt64(data.w));
-                character.transform.position = data;
+                character.ServerMovement(data);
             }
         }
-    }
-    
-    void Start()
-    {
-        StartCoroutine(ServerMove());
     }
 
 
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
     {
+        ServerMove();
         ClientMove();
     }
 
@@ -224,10 +226,6 @@ public class PlayerManager : MonoBehaviour
                                                                 , Quaternion.identity).GetComponent<Character>();
                 Pool[i].PlayerName = PlayerName;
                 Pool[i].NetworkId = NetworkId;
-                if (ClientNetworkId != NetworkId)
-                {
-                    // StartCoroutine(Pool[i].SM());
-                }
                 return Pool[i].NetworkId;
             }
         return null;

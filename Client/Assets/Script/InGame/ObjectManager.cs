@@ -24,8 +24,10 @@ public class ObjectManager : MonoBehaviour
             try
             {
                 Client.Connect();
-                Packet.LoginReq login = new Packet.LoginReq();
-                login.Name = System.IO.Path.GetRandomFileName();
+                Packet.LoginReq login = new Packet.LoginReq
+                {
+                    Name = System.IO.Path.GetRandomFileName()
+                };
                 PlayerManage.ClientName = login.Name;
 
                 Client.Send(Packet.Type.LoginReq, login);
@@ -43,25 +45,22 @@ public class ObjectManager : MonoBehaviour
     }
     
 
-    bool Login = false;
-	// Use this for initialization
 	void Start () {
         StartCoroutine(ServerPlayer());
-
-
+        
         StartCoroutine(ServerRequest());
     }
 
+    bool Login = false;
     IEnumerator ServerPlayer()
     {
-        for (; ; )
+        while (true)
         {
             Client.Update();
             PacketInfo info;
             
             if (Client.TryGetPacket(out info))
             {
-                Debug.Log(info.Type);
                 if (info.Type == Packet.Type.LoginAck)
                 {
                     Login = true;
@@ -70,18 +69,18 @@ public class ObjectManager : MonoBehaviour
                         PlayerManage.ClientNetworkId = enter.NetworkId;
                     }
                     PlayerManage.AddPlayer(0, 0, enter.Name, enter.NetworkId);
-                    Debug.Log(enter.Users.Count);
-                    Debug.Log(PlayerManage.ClientNetworkId);
+
+                    PlayerManage.Initialize();
+
                     for (int i = 0; i < enter.Users.Count; i++)
                     {
                         if (enter.Users[i].NetworkId != PlayerManage.ClientNetworkId)
                             PlayerManage.AddPlayer(0, 0, "Enermy", enter.Users[i].NetworkId);
                     }
-                    
                     break;
                 }
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1.0f / 30);
         }
         yield return null;
     }
@@ -122,7 +121,6 @@ public class ObjectManager : MonoBehaviour
                 PacketInfo info = new PacketInfo();
                 while (Client.TryGetPacket(out info))
                 {
-                    Client.Update();
                     if (info.Type == Packet.Type.MoveAck)
                     {
                         Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
@@ -143,7 +141,7 @@ public class ObjectManager : MonoBehaviour
                         }
                     }
                 }
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(1.0f / 30);
             }
         }
         Debug.Log("코루틴 종료");
