@@ -1,10 +1,9 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.Networking;
 
 public class ObjectManager : MonoBehaviour
 {
@@ -13,7 +12,17 @@ public class ObjectManager : MonoBehaviour
     public InGameCamera Camera;
     public PlayerManager PlayerManage;
 
-    NetClient Client = null;    
+    NetClient Client = null;
+
+    void OnDestroy()
+    {
+        
+        if (Client != null)
+        {
+            Client.Close();
+            Client.Update();
+        }
+    }
 
     void Awake() {
         if (Instance == null)
@@ -31,9 +40,17 @@ public class ObjectManager : MonoBehaviour
                 PlayerManage.ClientName = login.Name;
 
                 Client.Send(Packet.Type.LoginReq, login);
-                
+
+                StartCoroutine(ServerPlayer());
+                StartCoroutine(ServerRequest());
             }
             catch (Exception){
+                
+                PlayerManage.ClientNetworkId = 0;
+                PlayerManage.ClientName = "Offline";
+                PlayerManage.AddPlayer(0, 0, "Offline", 0);
+                PlayerManage.Initialize();
+
                 Client.Close();
                 Client = null;
             }
@@ -46,9 +63,7 @@ public class ObjectManager : MonoBehaviour
     
 
 	void Start () {
-        StartCoroutine(ServerPlayer());
-        
-        StartCoroutine(ServerRequest());
+
     }
 
     bool Login = false;
@@ -89,6 +104,7 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     /// 
+    
     IEnumerator ServerRequest()
     {
         Debug.Log("코루틴 시작");
@@ -111,7 +127,7 @@ public class ObjectManager : MonoBehaviour
                     {
                         X = location.x,
                         Y = location.y,
-                        Z = location.z
+                        Z = Convert.ToSingle(DateTime.UtcNow.Ticks)
                     }
                 };
 
@@ -124,8 +140,6 @@ public class ObjectManager : MonoBehaviour
                     if (info.Type == Packet.Type.MoveAck)
                     {
                         Packet.MoveAck moveAck = Packet.MoveAck.Parser.ParseFrom(info.Payload);
-                        if (moveAck.NetworkId != PlayerManage.ClientNetworkId)
-                            Debug.Log("Network : " + moveAck.NetworkId + " Pos : " + moveAck.Position.ToString());
                         Vector4 data = new Vector4(moveAck.Position.X, moveAck.Position.Y, moveAck.Position.Z)
                         {
                             w = moveAck.NetworkId
@@ -139,9 +153,17 @@ public class ObjectManager : MonoBehaviour
                         {
                             PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
                         }
+                    }else if (info.Type == Packet.Type.Disconnect)
+                    {
+                        Packet.Disconnect disconnect = Packet.Disconnect.Parser.ParseFrom(info.Payload);
+                        PlayerManage.DelPlayer(disconnect.NetworkId);
+                    }
+                    else
+                    {
+                      Debug.Log(info.Type);
                     }
                 }
-                yield return new WaitForSeconds(1.0f / 30);
+                yield return new WaitForSeconds(1.0f / 1000);
             }
         }
         Debug.Log("코루틴 종료");

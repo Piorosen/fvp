@@ -4,7 +4,7 @@ using System;
 
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Networking;
 public delegate void ChangeStatus(float now, float max);
 public class Character : MonoBehaviour
 { 
@@ -118,6 +118,7 @@ public class Character : MonoBehaviour
         HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
         transform.GetChild(1).GetChild(1).GetComponent<Text>().text = PlayerName;
     }
+    
 
     // 2번째의 RigidBody가 속도에 따라서 Jump 인지 Down인지 체크함.
     private void OnTriggerExit2D(Collider2D collision)
@@ -147,16 +148,18 @@ public class Character : MonoBehaviour
 
     public void ServerMovement(Vector3 data)
     {
+        rigidBody.gravityScale = 0.0f;
         var i = data - transform.position;
         if (i.x > 0)
         {
-            Renderer.flipX = true;
-            
-        }else if (i.x < 0)
+            Renderer.flipX = true;   
+        }
+        else if (i.x < 0)
         {
             Renderer.flipX = false;
         }
-        transform.position = data;
+        
+        transform.position = Vector3.Slerp(data, transform.position, MaxSpeed * Time.fixedDeltaTime);
     }
     
     // FixedUpdate에서 처리하지 않고
@@ -170,13 +173,16 @@ public class Character : MonoBehaviour
         float y = InputManager.InputVector.y;
         // data.z는 키보드의 값을 받을것인지 스마트폰의 입력을 받을것인지 나타냄
         // data.z 값의 편집 방법은 Hierarchy의 PlayerManager의 Is Debug의 값을 수정 요함.
-
-        if (data.z != 0)
+        
+        if (x == 0)
         {
             x = data.x;
+        }
+        if (y == 0)
+        {
             y = data.y;
         }
-        
+
         // 애니메이션 이동 방향의 값 
         anime.SetFloat("DivX", x);
         anime.SetFloat("DivY", y);
@@ -272,7 +278,7 @@ public class Character : MonoBehaviour
             }
         }
         // 초당 MP는 15씩 증가하는 코드.
-        MP += Time.fixedDeltaTime * 15;
+        MP += Time.fixedDeltaTime * 30;
 
         // 그외 변화된 좌우 값을 설정합니다.
         rigidBody.transform.Translate(Vector3.right * Speed);

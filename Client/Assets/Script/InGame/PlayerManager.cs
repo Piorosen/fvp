@@ -18,7 +18,6 @@ public class PlayerManager : MonoBehaviour
     public long? ClientNetworkId;
     
     public string ClientName;
-    public float IsDebug;
 
 
     void Awake()
@@ -31,6 +30,7 @@ public class PlayerManager : MonoBehaviour
         string PlayerName = PlayerPrefs.GetString("PlayerName");
 
     }
+
 
     public void Initialize()
     {
@@ -175,16 +175,18 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) == true){
             x = -1;
-        }else if (Input.GetKey(KeyCode.D) == true){
+        }
+        else if (Input.GetKey(KeyCode.D) == true){
             x = 1;
         }
         if (Input.GetKey(KeyCode.S) == true){
             y = -1;
-        }else if (Input.GetKey(KeyCode.W) == true){
+        }
+        else if (Input.GetKey(KeyCode.W) == true){
             y = 1;
         }
 
-        Vector4 data = new Vector4(x, y, IsDebug);
+        Vector4 data = new Vector4(x, y);
         if (ClientNetworkId != null)
         {
             ClientPlayer.Movement(data);
@@ -231,18 +233,18 @@ public class PlayerManager : MonoBehaviour
         return null;
     }
 
-    bool DelPlayer(Character @object)
+    public bool DelPlayer(Character @object)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
                                   item.NetworkId == @object.NetworkId));
         return (Pool[index] = null);
     }
 
-    bool DelPlayer(long? UID)
+    public bool DelPlayer(long? UID)
     {
-        int index = Pool.IndexOf(Pool.First((item) =>
-                                  item.NetworkId == UID));
-        return (Pool[index] = null);
+        //var player = FindPlayer(UID);
+        //Destroy(player);
+        return (true);
     }
 
 }

@@ -383,13 +383,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab:
-  - {fileID: 1373023226113786, guid: 3af30fe883118ac46b23bcdad88ac493, type: 2}
+  - {fileID: 1449313510279888, guid: 60dbe2f3e93efb24fa1eca5838f17319, type: 2}
   SpawnLocation:
   - {x: -14, y: -190}
   - {x: 65, y: -190}
   UserInterface: {fileID: 368312695}
   ClientName: 
-  IsDebug: 0
 --- !u!114 &368312698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,9 +646,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {x: 0, y: 0, z: 0}
-  Speed: 10
-  MaxSize: 100
-  MinSize: 40
+  Speed: 15
+  MaxSize: 150
+  MinSize: 70
   NeedSize: {x: 0, y: 0}
 --- !u!20 &519420031
 Camera:
