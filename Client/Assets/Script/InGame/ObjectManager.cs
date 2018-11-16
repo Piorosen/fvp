@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ObjectManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ObjectManager : MonoBehaviour
     public PlayerManager PlayerManage;
 
     NetClient Client = null;
+
+    public float Ping;
+    public Text text;
 
     void OnDestroy()
     {
@@ -32,6 +36,7 @@ public class ObjectManager : MonoBehaviour
             Client = new NetClient(Global.Network.IPAdress, Global.Network.Port);
             try
             {
+                text.text = Ping.ToString();
                 Client.Connect();
                 Packet.LoginReq login = new Packet.LoginReq
                 {
@@ -45,8 +50,7 @@ public class ObjectManager : MonoBehaviour
                 StartCoroutine(ServerRequest());
             }
             catch (Exception){
-                
-                PlayerManage.ClientNetworkId = 0;
+                PlayerManager.ClientNetworkId = 0;
                 PlayerManage.ClientName = "Offline";
                 PlayerManage.AddPlayer(0, 0, "Offline", 0);
                 PlayerManage.Initialize();
@@ -81,7 +85,7 @@ public class ObjectManager : MonoBehaviour
                     Login = true;
                     Packet.LoginAck enter = Packet.LoginAck.Parser.ParseFrom(info.Payload);
                     if (enter.Name == PlayerManage.ClientName) {
-                        PlayerManage.ClientNetworkId = enter.NetworkId;
+                        PlayerManager.ClientNetworkId = enter.NetworkId;
                     }
                     PlayerManage.AddPlayer(0, 0, enter.Name, enter.NetworkId);
 
@@ -89,7 +93,7 @@ public class ObjectManager : MonoBehaviour
 
                     for (int i = 0; i < enter.Users.Count; i++)
                     {
-                        if (enter.Users[i].NetworkId != PlayerManage.ClientNetworkId)
+                        if (enter.Users[i].NetworkId != PlayerManager.ClientNetworkId)
                             PlayerManage.AddPlayer(0, 0, "Enermy", enter.Users[i].NetworkId);
                     }
                     break;
@@ -127,10 +131,10 @@ public class ObjectManager : MonoBehaviour
                     {
                         X = location.x,
                         Y = location.y,
-                        Z = Convert.ToSingle(DateTime.UtcNow.Ticks)
+                        Z = (DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond / 1000.0f) % 100000
                     }
                 };
-
+                
                 Client.Send(Packet.Type.MoveReq, move);
                 Client.Update();
 
@@ -149,7 +153,7 @@ public class ObjectManager : MonoBehaviour
                     else if (info.Type == Packet.Type.EnterNewUserAck)
                     {
                         Packet.EnterNewUserAck enter = Packet.EnterNewUserAck.Parser.ParseFrom(info.Payload);
-                        if (enter.NewUser.NetworkId != PlayerManage.ClientNetworkId)
+                        if (enter.NewUser.NetworkId != PlayerManager.ClientNetworkId)
                         {
                             PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
                         }
@@ -163,7 +167,7 @@ public class ObjectManager : MonoBehaviour
                       Debug.Log(info.Type);
                     }
                 }
-                yield return new WaitForSeconds(1.0f / 1000);
+                yield return new WaitForSeconds(Ping / 1000.0f);
             }
         }
         Debug.Log("코루틴 종료");
@@ -172,7 +176,7 @@ public class ObjectManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PlayerManage.ClientNetworkId != null)
+        if (PlayerManager.ClientNetworkId != null)
         {
             Camera.Target = PlayerManage.LocationAverage;
             Camera.NeedSize = PlayerManage.LocationCamera;

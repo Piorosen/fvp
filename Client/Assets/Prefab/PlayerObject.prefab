@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 61386733353502930}
   - component: {fileID: 50165644873774284}
   m_Layer: 8
-  m_Name: PlayerObject 1 1
+  m_Name: PlayerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,13 +309,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthObject: {fileID: 114132534575987960}
-  MaxSpeed: 1
+  MaxSpeed: 0.7
   Jump: 6000
   Accelerate: 2
   Speed: 0
   MaxHP: 100
   MaxMP: 100
-  PlayerName: 
+  PlayerName: 123
 --- !u!114 &114311599495925158
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -145,28 +145,64 @@ public class Character : MonoBehaviour
             anime.SetBool("Down", false);
         }
     }
-
+    Queue<Vector3> ServerQue = new Queue<Vector3>();
+    bool C = false;
     public void ServerMovement(Vector3 data)
     {
+        if (!C)
+        {
+            dTime = data.z;
+            C = true;
+        }
         rigidBody.gravityScale = 0.0f;
-        var i = data - transform.position;
-        if (i.x > 0)
-        {
-            Renderer.flipX = true;   
-        }
-        else if (i.x < 0)
-        {
-            Renderer.flipX = false;
-        }
-        
-        transform.position = Vector3.Slerp(data, transform.position, MaxSpeed * Time.fixedDeltaTime);
+        ServerQue.Enqueue(data);
     }
-    
+
     // FixedUpdate에서 처리하지 않고
     // 독자적인 Movement에서 처리를 함.
     // PlayerManager의 FixedUpdate에 종속됨.
+    float dTime = 0;
+    Vector3 StartPosition = new Vector3();
+    Vector3 EndPosition = new Vector3();
+
     public void Movement(Vector4 data)
     {
+        if (NetworkId != PlayerManager.ClientNetworkId)
+        {
+            if (ServerQue.Count != 0)
+            {
+                var v = ServerQue.Peek();
+
+                if (dTime > v.z)
+                {
+                    StartPosition = EndPosition;
+                    for (; ServerQue.Count != 0;)
+                    {
+                        EndPosition = ServerQue.Peek();
+                        ServerQue.Dequeue();
+                    }
+
+                    var t = StartPosition;
+                    t.z = -1;
+                    transform.position = t;
+                    // v = ServerQue.Dequeue()
+                    
+                    dTime = v.z;
+                }
+                
+                Vector3 Distance = EndPosition - StartPosition;
+                
+                if (Distance.z != 0) { 
+                    transform.Translate(new Vector3(Distance.x * Time.fixedDeltaTime * (1.0f / Distance.z),
+                                                    Distance.y * Time.fixedDeltaTime * (1.0f / Distance.z),
+                                                    0));
+                    Debug.Log(Distance);
+                }
+                dTime += Time.fixedDeltaTime;
+            }
+            return;
+        }
+
         // InputManager은 인게임내 스마트폰에 있는
         // 가상 스틱의 값을 나타냄
         float x = InputManager.InputVector.x;

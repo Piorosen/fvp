@@ -60,6 +60,7 @@
      <Compile Include="Assets\Script\InGame\Character.cs" />
      <Compile Include="Assets\Script\InGame\InGameCamera.cs" />
      <Compile Include="Assets\Script\InGame\InputManager.cs" />
+     <Compile Include="Assets\Script\InGame\NetworkManager.cs" />
      <Compile Include="Assets\Script\InGame\ObjectManager.cs" />
      <Compile Include="Assets\Script\InGame\PlayerManager.cs" />
      <Compile Include="Assets\Script\InGame\UIManager.cs" />

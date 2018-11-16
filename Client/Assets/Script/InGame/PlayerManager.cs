@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public Queue<Vector4> MovementQueue = new Queue<Vector4>();
 
 
-    public long? ClientNetworkId;
+    public static long? ClientNetworkId;
     
     public string ClientName;
 
@@ -206,6 +206,13 @@ public class PlayerManager : MonoBehaviour
             {
                 var character = FindPlayer(Convert.ToInt64(data.w));
                 character.ServerMovement(data);
+            }
+
+        }
+        for (int i = 0; i < Pool.Count; i++)
+        {
+            if (Pool[i] != null && Pool[i].NetworkId != ClientNetworkId) {
+                Pool[i].Movement(new Vector4());
             }
         }
     }
