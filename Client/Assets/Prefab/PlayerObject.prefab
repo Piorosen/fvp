@@ -315,7 +315,7 @@ MonoBehaviour:
   Speed: 0
   MaxHP: 100
   MaxMP: 100
-  PlayerName: 123
+  PlayerName: 
 --- !u!114 &114311599495925158
 MonoBehaviour:
   m_ObjectHideFlags: 1

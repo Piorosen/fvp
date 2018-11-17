@@ -151,7 +151,8 @@ public class Character : MonoBehaviour
     {
         if (!C)
         {
-            dTime = data.z;
+            StartPosition.z = data.z;
+            EndPosition.z = data.z;
             C = true;
         }
         rigidBody.gravityScale = 0.0f;
@@ -161,7 +162,6 @@ public class Character : MonoBehaviour
     // FixedUpdate에서 처리하지 않고
     // 독자적인 Movement에서 처리를 함.
     // PlayerManager의 FixedUpdate에 종속됨.
-    float dTime = 0;
     Vector3 StartPosition = new Vector3();
     Vector3 EndPosition = new Vector3();
 
@@ -171,38 +171,29 @@ public class Character : MonoBehaviour
         {
             if (ServerQue.Count != 0)
             {
-                var v = ServerQue.Peek();
-
-                if (dTime > v.z)
+                StartPosition = EndPosition;
+                for (; ServerQue.Count != 0;)
                 {
-                    StartPosition = EndPosition;
-                    for (; ServerQue.Count != 0;)
-                    {
-                        EndPosition = ServerQue.Peek();
-                        ServerQue.Dequeue();
-                    }
+                    EndPosition = ServerQue.Dequeue();
+                }
 
-                    var t = StartPosition;
-                    t.z = -1;
-                    transform.position = t;
-                    // v = ServerQue.Dequeue()
-                    
-                    dTime = v.z;
-                }
-                
-                Vector3 Distance = EndPosition - StartPosition;
-                
-                if (Distance.z != 0) { 
-                    transform.Translate(new Vector3(Distance.x * Time.fixedDeltaTime * (1.0f / Distance.z),
-                                                    Distance.y * Time.fixedDeltaTime * (1.0f / Distance.z),
-                                                    0));
-                    Debug.Log(Distance);
-                }
-                dTime += Time.fixedDeltaTime;
+                var t = StartPosition;
+                t.z = -1;
+                transform.position = t;
             }
+
+            Vector3 Distance = EndPosition - StartPosition;
+
+            if (Distance.z != 0)
+            {
+                transform.Translate(new Vector3(Distance.x * Time.fixedDeltaTime * (1.0f / Distance.z),
+                                                Distance.y * Time.fixedDeltaTime * (1.0f / Distance.z),
+                                                0));
+            }
+           
             return;
         }
-
+        
         // InputManager은 인게임내 스마트폰에 있는
         // 가상 스틱의 값을 나타냄
         float x = InputManager.InputVector.x;
