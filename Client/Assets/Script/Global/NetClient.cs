@@ -123,7 +123,7 @@ public class NetClient
                         short payloadSize = BitConverter.ToInt16(readBuffer, readIndex);
                         short type = BitConverter.ToInt16(readBuffer, readIndex + sizeof(short));
                         int packetSize = headerSize + payloadSize;
-                        if (packetSize < readBufferLength)
+                        if (packetSize <= readBufferLength)
                         {
                             byte[] payload = new byte[payloadSize];
                             Array.Copy(readBuffer, readIndex + headerSize, payload, 0, payloadSize);
