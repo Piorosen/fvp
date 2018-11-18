@@ -229,6 +229,7 @@ void RelayServerEventProcessor::HandleLoginReq(int64_t networkId, const packet::
 		auto addUser = loginAck.add_users();
 		*(addUser->mutable_position()) = user.position;
 		addUser->set_network_id(user.networkId);
+		addUser->set_name(user.name);
   }
   Send(networkId, packet::Type::LOGIN_ACK, loginAck);
   
