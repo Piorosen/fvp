@@ -9,6 +9,12 @@
 #include <packet_type.pb.h>
 #include "Singleton.h"
 
+struct Handler
+{
+	std::function<void(int64_t, const void*, int)> handler;
+	std::string name;
+};
+
 class EventProcessor
 {
 public:
@@ -20,9 +26,10 @@ public:
   void Stop();
 
   template < typename ProcessorType, typename MessageType >
-  inline void BindHandler(packet::Type type, void(ProcessorType::*handler)(int64_t, const MessageType&))
+  inline void BindHandler(packet::Type type, void(ProcessorType::*handler)(int64_t, const MessageType&), const std::string& name = "")
   {
-    handlers[type] = [this, handler](int64_t networkId, const void* data, int size) {
+		auto& h = handlers[type];
+		h.handler = [this, handler](int64_t networkId, const void* data, int size) {
       MessageType message;
       if (message.ParseFromArray(data, size))
       {
@@ -30,6 +37,7 @@ public:
         (self->*handler)(networkId, message);
       }
     };
+		h.name = name;
   }
 
 protected:
@@ -49,6 +57,6 @@ private:
   std::queue<std::pair<int64_t, std::vector<char>>> eventQueue;
   std::vector<std::pair<int64_t, std::vector<char>>> eventBuffer;
   bool shouldStop = false;
-  std::map<packet::Type, std::function<void(int64_t, const void*, int)>> handlers;
+  std::map<packet::Type, Handler> handlers;
 //  std::chrono::milliseconds timeLimitMs;
 };

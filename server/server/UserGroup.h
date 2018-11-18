@@ -12,7 +12,9 @@ public:
 	void AddUser(RoomUser user);
 	int GetUserCount() const;
 	RoomUser* GetUser(int index);
+	const RoomUser* GetUser(int index) const;
 	void RemoveUser(int index);
+  RoomUser* FindUserByNetworkId(int64_t networkId);
 
 private:
 

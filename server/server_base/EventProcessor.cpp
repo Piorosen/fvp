@@ -82,7 +82,7 @@ void EventProcessor::DispatchEvent(int64_t networkId, const void* src, int size)
   auto it = handlers.find(static_cast<packet::Type>(header.messageType));
   if (it != handlers.end())
   {
-    it->second(networkId, reader.GetSerializedMessagePtr(), header.messageSize);
+    it->second.handler(networkId, reader.GetSerializedMessagePtr(), header.messageSize);
   }
   else
   {

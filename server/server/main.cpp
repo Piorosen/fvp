@@ -5,7 +5,7 @@
 
 int main()
 {
-  Server server;
+	Server server;
   server.Run();
 
   google::protobuf::ShutdownProtobufLibrary();

@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PacketDataSerializer.cpp" />
     <ClCompile Include="RelayServerEventProcessor.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="UserGroup.cpp" />
@@ -144,8 +145,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PacketDataSerializer.h" />
     <ClInclude Include="RelayServerEventProcessor.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="ServerContext.h" />
     <ClInclude Include="UserGroup.h" />
     <ClInclude Include="RoomUser.h" />
     <ClInclude Include="Server.h" />

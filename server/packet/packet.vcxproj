@@ -20,14 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="packet.pb.cc" />
+    <ClCompile Include="packet_data.pb.cc" />
     <ClCompile Include="packet_type.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="packet.pb.h" />
+    <ClInclude Include="packet_data.pb.h" />
     <ClInclude Include="packet_type.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\common\protobuf\packet_data.proto" />
     <None Include="..\..\common\protobuf\packet.proto" />
+    <None Include="..\..\common\protobuf\packet_type.proto" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

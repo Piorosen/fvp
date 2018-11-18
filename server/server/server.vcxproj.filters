@@ -32,6 +32,9 @@
     <ClCompile Include="Room.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="PacketDataSerializer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -56,6 +59,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerContext.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketDataSerializer.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

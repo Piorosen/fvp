@@ -20,6 +20,12 @@ message Disconnect
   int64 network_id = 1;
 }
 
+message EnterRoom
+{
+  int64 network_id = 1;
+  int64 room_id = 2;
+}
+
 message LoginReq
 {
   int64 network_id = 1;
@@ -31,6 +37,11 @@ message LoginAck
   int64 network_id = 1;
   string name = 2;
   repeated RoomUser users = 3;
+}
+
+message LogoutAck
+{
+  int64 network_id = 1;
 }
 
 message EnterNewUserAck
@@ -50,26 +61,63 @@ message MoveAck
   Vector3 position = 2;
 }
 
-message RoomListReq
+message GetRoomListReq
 {
 }
 
-message RoomListAck
+message GetRoomListAck
 {
   repeated Room rooms = 1;
 }
 
-message EnterRoomReq
+message MakeRoomReq
 {
-  int64 room_id = 1;
+  string room_name = 1;
+  int32 max_user_count = 2;
+}
+
+message MakeRoomAck
+{
+  string room_name = 1;
+  int32 max_user_count = 2;
+  int64 master_user_network_id = 3;
+  repeated RoomUser users = 4;
 }
 
 message EnterRoomReq
 {
   int64 room_id = 1;
+}
+
+message EnterRoomAck
+{
+  int64 room_id = 1;
+  Room room = 2;
 }
 
 message RenameRoomReq
 {
   string new_name = 1;
+}
+
+message MoveRoomUserReq
+{
+  int64 network_id = 1;
+  Vector3 position = 2;
+}
+
+message MoveRoomUserAck
+{
+  int64 network_id = 1;
+  Vector3 position = 2;
+}
+
+message ExitRoomUserReq
+{
+  int64 network_id = 1;
+}
+
+message ExitRoomUserAck
+{
+  int64 network_id = 1;
 }

@@ -21,9 +21,23 @@ int UserGroup::GetUserCount() const
 
 RoomUser* UserGroup::GetUser(int index)
 {
+	const UserGroup* self = this;
+	return const_cast<RoomUser*>(self->GetUser(index));
+}
+
+const RoomUser* UserGroup::GetUser(int index) const
+{
 	auto i = users.begin();
 	std::advance(i, index);
 	return i != users.end() ? &(*i) : nullptr;
+}
+
+RoomUser* UserGroup::FindUserByNetworkId(int64_t networkId)
+{
+  auto i = std::find_if(users.begin(), users.end(), [networkId](RoomUser& user) {
+    return user.networkId == networkId;
+  });
+  return i != users.end() ? &(*i) : nullptr;
 }
 
 void UserGroup::RemoveUser(int index)
