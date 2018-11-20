@@ -40,10 +40,9 @@ public class ObjectManager : MonoBehaviour
                 Client.Connect();
                 Packet.LoginReq login = new Packet.LoginReq
                 {
-                    Name = System.IO.Path.GetRandomFileName()
+                    Name = PlayerPrefs.GetString("PlayerName")
                 };
                 PlayerManage.ClientName = login.Name;
-
                 Client.Send(Packet.Type.LoginReq, login);
 
                 StartCoroutine(ServerPlayer());
@@ -94,7 +93,7 @@ public class ObjectManager : MonoBehaviour
                     for (int i = 0; i < enter.Users.Count; i++)
                     {
                         if (enter.Users[i].NetworkId != PlayerManager.ClientNetworkId)
-                            PlayerManage.AddPlayer(0, 0, "Enermy", enter.Users[i].NetworkId);
+                            PlayerManage.AddPlayer(0, 0, enter.Users[i].Name, enter.Users[i].NetworkId);
                     }
                     break;
                 }

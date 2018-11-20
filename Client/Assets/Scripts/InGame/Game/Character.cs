@@ -96,6 +96,9 @@ public class Character : MonoBehaviour
     Animator anime;
     Rigidbody2D rigidBody;
     SpriteRenderer Renderer;
+    Text Text;
+
+    public string PlayerName;
 
     // 고유 정보
     public long? NetworkId = null;
@@ -103,10 +106,6 @@ public class Character : MonoBehaviour
     // 현재 스테이터스
     private float _HP = 100.0f;
     private float _MP = 100.0f;
-
-    public string PlayerName;
-
-    Vector3 arive;
 
     // 실행이 되면은 각 컴포넌트의 정보를 가져옴.
     void Start()
@@ -116,7 +115,8 @@ public class Character : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
 
         HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
-        transform.GetChild(1).GetChild(1).GetComponent<Text>().text = PlayerName;
+        Text = this.transform.GetChild(1).GetChild(1).GetComponent<Text>();
+        Text.text = PlayerName;
     }
     
 

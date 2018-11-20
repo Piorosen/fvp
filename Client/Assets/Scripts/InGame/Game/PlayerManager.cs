@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
 
 
     public static long? ClientNetworkId;
-    
+
     public string ClientName;
 
 
@@ -26,14 +26,12 @@ public class PlayerManager : MonoBehaviour
         {
             Pool.Add(null);
         }
-
-        string PlayerName = PlayerPrefs.GetString("PlayerName");
-
     }
 
 
     public void Initialize()
     {
+        UserInterface.PlayerName.text = ClientName;
         Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
         Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
     }
@@ -227,18 +225,28 @@ public class PlayerManager : MonoBehaviour
 
     public long? AddPlayer(int Object, int Location, string PlayerName, long? NetworkId)
     {
+        Vector2 location = SpawnLocation[Location];
+        return AddPlayer(Object, location, PlayerName, NetworkId);
+    }
+    public long? AddPlayer(int Object, Vector2 Location, string PlayerName, long? NetworkId)
+    {
         for (int i = 0; i < Pool.Count; i++)
+        {
             if (Pool[i] == null)
             {
-                Pool[i] = Instantiate(Prefab[Object], new Vector3(SpawnLocation[Location].x
-                                                                , SpawnLocation[Location].y, -1)
-                                                                , Quaternion.identity).GetComponent<Character>();
+                Vector3 location = Location;
+                location.z = -1;
+
+                Pool[i] = Instantiate(Prefab[Object], location, Quaternion.identity).GetComponent<Character>();
                 Pool[i].PlayerName = PlayerName;
                 Pool[i].NetworkId = NetworkId;
                 return Pool[i].NetworkId;
             }
+        }
         return null;
     }
+
+
 
     public bool DelPlayer(Character @object)
     {

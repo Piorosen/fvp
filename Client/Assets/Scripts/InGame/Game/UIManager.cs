@@ -11,11 +11,6 @@ public class UIManager : MonoBehaviour {
     // 체력바, 기력바의 변화량 속도
     public float Speed;
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-
     float NowHP = 1;
     float MaxHP = 1;
 
