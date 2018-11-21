@@ -22,8 +22,8 @@ public class LoginManager : MonoBehaviour {
 
             Packet.LoginReq login = new Packet.LoginReq
             {
-                NetworkId = 0,
-                Name = this.GetHashCode().ToString()
+                Name = "Offline",
+                NetworkId = 1
             };
             client.Send(Packet.Type.LoginReq, login);
             Debug.Log("Send");
@@ -33,7 +33,7 @@ public class LoginManager : MonoBehaviour {
 
             if (info.Type == Packet.Type.LoginAck)
             {
-                Debug.Log("Respond");
+                Packet.LoginAck ack = Packet.LoginAck.Parser.ParseFrom(info.Payload);
             }
         }
         catch (System.Exception){

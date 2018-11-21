@@ -62,17 +62,17 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Global\Global.cs" />
     <Compile Include="Assets\Scripts\Global\NetClient.cs" />
+    <Compile Include="Assets\Scripts\Global\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\Global\SoundManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\Character.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InGameCamera.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InputManager.cs" />
-    <Compile Include="Assets\Scripts\InGame\Game\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\UIManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Lobby\MatchMaking.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\LoginManager.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\StartGame.cs" />
+    <Compile Include="Assets\Scripts\InGame\MainMenu\LoginManager.cs" />
+    <Compile Include="Assets\Scripts\InGame\MainMenu\StartGame.cs" />
     <Compile Include="Assets\Scripts\Packet.cs" />
     <Compile Include="Assets\Scripts\PacketData.cs" />
     <Compile Include="Assets\Scripts\PacketInternal.cs" />
