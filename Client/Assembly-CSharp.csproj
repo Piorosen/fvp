@@ -62,11 +62,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Global\Global.cs" />
     <Compile Include="Assets\Scripts\Global\NetClient.cs" />
+    <Compile Include="Assets\Scripts\Global\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\Global\SoundManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\Character.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InGameCamera.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InputManager.cs" />
-    <Compile Include="Assets\Scripts\InGame\Game\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\UIManager.cs" />

@@ -15,11 +15,6 @@ public class PlayerManager : MonoBehaviour
     public Queue<Vector4> MovementQueue = new Queue<Vector4>();
 
 
-    public static long? ClientNetworkId;
-
-    public string ClientName;
-
-
     void Awake()
     {
         for (int i = 0; i < 8; i++)
@@ -28,10 +23,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
     public void Initialize()
     {
-        UserInterface.PlayerName.text = ClientName;
+        UserInterface.PlayerName.text = NetworkManager.ClientName;
         Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
         Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
     }
@@ -43,7 +37,7 @@ public class PlayerManager : MonoBehaviour
     {
         get
         {
-            return Pool.First((item) => item.NetworkId == ClientNetworkId);
+            return Pool.First((item) => item.NetworkId == NetworkManager.ClientNetworkId);
         }
     }
     /// <summary>
@@ -53,7 +47,7 @@ public class PlayerManager : MonoBehaviour
     {
         get
         {
-            return Pool.FindIndex((item) => item.NetworkId == ClientNetworkId);
+            return Pool.FindIndex((item) => item.NetworkId == NetworkManager.ClientNetworkId);
         }
     }
     /// <summary>
@@ -185,7 +179,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         Vector4 data = new Vector4(x, y);
-        if (ClientNetworkId != null)
+        if (NetworkManager.ClientNetworkId != null)
         {
             ClientPlayer.Movement(data);
         }
@@ -200,7 +194,7 @@ public class PlayerManager : MonoBehaviour
         while (MovementQueue.Count > 0)
         {
             var data = MovementQueue.Dequeue();
-            if (data.w != ClientNetworkId)
+            if (data.w != NetworkManager.ClientNetworkId)
             {
                 var character = FindPlayer(Convert.ToInt64(data.w));
                 character.ServerMovement(data);
@@ -209,7 +203,7 @@ public class PlayerManager : MonoBehaviour
         }
         for (int i = 0; i < Pool.Count; i++)
         {
-            if (Pool[i] != null && Pool[i].NetworkId != ClientNetworkId) {
+            if (Pool[i] != null && Pool[i].NetworkId != NetworkManager.ClientNetworkId) {
                 Pool[i].Movement(new Vector4());
             }
         }
