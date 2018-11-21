@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         BgImage = GetComponent<Image>();
         JoyStickImg = transform.GetChild(0).GetComponent<Image>();
+        Debug.Log("123");
     }
 
     public void OnDrag(PointerEventData eventData)
