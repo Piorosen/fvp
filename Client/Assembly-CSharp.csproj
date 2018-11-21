@@ -71,8 +71,8 @@
     <Compile Include="Assets\Scripts\InGame\Game\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\UIManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Lobby\MatchMaking.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\LoginManager.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\StartGame.cs" />
+    <Compile Include="Assets\Scripts\InGame\MainMenu\LoginManager.cs" />
+    <Compile Include="Assets\Scripts\InGame\MainMenu\StartGame.cs" />
     <Compile Include="Assets\Scripts\Packet.cs" />
     <Compile Include="Assets\Scripts\PacketData.cs" />
     <Compile Include="Assets\Scripts\PacketInternal.cs" />

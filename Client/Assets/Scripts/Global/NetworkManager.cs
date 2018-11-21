@@ -8,13 +8,13 @@ using System.Threading;
 public class NetworkManager : MonoBehaviour {
 
     public static NetworkManager Instance = null;
-
    
     NetClient Network = null;
     bool LoginCheck = false;
 
     public static string ClientName;
     public static long? ClientNetworkId;
+
     void OnDestroy()
     {
         if (Network != null)
@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour {
             Network.Close();
         }
     }
-        
+
     void Awake()
     {
         if (Instance == null)
