@@ -57,6 +57,7 @@ public class ObjectManager : MonoBehaviour
                     {
                         w = moveAck.NetworkId
                     };
+                    
 
                     PlayerManage.MovementQueue.Enqueue(data);
                 }

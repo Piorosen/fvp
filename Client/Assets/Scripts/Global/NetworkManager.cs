@@ -18,6 +18,7 @@ public class NetworkManager {
     {
         if (Instance == null)
         {
+            Debug.Log("생성");
             Network = new NetClient(Global.Network.IPAdress, Global.Network.Port);
             Instance = this;
         }
@@ -44,7 +45,7 @@ public class NetworkManager {
 
         return Packet.LoginAck
                      .Parser
-                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.LoginReq)
+                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.LoginAck)
                                 .Value
                                 .Payload);
     }

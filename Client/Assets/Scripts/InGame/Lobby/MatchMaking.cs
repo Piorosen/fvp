@@ -20,11 +20,10 @@ public class MatchMaking : MonoBehaviour {
         return NetworkManage.GetRoomList();
     }
     public void Login(){
-        Debug.Log("로그인 시도");
         var data = NetworkManage.Login(PlayerName.text);
-        Debug.Log("로그인 시도 종료");
         if (data != null)
         {
+            Debug.Log($"{data.Name} {data.NetworkId}");
             PlayerPrefs.SetString("Name", data.Name);
             PlayerPrefs.SetString("NetworkId", data.NetworkId.ToString());
         }else{
@@ -33,15 +32,17 @@ public class MatchMaking : MonoBehaviour {
     }
 
     public void CreateRoom(){
+        Debug.Log(RoomName.text);
         var data = NetworkManage.MakeRoom(RoomName.text, 8);
-        
+        Debug.Log($"{data.MasterUserNetworkId} {data.MaxUserCount} {data.RoomName} {data.Users.Count}");
     }
 
     public void JoinGame(){
         var t = GetRoomList();
         foreach (var data in t.Rooms){
-            Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count);
+            Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count +" " + data.Name);
         }
+
     }
 
 	// Use this for initialization
