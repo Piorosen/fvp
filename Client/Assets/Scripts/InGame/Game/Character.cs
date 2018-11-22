@@ -107,6 +107,8 @@ public class Character : MonoBehaviour
     private float _HP = 100.0f;
     private float _MP = 100.0f;
 
+    public int NJump = 3;
+
     // 실행이 되면은 각 컴포넌트의 정보를 가져옴.
     void Start()
     {
@@ -115,37 +117,36 @@ public class Character : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
 
         HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
-        Debug.Log(HealthObject.value);
         Text = this.transform.GetChild(1).GetChild(1).GetComponent<Text>();
         Text.text = PlayerName;
     }
     
 
     // 2번째의 RigidBody가 속도에 따라서 Jump 인지 Down인지 체크함.
-    private void OnTriggerExit2D(Collider2D collision)
+    private void JumpCheckAnim()
     {
-        if (rigidBody.velocity.y > 0)
+        if (rigidBody.velocity.y > 0 && !anime.GetBool("Jump"))
         {
-            Debug.Log("공중부양상태");
-            HP = HP - 5;
             anime.SetBool("Jump", true);
         }
-        else if (rigidBody.velocity.y < 0)
+        else if (rigidBody.velocity.y < 0 && !anime.GetBool("Down"))
         {
             anime.SetBool("Down", true);
         }
     }
 
     // RigidBody의 레이어가 무엇이냐에 따라서 상태 전이
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void JumpCheck()
     {
-        Debug.Log("Attach" + collision.gameObject.layer);
-        if (collision.gameObject.layer == 8)
+        if (Mathf.Abs(rigidBody.velocity.y) == 0 && (anime.GetBool("Jump") || anime.GetBool("Down")))
         {
+            Debug.Log("False");
             anime.SetBool("Jump", false);
             anime.SetBool("Down", false);
+            NJump = 0;
         }
     }
+
     Queue<Vector3> ServerQue = new Queue<Vector3>();
     bool C = false;
     public void ServerMovement(Vector3 data)
@@ -283,9 +284,12 @@ public class Character : MonoBehaviour
             anime.SetBool("Walking", false);
         }
 
+        JumpCheckAnim();
+        JumpCheck();
+        
         // 점프 처리 하는 코드
         // 현재 점프중인지 아닌지 체크를 함
-        if (!anime.GetBool("Jump"))
+        if (NJump < 3)
         {
             // 키보드의 입력시 절대적으로 1.0f로 고정
             // 가상 스틱을 이용시 50% 가량 위로 이동해야지만 처리
@@ -302,13 +306,15 @@ public class Character : MonoBehaviour
                     rigidBody.AddForce(new Vector2(0, Jump));
                     // 점프 애니메이션 설정.
                     anime.SetBool("Jump", true);
+                    NJump++;
                 }
             }
         }
         // 초당 MP는 15씩 증가하는 코드.
-        MP += Time.fixedDeltaTime * 30;
+        MP += Time.fixedDeltaTime * 80;
+        
+            // 그외 변화된 좌우 값을 설정합니다.
+            rigidBody.transform.Translate(Vector3.right * Speed);
 
-        // 그외 변화된 좌우 값을 설정합니다.
-        rigidBody.transform.Translate(Vector3.right * Speed);
     }
 }

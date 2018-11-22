@@ -43,6 +43,11 @@ public class MatchMaking : MonoBehaviour {
             Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count +" " + data.Name);
         }
 
+        var e = NetworkManage.EnterRoom(long.Parse(Join.text));
+        foreach (var q in e.Room.RoomUsers)
+        {
+            Debug.Log(q.Name);
+        }
     }
 
 	// Use this for initialization
