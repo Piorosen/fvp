@@ -12,12 +12,13 @@ public class ObjectManager : MonoBehaviour
 
     public InGameCamera Camera;
     public PlayerManager PlayerManage;
-    public NetworkManager NetworkManage;
+    NetworkManager NetworkManage;
 
     void Awake() {
         if (Instance == null)
         {
             Instance = this;
+            NetworkManage = NetworkManager.Instance ?? new NetworkManager();
             StartCoroutine(ServerRequest());
         }
         else
@@ -36,6 +37,12 @@ public class ObjectManager : MonoBehaviour
                 PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
             }
         }
+        else{
+            PlayerManage.AddPlayer(0, 0, "Offline", 0);
+            PlayerManage.Initialize();
+            yield break;
+        }
+
 
         while (true)
         {
@@ -56,7 +63,7 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.EnterNewUserAck)
                 {
                     Packet.EnterNewUserAck enter = Packet.EnterNewUserAck.Parser.ParseFrom(info.Payload);
-                    if (enter.NewUser.NetworkId != PlayerManager.ClientNetworkId)
+                    if (enter.NewUser.NetworkId != NetworkManager.ClientNetworkId)
                     {
                         PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
                     }
@@ -78,7 +85,7 @@ public class ObjectManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PlayerManager.ClientNetworkId != null)
+        if (NetworkManager.ClientNetworkId != null)
         {
             Camera.Target = PlayerManage.LocationAverage;
             Camera.NeedSize = PlayerManage.LocationCamera;

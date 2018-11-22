@@ -5,34 +5,21 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Threading;
 
-public class NetworkManager : MonoBehaviour {
+public class NetworkManager {
 
     public static NetworkManager Instance = null;
    
     NetClient Network = null;
-    bool LoginCheck = false;
 
     public static string ClientName;
     public static long? ClientNetworkId;
 
-    void OnDestroy()
-    {
-        if (Network != null)
-        {
-            Network.Close();
-        }
-    }
-
-    void Awake()
+    public NetworkManager()
     {
         if (Instance == null)
         {
-            Instance = this;
             Network = new NetClient(Global.Network.IPAdress, Global.Network.Port);
-        }
-        else
-        {
-            Destroy(this);
+            Instance = this;
         }
     }
 
@@ -50,29 +37,16 @@ public class NetworkManager : MonoBehaviour {
         catch (Exception)
         {
             ClientNetworkId = 0;
-            Network.Close();
+            Network?.Close();
             Network = null;
+            return null;
         }
-        float TimeOut = 5.0f;
-        while (TimeOut > 0)
-        {
-            Network.Update();
-            PacketInfo info;
-            if (Network.TryGetPacket(out info))
-            {
-                if (info.Type == Packet.Type.LoginAck)
-                {
-                    Packet.LoginAck enter = Packet.LoginAck.Parser.ParseFrom(info.Payload);
-                    LoginCheck = true;
-                    ClientNetworkId = enter.NetworkId;
-                    ClientName = enter.Name;
-                    return enter;
-                }
-            }
-            Thread.Sleep(100);
-            TimeOut -= Time.deltaTime + 0.1f;
-        }
-        return null;
+
+        return Packet.LoginAck
+                     .Parser
+                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.LoginReq)
+                                .Value
+                                .Payload);
     }
 
 
@@ -128,10 +102,8 @@ public class NetworkManager : MonoBehaviour {
 
     public Packet.EnterRoomAck EnterRoom(long RoomId)
     {  
-        Packet.EnterRoom enterRoom = new Packet.EnterRoom();
-        enterRoom.NetworkId = ClientNetworkId.Value;
+        Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq();
         enterRoom.RoomId = RoomId;
-
         return Packet.EnterRoomAck
                      .Parser
                      .ParseFrom(SetTimeOut(5.0f, Packet.Type.EnterRoomAck)
@@ -142,6 +114,7 @@ public class NetworkManager : MonoBehaviour {
     public Packet.MakeRoomAck MakeRoom(string RoomName, int MaxUser)
     {
         Packet.MakeRoomReq makeRoom = new Packet.MakeRoomReq();
+
         makeRoom.MaxUserCount = MaxUser;
         makeRoom.RoomName = RoomName;
         Network.Send(Packet.Type.MakeRoomReq, makeRoom);
@@ -170,7 +143,6 @@ public class NetworkManager : MonoBehaviour {
             TimeOut -= Time.deltaTime + 0.1f;
         }
         return null;
-
     }
 
 }

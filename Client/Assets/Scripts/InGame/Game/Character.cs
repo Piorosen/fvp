@@ -115,6 +115,7 @@ public class Character : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
 
         HealthObject = this.transform.GetChild(1).GetChild(0).GetComponent<Slider>();
+        Debug.Log(HealthObject.value);
         Text = this.transform.GetChild(1).GetChild(1).GetComponent<Text>();
         Text.text = PlayerName;
     }
@@ -167,7 +168,7 @@ public class Character : MonoBehaviour
 
     public void Movement(Vector4 data)
     {
-        if (NetworkId != PlayerManager.ClientNetworkId)
+        if (NetworkId != NetworkManager.ClientNetworkId)
         {
             if (ServerQue.Count != 0)
             {
@@ -287,8 +288,8 @@ public class Character : MonoBehaviour
         if (!anime.GetBool("Jump"))
         {
             // 키보드의 입력시 절대적으로 1.0f로 고정
-            // 가상 스틱을 이용시 80% 가량 위로 이동해야지만 처리
-            if (y > 0.8f)
+            // 가상 스틱을 이용시 50% 가량 위로 이동해야지만 처리
+            if (y > 0.5f)
             {
                 // MP 30을 소모하므로 30 이상일 경우만
                 if (MP >= 30)

@@ -214,6 +214,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         ServerMove();
+
         ClientMove();
     }
 

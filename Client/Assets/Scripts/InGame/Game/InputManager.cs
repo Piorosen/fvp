@@ -11,14 +11,15 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
     // 방향키의 이미지
     Image BgImage;
-    // 조이스틱 가운데 흰색 버튼입니다.
-    Image JoyStickImg;
+
+    Image[] image = new Image[4];
 
     void Start()
     {
         BgImage = GetComponent<Image>();
-        JoyStickImg = transform.GetChild(0).GetComponent<Image>();
-        Debug.Log("123");
+        for (int i = 0; i < 4; i++){
+            image[i] = transform.GetChild(i).GetComponent<Image>();
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -38,10 +39,29 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                             ? InputVector.normalized
                             : InputVector;
 
-            JoyStickImg.rectTransform.anchoredPosition = new Vector3(
-                InputVector.x * BgImage.rectTransform.sizeDelta.x / 2
-                , InputVector.y * BgImage.rectTransform.sizeDelta.y / 2
-                , 0);
+            if (InputVector.y >= 0.5)
+            {
+                image[0].color = new Color(130.0f/255.0f, 0, 0);
+                image[3].color = new Color(1, 1, 1);
+            }if (InputVector.x > 0)
+            {
+                image[1].color = new Color(1, 1, 1);
+                image[2].color = new Color(130.0f / 255.0f, 0, 0);
+            }if (InputVector.x < 0)
+            {
+                image[1].color = new Color(130.0f / 255.0f, 0, 0);
+                image[2].color = new Color(1, 1, 1);
+            }if (InputVector.y <= -0.5)
+            {
+                image[0].color = new Color(1, 1, 1);
+                image[3].color = new Color(130.0f / 255.0f, 0, 0);
+            }
+
+            if (-0.5 <= InputVector.y && InputVector.y < 0.5){
+                image[0].color = new Color(1, 1, 1);
+                image[3].color = new Color(1, 1, 1);
+            }
+
         }
     }
 
@@ -52,7 +72,10 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        image[0].color = new Color(1, 1, 1);
+        image[1].color = new Color(1, 1, 1);
+        image[2].color = new Color(1, 1, 1);
+        image[3].color = new Color(1, 1, 1);
         InputVector = Vector3.zero;
-        JoyStickImg.rectTransform.anchoredPosition = Vector3.zero;
     }
 }

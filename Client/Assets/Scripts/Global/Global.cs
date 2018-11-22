@@ -7,20 +7,8 @@ public class Global
 {
     public static class Network
     {
-        public static string IPAdress
-        {
-            get
-            {
-                return "127.0.0.1";
-            }
-        }
-        public static int Port
-        {
-            get
-            {
-                return 16333;
-            }
-        }
+        public static string IPAdress => "127.0.0.1";
+        public static int Port => 16333;
     }
 
 
