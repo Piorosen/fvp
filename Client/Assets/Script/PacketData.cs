@@ -27,15 +27,16 @@ namespace Packet {
             "ChFwYWNrZXRfZGF0YS5wcm90bxIGcGFja2V0IioKB1ZlY3RvcjMSCQoBeBgB",
             "IAEoAhIJCgF5GAIgASgCEgkKAXoYAyABKAIiTwoIUm9vbVVzZXISEgoKbmV0",
             "d29ya19pZBgBIAEoAxIhCghwb3NpdGlvbhgCIAEoCzIPLnBhY2tldC5WZWN0",
-            "b3IzEgwKBG5hbWUYAyABKAkiXgoEUm9vbRIKCgJpZBgBIAEoAxIMCgRuYW1l",
-            "GAIgASgJEhYKDm1heF91c2VyX2NvdW50GAMgASgFEiQKCnJvb21fdXNlcnMY",
-            "BCADKAsyEC5wYWNrZXQuUm9vbVVzZXJiBnByb3RvMw=="));
+            "b3IzEgwKBG5hbWUYAyABKAkifgoEUm9vbRIKCgJpZBgBIAEoAxIMCgRuYW1l",
+            "GAIgASgJEhYKDm1heF91c2VyX2NvdW50GAMgASgFEh4KFm1hc3Rlcl91c2Vy",
+            "X25ldHdvcmtfaWQYBCABKAMSJAoKcm9vbV91c2VycxgFIAMoCzIQLnBhY2tl",
+            "dC5Sb29tVXNlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.Vector3), global::Packet.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.RoomUser), global::Packet.RoomUser.Parser, new[]{ "NetworkId", "Position", "Name" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.Room), global::Packet.Room.Parser, new[]{ "Id", "Name", "MaxUserCount", "RoomUsers" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.Room), global::Packet.Room.Parser, new[]{ "Id", "Name", "MaxUserCount", "MasterUserNetworkId", "RoomUsers" }, null, null, null)
           }));
     }
     #endregion
@@ -446,6 +447,7 @@ namespace Packet {
       id_ = other.id_;
       name_ = other.name_;
       maxUserCount_ = other.maxUserCount_;
+      masterUserNetworkId_ = other.masterUserNetworkId_;
       roomUsers_ = other.roomUsers_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -488,10 +490,21 @@ namespace Packet {
       }
     }
 
+    /// <summary>Field number for the "master_user_network_id" field.</summary>
+    public const int MasterUserNetworkIdFieldNumber = 4;
+    private long masterUserNetworkId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long MasterUserNetworkId {
+      get { return masterUserNetworkId_; }
+      set {
+        masterUserNetworkId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "room_users" field.</summary>
-    public const int RoomUsersFieldNumber = 4;
+    public const int RoomUsersFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Packet.RoomUser> _repeated_roomUsers_codec
-        = pb::FieldCodec.ForMessage(34, global::Packet.RoomUser.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Packet.RoomUser.Parser);
     private readonly pbc::RepeatedField<global::Packet.RoomUser> roomUsers_ = new pbc::RepeatedField<global::Packet.RoomUser>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Packet.RoomUser> RoomUsers {
@@ -514,6 +527,7 @@ namespace Packet {
       if (Id != other.Id) return false;
       if (Name != other.Name) return false;
       if (MaxUserCount != other.MaxUserCount) return false;
+      if (MasterUserNetworkId != other.MasterUserNetworkId) return false;
       if(!roomUsers_.Equals(other.roomUsers_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -524,6 +538,7 @@ namespace Packet {
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (MaxUserCount != 0) hash ^= MaxUserCount.GetHashCode();
+      if (MasterUserNetworkId != 0L) hash ^= MasterUserNetworkId.GetHashCode();
       hash ^= roomUsers_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -550,6 +565,10 @@ namespace Packet {
         output.WriteRawTag(24);
         output.WriteInt32(MaxUserCount);
       }
+      if (MasterUserNetworkId != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(MasterUserNetworkId);
+      }
       roomUsers_.WriteTo(output, _repeated_roomUsers_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -567,6 +586,9 @@ namespace Packet {
       }
       if (MaxUserCount != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxUserCount);
+      }
+      if (MasterUserNetworkId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MasterUserNetworkId);
       }
       size += roomUsers_.CalculateSize(_repeated_roomUsers_codec);
       if (_unknownFields != null) {
@@ -588,6 +610,9 @@ namespace Packet {
       }
       if (other.MaxUserCount != 0) {
         MaxUserCount = other.MaxUserCount;
+      }
+      if (other.MasterUserNetworkId != 0L) {
+        MasterUserNetworkId = other.MasterUserNetworkId;
       }
       roomUsers_.Add(other.roomUsers_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -613,7 +638,11 @@ namespace Packet {
             MaxUserCount = input.ReadInt32();
             break;
           }
-          case 34: {
+          case 32: {
+            MasterUserNetworkId = input.ReadInt64();
+            break;
+          }
+          case 42: {
             roomUsers_.AddEntriesFrom(input, _repeated_roomUsers_codec);
             break;
           }

@@ -27,37 +27,33 @@ namespace Packet {
             "CgxwYWNrZXQucHJvdG8SBnBhY2tldBoRcGFja2V0X3R5cGUucHJvdG8aEXBh",
             "Y2tldF9kYXRhLnByb3RvIiYKCEVycm9yQWNrEhoKBHR5cGUYASABKA4yDC5w",
             "YWNrZXQuVHlwZSIdCgdDb25uZWN0EhIKCm5ldHdvcmtfaWQYASABKAMiIAoK",
-            "RGlzY29ubmVjdBISCgpuZXR3b3JrX2lkGAEgASgDIjAKCUVudGVyUm9vbRIS",
-            "CgpuZXR3b3JrX2lkGAEgASgDEg8KB3Jvb21faWQYAiABKAMiLAoITG9naW5S",
-            "ZXESEgoKbmV0d29ya19pZBgBIAEoAxIMCgRuYW1lGAIgASgJIk0KCExvZ2lu",
-            "QWNrEhIKCm5ldHdvcmtfaWQYASABKAMSDAoEbmFtZRgCIAEoCRIfCgV1c2Vy",
-            "cxgDIAMoCzIQLnBhY2tldC5Sb29tVXNlciIfCglMb2dvdXRBY2sSEgoKbmV0",
-            "d29ya19pZBgBIAEoAyJMCg9FbnRlck5ld1VzZXJBY2sSFQoNbmV3X3VzZXJf",
-            "bmFtZRgBIAEoCRIiCghuZXdfdXNlchgCIAEoCzIQLnBhY2tldC5Sb29tVXNl",
-            "ciIsCgdNb3ZlUmVxEiEKCHBvc2l0aW9uGAEgASgLMg8ucGFja2V0LlZlY3Rv",
-            "cjMiQAoHTW92ZUFjaxISCgpuZXR3b3JrX2lkGAEgASgDEiEKCHBvc2l0aW9u",
-            "GAIgASgLMg8ucGFja2V0LlZlY3RvcjMiEAoOR2V0Um9vbUxpc3RSZXEiLQoO",
-            "R2V0Um9vbUxpc3RBY2sSGwoFcm9vbXMYASADKAsyDC5wYWNrZXQuUm9vbSI4",
-            "CgtNYWtlUm9vbVJlcRIRCglyb29tX25hbWUYASABKAkSFgoObWF4X3VzZXJf",
-            "Y291bnQYAiABKAUieQoLTWFrZVJvb21BY2sSEQoJcm9vbV9uYW1lGAEgASgJ",
-            "EhYKDm1heF91c2VyX2NvdW50GAIgASgFEh4KFm1hc3Rlcl91c2VyX25ldHdv",
-            "cmtfaWQYAyABKAMSHwoFdXNlcnMYBCADKAsyEC5wYWNrZXQuUm9vbVVzZXIi",
-            "HwoMRW50ZXJSb29tUmVxEg8KB3Jvb21faWQYASABKAMiOwoMRW50ZXJSb29t",
-            "QWNrEg8KB3Jvb21faWQYASABKAMSGgoEcm9vbRgCIAEoCzIMLnBhY2tldC5S",
-            "b29tIiEKDVJlbmFtZVJvb21SZXESEAoIbmV3X25hbWUYASABKAkiSAoPTW92",
-            "ZVJvb21Vc2VyUmVxEhIKCm5ldHdvcmtfaWQYASABKAMSIQoIcG9zaXRpb24Y",
-            "AiABKAsyDy5wYWNrZXQuVmVjdG9yMyJICg9Nb3ZlUm9vbVVzZXJBY2sSEgoK",
-            "bmV0d29ya19pZBgBIAEoAxIhCghwb3NpdGlvbhgCIAEoCzIPLnBhY2tldC5W",
-            "ZWN0b3IzIiUKD0V4aXRSb29tVXNlclJlcRISCgpuZXR3b3JrX2lkGAEgASgD",
-            "IiUKD0V4aXRSb29tVXNlckFjaxISCgpuZXR3b3JrX2lkGAEgASgDYgZwcm90",
-            "bzM="));
+            "RGlzY29ubmVjdBISCgpuZXR3b3JrX2lkGAEgASgDIiwKCExvZ2luUmVxEhIK",
+            "Cm5ldHdvcmtfaWQYASABKAMSDAoEbmFtZRgCIAEoCSJNCghMb2dpbkFjaxIS",
+            "CgpuZXR3b3JrX2lkGAEgASgDEgwKBG5hbWUYAiABKAkSHwoFdXNlcnMYAyAD",
+            "KAsyEC5wYWNrZXQuUm9vbVVzZXIiHwoJTG9nb3V0QWNrEhIKCm5ldHdvcmtf",
+            "aWQYASABKAMiTAoPRW50ZXJOZXdVc2VyQWNrEhUKDW5ld191c2VyX25hbWUY",
+            "ASABKAkSIgoIbmV3X3VzZXIYAiABKAsyEC5wYWNrZXQuUm9vbVVzZXIiLAoH",
+            "TW92ZVJlcRIhCghwb3NpdGlvbhgBIAEoCzIPLnBhY2tldC5WZWN0b3IzIkAK",
+            "B01vdmVBY2sSEgoKbmV0d29ya19pZBgBIAEoAxIhCghwb3NpdGlvbhgCIAEo",
+            "CzIPLnBhY2tldC5WZWN0b3IzIhAKDkdldFJvb21MaXN0UmVxIi0KDkdldFJv",
+            "b21MaXN0QWNrEhsKBXJvb21zGAEgAygLMgwucGFja2V0LlJvb20iOAoLTWFr",
+            "ZVJvb21SZXESEQoJcm9vbV9uYW1lGAEgASgJEhYKDm1heF91c2VyX2NvdW50",
+            "GAIgASgFIikKC01ha2VSb29tQWNrEhoKBHJvb20YASABKAsyDC5wYWNrZXQu",
+            "Um9vbSIfCgxFbnRlclJvb21SZXESDwoHcm9vbV9pZBgBIAEoAyI7CgxFbnRl",
+            "clJvb21BY2sSDwoHcm9vbV9pZBgBIAEoAxIaCgRyb29tGAIgASgLMgwucGFj",
+            "a2V0LlJvb20iIQoNUmVuYW1lUm9vbVJlcRIQCghuZXdfbmFtZRgBIAEoCSJI",
+            "Cg9Nb3ZlUm9vbVVzZXJSZXESEgoKbmV0d29ya19pZBgBIAEoAxIhCghwb3Np",
+            "dGlvbhgCIAEoCzIPLnBhY2tldC5WZWN0b3IzIkgKD01vdmVSb29tVXNlckFj",
+            "axISCgpuZXR3b3JrX2lkGAEgASgDEiEKCHBvc2l0aW9uGAIgASgLMg8ucGFj",
+            "a2V0LlZlY3RvcjMiJQoPRXhpdFJvb21Vc2VyUmVxEhIKCm5ldHdvcmtfaWQY",
+            "ASABKAMiJQoPRXhpdFJvb21Vc2VyQWNrEhIKCm5ldHdvcmtfaWQYASABKANi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Packet.PacketTypeReflection.Descriptor, global::Packet.PacketDataReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.ErrorAck), global::Packet.ErrorAck.Parser, new[]{ "Type" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.Connect), global::Packet.Connect.Parser, new[]{ "NetworkId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.Disconnect), global::Packet.Disconnect.Parser, new[]{ "NetworkId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterRoom), global::Packet.EnterRoom.Parser, new[]{ "NetworkId", "RoomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.LoginReq), global::Packet.LoginReq.Parser, new[]{ "NetworkId", "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.LoginAck), global::Packet.LoginAck.Parser, new[]{ "NetworkId", "Name", "Users" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.LogoutAck), global::Packet.LogoutAck.Parser, new[]{ "NetworkId" }, null, null, null),
@@ -67,7 +63,7 @@ namespace Packet {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.GetRoomListReq), global::Packet.GetRoomListReq.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.GetRoomListAck), global::Packet.GetRoomListAck.Parser, new[]{ "Rooms" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MakeRoomReq), global::Packet.MakeRoomReq.Parser, new[]{ "RoomName", "MaxUserCount" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MakeRoomAck), global::Packet.MakeRoomAck.Parser, new[]{ "RoomName", "MaxUserCount", "MasterUserNetworkId", "Users" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MakeRoomAck), global::Packet.MakeRoomAck.Parser, new[]{ "Room" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterRoomReq), global::Packet.EnterRoomReq.Parser, new[]{ "RoomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterRoomAck), global::Packet.EnterRoomAck.Parser, new[]{ "RoomId", "Room" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.RenameRoomReq), global::Packet.RenameRoomReq.Parser, new[]{ "NewName" }, null, null, null),
@@ -468,163 +464,6 @@ namespace Packet {
 
   }
 
-  public sealed partial class EnterRoom : pb::IMessage<EnterRoom> {
-    private static readonly pb::MessageParser<EnterRoom> _parser = new pb::MessageParser<EnterRoom>(() => new EnterRoom());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<EnterRoom> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EnterRoom() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EnterRoom(EnterRoom other) : this() {
-      networkId_ = other.networkId_;
-      roomId_ = other.roomId_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EnterRoom Clone() {
-      return new EnterRoom(this);
-    }
-
-    /// <summary>Field number for the "network_id" field.</summary>
-    public const int NetworkIdFieldNumber = 1;
-    private long networkId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long NetworkId {
-      get { return networkId_; }
-      set {
-        networkId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "room_id" field.</summary>
-    public const int RoomIdFieldNumber = 2;
-    private long roomId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long RoomId {
-      get { return roomId_; }
-      set {
-        roomId_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as EnterRoom);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(EnterRoom other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (NetworkId != other.NetworkId) return false;
-      if (RoomId != other.RoomId) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (NetworkId != 0L) hash ^= NetworkId.GetHashCode();
-      if (RoomId != 0L) hash ^= RoomId.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (NetworkId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(NetworkId);
-      }
-      if (RoomId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(RoomId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (NetworkId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NetworkId);
-      }
-      if (RoomId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(RoomId);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(EnterRoom other) {
-      if (other == null) {
-        return;
-      }
-      if (other.NetworkId != 0L) {
-        NetworkId = other.NetworkId;
-      }
-      if (other.RoomId != 0L) {
-        RoomId = other.RoomId;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            NetworkId = input.ReadInt64();
-            break;
-          }
-          case 16: {
-            RoomId = input.ReadInt64();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class LoginReq : pb::IMessage<LoginReq> {
     private static readonly pb::MessageParser<LoginReq> _parser = new pb::MessageParser<LoginReq>(() => new LoginReq());
     private pb::UnknownFieldSet _unknownFields;
@@ -633,7 +472,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -790,7 +629,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -967,7 +806,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1096,7 +935,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1259,7 +1098,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1394,7 +1233,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1557,7 +1396,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1658,7 +1497,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1779,7 +1618,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1936,7 +1775,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1953,10 +1792,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MakeRoomAck(MakeRoomAck other) : this() {
-      roomName_ = other.roomName_;
-      maxUserCount_ = other.maxUserCount_;
-      masterUserNetworkId_ = other.masterUserNetworkId_;
-      users_ = other.users_.Clone();
+      room_ = other.room_ != null ? other.room_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1965,47 +1801,15 @@ namespace Packet {
       return new MakeRoomAck(this);
     }
 
-    /// <summary>Field number for the "room_name" field.</summary>
-    public const int RoomNameFieldNumber = 1;
-    private string roomName_ = "";
+    /// <summary>Field number for the "room" field.</summary>
+    public const int RoomFieldNumber = 1;
+    private global::Packet.Room room_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string RoomName {
-      get { return roomName_; }
+    public global::Packet.Room Room {
+      get { return room_; }
       set {
-        roomName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        room_ = value;
       }
-    }
-
-    /// <summary>Field number for the "max_user_count" field.</summary>
-    public const int MaxUserCountFieldNumber = 2;
-    private int maxUserCount_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MaxUserCount {
-      get { return maxUserCount_; }
-      set {
-        maxUserCount_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "master_user_network_id" field.</summary>
-    public const int MasterUserNetworkIdFieldNumber = 3;
-    private long masterUserNetworkId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long MasterUserNetworkId {
-      get { return masterUserNetworkId_; }
-      set {
-        masterUserNetworkId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "users" field.</summary>
-    public const int UsersFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Packet.RoomUser> _repeated_users_codec
-        = pb::FieldCodec.ForMessage(34, global::Packet.RoomUser.Parser);
-    private readonly pbc::RepeatedField<global::Packet.RoomUser> users_ = new pbc::RepeatedField<global::Packet.RoomUser>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Packet.RoomUser> Users {
-      get { return users_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2021,20 +1825,14 @@ namespace Packet {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RoomName != other.RoomName) return false;
-      if (MaxUserCount != other.MaxUserCount) return false;
-      if (MasterUserNetworkId != other.MasterUserNetworkId) return false;
-      if(!users_.Equals(other.users_)) return false;
+      if (!object.Equals(Room, other.Room)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (RoomName.Length != 0) hash ^= RoomName.GetHashCode();
-      if (MaxUserCount != 0) hash ^= MaxUserCount.GetHashCode();
-      if (MasterUserNetworkId != 0L) hash ^= MasterUserNetworkId.GetHashCode();
-      hash ^= users_.GetHashCode();
+      if (room_ != null) hash ^= Room.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2048,19 +1846,10 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (RoomName.Length != 0) {
+      if (room_ != null) {
         output.WriteRawTag(10);
-        output.WriteString(RoomName);
+        output.WriteMessage(Room);
       }
-      if (MaxUserCount != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(MaxUserCount);
-      }
-      if (MasterUserNetworkId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(MasterUserNetworkId);
-      }
-      users_.WriteTo(output, _repeated_users_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2069,16 +1858,9 @@ namespace Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (RoomName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(RoomName);
+      if (room_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Room);
       }
-      if (MaxUserCount != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxUserCount);
-      }
-      if (MasterUserNetworkId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MasterUserNetworkId);
-      }
-      size += users_.CalculateSize(_repeated_users_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2090,16 +1872,12 @@ namespace Packet {
       if (other == null) {
         return;
       }
-      if (other.RoomName.Length != 0) {
-        RoomName = other.RoomName;
+      if (other.room_ != null) {
+        if (room_ == null) {
+          room_ = new global::Packet.Room();
+        }
+        Room.MergeFrom(other.Room);
       }
-      if (other.MaxUserCount != 0) {
-        MaxUserCount = other.MaxUserCount;
-      }
-      if (other.MasterUserNetworkId != 0L) {
-        MasterUserNetworkId = other.MasterUserNetworkId;
-      }
-      users_.Add(other.users_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2112,19 +1890,10 @@ namespace Packet {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            RoomName = input.ReadString();
-            break;
-          }
-          case 16: {
-            MaxUserCount = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            MasterUserNetworkId = input.ReadInt64();
-            break;
-          }
-          case 34: {
-            users_.AddEntriesFrom(input, _repeated_users_codec);
+            if (room_ == null) {
+              room_ = new global::Packet.Room();
+            }
+            input.ReadMessage(room_);
             break;
           }
         }
@@ -2141,7 +1910,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2270,7 +2039,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2300,6 +2069,9 @@ namespace Packet {
     /// <summary>Field number for the "room_id" field.</summary>
     public const int RoomIdFieldNumber = 1;
     private long roomId_;
+    /// <summary>
+    /// 제거 예정
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long RoomId {
       get { return roomId_; }
@@ -2433,7 +2205,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2562,7 +2334,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2725,7 +2497,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2888,7 +2660,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3017,7 +2789,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
