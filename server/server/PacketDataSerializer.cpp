@@ -14,6 +14,7 @@ PacketDataSerializer::~PacketDataSerializer()
 bool PacketDataSerializer::Serialize(const Room& room, packet::Room& outRoom)
 {
 	outRoom.Clear();
+	outRoom.set_id(room.GetId());
 	outRoom.set_name(room.GetRoomName());
 	outRoom.set_max_user_count(room.GetMaxUserCount());
 	for (int i = 0; i != room.GetUserGroup()->GetUserCount(); ++i)

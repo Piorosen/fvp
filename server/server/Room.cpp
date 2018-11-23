@@ -3,12 +3,18 @@
 #include "PacketReader.h"
 #include <packet.pb.h>
 
-Room::Room()
+Room::Room(int64_t roomId) :
+	id(roomId)
 {
 }
 
 Room::~Room()
 {
+}
+
+int64_t Room::GetId() const
+{
+	return id;
 }
 
 void Room::EnterRoom(int64_t networkId)

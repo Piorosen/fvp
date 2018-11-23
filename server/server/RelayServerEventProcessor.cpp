@@ -172,13 +172,15 @@ void RelayServerEventProcessor::HandleMakeRoomReq(int64_t networkId, const packe
 
 	const int64_t roomId = ++lastRoomId;
 
-	Room room;
+	Room room(roomId);
 	room.SetRoomName(message.room_name());
 	room.SetMaxUserCount(message.max_user_count());
-	
-	rooms.emplace(roomId, std::move(room));
+	room.EnterRoom(networkId);
 
 	packet::MakeRoomAck ack;
+	packetDataSerializer.Serialize(room, *ack.mutable_room());
+
+	rooms.emplace(roomId, std::move(room));
 	
 	Send(networkId, packet::Type::MAKE_ROOM_ACK, ack);
 }

@@ -8,8 +8,9 @@ class Room
 {
 public:
 
-	Room();
+	Room(int64_t roomId);
 	~Room();
+	int64_t GetId() const;
 	void SetRoomName(const std::string& name);
 	const std::string& GetRoomName() const;
 	UserGroup* GetUserGroup();
@@ -22,6 +23,7 @@ public:
 
 private:
 
+	int64_t id = 0;
 	std::string name = "";
 	UserGroup group;
 	int maxUserCount = 0;
