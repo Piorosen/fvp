@@ -402,10 +402,10 @@ class Room : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // repeated .packet.RoomUser room_users = 4;
+  // repeated .packet.RoomUser room_users = 5;
   int room_users_size() const;
   void clear_room_users();
-  static const int kRoomUsersFieldNumber = 4;
+  static const int kRoomUsersFieldNumber = 5;
   ::packet::RoomUser* mutable_room_users(int index);
   ::google::protobuf::RepeatedPtrField< ::packet::RoomUser >*
       mutable_room_users();
@@ -434,6 +434,12 @@ class Room : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::google::protobuf::int64 id() const;
   void set_id(::google::protobuf::int64 value);
 
+  // int64 master_user_network_id = 4;
+  void clear_master_user_network_id();
+  static const int kMasterUserNetworkIdFieldNumber = 4;
+  ::google::protobuf::int64 master_user_network_id() const;
+  void set_master_user_network_id(::google::protobuf::int64 value);
+
   // int32 max_user_count = 3;
   void clear_max_user_count();
   static const int kMaxUserCountFieldNumber = 3;
@@ -447,6 +453,7 @@ class Room : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::google::protobuf::RepeatedPtrField< ::packet::RoomUser > room_users_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int64 id_;
+  ::google::protobuf::int64 master_user_network_id_;
   ::google::protobuf::int32 max_user_count_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_packet_5fdata_2eproto::TableStruct;
@@ -714,7 +721,21 @@ inline void Room::set_max_user_count(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:packet.Room.max_user_count)
 }
 
-// repeated .packet.RoomUser room_users = 4;
+// int64 master_user_network_id = 4;
+inline void Room::clear_master_user_network_id() {
+  master_user_network_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Room::master_user_network_id() const {
+  // @@protoc_insertion_point(field_get:packet.Room.master_user_network_id)
+  return master_user_network_id_;
+}
+inline void Room::set_master_user_network_id(::google::protobuf::int64 value) {
+  
+  master_user_network_id_ = value;
+  // @@protoc_insertion_point(field_set:packet.Room.master_user_network_id)
+}
+
+// repeated .packet.RoomUser room_users = 5;
 inline int Room::room_users_size() const {
   return room_users_.size();
 }

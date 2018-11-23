@@ -118,6 +118,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::Room, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::Room, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::Room, max_user_count_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::Room, master_user_network_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::Room, room_users_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -156,13 +157,14 @@ void AddDescriptorsImpl() {
       "\n\021packet_data.proto\022\006packet\"*\n\007Vector3\022\t"
       "\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\"O\n\010RoomU"
       "ser\022\022\n\nnetwork_id\030\001 \001(\003\022!\n\010position\030\002 \001("
-      "\0132\017.packet.Vector3\022\014\n\004name\030\003 \001(\t\"^\n\004Room"
+      "\0132\017.packet.Vector3\022\014\n\004name\030\003 \001(\t\"~\n\004Room"
       "\022\n\n\002id\030\001 \001(\003\022\014\n\004name\030\002 \001(\t\022\026\n\016max_user_c"
-      "ount\030\003 \001(\005\022$\n\nroom_users\030\004 \003(\0132\020.packet."
-      "RoomUserb\006proto3"
+      "ount\030\003 \001(\005\022\036\n\026master_user_network_id\030\004 \001"
+      "(\003\022$\n\nroom_users\030\005 \003(\0132\020.packet.RoomUser"
+      "b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 256);
+      descriptor, 288);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet_data.proto", &protobuf_RegisterTypes);
 }
@@ -815,6 +817,7 @@ void Room::InitAsDefaultInstance() {
 const int Room::kIdFieldNumber;
 const int Room::kNameFieldNumber;
 const int Room::kMaxUserCountFieldNumber;
+const int Room::kMasterUserNetworkIdFieldNumber;
 const int Room::kRoomUsersFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -938,10 +941,24 @@ bool Room::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .packet.RoomUser room_users = 4;
+      // int64 master_user_network_id = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &master_user_network_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .packet.RoomUser room_users = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_room_users()));
         } else {
@@ -996,11 +1013,16 @@ void Room::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->max_user_count(), output);
   }
 
-  // repeated .packet.RoomUser room_users = 4;
+  // int64 master_user_network_id = 4;
+  if (this->master_user_network_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->master_user_network_id(), output);
+  }
+
+  // repeated .packet.RoomUser room_users = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->room_users_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4,
+      5,
       this->room_users(static_cast<int>(i)),
       output);
   }
@@ -1040,12 +1062,17 @@ void Room::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->max_user_count(), target);
   }
 
-  // repeated .packet.RoomUser room_users = 4;
+  // int64 master_user_network_id = 4;
+  if (this->master_user_network_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->master_user_network_id(), target);
+  }
+
+  // repeated .packet.RoomUser room_users = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->room_users_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, this->room_users(static_cast<int>(i)), deterministic, target);
+        5, this->room_users(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1065,7 +1092,7 @@ size_t Room::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .packet.RoomUser room_users = 4;
+  // repeated .packet.RoomUser room_users = 5;
   {
     unsigned int count = static_cast<unsigned int>(this->room_users_size());
     total_size += 1UL * count;
@@ -1088,6 +1115,13 @@ size_t Room::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->id());
+  }
+
+  // int64 master_user_network_id = 4;
+  if (this->master_user_network_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->master_user_network_id());
   }
 
   // int32 max_user_count = 3;
@@ -1132,6 +1166,9 @@ void Room::MergeFrom(const Room& from) {
   if (from.id() != 0) {
     set_id(from.id());
   }
+  if (from.master_user_network_id() != 0) {
+    set_master_user_network_id(from.master_user_network_id());
+  }
   if (from.max_user_count() != 0) {
     set_max_user_count(from.max_user_count());
   }
@@ -1165,6 +1202,7 @@ void Room::InternalSwap(Room* other) {
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(id_, other->id_);
+  swap(master_user_network_id_, other->master_user_network_id_);
   swap(max_user_count_, other->max_user_count_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }

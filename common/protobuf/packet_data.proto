@@ -21,5 +21,6 @@ message Room
   int64 id = 1;
   string name = 2;
   int32 max_user_count = 3;
-  repeated RoomUser room_users = 4;
+  int64 master_user_network_id = 4;
+  repeated RoomUser room_users = 5;
 }

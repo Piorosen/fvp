@@ -20,12 +20,6 @@ message Disconnect
   int64 network_id = 1;
 }
 
-message EnterRoom
-{
-  int64 network_id = 1;
-  int64 room_id = 2;
-}
-
 message LoginReq
 {
   int64 network_id = 1;
@@ -78,10 +72,7 @@ message MakeRoomReq
 
 message MakeRoomAck
 {
-  string room_name = 1;
-  int32 max_user_count = 2;
-  int64 master_user_network_id = 3;
-  repeated RoomUser users = 4;
+  Room room = 1;
 }
 
 message EnterRoomReq
@@ -91,7 +82,7 @@ message EnterRoomReq
 
 message EnterRoomAck
 {
-  int64 room_id = 1;
+  int64 room_id = 1; // 제거 예정
   Room room = 2;
 }
 
