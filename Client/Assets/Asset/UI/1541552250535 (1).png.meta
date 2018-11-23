@@ -5,6 +5,10 @@ TextureImporter:
     21300000: Gray_Move
     21300002: Red_Move
     21300004: Blue_Move
+    21300006: Blue_Up
+    21300008: Blue_Right
+    21300010: Blue_Down
+    21300012: Blue_Left
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -149,6 +153,86 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: Blue_Up
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 22
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc11debc88693446c8fc52578bf355a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue_Right
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 14
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb0d621522554d1288d394447413112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue_Down
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 8
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42c98fa8038d415b8dc04f2ba3a5f40
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue_Left
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 14
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbbf493631c746c792f2564b7d3f6b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: Blue_Move
       rect:
         serializedVersion: 2
@@ -157,13 +241,13 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 829d1bd4740414aada19c0c97898078b
+      spriteID: c52b36b932ada4b9287806cfc842b43c
       vertices: []
       indices: 
       edges: []
