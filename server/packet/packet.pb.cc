@@ -125,6 +125,16 @@ class ExitRoomUserAckDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ExitRoomUserAck>
       _instance;
 } _ExitRoomUserAck_default_instance_;
+class CastSkillReqDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<CastSkillReq>
+      _instance;
+} _CastSkillReq_default_instance_;
+class CastSkillAckDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<CastSkillAck>
+      _instance;
+} _CastSkillAck_default_instance_;
 }  // namespace packet
 namespace protobuf_packet_2eproto {
 static void InitDefaultsErrorAck() {
@@ -416,6 +426,36 @@ static void InitDefaultsExitRoomUserAck() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_ExitRoomUserAck =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsExitRoomUserAck}, {}};
 
+static void InitDefaultsCastSkillReq() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::packet::_CastSkillReq_default_instance_;
+    new (ptr) ::packet::CastSkillReq();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::packet::CastSkillReq::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_CastSkillReq =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsCastSkillReq}, {
+      &protobuf_packet_5fdata_2eproto::scc_info_Vector3.base,}};
+
+static void InitDefaultsCastSkillAck() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::packet::_CastSkillAck_default_instance_;
+    new (ptr) ::packet::CastSkillAck();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::packet::CastSkillAck::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_CastSkillAck =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsCastSkillAck}, {
+      &protobuf_packet_5fdata_2eproto::scc_info_Vector3.base,}};
+
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ErrorAck.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Connect.base);
@@ -437,9 +477,11 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_MoveRoomUserAck.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ExitRoomUserReq.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ExitRoomUserAck.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_CastSkillReq.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_CastSkillAck.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[20];
+::google::protobuf::Metadata file_level_metadata[22];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -570,6 +612,24 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::ExitRoomUserAck, network_id_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillReq, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillReq, network_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillReq, skill_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillReq, cast_position_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillReq, cast_direction_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillAck, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillAck, network_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillAck, skill_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillAck, cast_position_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::CastSkillAck, cast_direction_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::packet::ErrorAck)},
@@ -592,6 +652,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 109, -1, sizeof(::packet::MoveRoomUserAck)},
   { 116, -1, sizeof(::packet::ExitRoomUserReq)},
   { 122, -1, sizeof(::packet::ExitRoomUserAck)},
+  { 128, -1, sizeof(::packet::CastSkillReq)},
+  { 137, -1, sizeof(::packet::CastSkillAck)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -615,6 +677,8 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_MoveRoomUserAck_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_ExitRoomUserReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_ExitRoomUserAck_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_CastSkillReq_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_CastSkillAck_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -632,7 +696,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 20);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 22);
 }
 
 void AddDescriptorsImpl() {
@@ -663,11 +727,17 @@ void AddDescriptorsImpl() {
       "r3\"H\n\017MoveRoomUserAck\022\022\n\nnetwork_id\030\001 \001("
       "\003\022!\n\010position\030\002 \001(\0132\017.packet.Vector3\"%\n\017"
       "ExitRoomUserReq\022\022\n\nnetwork_id\030\001 \001(\003\"%\n\017E"
-      "xitRoomUserAck\022\022\n\nnetwork_id\030\001 \001(\003b\006prot"
-      "o3"
+      "xitRoomUserAck\022\022\n\nnetwork_id\030\001 \001(\003\"\205\001\n\014C"
+      "astSkillReq\022\022\n\nnetwork_id\030\001 \001(\003\022\020\n\010skill"
+      "_id\030\002 \001(\003\022&\n\rcast_position\030\003 \001(\0132\017.packe"
+      "t.Vector3\022\'\n\016cast_direction\030\004 \001(\0132\017.pack"
+      "et.Vector3\"\205\001\n\014CastSkillAck\022\022\n\nnetwork_i"
+      "d\030\001 \001(\003\022\020\n\010skill_id\030\002 \001(\003\022&\n\rcast_positi"
+      "on\030\003 \001(\0132\017.packet.Vector3\022\'\n\016cast_direct"
+      "ion\030\004 \001(\0132\017.packet.Vector3b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1042);
+      descriptor, 1314);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet.proto", &protobuf_RegisterTypes);
   ::protobuf_packet_5ftype_2eproto::AddDescriptors();
@@ -5692,6 +5762,756 @@ void ExitRoomUserAck::InternalSwap(ExitRoomUserAck* other) {
 }
 
 
+// ===================================================================
+
+void CastSkillReq::InitAsDefaultInstance() {
+  ::packet::_CastSkillReq_default_instance_._instance.get_mutable()->cast_position_ = const_cast< ::packet::Vector3*>(
+      ::packet::Vector3::internal_default_instance());
+  ::packet::_CastSkillReq_default_instance_._instance.get_mutable()->cast_direction_ = const_cast< ::packet::Vector3*>(
+      ::packet::Vector3::internal_default_instance());
+}
+void CastSkillReq::clear_cast_position() {
+  if (GetArenaNoVirtual() == NULL && cast_position_ != NULL) {
+    delete cast_position_;
+  }
+  cast_position_ = NULL;
+}
+void CastSkillReq::clear_cast_direction() {
+  if (GetArenaNoVirtual() == NULL && cast_direction_ != NULL) {
+    delete cast_direction_;
+  }
+  cast_direction_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CastSkillReq::kNetworkIdFieldNumber;
+const int CastSkillReq::kSkillIdFieldNumber;
+const int CastSkillReq::kCastPositionFieldNumber;
+const int CastSkillReq::kCastDirectionFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CastSkillReq::CastSkillReq()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_packet_2eproto::scc_info_CastSkillReq.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:packet.CastSkillReq)
+}
+CastSkillReq::CastSkillReq(const CastSkillReq& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_cast_position()) {
+    cast_position_ = new ::packet::Vector3(*from.cast_position_);
+  } else {
+    cast_position_ = NULL;
+  }
+  if (from.has_cast_direction()) {
+    cast_direction_ = new ::packet::Vector3(*from.cast_direction_);
+  } else {
+    cast_direction_ = NULL;
+  }
+  ::memcpy(&network_id_, &from.network_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&skill_id_) -
+    reinterpret_cast<char*>(&network_id_)) + sizeof(skill_id_));
+  // @@protoc_insertion_point(copy_constructor:packet.CastSkillReq)
+}
+
+void CastSkillReq::SharedCtor() {
+  ::memset(&cast_position_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&skill_id_) -
+      reinterpret_cast<char*>(&cast_position_)) + sizeof(skill_id_));
+}
+
+CastSkillReq::~CastSkillReq() {
+  // @@protoc_insertion_point(destructor:packet.CastSkillReq)
+  SharedDtor();
+}
+
+void CastSkillReq::SharedDtor() {
+  if (this != internal_default_instance()) delete cast_position_;
+  if (this != internal_default_instance()) delete cast_direction_;
+}
+
+void CastSkillReq::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* CastSkillReq::descriptor() {
+  ::protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const CastSkillReq& CastSkillReq::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_packet_2eproto::scc_info_CastSkillReq.base);
+  return *internal_default_instance();
+}
+
+
+void CastSkillReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:packet.CastSkillReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && cast_position_ != NULL) {
+    delete cast_position_;
+  }
+  cast_position_ = NULL;
+  if (GetArenaNoVirtual() == NULL && cast_direction_ != NULL) {
+    delete cast_direction_;
+  }
+  cast_direction_ = NULL;
+  ::memset(&network_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&skill_id_) -
+      reinterpret_cast<char*>(&network_id_)) + sizeof(skill_id_));
+  _internal_metadata_.Clear();
+}
+
+bool CastSkillReq::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:packet.CastSkillReq)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int64 network_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &network_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 skill_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &skill_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .packet.Vector3 cast_position = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_cast_position()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .packet.Vector3 cast_direction = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_cast_direction()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:packet.CastSkillReq)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:packet.CastSkillReq)
+  return false;
+#undef DO_
+}
+
+void CastSkillReq::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:packet.CastSkillReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->network_id(), output);
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->skill_id(), output);
+  }
+
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_cast_position(), output);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->_internal_cast_direction(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:packet.CastSkillReq)
+}
+
+::google::protobuf::uint8* CastSkillReq::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:packet.CastSkillReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->network_id(), target);
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->skill_id(), target);
+  }
+
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_cast_position(), deterministic, target);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->_internal_cast_direction(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:packet.CastSkillReq)
+  return target;
+}
+
+size_t CastSkillReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:packet.CastSkillReq)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *cast_position_);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *cast_direction_);
+  }
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->network_id());
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->skill_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void CastSkillReq::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:packet.CastSkillReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CastSkillReq* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const CastSkillReq>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:packet.CastSkillReq)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:packet.CastSkillReq)
+    MergeFrom(*source);
+  }
+}
+
+void CastSkillReq::MergeFrom(const CastSkillReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:packet.CastSkillReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_cast_position()) {
+    mutable_cast_position()->::packet::Vector3::MergeFrom(from.cast_position());
+  }
+  if (from.has_cast_direction()) {
+    mutable_cast_direction()->::packet::Vector3::MergeFrom(from.cast_direction());
+  }
+  if (from.network_id() != 0) {
+    set_network_id(from.network_id());
+  }
+  if (from.skill_id() != 0) {
+    set_skill_id(from.skill_id());
+  }
+}
+
+void CastSkillReq::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:packet.CastSkillReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CastSkillReq::CopyFrom(const CastSkillReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:packet.CastSkillReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CastSkillReq::IsInitialized() const {
+  return true;
+}
+
+void CastSkillReq::Swap(CastSkillReq* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CastSkillReq::InternalSwap(CastSkillReq* other) {
+  using std::swap;
+  swap(cast_position_, other->cast_position_);
+  swap(cast_direction_, other->cast_direction_);
+  swap(network_id_, other->network_id_);
+  swap(skill_id_, other->skill_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata CastSkillReq::GetMetadata() const {
+  protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void CastSkillAck::InitAsDefaultInstance() {
+  ::packet::_CastSkillAck_default_instance_._instance.get_mutable()->cast_position_ = const_cast< ::packet::Vector3*>(
+      ::packet::Vector3::internal_default_instance());
+  ::packet::_CastSkillAck_default_instance_._instance.get_mutable()->cast_direction_ = const_cast< ::packet::Vector3*>(
+      ::packet::Vector3::internal_default_instance());
+}
+void CastSkillAck::clear_cast_position() {
+  if (GetArenaNoVirtual() == NULL && cast_position_ != NULL) {
+    delete cast_position_;
+  }
+  cast_position_ = NULL;
+}
+void CastSkillAck::clear_cast_direction() {
+  if (GetArenaNoVirtual() == NULL && cast_direction_ != NULL) {
+    delete cast_direction_;
+  }
+  cast_direction_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CastSkillAck::kNetworkIdFieldNumber;
+const int CastSkillAck::kSkillIdFieldNumber;
+const int CastSkillAck::kCastPositionFieldNumber;
+const int CastSkillAck::kCastDirectionFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CastSkillAck::CastSkillAck()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_packet_2eproto::scc_info_CastSkillAck.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:packet.CastSkillAck)
+}
+CastSkillAck::CastSkillAck(const CastSkillAck& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_cast_position()) {
+    cast_position_ = new ::packet::Vector3(*from.cast_position_);
+  } else {
+    cast_position_ = NULL;
+  }
+  if (from.has_cast_direction()) {
+    cast_direction_ = new ::packet::Vector3(*from.cast_direction_);
+  } else {
+    cast_direction_ = NULL;
+  }
+  ::memcpy(&network_id_, &from.network_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&skill_id_) -
+    reinterpret_cast<char*>(&network_id_)) + sizeof(skill_id_));
+  // @@protoc_insertion_point(copy_constructor:packet.CastSkillAck)
+}
+
+void CastSkillAck::SharedCtor() {
+  ::memset(&cast_position_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&skill_id_) -
+      reinterpret_cast<char*>(&cast_position_)) + sizeof(skill_id_));
+}
+
+CastSkillAck::~CastSkillAck() {
+  // @@protoc_insertion_point(destructor:packet.CastSkillAck)
+  SharedDtor();
+}
+
+void CastSkillAck::SharedDtor() {
+  if (this != internal_default_instance()) delete cast_position_;
+  if (this != internal_default_instance()) delete cast_direction_;
+}
+
+void CastSkillAck::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* CastSkillAck::descriptor() {
+  ::protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const CastSkillAck& CastSkillAck::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_packet_2eproto::scc_info_CastSkillAck.base);
+  return *internal_default_instance();
+}
+
+
+void CastSkillAck::Clear() {
+// @@protoc_insertion_point(message_clear_start:packet.CastSkillAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && cast_position_ != NULL) {
+    delete cast_position_;
+  }
+  cast_position_ = NULL;
+  if (GetArenaNoVirtual() == NULL && cast_direction_ != NULL) {
+    delete cast_direction_;
+  }
+  cast_direction_ = NULL;
+  ::memset(&network_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&skill_id_) -
+      reinterpret_cast<char*>(&network_id_)) + sizeof(skill_id_));
+  _internal_metadata_.Clear();
+}
+
+bool CastSkillAck::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:packet.CastSkillAck)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int64 network_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &network_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 skill_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &skill_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .packet.Vector3 cast_position = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_cast_position()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .packet.Vector3 cast_direction = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_cast_direction()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:packet.CastSkillAck)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:packet.CastSkillAck)
+  return false;
+#undef DO_
+}
+
+void CastSkillAck::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:packet.CastSkillAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->network_id(), output);
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->skill_id(), output);
+  }
+
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_cast_position(), output);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->_internal_cast_direction(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:packet.CastSkillAck)
+}
+
+::google::protobuf::uint8* CastSkillAck::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:packet.CastSkillAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->network_id(), target);
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->skill_id(), target);
+  }
+
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_cast_position(), deterministic, target);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->_internal_cast_direction(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:packet.CastSkillAck)
+  return target;
+}
+
+size_t CastSkillAck::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:packet.CastSkillAck)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .packet.Vector3 cast_position = 3;
+  if (this->has_cast_position()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *cast_position_);
+  }
+
+  // .packet.Vector3 cast_direction = 4;
+  if (this->has_cast_direction()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *cast_direction_);
+  }
+
+  // int64 network_id = 1;
+  if (this->network_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->network_id());
+  }
+
+  // int64 skill_id = 2;
+  if (this->skill_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->skill_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void CastSkillAck::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:packet.CastSkillAck)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CastSkillAck* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const CastSkillAck>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:packet.CastSkillAck)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:packet.CastSkillAck)
+    MergeFrom(*source);
+  }
+}
+
+void CastSkillAck::MergeFrom(const CastSkillAck& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:packet.CastSkillAck)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_cast_position()) {
+    mutable_cast_position()->::packet::Vector3::MergeFrom(from.cast_position());
+  }
+  if (from.has_cast_direction()) {
+    mutable_cast_direction()->::packet::Vector3::MergeFrom(from.cast_direction());
+  }
+  if (from.network_id() != 0) {
+    set_network_id(from.network_id());
+  }
+  if (from.skill_id() != 0) {
+    set_skill_id(from.skill_id());
+  }
+}
+
+void CastSkillAck::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:packet.CastSkillAck)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CastSkillAck::CopyFrom(const CastSkillAck& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:packet.CastSkillAck)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CastSkillAck::IsInitialized() const {
+  return true;
+}
+
+void CastSkillAck::Swap(CastSkillAck* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CastSkillAck::InternalSwap(CastSkillAck* other) {
+  using std::swap;
+  swap(cast_position_, other->cast_position_);
+  swap(cast_direction_, other->cast_direction_);
+  swap(network_id_, other->network_id_);
+  swap(skill_id_, other->skill_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata CastSkillAck::GetMetadata() const {
+  protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace packet
 namespace google {
@@ -5755,6 +6575,12 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::ExitRoomUserReq* Arena::
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::ExitRoomUserAck* Arena::CreateMaybeMessage< ::packet::ExitRoomUserAck >(Arena* arena) {
   return Arena::CreateInternal< ::packet::ExitRoomUserAck >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::CastSkillReq* Arena::CreateMaybeMessage< ::packet::CastSkillReq >(Arena* arena) {
+  return Arena::CreateInternal< ::packet::CastSkillReq >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::CastSkillAck* Arena::CreateMaybeMessage< ::packet::CastSkillAck >(Arena* arena) {
+  return Arena::CreateInternal< ::packet::CastSkillAck >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

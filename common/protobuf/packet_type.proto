@@ -38,4 +38,7 @@ enum Type
 
   LOGOUT_REQ = 119;
   LOGOUT_ACK = 120;
+
+  CAST_SKILL_REQ = 121;
+  CAST_SKILL_ACK = 122;
 }

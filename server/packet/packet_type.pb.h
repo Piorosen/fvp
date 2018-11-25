@@ -73,12 +73,14 @@ enum Type {
   ENTER_NEW_ROOM_USER_ACK = 118,
   LOGOUT_REQ = 119,
   LOGOUT_ACK = 120,
+  CAST_SKILL_REQ = 121,
+  CAST_SKILL_ACK = 122,
   Type_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   Type_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool Type_IsValid(int value);
 const Type Type_MIN = NONE;
-const Type Type_MAX = LOGOUT_ACK;
+const Type Type_MAX = CAST_SKILL_ACK;
 const int Type_ARRAYSIZE = Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Type_descriptor();

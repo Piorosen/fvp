@@ -18,6 +18,20 @@ void RelayServerEventProcessor::Start()
 	BindHandler(packet::Type::ENTER_ROOM_REQ, &RelayServerEventProcessor::HandleEnterRoomReq);
 	BindHandler(packet::Type::MOVE_ROOM_USER_REQ, &RelayServerEventProcessor::HandleMoveRoomUserReq);
 	BindHandler(packet::Type::EXIT_ROOM_USER_REQ, &RelayServerEventProcessor::HandleExitRoomUserReq);
+	BindHandler(packet::Type::CAST_SKILL_REQ, &RelayServerEventProcessor::HandleCastSkillReq);
+}
+
+void RelayServerEventProcessor::HandleCastSkillReq(int64_t networkId, const packet::CastSkillReq& message)
+{
+	const int64_t roomId = GetUserRoomId(networkId);
+
+	packet::CastSkillAck ack;
+	ack.set_network_id(networkId);
+	ack.set_skill_id(message.network_id());
+	*ack.mutable_cast_position() = message.cast_position();
+	*ack.mutable_cast_direction() = message.cast_direction();
+
+	SendToRoomUsers(roomId, packet::Type::CAST_SKILL_ACK, ack);
 }
 
 void RelayServerEventProcessor::HandleExitRoomUserReq(int64_t networkId, const packet::ExitRoomUserReq& message)

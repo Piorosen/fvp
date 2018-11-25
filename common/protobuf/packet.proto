@@ -112,3 +112,19 @@ message ExitRoomUserAck
 {
   int64 network_id = 1;
 }
+
+message CastSkillReq
+{
+  int64 network_id = 1;
+  int64 skill_id = 2;
+  Vector3 cast_position = 3;
+  Vector3 cast_direction = 4;
+}
+
+message CastSkillAck
+{
+  int64 network_id = 1;
+  int64 skill_id = 2;
+  Vector3 cast_position = 3;
+  Vector3 cast_direction = 4;
+}

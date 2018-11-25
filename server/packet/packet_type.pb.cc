@@ -50,7 +50,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\021packet_type.proto\022\006packet*\334\003\n\004Type\022\010\n\004"
+      "\n\021packet_type.proto\022\006packet*\204\004\n\004Type\022\010\n\004"
       "NONE\020\000\022\013\n\007CONNECT\020\002\022\016\n\nDISCONNECT\020\003\022\r\n\tE"
       "RROR_ACK\020\004\022\r\n\tLOGIN_REQ\020d\022\r\n\tLOGIN_ACK\020e"
       "\022\026\n\022ENTER_NEW_USER_REQ\020f\022\026\n\022ENTER_NEW_US"
@@ -62,10 +62,11 @@ void AddDescriptorsImpl() {
       "ER_ACK\020r\022\026\n\022EXIT_ROOM_USER_REQ\020s\022\026\n\022EXIT"
       "_ROOM_USER_ACK\020t\022\033\n\027ENTER_NEW_ROOM_USER_"
       "REQ\020u\022\033\n\027ENTER_NEW_ROOM_USER_ACK\020v\022\016\n\nLO"
-      "GOUT_REQ\020w\022\016\n\nLOGOUT_ACK\020xb\006proto3"
+      "GOUT_REQ\020w\022\016\n\nLOGOUT_ACK\020x\022\022\n\016CAST_SKILL"
+      "_REQ\020y\022\022\n\016CAST_SKILL_ACK\020zb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 514);
+      descriptor, 554);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet_type.proto", &protobuf_RegisterTypes);
 }
@@ -112,6 +113,8 @@ bool Type_IsValid(int value) {
     case 118:
     case 119:
     case 120:
+    case 121:
+    case 122:
       return true;
     default:
       return false;
