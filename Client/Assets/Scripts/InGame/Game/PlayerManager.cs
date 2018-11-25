@@ -8,7 +8,7 @@ using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    List<Character> Pool = new List<Character>(8);
+    List<BaseCharacter> Pool = new List<BaseCharacter>(8);
     public List<GameObject> Prefab;
     public List<Vector2> SpawnLocation;
     public UIManager UserInterface;
@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// 클라이언트의 플레이어 정보를 가져옵니다.
     /// </summary>
-    public Character ClientPlayer
+    public BaseCharacter ClientPlayer
     {
         get
         {
@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     /// <param name="NetworkId">네트워크 아이디를 입력받습니다.</param>
     /// <returns></returns>
-    public Character FindPlayer(long? NetworkId)
+    public BaseCharacter FindPlayer(long? NetworkId)
     {
         return Pool.First((item) => item.NetworkId == NetworkId);
     }
@@ -204,7 +204,7 @@ public class PlayerManager : MonoBehaviour
                 Vector3 location = Location;
                 location.z = -1;
 
-                Pool[i] = Instantiate(Prefab[Object], location, Quaternion.identity).GetComponent<Character>();
+                Pool[i] = Instantiate(Prefab[Object], location, Quaternion.identity).GetComponent<BaseCharacter>();
                 Pool[i].PlayerName = PlayerName;
                 Pool[i].NetworkId = NetworkId;
                 return Pool[i].NetworkId;
@@ -215,7 +215,7 @@ public class PlayerManager : MonoBehaviour
 
 
 
-    public bool DelPlayer(Character @object)
+    public bool DelPlayer(BaseCharacter @object)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
                                   item.NetworkId == @object.NetworkId));

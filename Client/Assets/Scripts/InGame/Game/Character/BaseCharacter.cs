@@ -2,10 +2,11 @@
 using UnityEngine;
 using System.Collections.Concurrent;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 
 public delegate void ChangeStatus(float now, float max);
-public class MainCharacter : MonoBehaviour
+public class BaseCharacter : MonoBehaviour
 {
     // 이벤트
     public event ChangeStatus ChangeHP;
@@ -23,15 +24,21 @@ public class MainCharacter : MonoBehaviour
         ChangeMP?.Invoke(now, max);
     }
 
+
+    // Components
+    protected Slider HealthObject;
+    protected Text Text;
     protected SpriteRenderer Renderer;
     protected Animator Anim;
     protected Rigidbody2D RigidBody;
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         Renderer = GetComponent<SpriteRenderer>();
+        HealthObject = transform.GetChild(1).GetChild(0).GetComponent<Slider>();
+        Text = transform.GetChild(1).GetChild(1).GetComponent<Text>();
     }
 
     public float MaxHP = 100.0f;
@@ -84,6 +91,19 @@ public class MainCharacter : MonoBehaviour
         }
     }
 
+    // 플레이어 이름
+    public string PlayerName
+    {
+        get
+        {
+            return Text.text;
+        }
+        set
+        {
+            Text.text = value;
+        }
+    }
+
     // 캐릭터가 이동할 수 있는 최대 속도.
     public float MaxSpeed;
     // 점프하는 힘
@@ -92,8 +112,6 @@ public class MainCharacter : MonoBehaviour
     public float Accelerate;
     // 현재 속도
     public float Speed;
-    // 플레이어 이름
-    public string PlayerName;
     // 고유 정보
     public long? NetworkId = null;
 
@@ -107,7 +125,7 @@ public class MainCharacter : MonoBehaviour
     protected bool IsGround = false;
 
     public int MaxJumpCount = 3;
-    private int CanJumpCount = 3;
+    private int CanJumpCount;
 
     private ConcurrentQueue<Vector3> ServerQue = new ConcurrentQueue<Vector3>();
     Vector3 StartPosition;
@@ -264,5 +282,12 @@ public class MainCharacter : MonoBehaviour
     {
         IsGround = true;
         CanJumpCount = MaxJumpCount;
+    }
+
+
+
+    public void Attack()
+    {
+        
     }
 }

@@ -140,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449313510279888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.202568, y: -212.39394, z: -1}
+  m_LocalPosition: {x: 12.7, y: -197.3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555017902452070}
@@ -155,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1644254467259534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 17, z: -1}
+  m_LocalPosition: {x: 0, y: 28.199997, z: -1}
   m_LocalScale: {x: 1.6125, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4201410191743328}
@@ -175,7 +175,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 30
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -197,14 +197,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.5, y: 18.5}
+    oldSize: {x: 15, y: 37}
     newSize: {x: 7.5, y: 18.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.9, y: 18}
+  m_Size: {x: 15, y: 37}
   m_EdgeRadius: 0
 --- !u!61 &61743630633792150
 BoxCollider2D:
@@ -222,14 +222,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.5, y: 18.5}
+    oldSize: {x: 15, y: 37}
     newSize: {x: 7.5, y: 18.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.9, y: 18}
+  m_Size: {x: 15, y: 37}
   m_EdgeRadius: 0
 --- !u!95 &95193682060855750
 Animator:
@@ -310,11 +310,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   MaxMP: 100
-  MaxSpeed: 0.7
-  JumpPower: 3
-  Accelerate: 2
+  MaxSpeed: 1.4
+  JumpPower: 8000
+  Accelerate: 4
   Speed: 0
   PlayerName: 
+  MaxJumpCount: 1
   HealthObject: {fileID: 114132534575987960}
 --- !u!114 &114311599495925158
 MonoBehaviour:
@@ -448,7 +449,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1644254467259534}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -592,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 12.2}
+  m_AnchoredPosition: {x: 0, y: 23.4}
   m_SizeDelta: {x: 40, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224332640696124112

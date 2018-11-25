@@ -64,8 +64,8 @@
     <Compile Include="Assets\Scripts\Global\NetClient.cs" />
     <Compile Include="Assets\Scripts\Global\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\Global\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\InGame\Game\Character.cs" />
-    <Compile Include="Assets\Scripts\InGame\Game\Character\MainCharacter.cs" />
+    <Compile Include="Assets\Scripts\InGame\Game\BasicCharacter.cs" />
+    <Compile Include="Assets\Scripts\InGame\Game\Character\BaseCharacter.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InGameCamera.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\InputManager.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\ObjectManager.cs" />
