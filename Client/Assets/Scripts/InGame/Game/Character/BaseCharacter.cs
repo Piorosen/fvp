@@ -265,12 +265,6 @@ public class BaseCharacter : MonoBehaviour
             Jump();
             NextMovePosition.x = ClientMove();
 
-
-            if (NextMovePosition.x == 1){
-
-            }else if (NextMovePosition.y == 0){
-                NextMovePosition.y = 10;
-            }
             transform.Translate(NextMovePosition);
         }
         else
@@ -288,12 +282,5 @@ public class BaseCharacter : MonoBehaviour
     {
         IsGround = true;
         CanJumpCount = MaxJumpCount;
-    }
-
-
-
-    public void Attack()
-    {
-
     }
 }
