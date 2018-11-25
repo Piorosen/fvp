@@ -49,6 +49,8 @@ void RelayServerEventProcessor::HandleExitRoomUserReq(int64_t networkId, const p
 		return;
 	}
 
+	userRoomIdInfos.erase(roomId);
+
 	packet::ExitRoomUserAck ack;
 
 	ack.set_network_id(networkId);
@@ -132,6 +134,8 @@ void RelayServerEventProcessor::HandleEnterRoomReq(int64_t networkId, const pack
 
 	// 방에 유저 추가
 	room->EnterRoom(networkId);
+
+	userRoomIdInfos[networkId] = roomId;
 	
 	UserGroup* userGroup = room->GetUserGroup();
 
@@ -195,6 +199,8 @@ void RelayServerEventProcessor::HandleMakeRoomReq(int64_t networkId, const packe
 	packetDataSerializer.Serialize(room, *ack.mutable_room());
 
 	rooms.emplace(roomId, std::move(room));
+
+	userRoomIdInfos[networkId] = roomId;
 	
 	Send(networkId, packet::Type::MAKE_ROOM_ACK, ack);
 }
