@@ -33,6 +33,9 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             else if (Input.GetKey(KeyCode.D) == true)
             {
                 InputVector.x = 1;
+            }else
+            {
+                InputVector.x = 0;
             }
         }
         if (InputVector.y == 0.0f)
@@ -44,21 +47,23 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             else if (Input.GetKey(KeyCode.W) == true)
             {
                 InputVector.y = 1;
+            }else
+            {
+                InputVector.y = 0;
             }
         }
+    }
 
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)){
-            InputVector.y = 0;
-        }if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)){
-            InputVector.x = 0;
+
+    void Update()
+    {
+        if (!IsDrag)
+        {
+            CheckKeyboard();
         }
     }
 
-
-    void Update(){
-        // CheckKeyboard();
-    }
-
+    bool IsDrag = false;
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 pos;
@@ -106,6 +111,7 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        IsDrag = true;
         OnDrag(eventData);
     }
 
@@ -116,5 +122,6 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         image[2].color = new Color(1, 1, 1);
         image[3].color = new Color(1, 1, 1);
         InputVector = Vector3.zero;
+        IsDrag = false;
     }
 }

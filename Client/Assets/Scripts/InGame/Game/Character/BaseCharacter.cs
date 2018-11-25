@@ -177,59 +177,20 @@ public class BaseCharacter : MonoBehaviour
         float Acc = Accelerate * Time.fixedDeltaTime;
         // 이동관련 함수 처리
 
-        if (InputManager.InputVector.x < 0)
-        {
-            // 이동시 MP 10 소모 (초당)
-            MP -= 10 * Time.deltaTime;
-            if (Speed < -MaxSpeed)
-            {
-                Speed = -MaxSpeed;
-            }
-            else
-            {
-                Speed -= Acc;
-            }
-        }
-        else if (InputManager.InputVector.x > 0)
-        {
-            // 이동시 MP 10 소모 (초당)
-            MP -= 10 * Time.deltaTime;
-            if (Speed > MaxSpeed)
-            {
-                Speed = MaxSpeed;
-            }
-            else
-            {
-                Speed += Acc;
-            }
-        }
-        else
-        {
-            // x의 값이 0 일 때 멈추는 효과
-            if (Speed > 0.05)
-            {
-                Speed -= Acc * 1.3f;
-            }
-            else if (Speed < -0.05)
-            {
-                Speed += Acc * 1.3f;
-            }
-            else
-            {
-                Speed = 0.0f;
-            }
-        }
-        return Speed;
+        Debug.Log(new Vector2(InputManager.InputVector.x * Acc, 0));
+        RigidBody.AddForce(new Vector2(InputManager.InputVector.x * Acc, 0));
+
+        return RigidBody.velocity.x;
     }
 
-    protected void SetAnim(Vector2 NextMovePosition)
+    protected void SetAnim()
     {
-        if (NextMovePosition.x > 0)
+        if (RigidBody.velocity.x > 0)
         {
             Renderer.flipX = true;
             Anim.SetBool("Walking", true);
         }
-        else if (NextMovePosition.x < 0)
+        else if (RigidBody.velocity.x < 0)
         {
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
@@ -239,11 +200,11 @@ public class BaseCharacter : MonoBehaviour
             Anim.SetBool("Walking", false);
         }
 
-        if (NextMovePosition.y > 0)
+        if (RigidBody.velocity.y > 0)
         {
             Anim.SetBool("Jump", true);
         }
-        else if (NextMovePosition.y < 0)
+        else if (RigidBody.velocity.y < 0)
         {
             Anim.SetBool("Down", true);
         }
@@ -263,15 +224,14 @@ public class BaseCharacter : MonoBehaviour
         if (NetworkId == NetworkManager.ClientNetworkId)
         {
             Jump();
-            NextMovePosition.x = ClientMove();
-
-            transform.Translate(NextMovePosition);
+            ClientMove();
+            Debug.Log(RigidBody.velocity);
         }
         else
         {
             NextMovePosition = ServerMovement();
         }
-        SetAnim(NextMovePosition);
+        SetAnim();
     }
 
     protected void OnTriggerExit2D(Collider2D collision)

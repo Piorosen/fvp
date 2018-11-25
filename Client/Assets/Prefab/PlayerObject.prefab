@@ -140,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449313510279888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.7, y: -197.3, z: -1}
+  m_LocalPosition: {x: 12.532886, y: -196.15718, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555017902452070}
@@ -173,13 +173,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 1
+  m_AngularDrag: 0
   m_GravityScale: 30
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61100853923391996
 BoxCollider2D:
@@ -311,12 +311,10 @@ MonoBehaviour:
   MaxHP: 100
   MaxMP: 100
   MaxSpeed: 1.4
-  JumpPower: 8000
-  Accelerate: 4
+  JumpPower: 10000
+  Accelerate: 14000
   Speed: 0
-  PlayerName: 
   MaxJumpCount: 1
-  HealthObject: {fileID: 114132534575987960}
 --- !u!114 &114311599495925158
 MonoBehaviour:
   m_ObjectHideFlags: 1
