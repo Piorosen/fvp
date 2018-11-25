@@ -157,34 +157,7 @@ public class PlayerManager : MonoBehaviour
             return new Vector2(Mathf.Abs(x.x), Mathf.Abs(x.y));
         }
     }
-    
-    /// <summary>
-    /// 클라이언트의 움직임을 처리합니다.
-    /// </summary>
-    public void ClientMove(){
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.A) == true){
-            x = -1;
-        }
-        else if (Input.GetKey(KeyCode.D) == true){
-            x = 1;
-        }
-        if (Input.GetKey(KeyCode.S) == true){
-            y = -1;
-        }
-        else if (Input.GetKey(KeyCode.W) == true){
-            y = 1;
-        }
-
-        Vector4 data = new Vector4(x, y);
-        if (NetworkManager.ClientNetworkId != null)
-        {
-            ClientPlayer.Movement(data);
-        }
-        
-    }
 
     /// <summary>
     /// 서버의 움직임을 처리합니다.
@@ -197,14 +170,15 @@ public class PlayerManager : MonoBehaviour
             if (data.w != NetworkManager.ClientNetworkId)
             {
                 var character = FindPlayer(Convert.ToInt64(data.w));
-                character.ServerMovement(data);
+                character.ServerData(data);
             }
 
         }
         for (int i = 0; i < Pool.Count; i++)
         {
-            if (Pool[i] != null && Pool[i].NetworkId != NetworkManager.ClientNetworkId) {
-                Pool[i].Movement(new Vector4());
+            if (Pool[i] != null)
+            {
+                Pool[i].Movement();
             }
         }
     }
@@ -214,8 +188,6 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         ServerMove();
-
-        ClientMove();
     }
 
     public long? AddPlayer(int Object, int Location, string PlayerName, long? NetworkId)

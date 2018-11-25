@@ -22,6 +22,43 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
+    void CheckKeyboard()
+    {
+        if (InputVector.x == 0.0f)
+        {
+            if (Input.GetKey(KeyCode.A) == true)
+            {
+                InputVector.x = -1;
+            }
+            else if (Input.GetKey(KeyCode.D) == true)
+            {
+                InputVector.x = 1;
+            }
+        }
+        if (InputVector.y == 0.0f)
+        {
+            if (Input.GetKey(KeyCode.S) == true)
+            {
+                InputVector.y = -1;
+            }
+            else if (Input.GetKey(KeyCode.W) == true)
+            {
+                InputVector.y = 1;
+            }
+        }
+
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)){
+            InputVector.y = 0;
+        }if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)){
+            InputVector.x = 0;
+        }
+    }
+
+
+    void Update(){
+        // CheckKeyboard();
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 pos;
@@ -38,6 +75,8 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             InputVector = (InputVector.magnitude > 1.0f)
                             ? InputVector.normalized
                             : InputVector;
+
+
 
             if (InputVector.y >= 0.5)
             {
