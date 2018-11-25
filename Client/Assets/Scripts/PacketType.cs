@@ -24,7 +24,7 @@ namespace Packet {
     static PacketTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFwYWNrZXRfdHlwZS5wcm90bxIGcGFja2V0KtwDCgRUeXBlEggKBE5PTkUQ",
+            "ChFwYWNrZXRfdHlwZS5wcm90bxIGcGFja2V0KoQECgRUeXBlEggKBE5PTkUQ",
             "ABILCgdDT05ORUNUEAISDgoKRElTQ09OTkVDVBADEg0KCUVSUk9SX0FDSxAE",
             "Eg0KCUxPR0lOX1JFURBkEg0KCUxPR0lOX0FDSxBlEhYKEkVOVEVSX05FV19V",
             "U0VSX1JFURBmEhYKEkVOVEVSX05FV19VU0VSX0FDSxBnEgwKCE1PVkVfUkVR",
@@ -35,7 +35,8 @@ namespace Packet {
             "RVJfQUNLEHISFgoSRVhJVF9ST09NX1VTRVJfUkVREHMSFgoSRVhJVF9ST09N",
             "X1VTRVJfQUNLEHQSGwoXRU5URVJfTkVXX1JPT01fVVNFUl9SRVEQdRIbChdF",
             "TlRFUl9ORVdfUk9PTV9VU0VSX0FDSxB2Eg4KCkxPR09VVF9SRVEQdxIOCgpM",
-            "T0dPVVRfQUNLEHhiBnByb3RvMw=="));
+            "T0dPVVRfQUNLEHgSEgoOQ0FTVF9TS0lMTF9SRVEQeRISCg5DQVNUX1NLSUxM",
+            "X0FDSxB6YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Packet.Type), }, null));
@@ -69,6 +70,8 @@ namespace Packet {
     [pbr::OriginalName("ENTER_NEW_ROOM_USER_ACK")] EnterNewRoomUserAck = 118,
     [pbr::OriginalName("LOGOUT_REQ")] LogoutReq = 119,
     [pbr::OriginalName("LOGOUT_ACK")] LogoutAck = 120,
+    [pbr::OriginalName("CAST_SKILL_REQ")] CastSkillReq = 121,
+    [pbr::OriginalName("CAST_SKILL_ACK")] CastSkillAck = 122,
   }
 
   #endregion

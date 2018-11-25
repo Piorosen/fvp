@@ -46,8 +46,14 @@ namespace Packet {
             "dGlvbhgCIAEoCzIPLnBhY2tldC5WZWN0b3IzIkgKD01vdmVSb29tVXNlckFj",
             "axISCgpuZXR3b3JrX2lkGAEgASgDEiEKCHBvc2l0aW9uGAIgASgLMg8ucGFj",
             "a2V0LlZlY3RvcjMiJQoPRXhpdFJvb21Vc2VyUmVxEhIKCm5ldHdvcmtfaWQY",
-            "ASABKAMiJQoPRXhpdFJvb21Vc2VyQWNrEhIKCm5ldHdvcmtfaWQYASABKANi",
-            "BnByb3RvMw=="));
+            "ASABKAMiJQoPRXhpdFJvb21Vc2VyQWNrEhIKCm5ldHdvcmtfaWQYASABKAMi",
+            "hQEKDENhc3RTa2lsbFJlcRISCgpuZXR3b3JrX2lkGAEgASgDEhAKCHNraWxs",
+            "X2lkGAIgASgDEiYKDWNhc3RfcG9zaXRpb24YAyABKAsyDy5wYWNrZXQuVmVj",
+            "dG9yMxInCg5jYXN0X2RpcmVjdGlvbhgEIAEoCzIPLnBhY2tldC5WZWN0b3Iz",
+            "IoUBCgxDYXN0U2tpbGxBY2sSEgoKbmV0d29ya19pZBgBIAEoAxIQCghza2ls",
+            "bF9pZBgCIAEoAxImCg1jYXN0X3Bvc2l0aW9uGAMgASgLMg8ucGFja2V0LlZl",
+            "Y3RvcjMSJwoOY2FzdF9kaXJlY3Rpb24YBCABKAsyDy5wYWNrZXQuVmVjdG9y",
+            "M2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Packet.PacketTypeReflection.Descriptor, global::Packet.PacketDataReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -70,7 +76,9 @@ namespace Packet {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MoveRoomUserReq), global::Packet.MoveRoomUserReq.Parser, new[]{ "NetworkId", "Position" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MoveRoomUserAck), global::Packet.MoveRoomUserAck.Parser, new[]{ "NetworkId", "Position" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.ExitRoomUserReq), global::Packet.ExitRoomUserReq.Parser, new[]{ "NetworkId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.ExitRoomUserAck), global::Packet.ExitRoomUserAck.Parser, new[]{ "NetworkId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.ExitRoomUserAck), global::Packet.ExitRoomUserAck.Parser, new[]{ "NetworkId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.CastSkillReq), global::Packet.CastSkillReq.Parser, new[]{ "NetworkId", "SkillId", "CastPosition", "CastDirection" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.CastSkillAck), global::Packet.CastSkillAck.Parser, new[]{ "NetworkId", "SkillId", "CastPosition", "CastDirection" }, null, null, null)
           }));
     }
     #endregion
@@ -2902,6 +2910,456 @@ namespace Packet {
             break;
           case 8: {
             NetworkId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CastSkillReq : pb::IMessage<CastSkillReq> {
+    private static readonly pb::MessageParser<CastSkillReq> _parser = new pb::MessageParser<CastSkillReq>(() => new CastSkillReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CastSkillReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillReq(CastSkillReq other) : this() {
+      networkId_ = other.networkId_;
+      skillId_ = other.skillId_;
+      castPosition_ = other.castPosition_ != null ? other.castPosition_.Clone() : null;
+      castDirection_ = other.castDirection_ != null ? other.castDirection_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillReq Clone() {
+      return new CastSkillReq(this);
+    }
+
+    /// <summary>Field number for the "network_id" field.</summary>
+    public const int NetworkIdFieldNumber = 1;
+    private long networkId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NetworkId {
+      get { return networkId_; }
+      set {
+        networkId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_id" field.</summary>
+    public const int SkillIdFieldNumber = 2;
+    private long skillId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long SkillId {
+      get { return skillId_; }
+      set {
+        skillId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cast_position" field.</summary>
+    public const int CastPositionFieldNumber = 3;
+    private global::Packet.Vector3 castPosition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Packet.Vector3 CastPosition {
+      get { return castPosition_; }
+      set {
+        castPosition_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cast_direction" field.</summary>
+    public const int CastDirectionFieldNumber = 4;
+    private global::Packet.Vector3 castDirection_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Packet.Vector3 CastDirection {
+      get { return castDirection_; }
+      set {
+        castDirection_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CastSkillReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CastSkillReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (NetworkId != other.NetworkId) return false;
+      if (SkillId != other.SkillId) return false;
+      if (!object.Equals(CastPosition, other.CastPosition)) return false;
+      if (!object.Equals(CastDirection, other.CastDirection)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (NetworkId != 0L) hash ^= NetworkId.GetHashCode();
+      if (SkillId != 0L) hash ^= SkillId.GetHashCode();
+      if (castPosition_ != null) hash ^= CastPosition.GetHashCode();
+      if (castDirection_ != null) hash ^= CastDirection.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (NetworkId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(NetworkId);
+      }
+      if (SkillId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SkillId);
+      }
+      if (castPosition_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(CastPosition);
+      }
+      if (castDirection_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(CastDirection);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (NetworkId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NetworkId);
+      }
+      if (SkillId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SkillId);
+      }
+      if (castPosition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CastPosition);
+      }
+      if (castDirection_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CastDirection);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CastSkillReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.NetworkId != 0L) {
+        NetworkId = other.NetworkId;
+      }
+      if (other.SkillId != 0L) {
+        SkillId = other.SkillId;
+      }
+      if (other.castPosition_ != null) {
+        if (castPosition_ == null) {
+          castPosition_ = new global::Packet.Vector3();
+        }
+        CastPosition.MergeFrom(other.CastPosition);
+      }
+      if (other.castDirection_ != null) {
+        if (castDirection_ == null) {
+          castDirection_ = new global::Packet.Vector3();
+        }
+        CastDirection.MergeFrom(other.CastDirection);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            NetworkId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            SkillId = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            if (castPosition_ == null) {
+              castPosition_ = new global::Packet.Vector3();
+            }
+            input.ReadMessage(castPosition_);
+            break;
+          }
+          case 34: {
+            if (castDirection_ == null) {
+              castDirection_ = new global::Packet.Vector3();
+            }
+            input.ReadMessage(castDirection_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CastSkillAck : pb::IMessage<CastSkillAck> {
+    private static readonly pb::MessageParser<CastSkillAck> _parser = new pb::MessageParser<CastSkillAck>(() => new CastSkillAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CastSkillAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillAck(CastSkillAck other) : this() {
+      networkId_ = other.networkId_;
+      skillId_ = other.skillId_;
+      castPosition_ = other.castPosition_ != null ? other.castPosition_.Clone() : null;
+      castDirection_ = other.castDirection_ != null ? other.castDirection_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CastSkillAck Clone() {
+      return new CastSkillAck(this);
+    }
+
+    /// <summary>Field number for the "network_id" field.</summary>
+    public const int NetworkIdFieldNumber = 1;
+    private long networkId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NetworkId {
+      get { return networkId_; }
+      set {
+        networkId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_id" field.</summary>
+    public const int SkillIdFieldNumber = 2;
+    private long skillId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long SkillId {
+      get { return skillId_; }
+      set {
+        skillId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cast_position" field.</summary>
+    public const int CastPositionFieldNumber = 3;
+    private global::Packet.Vector3 castPosition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Packet.Vector3 CastPosition {
+      get { return castPosition_; }
+      set {
+        castPosition_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cast_direction" field.</summary>
+    public const int CastDirectionFieldNumber = 4;
+    private global::Packet.Vector3 castDirection_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Packet.Vector3 CastDirection {
+      get { return castDirection_; }
+      set {
+        castDirection_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CastSkillAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CastSkillAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (NetworkId != other.NetworkId) return false;
+      if (SkillId != other.SkillId) return false;
+      if (!object.Equals(CastPosition, other.CastPosition)) return false;
+      if (!object.Equals(CastDirection, other.CastDirection)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (NetworkId != 0L) hash ^= NetworkId.GetHashCode();
+      if (SkillId != 0L) hash ^= SkillId.GetHashCode();
+      if (castPosition_ != null) hash ^= CastPosition.GetHashCode();
+      if (castDirection_ != null) hash ^= CastDirection.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (NetworkId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(NetworkId);
+      }
+      if (SkillId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SkillId);
+      }
+      if (castPosition_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(CastPosition);
+      }
+      if (castDirection_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(CastDirection);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (NetworkId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NetworkId);
+      }
+      if (SkillId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SkillId);
+      }
+      if (castPosition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CastPosition);
+      }
+      if (castDirection_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CastDirection);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CastSkillAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.NetworkId != 0L) {
+        NetworkId = other.NetworkId;
+      }
+      if (other.SkillId != 0L) {
+        SkillId = other.SkillId;
+      }
+      if (other.castPosition_ != null) {
+        if (castPosition_ == null) {
+          castPosition_ = new global::Packet.Vector3();
+        }
+        CastPosition.MergeFrom(other.CastPosition);
+      }
+      if (other.castDirection_ != null) {
+        if (castDirection_ == null) {
+          castDirection_ = new global::Packet.Vector3();
+        }
+        CastDirection.MergeFrom(other.CastDirection);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            NetworkId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            SkillId = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            if (castPosition_ == null) {
+              castPosition_ = new global::Packet.Vector3();
+            }
+            input.ReadMessage(castPosition_);
+            break;
+          }
+          case 34: {
+            if (castDirection_ == null) {
+              castDirection_ = new global::Packet.Vector3();
+            }
+            input.ReadMessage(castDirection_);
             break;
           }
         }
