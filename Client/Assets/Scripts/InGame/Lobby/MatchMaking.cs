@@ -34,7 +34,7 @@ public class MatchMaking : MonoBehaviour {
     public void CreateRoom(){
         Debug.Log(RoomName.text);
         var data = NetworkManage.MakeRoom(RoomName.text, 8);
-        Debug.Log($"{data.MasterUserNetworkId} {data.MaxUserCount} {data.RoomName} {data.Users.Count}");
+        Debug.Log($"{data.Room.MasterUserNetworkId} {data.Room.Id} {data.Room.Name} {data.Room.RoomUsers.Count}");
     }
 
     public void JoinGame(){

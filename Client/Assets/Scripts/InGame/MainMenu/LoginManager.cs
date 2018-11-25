@@ -22,8 +22,7 @@ public class LoginManager : MonoBehaviour {
 
             Packet.LoginReq login = new Packet.LoginReq
             {
-                Name = "Offline",
-                NetworkId = 1
+                Name = "Offline"
             };
             client.Send(Packet.Type.LoginReq, login);
             Debug.Log("Send");
@@ -33,7 +32,7 @@ public class LoginManager : MonoBehaviour {
 
             if (info.Type == Packet.Type.LoginAck)
             {
-                Packet.LoginAck ack = Packet.LoginAck.Parser.ParseFrom(info.Payload);
+             //   Packet.LoginAck ack = Packet.LoginAck.Parser.ParseFrom(info.Payload);
             }
         }
         catch (System.Exception){
