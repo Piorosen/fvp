@@ -9,6 +9,7 @@ public class MatchMaking : MonoBehaviour {
     public Text PlayerName;
     public Text Join;
     public Text RoomName;
+    public Text Exit;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class MatchMaking : MonoBehaviour {
         var data = NetworkManage.Login(PlayerName.text);
         if (data != null)
         {
+            NetworkManager.ClientNetworkId = data.NetworkId;
             Debug.Log($"{data.Name} {data.NetworkId}");
             PlayerPrefs.SetString("Name", data.Name);
             PlayerPrefs.SetString("NetworkId", data.NetworkId.ToString());
@@ -35,6 +37,13 @@ public class MatchMaking : MonoBehaviour {
         Debug.Log(RoomName.text);
         var data = NetworkManage.MakeRoom(RoomName.text, 8);
         Debug.Log($"{data.Room.MasterUserNetworkId} {data.Room.Id} {data.Room.Name} {data.Room.RoomUsers.Count}");
+    }
+
+    public void ExitRoom()
+    {
+        Debug.Log("Exit Room");
+        var data = NetworkManage.ExitRoom();
+
     }
 
     public void JoinGame(){

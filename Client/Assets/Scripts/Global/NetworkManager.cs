@@ -114,10 +114,11 @@ public class NetworkManager {
 
     public Packet.MakeRoomAck MakeRoom(string RoomName, int MaxUser)
     {
-        Packet.MakeRoomReq makeRoom = new Packet.MakeRoomReq();
-
-        makeRoom.MaxUserCount = MaxUser;
-        makeRoom.RoomName = RoomName;
+        Packet.MakeRoomReq makeRoom = new Packet.MakeRoomReq
+        {
+            MaxUserCount = MaxUser,
+            RoomName = RoomName
+        };
         Network.Send(Packet.Type.MakeRoomReq, makeRoom);
 
         return Packet.MakeRoomAck
@@ -125,6 +126,21 @@ public class NetworkManager {
                      .ParseFrom(SetTimeOut(5.0f, Packet.Type.MakeRoomAck)
                                 .Value
                                 .Payload);
+    }
+
+    public Packet.ExitRoomUserAck ExitRoom()
+    {
+        Packet.ExitRoomUserReq exitRoom = new Packet.ExitRoomUserReq
+        {
+            NetworkId = ClientNetworkId.Value
+        };
+        Network.Send(Packet.Type.ExitRoomUserReq, exitRoom);
+
+        return Packet.ExitRoomUserAck
+                      .Parser
+                      .ParseFrom(SetTimeOut(5.0f, Packet.Type.ExitRoomUserAck)
+                                 .Value
+                                 .Payload);
     }
 
     PacketInfo? SetTimeOut(float TimeOut, Packet.Type type)

@@ -33,9 +33,6 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             else if (Input.GetKey(KeyCode.D) == true)
             {
                 InputVector.x = 1;
-            }else
-            {
-                InputVector.x = 0;
             }
         }
         if (InputVector.y == 0.0f)
@@ -47,10 +44,24 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             else if (Input.GetKey(KeyCode.W) == true)
             {
                 InputVector.y = 1;
-            }else
-            {
-                InputVector.y = 0;
             }
+        }
+
+        if (Input.GetKey(KeyCode.A) == false && InputVector.x == -1)
+        {
+            InputVector.x = 0;
+        }
+        if (Input.GetKey(KeyCode.D) == false && InputVector.x == 1)
+        {
+            InputVector.x = 0;
+        }
+        if (Input.GetKey(KeyCode.W) == false && InputVector.y == 1)
+        {
+            InputVector.y = 0;
+        }
+        if (Input.GetKey(KeyCode.S) == false && InputVector.y == -1)
+        {
+            InputVector.y = 0;
         }
     }
 

@@ -312,7 +312,7 @@ MonoBehaviour:
   MaxMP: 100
   MaxSpeed: 1.4
   JumpPower: 10000
-  Accelerate: 14000
+  Accelerate: 10000
   Speed: 0
   MaxJumpCount: 1
 --- !u!114 &114311599495925158
