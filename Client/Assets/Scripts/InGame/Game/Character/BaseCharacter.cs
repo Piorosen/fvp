@@ -39,6 +39,8 @@ public class BaseCharacter : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
         HealthObject = transform.GetChild(1).GetChild(0).GetComponent<Slider>();
         Text = transform.GetChild(1).GetChild(1).GetComponent<Text>();
+        HealthPoint = MaxHealth;
+        EnergyPoint = MaxEnergy;
     }
 
     public float MaxHealth = 100.0f;

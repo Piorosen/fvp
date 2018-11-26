@@ -35,13 +35,19 @@ public class WarriorCharacter : BaseCharacter
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q) == true){
+        EnergyPoint += 40 * Time.deltaTime;
+        if (Input.GetKey(KeyCode.Q) == true)
+        {
             UseSkill(0);
         }
+        if (Input.GetKey(KeyCode.E) == true)
+        {
+            UseSkill(1);
+        }
+
         var list = CoolTime.Keys.ToList();
         for (int i = 0; i < CoolTime.Count; i++)
         {
-            Debug.Log(CoolTime.Count);
             CoolTime[list[i]] -= Time.deltaTime;
             if (CoolTime[list[i]] < 0.0f)
             {
@@ -56,9 +62,18 @@ public class WarriorCharacter : BaseCharacter
 
         if (CoolTime.ContainsKey(SkillId) == false)
         {
-            CoolTime.Add(SkillId, skill.Delay);
-            RigidBody.AddForce(Vector2.up * skill.Knockback);
-            OnSkillUse(skill);
+            if (EnergyPoint >= skill.UseEnergyPoint && HealthPoint > skill.UseHealthPoint)
+            {
+                EnergyPoint -= skill.UseEnergyPoint;
+                HealthPoint -= skill.UseHealthPoint;
+
+                CoolTime.Add(SkillId, skill.Delay);
+                if (skill.SkillId == 0)
+                    RigidBody.AddForce(Vector2.left * skill.Knockback);
+                else
+                    RigidBody.AddForce(Vector2.right * skill.Knockback);
+                OnSkillUse(skill);
+            }
         }
     }
 
@@ -67,7 +82,7 @@ public class WarriorCharacter : BaseCharacter
         var skill = SkillManage.GetSkill(SkillId);
 
         HealthPoint -= skill.UseHealthPoint;
-        EnergyPoint -= skill.UseEnergy;
+        EnergyPoint -= skill.UseEnergyPoint;
 
 
         OnSkillHit(skill);

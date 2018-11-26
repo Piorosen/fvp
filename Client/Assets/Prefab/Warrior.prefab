@@ -407,8 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745d4c59b0ece45b9abe443e0559863e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MaxEnergy: 100
+  MaxHealth: 500
+  MaxEnergy: 300
   MaxSpeed: 0
   JumpPower: 10000
   Accelerate: 10000

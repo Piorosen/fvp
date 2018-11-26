@@ -20,24 +20,39 @@ public class SkillManager {
             LoadSkill();
             Instance = this;
         }
-
     }
-    
+
     void LoadSkill()
     {
         SkillList.Add(new Skill
         {
-            Delay = 1.5f,
+            Delay = 0.01f,
             Distance = 3,
             IsActive = true,
             MasicDamage = 0,
             Name = "Basic",
             PhysicsDamage = 40,
             SpecialDamage = 0,
-            UseEnergy = 30,
+            UseEnergyPoint = 0,
             UseHealthPoint = 0,
             Image = null,
-            Knockback = 7000,
+            Knockback = 40000,
+            RigidTime = 0,
+
+        });
+        SkillList.Add(new Skill
+        {
+            Delay = 0.01f,
+            Distance = 3,
+            IsActive = true,
+            MasicDamage = 0,
+            Name = "Basic",
+            PhysicsDamage = 40,
+            SpecialDamage = 0,
+            UseEnergyPoint = 0,
+            UseHealthPoint = 0,
+            Image = null,
+            Knockback = 40000,
             RigidTime = 0
         });
     }
@@ -46,14 +61,4 @@ public class SkillManager {
     {
         return SkillList[Convert.ToInt32(SkillId)];
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

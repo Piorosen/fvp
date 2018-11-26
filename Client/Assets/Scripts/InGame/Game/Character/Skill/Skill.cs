@@ -24,9 +24,10 @@ public class Skill {
     public float MasicDamage;
     public float Distance;
 
-    public float UseEnergy;
+    public float UseEnergyPoint;
     public float UseHealthPoint;
 
+    public Vector2 Direction;
     public float Knockback;
     public float RigidTime;
 }
