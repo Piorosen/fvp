@@ -42,7 +42,7 @@ public class MatchMaking : MonoBehaviour {
     public void ExitRoom()
     {
         Debug.Log("Exit Room");
-        var data = NetworkManage.ExitRoom();
+        NetworkManage.ExitRoom();
 
     }
 

@@ -41,8 +41,8 @@ public class BaseCharacter : MonoBehaviour
         Text = transform.GetChild(1).GetChild(1).GetComponent<Text>();
     }
 
-    public float MaxHP = 100.0f;
-    public float HP
+    public float MaxHealth = 100.0f;
+    public float HealthPoint
     {
         get
         {
@@ -50,9 +50,9 @@ public class BaseCharacter : MonoBehaviour
         }
         set
         {
-            if (value > MaxHP)
+            if (value > MaxHealth)
             {
-                value = MaxHP;
+                value = MaxHealth;
             }
             else if (value < 0)
             {
@@ -61,13 +61,13 @@ public class BaseCharacter : MonoBehaviour
 
             if (value != _HP)
             {
-                OnChangeHP(value, MaxHP);
+                OnChangeHP(value, MaxHealth);
                 _HP = value;
             }
         }
     }
-    public float MaxMP = 100.0f;
-    public float MP
+    public float MaxEnergy = 100.0f;
+    public float EnergyPoint
     {
         get
         {
@@ -75,9 +75,9 @@ public class BaseCharacter : MonoBehaviour
         }
         set
         {
-            if (value > MaxMP)
+            if (value > MaxEnergy)
             {
-                value = MaxMP;
+                value = MaxEnergy;
             }
             else if (value < 0)
             {
@@ -85,7 +85,7 @@ public class BaseCharacter : MonoBehaviour
             }
             if (value != _MP)
             {
-                OnChangeMP(value, MaxMP);
+                OnChangeMP(value, MaxEnergy);
                 _MP = value;
             }
         }
@@ -176,21 +176,19 @@ public class BaseCharacter : MonoBehaviour
     {
         float Acc = Accelerate * Time.fixedDeltaTime;
         // 이동관련 함수 처리
-
-        Debug.Log(new Vector2(InputManager.InputVector.x * Acc, 0));
         RigidBody.AddForce(new Vector2(InputManager.InputVector.x * Acc, 0));
 
         return RigidBody.velocity.x;
     }
 
-    protected void SetAnim()
+    protected void SetAnim(Vector2 animData)
     {
-        if (RigidBody.velocity.x > 0)
+        if (animData.x > 0)
         {
             Renderer.flipX = true;
             Anim.SetBool("Walking", true);
         }
-        else if (RigidBody.velocity.x < 0)
+        else if (animData.x < 0)
         {
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
@@ -200,11 +198,11 @@ public class BaseCharacter : MonoBehaviour
             Anim.SetBool("Walking", false);
         }
 
-        if (RigidBody.velocity.y > 0)
+        if (animData.y > 0)
         {
             Anim.SetBool("Jump", true);
         }
-        else if (RigidBody.velocity.y < 0)
+        else if (animData.y < 0)
         {
             Anim.SetBool("Down", true);
         }
@@ -221,17 +219,18 @@ public class BaseCharacter : MonoBehaviour
     public void Movement()
     {
         Vector2 NextMovePosition = new Vector2();
+
         if (NetworkId == NetworkManager.ClientNetworkId)
         {
             Jump();
             ClientMove();
-            Debug.Log(RigidBody.velocity);
+            NextMovePosition = RigidBody.velocity;
         }
         else
         {
             NextMovePosition = ServerMovement();
         }
-        SetAnim();
+        SetAnim(NextMovePosition);
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
@@ -242,5 +241,14 @@ public class BaseCharacter : MonoBehaviour
     {
         IsGround = true;
         CanJumpCount = MaxJumpCount;
+    }
+
+    public virtual void UseSkill(long SkillId)
+    {
+        throw new NotImplementedException();
+    }
+    public virtual void HitSkill(long SkillId)
+    {
+        throw new NotImplementedException();
     }
 }
