@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Slider HealthPoint;
-    public Slider ManaPoint;
+    public Slider EnergyPoint;
     public Text PlayerName;
 
     // 체력바, 기력바의 변화량 속도
@@ -52,14 +52,14 @@ public class UIManager : MonoBehaviour {
         }
 
         // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowMP, MaxMP, 0.99f) <= ManaPoint.value
-            && ManaPoint.value <= Convert(NowMP, MaxMP, 1.01f))
+        if (Convert(NowMP, MaxMP, 0.99f) <= EnergyPoint.value
+            && EnergyPoint.value <= Convert(NowMP, MaxMP, 1.01f))
         {
-            ManaPoint.value = Convert(NowMP, MaxMP);
+            EnergyPoint.value = Convert(NowMP, MaxMP);
         }
         else
         {
-            ManaPoint.value = Vector2.Lerp(new Vector2(ManaPoint.value, 0)
+            EnergyPoint.value = Vector2.Lerp(new Vector2(EnergyPoint.value, 0)
                                            , new Vector2(Convert(NowMP, MaxMP), 0)
                                            , Speed * Time.deltaTime).x;
         }
