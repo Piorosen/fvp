@@ -55,13 +55,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4201410191743328}
   - component: {fileID: 212893990547829130}
-  - component: {fileID: 114189474348669234}
+  - component: {fileID: 114890066385279004}
   - component: {fileID: 95193682060855750}
   - component: {fileID: 61743630633792150}
   - component: {fileID: 61100853923391996}
   - component: {fileID: 50757026429355848}
   m_Layer: 9
-  m_Name: PlayerObject
+  m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,24 +297,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114189474348669234
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449313510279888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24f8f149961ad4a96928cb257524c8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 100
-  MaxMP: 100
-  MaxSpeed: 1.4
-  JumpPower: 10000
-  Accelerate: 14000
-  Speed: 0
-  MaxJumpCount: 1
 --- !u!114 &114311599495925158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,6 +396,24 @@ MonoBehaviour:
   m_Text: '
 
 '
+--- !u!114 &114890066385279004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1449313510279888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745d4c59b0ece45b9abe443e0559863e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 500
+  MaxEnergy: 300
+  MaxSpeed: 0
+  JumpPower: 10000
+  Accelerate: 10000
+  Speed: 0
+  MaxJumpCount: 1
 --- !u!114 &114902939150330478
 MonoBehaviour:
   m_ObjectHideFlags: 1

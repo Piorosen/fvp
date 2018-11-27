@@ -18,7 +18,6 @@ public class InGameCamera : MonoBehaviour {
 
     Camera CameraInfo;
 
-    bool a;
     float Lerp(){
 
 
@@ -29,7 +28,8 @@ public class InGameCamera : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         Target = new Vector3();
         CameraInfo = GetComponent<Camera>();
 	}
