@@ -40,9 +40,10 @@ RoomUser* UserGroup::FindUserByNetworkId(int64_t networkId)
   return i != users.end() ? &(*i) : nullptr;
 }
 
-void UserGroup::RemoveUser(int index)
+void UserGroup::RemoveUser(int64_t networkId)
 {
-	auto i = users.begin();
-	std::advance(i, index);
+	auto i = std::find_if(users.begin(), users.end(), [networkId](RoomUser& user) {
+		return user.networkId == networkId;
+	});
 	users.erase(i);
 }

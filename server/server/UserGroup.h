@@ -13,7 +13,7 @@ public:
 	int GetUserCount() const;
 	RoomUser* GetUser(int index);
 	const RoomUser* GetUser(int index) const;
-	void RemoveUser(int index);
+	void RemoveUser(int64_t networkId);
   RoomUser* FindUserByNetworkId(int64_t networkId);
 
 private:

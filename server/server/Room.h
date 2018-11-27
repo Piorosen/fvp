@@ -17,7 +17,7 @@ public:
 	const UserGroup* GetUserGroup() const;
 	int GetMaxUserCount() const;
 	void SetMaxUserCount(int count);
-	void EnterRoom(int64_t networkId);
+	void EnterRoom(RoomUser roomUser);
 	bool IsFull() const;
 	bool RemoveUser(int64_t networkId);
 

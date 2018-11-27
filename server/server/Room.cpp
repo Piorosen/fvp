@@ -17,9 +17,9 @@ int64_t Room::GetId() const
 	return id;
 }
 
-void Room::EnterRoom(int64_t networkId)
+void Room::EnterRoom(RoomUser roomUser)
 {
-	auto session = SessionManager::GetInstance().GetSession(networkId);
+	auto session = SessionManager::GetInstance().GetSession(roomUser.networkId);
 	if (!session)
 	{
 		return;
@@ -34,8 +34,6 @@ void Room::EnterRoom(int64_t networkId)
 	{
 		return;
 	}
-
-	RoomUser roomUser;
 
 	GetUserGroup()->AddUser(std::move(roomUser));
 }
