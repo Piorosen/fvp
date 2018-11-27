@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Skill {
+public abstract class Skill {
     static long SkillCount = 0;
     public Skill()
     {
@@ -11,14 +11,17 @@ public class Skill {
         SkillCount++;
     }
 
+    public abstract bool OnUseSkill(BaseCharacter player);
+
     public string Name;
     public Image Image;
 
     public readonly long SkillId;
-    public bool IsActive;
 
     public float PhysicsDamage;
+    public float MaxDelay;
     public float Delay;
+    public float Maintain;
 
     public float SpecialDamage;
     public float MasicDamage;
@@ -27,7 +30,4 @@ public class Skill {
     public float UseEnergyPoint;
     public float UseHealthPoint;
 
-    public Vector2 Direction;
-    public float Knockback;
-    public float RigidTime;
 }

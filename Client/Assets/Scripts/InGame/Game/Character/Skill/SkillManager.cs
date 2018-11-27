@@ -2,63 +2,86 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 
 public class SkillManager {
-    public static SkillManager Instance;
-
-    NetworkManager NetworkManage;
-
-    List<Skill> SkillList;
+    static List<Skill> SkillInfo;
+    List<Skill> SkillQueue;
 
     public SkillManager()
     {
-        if (Instance == null)
+        if (SkillInfo == null)
         {
-            SkillList = new List<Skill>();
-            NetworkManage = NetworkManager.Instance ?? new NetworkManager();
+            SkillInfo = new List<Skill>();
             LoadSkill();
-            Instance = this;
+        }
+        SkillQueue = new List<Skill>();
+    }
+
+    public void OnUseSkill(BaseCharacter player, long SkillId)
+    {
+        var result = SkillQueue.FirstOrDefault((i) => i.SkillId == SkillId);
+        if (result == null)
+        {
+            if (this[SkillId].OnUseSkill(player))
+                SkillQueue.Add(this[SkillId]);
+        }
+    }
+
+    public void Update()
+    {
+        for (int i = 0; i < SkillQueue.Count; i++)
+        {
+            SkillQueue[i].Delay -= Time.deltaTime;
+            if (SkillQueue[i].Delay <= 0.0f)
+            {
+                SkillQueue.RemoveAt(i);
+            }
         }
     }
 
     void LoadSkill()
     {
-        SkillList.Add(new Skill
+        SkillInfo.Add(new ActiveSkill
         {
-            Delay = 0.01f,
+            Delay = 0.0f,
             Distance = 3,
-            IsActive = true,
             MasicDamage = 0,
             Name = "Basic",
             PhysicsDamage = 40,
             SpecialDamage = 0,
-            UseEnergyPoint = 0,
-            UseHealthPoint = 0,
+            UseEnergyPoint = 50,
+            UseHealthPoint = 20,
             Image = null,
-            Knockback = 40000,
+            Knockback = 8000,
             RigidTime = 0,
-
+            MaxDelay = 0.5f,
+            Direction = Vector3.right
         });
-        SkillList.Add(new Skill
+        SkillInfo.Add(new ActiveSkill
         {
-            Delay = 0.01f,
+            Delay = 0,
             Distance = 3,
-            IsActive = true,
             MasicDamage = 0,
             Name = "Basic",
             PhysicsDamage = 40,
             SpecialDamage = 0,
-            UseEnergyPoint = 0,
-            UseHealthPoint = 0,
+            UseEnergyPoint = 60,
+            UseHealthPoint = 20,
             Image = null,
-            Knockback = 40000,
-            RigidTime = 0
+            Knockback = 8000,
+            RigidTime = 0,
+            MaxDelay = 0.5f,
+            Direction = Vector3.left
         });
     }
 
-    public Skill GetSkill(long SkillId)
+    public Skill this[long SkillId]
     {
-        return SkillList[Convert.ToInt32(SkillId)];
+        get
+        {
+            return SkillInfo[Convert.ToInt32(SkillId)];
+        }
     }
 }
