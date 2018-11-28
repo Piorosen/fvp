@@ -11,6 +11,8 @@ public abstract class Skill {
         SkillCount++;
     }
 
+
+
     public abstract bool OnUseSkill(BaseCharacter player);
 
     public string Name;

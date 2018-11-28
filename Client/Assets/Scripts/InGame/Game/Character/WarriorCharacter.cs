@@ -25,20 +25,30 @@ public class WarriorCharacter : BaseCharacter
         EnergyPoint += 50 * Time.deltaTime;
         if (Input.GetKey(KeyCode.Q) == true)
         {
-            SkillManage.OnUseSkill(this, 0);
+            UseSkill(0);
         }
         if (Input.GetKey(KeyCode.E) == true)
         {
-            SkillManage.OnUseSkill(this, 1);
+            UseSkill(1);
         }
     }
 
+    IEnumerator AttackMotion(float time)
+    {
+        Debug.Log("공격 애니메이션 시작!");
+        Anim.SetBool("Attack", true);
+        yield return new WaitForSeconds(time);
+        Anim.SetBool("Attack", false);
+    }
     public override void UseSkill(long SkillId)
     {
+        StartCoroutine(AttackMotion(0.5f));
         var skill = SkillManage[SkillId];
-        skill.OnUseSkill(this);
+        skill.Direction = Renderer.flipX ? Vector2.right : Vector2.left;
         skill.Position = this.transform.position;
-        skill.Direction = Renderer.flipX ? Vector2.left : Vector2.right;
+
+        SkillManage.OnUseSkill(this, skill);
+
         OnSkillUse(skill);
     }
 

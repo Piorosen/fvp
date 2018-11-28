@@ -39,12 +39,14 @@ public class ObjectManager : MonoBehaviour
                 }
                 PlayerManage.Initialize();
             }catch (Exception){
+                NetworkManager.ClientNetworkId = 0;
                 PlayerManage.AddPlayer(0, 0, "Offline", 0);
                 PlayerManage.Initialize();
                 yield break;
             }
         }
         else{
+            NetworkManager.ClientNetworkId = 0;
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
             PlayerManage.Initialize();
             yield break;

@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
         UserInterface.PlayerName.text = NetworkManager.ClientName;
         Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
         Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
-        Pool[ClientPlayerIndex].SkillUse += (Skill skill, long? NetworkId) => NetworkManager.Instance.CastSkill(Pool[ClientPlayerIndex].transform.position, skill);
+//        Pool[ClientPlayerIndex].SkillUse += (Skill skill, long? NetworkId) => NetworkManager.Instance.CastSkill(Pool[ClientPlayerIndex].transform.position, skill);
     }
 
     /// <summary>
