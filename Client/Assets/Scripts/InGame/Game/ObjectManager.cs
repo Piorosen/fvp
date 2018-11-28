@@ -31,11 +31,13 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     IEnumerator ServerRequest(){
-        var login = NetworkManage.Login("Offline");
-        if (login != null){
-            foreach (var item in login.Users){
+        if (NetworkManager.ClientNetworkId != null){
+            Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
+            PlayerPrefs.DeleteKey("UserList");
+            foreach (var item in room.RoomUsers){
                 PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
             }
+            PlayerManage.Initialize();
         }
         else{
             PlayerManage.AddPlayer(0, 0, "Offline", 0);

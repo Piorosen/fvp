@@ -8,7 +8,7 @@ using System.Threading;
 public class NetworkManager {
 
     public static NetworkManager Instance = null;
-    
+        
     NetClient Network = null;
 
     public static string ClientName;

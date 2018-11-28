@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MatchMaking : MonoBehaviour {
     NetworkManager NetworkManage;
@@ -37,6 +38,9 @@ public class MatchMaking : MonoBehaviour {
         Debug.Log(RoomName.text);
         var data = NetworkManage.MakeRoom(RoomName.text, 8);
         Debug.Log($"{data.Room.MasterUserNetworkId} {data.Room.Id} {data.Room.Name} {data.Room.RoomUsers.Count}");
+        PlayerPrefs.SetString("UserList", data.Room.ToString());
+
+        SceneManager.LoadScene("InGame");
     }
 
     public void ExitRoom()
@@ -53,10 +57,9 @@ public class MatchMaking : MonoBehaviour {
         }
 
         var e = NetworkManage.EnterRoom(long.Parse(Join.text));
-        foreach (var q in e.Room.RoomUsers)
-        {
-            Debug.Log(q.Name);
-        }
+        PlayerPrefs.SetString("UserList", e.Room.ToString());
+
+        SceneManager.LoadScene("InGame");
     }
 
 	// Use this for initialization
