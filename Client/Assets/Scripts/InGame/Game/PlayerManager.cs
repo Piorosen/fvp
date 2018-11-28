@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
         UserInterface.PlayerName.text = NetworkManager.ClientName;
         Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
         Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
+        Pool[ClientPlayerIndex].SkillUse += (Skill skill, long? NetworkId) => NetworkManager.Instance.CastSkill(Pool[ClientPlayerIndex].transform.position, skill);
     }
 
     /// <summary>
@@ -183,7 +184,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
     {
@@ -219,6 +219,7 @@ public class PlayerManager : MonoBehaviour
     {
         int index = Pool.IndexOf(Pool.First((item) =>
                                   item.NetworkId == @object.NetworkId));
+        Destroy(Pool[index]);
         return (Pool[index] = null);
     }
 

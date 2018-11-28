@@ -7,21 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Linq;
 
-public delegate void SkillEvent(Skill skill, long? NetworkId);
 public class WarriorCharacter : BaseCharacter
 {
-    public event SkillEvent SkillUse;
-    public event SkillEvent SkillHit;
-
-    protected void OnSkillUse(Skill Skill)
-    {
-        SkillUse?.Invoke(Skill, NetworkId);
-    }
-
-    protected void OnSkillHit(Skill Skill)
-    {
-        SkillHit?.Invoke(Skill, NetworkId);
-    }
 
     SkillManager SkillManage;
 
@@ -46,15 +33,21 @@ public class WarriorCharacter : BaseCharacter
         }
     }
 
+    public override void UseSkill(long SkillId)
+    {
+        var skill = SkillManage[SkillId];
+        skill.OnUseSkill(this);
+        skill.Position = this.transform.position;
+        skill.Direction = Renderer.flipX ? Vector2.left : Vector2.right;
+        OnSkillUse(skill);
+    }
+
     public override void HitSkill(long SkillId)
     {
         var skill = SkillManage[SkillId];
 
         HealthPoint -= skill.UseHealthPoint;
         EnergyPoint -= skill.UseEnergyPoint;
-
-
-        OnSkillHit(skill);
     }
 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Threading;
+using System.Collections.Concurrent;
 
 public class NetworkManager {
 
@@ -13,6 +14,8 @@ public class NetworkManager {
 
     public static string ClientName;
     public static long? ClientNetworkId;
+
+    ConcurrentQueue<PacketInfo> GameQueue = new ConcurrentQueue<PacketInfo>();
 
     public NetworkManager()
     {
@@ -142,6 +145,30 @@ public class NetworkManager {
                                  .Value
                                  .Payload);
     }
+
+    public void CastSkill(Vector3 position, Skill skill)
+    {
+        Packet.CastSkillReq castSkill = new Packet.CastSkillReq
+        {
+            NetworkId = ClientNetworkId.Value,
+            CastPosition = new Packet.Vector3
+            {
+                X = position.x,
+                Y = position.y,
+                Z = position.z
+            },
+            CastDirection = new Packet.Vector3
+            {
+                X = skill.Direction.x,
+                Y = skill.Direction.y,
+                Z = position.z
+            },
+            SkillId = skill.SkillId
+        };
+        Network.Send(Packet.Type.CastSkillReq, castSkill);
+    }
+
+
 
     PacketInfo? SetTimeOut(float TimeOut, Packet.Type type)
     {

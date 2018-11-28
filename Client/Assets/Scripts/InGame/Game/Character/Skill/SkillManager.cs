@@ -46,34 +46,28 @@ public class SkillManager {
         SkillInfo.Add(new ActiveSkill
         {
             Delay = 0.0f,
-            Distance = 3,
-            MasicDamage = 0,
+            Distance = 5,
             Name = "Basic",
             PhysicsDamage = 40,
-            SpecialDamage = 0,
             UseEnergyPoint = 50,
             UseHealthPoint = 20,
             Image = null,
             Knockback = 8000,
             RigidTime = 0,
             MaxDelay = 0.5f,
-            Direction = Vector3.right
         });
         SkillInfo.Add(new ActiveSkill
         {
             Delay = 0,
-            Distance = 3,
-            MasicDamage = 0,
+            Distance = 5,
             Name = "Basic",
             PhysicsDamage = 40,
-            SpecialDamage = 0,
             UseEnergyPoint = 60,
             UseHealthPoint = 20,
             Image = null,
             Knockback = 8000,
             RigidTime = 0,
             MaxDelay = 0.5f,
-            Direction = Vector3.left
         });
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MatchMaking : MonoBehaviour {
     NetworkManager NetworkManage;
@@ -51,15 +52,25 @@ public class MatchMaking : MonoBehaviour {
     }
 
     public void JoinGame(){
-        var t = GetRoomList();
-        foreach (var data in t.Rooms){
-            Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count +" " + data.Name);
+        try
+        {
+            var t = GetRoomList();
+            foreach (var data in t.Rooms)
+            {
+                Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
+            }
+
+            var e = NetworkManage.EnterRoom(long.Parse(Join.text));
+            PlayerPrefs.SetString("UserList", e.Room.ToString());
         }
+        catch (Exception e)
+        {
 
-        var e = NetworkManage.EnterRoom(long.Parse(Join.text));
-        PlayerPrefs.SetString("UserList", e.Room.ToString());
-
-        SceneManager.LoadScene("InGame");
+        }
+        finally
+        {
+            SceneManager.LoadScene("InGame");
+        }
     }
 
 	// Use this for initialization

@@ -9,16 +9,13 @@ using UnityEngine.UI;
 public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
-
     public InGameCamera Camera;
     public PlayerManager PlayerManage;
-    NetworkManager NetworkManage;
 
     void Awake() {
         if (Instance == null)
         {
             Instance = this;
-            NetworkManage = NetworkManager.Instance ?? new NetworkManager();
             StartCoroutine(ServerRequest());
         }
         else
@@ -32,12 +29,20 @@ public class ObjectManager : MonoBehaviour
     /// </summary>
     IEnumerator ServerRequest(){
         if (NetworkManager.ClientNetworkId != null){
-            Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
-            PlayerPrefs.DeleteKey("UserList");
-            foreach (var item in room.RoomUsers){
-                PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
+            try
+            {
+                Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
+                PlayerPrefs.DeleteKey("UserList");
+                foreach (var item in room.RoomUsers)
+                {
+                    PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
+                }
+                PlayerManage.Initialize();
+            }catch (Exception){
+                PlayerManage.AddPlayer(0, 0, "Offline", 0);
+                PlayerManage.Initialize();
+                yield break;
             }
-            PlayerManage.Initialize();
         }
         else{
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
@@ -48,7 +53,7 @@ public class ObjectManager : MonoBehaviour
 
         while (true)
         {
-            var Que = NetworkManage.ServerRequest(PlayerManage.ClientPlayer.transform.position);
+            var Que = NetworkManager.Instance.ServerRequest(PlayerManage.ClientPlayer.transform.position);
             while (Que.Count != 0)
             {
                 var info = Que.Dequeue();
@@ -75,6 +80,15 @@ public class ObjectManager : MonoBehaviour
                 {
                     Packet.Disconnect disconnect = Packet.Disconnect.Parser.ParseFrom(info.Payload);
                     PlayerManage.DelPlayer(disconnect.NetworkId);
+                }
+                else if (info.Type == Packet.Type.CastSkillAck)
+                {
+                    Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
+
+                    //
+                    //  캐스트 스킬 이벤트 추가해야함.
+                    //
+                    //
                 }
                 else
                 {
