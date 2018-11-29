@@ -177,7 +177,7 @@ void RelayServerEventProcessor::HandleEnterRoomReq(int64_t networkId, const pack
 		ack.set_room_id(roomId);
 		packetDataSerializer.Serialize(*room, *ack.mutable_room());
 
-		SendToRoomUsers(roomId, packet::Type::ENTER_ROOM_ACK, ack);
+		Send(networkId, packet::Type::ENTER_ROOM_ACK, ack);
 	}
 }
 
