@@ -77,7 +77,7 @@ public class MatchMaking : MonoBehaviour {
         }
         finally
         {
-            SceneManager.LoadScene("InGame");
+            SceneManager.LoadScene("InGame", LoadSceneMode.Single);
         }
     }
 

@@ -107,6 +107,7 @@ public class NetworkManager {
     {  
         Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq();
         enterRoom.RoomId = RoomId;
+        Packet.Ack
         
         return Packet.EnterRoomAck
                      .Parser
@@ -178,6 +179,7 @@ public class NetworkManager {
             PacketInfo info;
             if (Network.TryGetPacket(out info))
             {
+                Debug.Log(info.Type.ToString());
                 if (info.Type == type)
                 {
                     return info;

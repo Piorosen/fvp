@@ -94,7 +94,7 @@ public class ObjectManager : MonoBehaviour
                     //
                     //
                 }
-                else if (info.Type == Packet.Type.EnterNewUserAck)
+                else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {
                     Packet.EnterNewUserAck enter = Packet.EnterNewUserAck.Parser.ParseFrom(info.Payload);
                     if (enter.NewUser.NetworkId != NetworkManager.ClientNetworkId)
@@ -113,7 +113,7 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.6f));
         }
     }
 

@@ -23,14 +23,16 @@ public class SkillManager {
         SkillQueue = new List<Skill>();
     }
 
-    public void OnUseSkill(BaseCharacter player, Skill Skill)
+    public bool OnUseSkill(BaseCharacter player, Skill Skill)
     {
         var result = SkillQueue.FirstOrDefault((i) => i.SkillId == Skill.SkillId);
         if (result == null)
         {
             if (this[Skill.SkillId].OnUseSkill(player))
                 SkillQueue.Add(this[Skill.SkillId]);
+            return true;
         }
+        return false;
     }
 
     public void Update()
