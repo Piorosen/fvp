@@ -40,7 +40,7 @@ namespace protobuf_packet_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[22];
+  static const ::google::protobuf::internal::ParseTable schema[23];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -60,6 +60,9 @@ extern ConnectDefaultTypeInternal _Connect_default_instance_;
 class Disconnect;
 class DisconnectDefaultTypeInternal;
 extern DisconnectDefaultTypeInternal _Disconnect_default_instance_;
+class EnterNewRoomUserAck;
+class EnterNewRoomUserAckDefaultTypeInternal;
+extern EnterNewRoomUserAckDefaultTypeInternal _EnterNewRoomUserAck_default_instance_;
 class EnterNewUserAck;
 class EnterNewUserAckDefaultTypeInternal;
 extern EnterNewUserAckDefaultTypeInternal _EnterNewUserAck_default_instance_;
@@ -121,6 +124,7 @@ template<> ::packet::CastSkillAck* Arena::CreateMaybeMessage<::packet::CastSkill
 template<> ::packet::CastSkillReq* Arena::CreateMaybeMessage<::packet::CastSkillReq>(Arena*);
 template<> ::packet::Connect* Arena::CreateMaybeMessage<::packet::Connect>(Arena*);
 template<> ::packet::Disconnect* Arena::CreateMaybeMessage<::packet::Disconnect>(Arena*);
+template<> ::packet::EnterNewRoomUserAck* Arena::CreateMaybeMessage<::packet::EnterNewRoomUserAck>(Arena*);
 template<> ::packet::EnterNewUserAck* Arena::CreateMaybeMessage<::packet::EnterNewUserAck>(Arena*);
 template<> ::packet::EnterRoomAck* Arena::CreateMaybeMessage<::packet::EnterRoomAck>(Arena*);
 template<> ::packet::EnterRoomReq* Arena::CreateMaybeMessage<::packet::EnterRoomReq>(Arena*);
@@ -1806,6 +1810,115 @@ class EnterRoomAck : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
+class EnterNewRoomUserAck : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:packet.EnterNewRoomUserAck) */ {
+ public:
+  EnterNewRoomUserAck();
+  virtual ~EnterNewRoomUserAck();
+
+  EnterNewRoomUserAck(const EnterNewRoomUserAck& from);
+
+  inline EnterNewRoomUserAck& operator=(const EnterNewRoomUserAck& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  EnterNewRoomUserAck(EnterNewRoomUserAck&& from) noexcept
+    : EnterNewRoomUserAck() {
+    *this = ::std::move(from);
+  }
+
+  inline EnterNewRoomUserAck& operator=(EnterNewRoomUserAck&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EnterNewRoomUserAck& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const EnterNewRoomUserAck* internal_default_instance() {
+    return reinterpret_cast<const EnterNewRoomUserAck*>(
+               &_EnterNewRoomUserAck_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  void Swap(EnterNewRoomUserAck* other);
+  friend void swap(EnterNewRoomUserAck& a, EnterNewRoomUserAck& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline EnterNewRoomUserAck* New() const final {
+    return CreateMaybeMessage<EnterNewRoomUserAck>(NULL);
+  }
+
+  EnterNewRoomUserAck* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<EnterNewRoomUserAck>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const EnterNewRoomUserAck& from);
+  void MergeFrom(const EnterNewRoomUserAck& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(EnterNewRoomUserAck* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .packet.RoomUser new_user = 1;
+  bool has_new_user() const;
+  void clear_new_user();
+  static const int kNewUserFieldNumber = 1;
+  private:
+  const ::packet::RoomUser& _internal_new_user() const;
+  public:
+  const ::packet::RoomUser& new_user() const;
+  ::packet::RoomUser* release_new_user();
+  ::packet::RoomUser* mutable_new_user();
+  void set_allocated_new_user(::packet::RoomUser* new_user);
+
+  // @@protoc_insertion_point(class_scope:packet.EnterNewRoomUserAck)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::packet::RoomUser* new_user_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_packet_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class RenameRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:packet.RenameRoomReq) */ {
  public:
   RenameRoomReq();
@@ -1841,7 +1954,7 @@ class RenameRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_RenameRoomReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   void Swap(RenameRoomReq* other);
   friend void swap(RenameRoomReq& a, RenameRoomReq& b) {
@@ -1952,7 +2065,7 @@ class MoveRoomUserReq : public ::google::protobuf::Message /* @@protoc_insertion
                &_MoveRoomUserReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   void Swap(MoveRoomUserReq* other);
   friend void swap(MoveRoomUserReq& a, MoveRoomUserReq& b) {
@@ -2068,7 +2181,7 @@ class MoveRoomUserAck : public ::google::protobuf::Message /* @@protoc_insertion
                &_MoveRoomUserAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   void Swap(MoveRoomUserAck* other);
   friend void swap(MoveRoomUserAck& a, MoveRoomUserAck& b) {
@@ -2184,7 +2297,7 @@ class ExitRoomUserReq : public ::google::protobuf::Message /* @@protoc_insertion
                &_ExitRoomUserReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   void Swap(ExitRoomUserReq* other);
   friend void swap(ExitRoomUserReq& a, ExitRoomUserReq& b) {
@@ -2287,7 +2400,7 @@ class ExitRoomUserAck : public ::google::protobuf::Message /* @@protoc_insertion
                &_ExitRoomUserAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   void Swap(ExitRoomUserAck* other);
   friend void swap(ExitRoomUserAck& a, ExitRoomUserAck& b) {
@@ -2390,7 +2503,7 @@ class CastSkillReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_CastSkillReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   void Swap(CastSkillReq* other);
   friend void swap(CastSkillReq& a, CastSkillReq& b) {
@@ -2526,7 +2639,7 @@ class CastSkillAck : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_CastSkillAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   void Swap(CastSkillAck* other);
   friend void swap(CastSkillAck& a, CastSkillAck& b) {
@@ -3340,6 +3453,58 @@ inline void EnterRoomAck::set_allocated_room(::packet::Room* room) {
 
 // -------------------------------------------------------------------
 
+// EnterNewRoomUserAck
+
+// .packet.RoomUser new_user = 1;
+inline bool EnterNewRoomUserAck::has_new_user() const {
+  return this != internal_default_instance() && new_user_ != NULL;
+}
+inline const ::packet::RoomUser& EnterNewRoomUserAck::_internal_new_user() const {
+  return *new_user_;
+}
+inline const ::packet::RoomUser& EnterNewRoomUserAck::new_user() const {
+  const ::packet::RoomUser* p = new_user_;
+  // @@protoc_insertion_point(field_get:packet.EnterNewRoomUserAck.new_user)
+  return p != NULL ? *p : *reinterpret_cast<const ::packet::RoomUser*>(
+      &::packet::_RoomUser_default_instance_);
+}
+inline ::packet::RoomUser* EnterNewRoomUserAck::release_new_user() {
+  // @@protoc_insertion_point(field_release:packet.EnterNewRoomUserAck.new_user)
+  
+  ::packet::RoomUser* temp = new_user_;
+  new_user_ = NULL;
+  return temp;
+}
+inline ::packet::RoomUser* EnterNewRoomUserAck::mutable_new_user() {
+  
+  if (new_user_ == NULL) {
+    auto* p = CreateMaybeMessage<::packet::RoomUser>(GetArenaNoVirtual());
+    new_user_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:packet.EnterNewRoomUserAck.new_user)
+  return new_user_;
+}
+inline void EnterNewRoomUserAck::set_allocated_new_user(::packet::RoomUser* new_user) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(new_user_);
+  }
+  if (new_user) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      new_user = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, new_user, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  new_user_ = new_user;
+  // @@protoc_insertion_point(field_set_allocated:packet.EnterNewRoomUserAck.new_user)
+}
+
+// -------------------------------------------------------------------
+
 // RenameRoomReq
 
 // string new_name = 1;
@@ -3822,6 +3987,8 @@ inline void CastSkillAck::set_allocated_cast_direction(::packet::Vector3* cast_d
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

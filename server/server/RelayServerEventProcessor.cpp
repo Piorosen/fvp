@@ -48,7 +48,7 @@ void RelayServerEventProcessor::HandleExitRoomUserReq(int64_t networkId, const p
 	{
 		return;
 	}
-	userRoomIdInfos.erase(roomId);
+	userRoomIdInfos.erase(networkId);
 
 	packet::ExitRoomUserAck ack;
 
@@ -157,7 +157,7 @@ void RelayServerEventProcessor::HandleEnterRoomReq(int64_t networkId, const pack
 			return;
 		}
 
-		packet::EnterNewUserAck ack;
+		packet::EnterNewRoomUserAck ack;
 
 		packetDataSerializer.Serialize(*newUser, *ack.mutable_new_user());
 
@@ -166,7 +166,7 @@ void RelayServerEventProcessor::HandleEnterRoomReq(int64_t networkId, const pack
 			auto user = userGroup->GetUser(i);
 			if (user->networkId != networkId)
 			{
-				Send(networkId, packet::Type::ENTER_NEW_USER_ACK, ack);
+				Send(user->networkId, packet::Type::ENTER_NEW_ROOM_USER_ACK, ack);
 			}
 		}
 	}

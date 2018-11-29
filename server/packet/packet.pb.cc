@@ -100,6 +100,11 @@ class EnterRoomAckDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<EnterRoomAck>
       _instance;
 } _EnterRoomAck_default_instance_;
+class EnterNewRoomUserAckDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<EnterNewRoomUserAck>
+      _instance;
+} _EnterNewRoomUserAck_default_instance_;
 class RenameRoomReqDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<RenameRoomReq>
@@ -354,6 +359,21 @@ static void InitDefaultsEnterRoomAck() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsEnterRoomAck}, {
       &protobuf_packet_5fdata_2eproto::scc_info_Room.base,}};
 
+static void InitDefaultsEnterNewRoomUserAck() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::packet::_EnterNewRoomUserAck_default_instance_;
+    new (ptr) ::packet::EnterNewRoomUserAck();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::packet::EnterNewRoomUserAck::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_EnterNewRoomUserAck =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsEnterNewRoomUserAck}, {
+      &protobuf_packet_5fdata_2eproto::scc_info_RoomUser.base,}};
+
 static void InitDefaultsRenameRoomReq() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -472,6 +492,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_MakeRoomAck.base);
   ::google::protobuf::internal::InitSCC(&scc_info_EnterRoomReq.base);
   ::google::protobuf::internal::InitSCC(&scc_info_EnterRoomAck.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_EnterNewRoomUserAck.base);
   ::google::protobuf::internal::InitSCC(&scc_info_RenameRoomReq.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MoveRoomUserReq.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MoveRoomUserAck.base);
@@ -481,7 +502,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_CastSkillAck.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[22];
+::google::protobuf::Metadata file_level_metadata[23];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -581,6 +602,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::EnterRoomAck, room_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::EnterRoomAck, room_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::EnterNewRoomUserAck, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::EnterNewRoomUserAck, new_user_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::packet::RenameRoomReq, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -647,13 +674,14 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 77, -1, sizeof(::packet::MakeRoomAck)},
   { 83, -1, sizeof(::packet::EnterRoomReq)},
   { 89, -1, sizeof(::packet::EnterRoomAck)},
-  { 96, -1, sizeof(::packet::RenameRoomReq)},
-  { 102, -1, sizeof(::packet::MoveRoomUserReq)},
-  { 109, -1, sizeof(::packet::MoveRoomUserAck)},
-  { 116, -1, sizeof(::packet::ExitRoomUserReq)},
-  { 122, -1, sizeof(::packet::ExitRoomUserAck)},
-  { 128, -1, sizeof(::packet::CastSkillReq)},
-  { 137, -1, sizeof(::packet::CastSkillAck)},
+  { 96, -1, sizeof(::packet::EnterNewRoomUserAck)},
+  { 102, -1, sizeof(::packet::RenameRoomReq)},
+  { 108, -1, sizeof(::packet::MoveRoomUserReq)},
+  { 115, -1, sizeof(::packet::MoveRoomUserAck)},
+  { 122, -1, sizeof(::packet::ExitRoomUserReq)},
+  { 128, -1, sizeof(::packet::ExitRoomUserAck)},
+  { 134, -1, sizeof(::packet::CastSkillReq)},
+  { 143, -1, sizeof(::packet::CastSkillAck)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -672,6 +700,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_MakeRoomAck_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_EnterRoomReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_EnterRoomAck_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_EnterNewRoomUserAck_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_RenameRoomReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_MoveRoomUserReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::packet::_MoveRoomUserAck_default_instance_),
@@ -696,7 +725,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 22);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 23);
 }
 
 void AddDescriptorsImpl() {
@@ -721,23 +750,25 @@ void AddDescriptorsImpl() {
       "MakeRoomAck\022\032\n\004room\030\001 \001(\0132\014.packet.Room\""
       "\037\n\014EnterRoomReq\022\017\n\007room_id\030\001 \001(\003\";\n\014Ente"
       "rRoomAck\022\017\n\007room_id\030\001 \001(\003\022\032\n\004room\030\002 \001(\0132"
-      "\014.packet.Room\"!\n\rRenameRoomReq\022\020\n\010new_na"
-      "me\030\001 \001(\t\"H\n\017MoveRoomUserReq\022\022\n\nnetwork_i"
-      "d\030\001 \001(\003\022!\n\010position\030\002 \001(\0132\017.packet.Vecto"
-      "r3\"H\n\017MoveRoomUserAck\022\022\n\nnetwork_id\030\001 \001("
-      "\003\022!\n\010position\030\002 \001(\0132\017.packet.Vector3\"%\n\017"
-      "ExitRoomUserReq\022\022\n\nnetwork_id\030\001 \001(\003\"%\n\017E"
-      "xitRoomUserAck\022\022\n\nnetwork_id\030\001 \001(\003\"\205\001\n\014C"
-      "astSkillReq\022\022\n\nnetwork_id\030\001 \001(\003\022\020\n\010skill"
-      "_id\030\002 \001(\003\022&\n\rcast_position\030\003 \001(\0132\017.packe"
-      "t.Vector3\022\'\n\016cast_direction\030\004 \001(\0132\017.pack"
-      "et.Vector3\"\205\001\n\014CastSkillAck\022\022\n\nnetwork_i"
-      "d\030\001 \001(\003\022\020\n\010skill_id\030\002 \001(\003\022&\n\rcast_positi"
-      "on\030\003 \001(\0132\017.packet.Vector3\022\'\n\016cast_direct"
-      "ion\030\004 \001(\0132\017.packet.Vector3b\006proto3"
+      "\014.packet.Room\"9\n\023EnterNewRoomUserAck\022\"\n\010"
+      "new_user\030\001 \001(\0132\020.packet.RoomUser\"!\n\rRena"
+      "meRoomReq\022\020\n\010new_name\030\001 \001(\t\"H\n\017MoveRoomU"
+      "serReq\022\022\n\nnetwork_id\030\001 \001(\003\022!\n\010position\030\002"
+      " \001(\0132\017.packet.Vector3\"H\n\017MoveRoomUserAck"
+      "\022\022\n\nnetwork_id\030\001 \001(\003\022!\n\010position\030\002 \001(\0132\017"
+      ".packet.Vector3\"%\n\017ExitRoomUserReq\022\022\n\nne"
+      "twork_id\030\001 \001(\003\"%\n\017ExitRoomUserAck\022\022\n\nnet"
+      "work_id\030\001 \001(\003\"\205\001\n\014CastSkillReq\022\022\n\nnetwor"
+      "k_id\030\001 \001(\003\022\020\n\010skill_id\030\002 \001(\003\022&\n\rcast_pos"
+      "ition\030\003 \001(\0132\017.packet.Vector3\022\'\n\016cast_dir"
+      "ection\030\004 \001(\0132\017.packet.Vector3\"\205\001\n\014CastSk"
+      "illAck\022\022\n\nnetwork_id\030\001 \001(\003\022\020\n\010skill_id\030\002"
+      " \001(\003\022&\n\rcast_position\030\003 \001(\0132\017.packet.Vec"
+      "tor3\022\'\n\016cast_direction\030\004 \001(\0132\017.packet.Ve"
+      "ctor3b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1314);
+      descriptor, 1373);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "packet.proto", &protobuf_RegisterTypes);
   ::protobuf_packet_5ftype_2eproto::AddDescriptors();
@@ -4516,6 +4547,246 @@ void EnterRoomAck::InternalSwap(EnterRoomAck* other) {
 
 // ===================================================================
 
+void EnterNewRoomUserAck::InitAsDefaultInstance() {
+  ::packet::_EnterNewRoomUserAck_default_instance_._instance.get_mutable()->new_user_ = const_cast< ::packet::RoomUser*>(
+      ::packet::RoomUser::internal_default_instance());
+}
+void EnterNewRoomUserAck::clear_new_user() {
+  if (GetArenaNoVirtual() == NULL && new_user_ != NULL) {
+    delete new_user_;
+  }
+  new_user_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int EnterNewRoomUserAck::kNewUserFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+EnterNewRoomUserAck::EnterNewRoomUserAck()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_packet_2eproto::scc_info_EnterNewRoomUserAck.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:packet.EnterNewRoomUserAck)
+}
+EnterNewRoomUserAck::EnterNewRoomUserAck(const EnterNewRoomUserAck& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_new_user()) {
+    new_user_ = new ::packet::RoomUser(*from.new_user_);
+  } else {
+    new_user_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:packet.EnterNewRoomUserAck)
+}
+
+void EnterNewRoomUserAck::SharedCtor() {
+  new_user_ = NULL;
+}
+
+EnterNewRoomUserAck::~EnterNewRoomUserAck() {
+  // @@protoc_insertion_point(destructor:packet.EnterNewRoomUserAck)
+  SharedDtor();
+}
+
+void EnterNewRoomUserAck::SharedDtor() {
+  if (this != internal_default_instance()) delete new_user_;
+}
+
+void EnterNewRoomUserAck::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* EnterNewRoomUserAck::descriptor() {
+  ::protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const EnterNewRoomUserAck& EnterNewRoomUserAck::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_packet_2eproto::scc_info_EnterNewRoomUserAck.base);
+  return *internal_default_instance();
+}
+
+
+void EnterNewRoomUserAck::Clear() {
+// @@protoc_insertion_point(message_clear_start:packet.EnterNewRoomUserAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && new_user_ != NULL) {
+    delete new_user_;
+  }
+  new_user_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool EnterNewRoomUserAck::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:packet.EnterNewRoomUserAck)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .packet.RoomUser new_user = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_new_user()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:packet.EnterNewRoomUserAck)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:packet.EnterNewRoomUserAck)
+  return false;
+#undef DO_
+}
+
+void EnterNewRoomUserAck::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:packet.EnterNewRoomUserAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .packet.RoomUser new_user = 1;
+  if (this->has_new_user()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_new_user(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:packet.EnterNewRoomUserAck)
+}
+
+::google::protobuf::uint8* EnterNewRoomUserAck::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:packet.EnterNewRoomUserAck)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .packet.RoomUser new_user = 1;
+  if (this->has_new_user()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_new_user(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:packet.EnterNewRoomUserAck)
+  return target;
+}
+
+size_t EnterNewRoomUserAck::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:packet.EnterNewRoomUserAck)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .packet.RoomUser new_user = 1;
+  if (this->has_new_user()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *new_user_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void EnterNewRoomUserAck::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:packet.EnterNewRoomUserAck)
+  GOOGLE_DCHECK_NE(&from, this);
+  const EnterNewRoomUserAck* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const EnterNewRoomUserAck>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:packet.EnterNewRoomUserAck)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:packet.EnterNewRoomUserAck)
+    MergeFrom(*source);
+  }
+}
+
+void EnterNewRoomUserAck::MergeFrom(const EnterNewRoomUserAck& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:packet.EnterNewRoomUserAck)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_new_user()) {
+    mutable_new_user()->::packet::RoomUser::MergeFrom(from.new_user());
+  }
+}
+
+void EnterNewRoomUserAck::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:packet.EnterNewRoomUserAck)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void EnterNewRoomUserAck::CopyFrom(const EnterNewRoomUserAck& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:packet.EnterNewRoomUserAck)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool EnterNewRoomUserAck::IsInitialized() const {
+  return true;
+}
+
+void EnterNewRoomUserAck::Swap(EnterNewRoomUserAck* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void EnterNewRoomUserAck::InternalSwap(EnterNewRoomUserAck* other) {
+  using std::swap;
+  swap(new_user_, other->new_user_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata EnterNewRoomUserAck::GetMetadata() const {
+  protobuf_packet_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_packet_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void RenameRoomReq::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -6560,6 +6831,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::EnterRoomReq* Arena::Cre
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::EnterRoomAck* Arena::CreateMaybeMessage< ::packet::EnterRoomAck >(Arena* arena) {
   return Arena::CreateInternal< ::packet::EnterRoomAck >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::EnterNewRoomUserAck* Arena::CreateMaybeMessage< ::packet::EnterNewRoomUserAck >(Arena* arena) {
+  return Arena::CreateInternal< ::packet::EnterNewRoomUserAck >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::packet::RenameRoomReq* Arena::CreateMaybeMessage< ::packet::RenameRoomReq >(Arena* arena) {
   return Arena::CreateInternal< ::packet::RenameRoomReq >(arena);

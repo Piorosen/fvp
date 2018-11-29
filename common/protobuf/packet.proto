@@ -86,6 +86,11 @@ message EnterRoomAck
   Room room = 2;
 }
 
+message EnterNewRoomUserAck
+{
+  RoomUser new_user = 1;
+}
+
 message RenameRoomReq
 {
   string new_name = 1;
