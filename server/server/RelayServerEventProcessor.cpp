@@ -48,16 +48,22 @@ void RelayServerEventProcessor::HandleExitRoomUserReq(int64_t networkId, const p
 	{
 		return;
 	}
-
 	userRoomIdInfos.erase(roomId);
 
 	packet::ExitRoomUserAck ack;
 
 	ack.set_network_id(networkId);
 
-	SendToRoomUsers(roomId, packet::Type::EXIT_ROOM_USER_ACK, ack);
+	if (room->GetUserGroup()->GetUserCount() == 0)
+	{
+		rooms.erase(roomId);
+	}
+	else
+	{
+		SendToRoomUsers(roomId, packet::Type::EXIT_ROOM_USER_ACK, ack);
+	}
 
-	rooms.erase(roomId);
+	Send(networkId, packet::Type::EXIT_ROOM_USER_ACK, ack);
 }
 
 void RelayServerEventProcessor::HandleMoveReq(int64_t networkId, const packet::MoveReq & message)
@@ -171,7 +177,7 @@ void RelayServerEventProcessor::HandleEnterRoomReq(int64_t networkId, const pack
 		ack.set_room_id(roomId);
 		packetDataSerializer.Serialize(*room, *ack.mutable_room());
 
-		SendToRoomUsers(roomId, packet::Type::ENTER_ROOM_ACK, ack);
+		Send(networkId, packet::Type::ENTER_ROOM_ACK, ack);
 	}
 }
 
