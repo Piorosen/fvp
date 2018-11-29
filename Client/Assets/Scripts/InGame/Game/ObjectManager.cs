@@ -66,9 +66,33 @@ public class ObjectManager : MonoBehaviour
                     {
                         w = moveAck.NetworkId
                     };
-                    
 
                     PlayerManage.MovementQueue.Enqueue(data);
+                }
+                else if (info.Type == Packet.Type.CastSkillAck)
+                {
+                    Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
+
+                    if (SkillManager.IsActiveSkill(castSkill.SkillId))
+                    {
+                        var skill = (SkillManager.SkillInfo[Convert.ToInt32(castSkill.SkillId)] as ActiveSkill);
+                        skill.CastPosition = new Vector2
+                        {
+                            x = castSkill.CastPosition.X,
+                            y = castSkill.CastPosition.Y
+                        };
+                        skill.CastDirection = new Vector2
+                        {
+                            x = castSkill.CastDirection.X,
+                            y = castSkill.CastDirection.Y,
+                        };
+                        skill.NetworkId = castSkill.NetworkId;
+                        PlayerManage.CastSkill(skill);
+                    }
+                    //
+                    //  캐스트 스킬 이벤트 추가해야함.
+                    //
+                    //
                 }
                 else if (info.Type == Packet.Type.EnterNewUserAck)
                 {
@@ -83,15 +107,7 @@ public class ObjectManager : MonoBehaviour
                     Packet.Disconnect disconnect = Packet.Disconnect.Parser.ParseFrom(info.Payload);
                     PlayerManage.DelPlayer(disconnect.NetworkId);
                 }
-                else if (info.Type == Packet.Type.CastSkillAck)
-                {
-                    Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
-
-                    //
-                    //  캐스트 스킬 이벤트 추가해야함.
-                    //
-                    //
-                }
+                
                 else
                 {
                     Debug.Log(info.Type);

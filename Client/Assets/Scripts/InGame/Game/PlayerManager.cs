@@ -28,9 +28,8 @@ public class PlayerManager : MonoBehaviour
         UserInterface.PlayerName.text = NetworkManager.ClientName;
         Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
         Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
-//        Pool[ClientPlayerIndex].SkillUse += (Skill skill, long? NetworkId) => NetworkManager.Instance.CastSkill(Pool[ClientPlayerIndex].transform.position, skill);
     }
-
+    #region Property
     /// <summary>
     /// 클라이언트의 플레이어 정보를 가져옵니다.
     /// </summary>
@@ -158,7 +157,7 @@ public class PlayerManager : MonoBehaviour
             return new Vector2(Mathf.Abs(x.x), Mathf.Abs(x.y));
         }
     }
-
+    #endregion
 
     /// <summary>
     /// 서버의 움직임을 처리합니다.
@@ -183,6 +182,12 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void CastSkill(ActiveSkill Skill)
+    {
+        Debug.Log("스킬 받음");
+    }
+
 
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
@@ -212,9 +217,7 @@ public class PlayerManager : MonoBehaviour
         }
         return null;
     }
-
-
-
+    
     public bool DelPlayer(BaseCharacter @object)
     {
         int index = Pool.IndexOf(Pool.First((item) =>
@@ -222,7 +225,6 @@ public class PlayerManager : MonoBehaviour
         Destroy(Pool[index]);
         return (Pool[index] = null);
     }
-
     public bool DelPlayer(long? UID)
     {
         //var player = FindPlayer(UID);

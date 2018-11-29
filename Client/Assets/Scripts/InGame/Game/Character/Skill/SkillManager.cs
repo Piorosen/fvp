@@ -4,10 +4,14 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-
 public class SkillManager {
-    static List<Skill> SkillInfo;
+    public static List<Skill> SkillInfo;
     List<Skill> SkillQueue;
+    
+    public static bool IsActiveSkill(long Skill)
+    {
+        return SkillInfo[Convert.ToInt32(Skill)] is ActiveSkill;
+    }
 
     public SkillManager()
     {
@@ -33,10 +37,14 @@ public class SkillManager {
     {
         for (int i = 0; i < SkillQueue.Count; i++)
         {
-            SkillQueue[i].Delay -= Time.deltaTime;
-            if (SkillQueue[i].Delay <= 0.0f)
+            if (SkillQueue[i] is ActiveSkill)
             {
-                SkillQueue.RemoveAt(i);
+                var sk = SkillQueue[i] as ActiveSkill;
+                sk.Delay -= Time.deltaTime;
+                if (sk.Delay <= 0.0f)
+                {
+                    SkillQueue.RemoveAt(i);
+                }
             }
         }
     }
@@ -45,28 +53,20 @@ public class SkillManager {
     {
         SkillInfo.Add(new ActiveSkill
         {
-            Delay = 0.0f,
             Distance = 5,
-            Name = "Basic",
             PhysicsDamage = 40,
-            UseEnergyPoint = 50,
-            UseHealthPoint = 20,
-            Image = null,
+            CastEnergyPoint = 40,
+            HitHealthPoint = 30,
             Knockback = 8000,
-            RigidTime = 0,
             MaxDelay = 1.5f,
         });
         SkillInfo.Add(new ActiveSkill
         {
-            Delay = 0,
             Distance = 5,
-            Name = "Basic",
             PhysicsDamage = 40,
-            UseEnergyPoint = 60,
-            UseHealthPoint = 20,
-            Image = null,
+            CastEnergyPoint = 100,
+            HitHealthPoint = 100,
             Knockback = 8000,
-            RigidTime = 0,
             MaxDelay = 2.0f,
         });
     }

@@ -44,20 +44,18 @@ public class WarriorCharacter : BaseCharacter
     {
         StartCoroutine(AttackMotion(0.5f));
         var skill = SkillManage[SkillId];
-        skill.Direction = Renderer.flipX ? Vector2.right : Vector2.left;
-        skill.Position = this.transform.position;
+        skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
+        skill.CastPosition = this.transform.position;
 
         SkillManage.OnUseSkill(this, skill);
-
-        OnSkillUse(skill);
     }
 
     public override void HitSkill(long SkillId)
     {
         var skill = SkillManage[SkillId];
 
-        HealthPoint -= skill.UseHealthPoint;
-        EnergyPoint -= skill.UseEnergyPoint;
+        HealthPoint -= skill.CastHealthPoint;
+        EnergyPoint -= skill.CastEnergyPoint;
     }
 
 }

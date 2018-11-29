@@ -11,8 +11,7 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
     // 방향키의 이미지
     Image BgImage;
-
-    Image[] image = new Image[4];
+    readonly Image[] image = new Image[4];
 
     void Start()
     {

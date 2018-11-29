@@ -19,8 +19,6 @@ public class InGameCamera : MonoBehaviour {
     Camera CameraInfo;
 
     float Lerp(){
-
-
         float max = NeedSize.x > NeedSize.y ? NeedSize.x : NeedSize.y;
         return Mathf.Lerp(CameraInfo.orthographicSize, 
                           Mathf.Clamp(max, MinSize, MaxSize), 
