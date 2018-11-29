@@ -46,8 +46,11 @@ public class MatchMaking : MonoBehaviour {
 
     public void ExitRoom()
     {
-        Debug.Log("Exit Room");
-        NetworkManage.ExitRoom();
+        var getlist = NetworkManage.GetRoomList();
+        foreach (var t in getlist.Rooms)
+        {
+            Debug.Log(t.Id + " " + t.Name + " ");
+        }
 
     }
 
@@ -60,10 +63,15 @@ public class MatchMaking : MonoBehaviour {
                 Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
             }
 
+            /*
+             * 
+             *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
+             * 
+             */
             var e = NetworkManage.EnterRoom(long.Parse(Join.text));
             PlayerPrefs.SetString("UserList", e.Room.ToString());
         }
-        catch (Exception e)
+        catch (Exception)
         {
 
         }

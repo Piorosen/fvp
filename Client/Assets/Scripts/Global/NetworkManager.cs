@@ -56,10 +56,8 @@ public class NetworkManager {
 
     public Queue<PacketInfo> ServerRequest(Vector3 Location)
     {
-        Debug.Log("코루틴 시작");
         if (Network != null)
         {
-            Debug.Log("널아님");
             Packet.MoveReq move = new Packet.MoveReq
             {
                 Position = new Packet.Vector3()
@@ -95,6 +93,7 @@ public class NetworkManager {
     public Packet.GetRoomListAck GetRoomList()
     {
         Packet.GetRoomListReq request = new Packet.GetRoomListReq();
+        
         Network.Send(Packet.Type.GetRoomListReq, request);
 
         return Packet.GetRoomListAck
@@ -108,6 +107,7 @@ public class NetworkManager {
     {  
         Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq();
         enterRoom.RoomId = RoomId;
+        
         return Packet.EnterRoomAck
                      .Parser
                      .ParseFrom(SetTimeOut(5.0f, Packet.Type.EnterRoomAck)
@@ -159,8 +159,8 @@ public class NetworkManager {
             },
             CastDirection = new Packet.Vector3
             {
-                X = skill.Direction.x,
-                Y = skill.Direction.y,
+                X = skill.CastDirection.x,
+                Y = skill.CastDirection.y,
                 Z = position.z
             },
             SkillId = skill.SkillId

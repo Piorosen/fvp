@@ -6,12 +6,12 @@ public class ActiveSkill : Skill
 {
     public override bool OnUseSkill(BaseCharacter player)
     {
-        if (player.EnergyPoint >= UseEnergyPoint && player.HealthPoint > UseHealthPoint)
+        if (player.EnergyPoint >= CastEnergyPoint && player.HealthPoint > CastHealthPoint)
         {
-            player.HealthPoint -= this.UseHealthPoint;
-            player.EnergyPoint -= this.UseEnergyPoint;
+            player.HealthPoint -= this.CastHealthPoint;
+            player.EnergyPoint -= this.CastEnergyPoint;
             Delay = MaxDelay;
-            player.GetComponent<Rigidbody2D>().AddForce(Direction * Knockback);
+            NetworkManager.Instance.CastSkill(player.transform.position, this);
             return true;
         }
         return false;
@@ -19,4 +19,10 @@ public class ActiveSkill : Skill
     public float Knockback;
     // 경직시간
     public float RigidTime;
+
+    public float PhysicsDamage;
+    public float MaxDelay;
+    public float Delay;
+    public float Distance;
+        
 }

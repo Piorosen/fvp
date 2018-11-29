@@ -1,35 +1,14 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public abstract class Skill {
-    static long SkillCount = 0;
-    public Skill()
-    {
-        SkillId = SkillCount;
-        SkillCount++;
-    }
+public abstract class Skill : NetworkSkill
+{
+    public float CastEnergyPoint = 0;
+    public float CastHealthPoint = 0;
 
-
-
-    public abstract bool OnUseSkill(BaseCharacter player);
-
-    public string Name;
-    public Image Image;
-
-    public Vector2 Direction;
-
-    public readonly long SkillId;
-    public Vector2 Position;
-    public float PhysicsDamage;
-
-    public float MaxDelay;
-    public float Delay;
-
-    public float Distance;
-
-    public float UseEnergyPoint;
-    public float UseHealthPoint;
-
+    public float HitEnergyPoint = 0;
+    public float HitHealthPoint = 0;
 }
