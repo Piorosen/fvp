@@ -19,13 +19,13 @@ public class SkillManager {
         SkillQueue = new List<Skill>();
     }
 
-    public void OnUseSkill(BaseCharacter player, long SkillId)
+    public void OnUseSkill(BaseCharacter player, Skill Skill)
     {
-        var result = SkillQueue.FirstOrDefault((i) => i.SkillId == SkillId);
+        var result = SkillQueue.FirstOrDefault((i) => i.SkillId == Skill.SkillId);
         if (result == null)
         {
-            if (this[SkillId].OnUseSkill(player))
-                SkillQueue.Add(this[SkillId]);
+            if (this[Skill.SkillId].OnUseSkill(player))
+                SkillQueue.Add(this[Skill.SkillId]);
         }
     }
 
@@ -46,34 +46,28 @@ public class SkillManager {
         SkillInfo.Add(new ActiveSkill
         {
             Delay = 0.0f,
-            Distance = 3,
-            MasicDamage = 0,
+            Distance = 5,
             Name = "Basic",
             PhysicsDamage = 40,
-            SpecialDamage = 0,
             UseEnergyPoint = 50,
             UseHealthPoint = 20,
             Image = null,
             Knockback = 8000,
             RigidTime = 0,
-            MaxDelay = 0.5f,
-            Direction = Vector3.right
+            MaxDelay = 1.5f,
         });
         SkillInfo.Add(new ActiveSkill
         {
             Delay = 0,
-            Distance = 3,
-            MasicDamage = 0,
+            Distance = 5,
             Name = "Basic",
             PhysicsDamage = 40,
-            SpecialDamage = 0,
             UseEnergyPoint = 60,
             UseHealthPoint = 20,
             Image = null,
             Knockback = 8000,
             RigidTime = 0,
-            MaxDelay = 0.5f,
-            Direction = Vector3.left
+            MaxDelay = 2.0f,
         });
     }
 

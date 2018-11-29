@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 
 public delegate void ChangeStatus(float now, float max);
+public delegate void SkillEvent(Skill skill, long? NetworkId);
+
 public class BaseCharacter : MonoBehaviour
 {
     // 이벤트
     public event ChangeStatus ChangeHP;
     public event ChangeStatus ChangeMP;
+    public event SkillEvent SkillUse;
 
     // 이벤트 발생 시키는 함수
     // 체력이 변화 가 되었을 경우 UI에 변화를 주어야함.
@@ -22,6 +25,11 @@ public class BaseCharacter : MonoBehaviour
     void OnChangeMP(float now, float max)
     {
         ChangeMP?.Invoke(now, max);
+    }
+
+    protected void OnSkillUse(Skill skill)
+    {
+        SkillUse?.Invoke(skill, NetworkId);
     }
 
 

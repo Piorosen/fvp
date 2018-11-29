@@ -16,9 +16,6 @@ public class ActiveSkill : Skill
         }
         return false;
     }
-
-
-    public Vector2 Direction;
     public float Knockback;
     // 경직시간
     public float RigidTime;

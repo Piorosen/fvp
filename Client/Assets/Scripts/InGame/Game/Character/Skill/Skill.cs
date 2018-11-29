@@ -11,20 +11,22 @@ public abstract class Skill {
         SkillCount++;
     }
 
+
+
     public abstract bool OnUseSkill(BaseCharacter player);
 
     public string Name;
     public Image Image;
 
-    public readonly long SkillId;
+    public Vector2 Direction;
 
+    public readonly long SkillId;
+    public Vector2 Position;
     public float PhysicsDamage;
+
     public float MaxDelay;
     public float Delay;
-    public float Maintain;
 
-    public float SpecialDamage;
-    public float MasicDamage;
     public float Distance;
 
     public float UseEnergyPoint;

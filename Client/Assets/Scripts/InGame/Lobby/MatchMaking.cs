@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class MatchMaking : MonoBehaviour {
     NetworkManager NetworkManage;
@@ -37,6 +39,9 @@ public class MatchMaking : MonoBehaviour {
         Debug.Log(RoomName.text);
         var data = NetworkManage.MakeRoom(RoomName.text, 8);
         Debug.Log($"{data.Room.MasterUserNetworkId} {data.Room.Id} {data.Room.Name} {data.Room.RoomUsers.Count}");
+        PlayerPrefs.SetString("UserList", data.Room.ToString());
+
+        SceneManager.LoadScene("InGame");
     }
 
     public void ExitRoom()
@@ -47,15 +52,24 @@ public class MatchMaking : MonoBehaviour {
     }
 
     public void JoinGame(){
-        var t = GetRoomList();
-        foreach (var data in t.Rooms){
-            Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count +" " + data.Name);
-        }
-
-        var e = NetworkManage.EnterRoom(long.Parse(Join.text));
-        foreach (var q in e.Room.RoomUsers)
+        try
         {
-            Debug.Log(q.Name);
+            var t = GetRoomList();
+            foreach (var data in t.Rooms)
+            {
+                Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
+            }
+
+            var e = NetworkManage.EnterRoom(long.Parse(Join.text));
+            PlayerPrefs.SetString("UserList", e.Room.ToString());
+        }
+        catch (Exception e)
+        {
+
+        }
+        finally
+        {
+            SceneManager.LoadScene("InGame");
         }
     }
 
