@@ -19,14 +19,19 @@ public class MatchMaking : MonoBehaviour {
     }
 
 
-    Packet.GetRoomListAck GetRoomList(){
+    Packet.GetRoomListAck GetRoomList()
+    {
         return NetworkManage.GetRoomList();
     }
+
+
     public void Login(){
         var data = NetworkManage.Login(PlayerName.text);
         if (data != null)
         {
             NetworkManager.ClientNetworkId = data.NetworkId;
+            NetworkManager.ClientName = data.Name;
+
             Debug.Log($"{data.Name} {data.NetworkId}");
             PlayerPrefs.SetString("Name", data.Name);
             PlayerPrefs.SetString("NetworkId", data.NetworkId.ToString());
@@ -54,7 +59,7 @@ public class MatchMaking : MonoBehaviour {
 
     }
 
-    public void JoinGame(){
+    public void JoinGame() {
         try
         {
             var t = GetRoomList();
@@ -63,12 +68,14 @@ public class MatchMaking : MonoBehaviour {
                 Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
             }
 
+            long RoomId = long.Parse(Join.text);
+            Debug.Log(RoomId);
             /*
              * 
              *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
              * 
              */
-            var e = NetworkManage.EnterRoom(long.Parse(Join.text));
+            var e = NetworkManage.EnterRoom(RoomId);    
             PlayerPrefs.SetString("UserList", e.Room.ToString());
         }
         catch (Exception)

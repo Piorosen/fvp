@@ -104,14 +104,17 @@ public class NetworkManager {
     }
 
     public Packet.EnterRoomAck EnterRoom(long RoomId)
-    {  
-        Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq();
-        enterRoom.RoomId = RoomId;
-        Packet.Ack
+    {
+
+        Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq
+        {
+            RoomId = RoomId
+        };
+        Network.Send(Packet.Type.EnterRoomReq, enterRoom);
         
         return Packet.EnterRoomAck
                      .Parser
-                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.EnterRoomAck)
+                     .ParseFrom(SetTimeOut(1.0f, Packet.Type.EnterRoomAck)
                                 .Value
                                 .Payload);
     }
@@ -143,8 +146,8 @@ public class NetworkManager {
         return Packet.ExitRoomUserAck
                       .Parser
                       .ParseFrom(SetTimeOut(5.0f, Packet.Type.ExitRoomUserAck)
-                                 .Value
-                                 .Payload);
+                                .Value
+                                .Payload);
     }
 
     public void CastSkill(Vector3 position, Skill skill)
@@ -177,7 +180,7 @@ public class NetworkManager {
         {
             Network.Update();
             PacketInfo info;
-            if (Network.TryGetPacket(out info))
+            while (Network.TryGetPacket(out info))
             {
                 Debug.Log(info.Type.ToString());
                 if (info.Type == type)

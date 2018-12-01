@@ -10,7 +10,7 @@ public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
     public InGameCamera Camera;
-    public PlayerManager PlayerManage;
+    public PlayerManager PlayerManage = new PlayerManager();
 
     void Awake() {
         if (Instance == null)
@@ -40,6 +40,7 @@ public class ObjectManager : MonoBehaviour
                 PlayerManage.Initialize();
             }catch (Exception){
                 NetworkManager.ClientNetworkId = 0;
+                NetworkManager.ClientName = "Offline";
                 PlayerManage.AddPlayer(0, 0, "Offline", 0);
                 PlayerManage.Initialize();
                 yield break;
@@ -47,6 +48,7 @@ public class ObjectManager : MonoBehaviour
         }
         else{
             NetworkManager.ClientNetworkId = 0;
+            NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
             PlayerManage.Initialize();
             yield break;
@@ -97,10 +99,8 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {
                     Packet.EnterNewUserAck enter = Packet.EnterNewUserAck.Parser.ParseFrom(info.Payload);
-                    if (enter.NewUser.NetworkId != NetworkManager.ClientNetworkId)
-                    {
-                        PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
-                    }
+                    PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
+                    Debug.Log("새로운 유저 입장");
                 }
                 else if (info.Type == Packet.Type.Disconnect)
                 {
