@@ -36,18 +36,22 @@ public class WarriorCharacter : BaseCharacter
     IEnumerator AttackMotion(float time)
     {
         Debug.Log("공격 애니메이션 시작!");
+        
         Anim.SetBool("Attack", true);
         yield return new WaitForSeconds(time);
         Anim.SetBool("Attack", false);
     }
     public override void UseSkill(long SkillId)
     {
-        StartCoroutine(AttackMotion(0.5f));
+        
         var skill = SkillManage[SkillId];
         skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
         skill.CastPosition = this.transform.position;
 
-        SkillManage.OnUseSkill(this, skill);
+        if (SkillManage.OnUseSkill(this, skill))
+        {
+            StartCoroutine(AttackMotion(0.5f));
+        }
     }
 
     public override void HitSkill(long SkillId)
