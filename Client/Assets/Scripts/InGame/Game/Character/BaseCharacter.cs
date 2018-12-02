@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Concurrent;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 
 public delegate void ChangeStatus(float now, float max);
 
@@ -129,9 +129,10 @@ public class BaseCharacter : MonoBehaviour
     public int MaxJumpCount = 3;
     private int CanJumpCount;
 
-    private ConcurrentQueue<Vector3> ServerQue = new ConcurrentQueue<Vector3>();
+    private Queue<Vector3> ServerQue = new Queue<Vector3>();
     Vector3 StartPosition;
     Vector3 EndPosition;
+    float time = 0;
 
     protected float JumpDelay = 0.5f;
     protected virtual void Jump()
@@ -145,27 +146,39 @@ public class BaseCharacter : MonoBehaviour
         }
         JumpDelay -= Time.fixedDeltaTime;
     }
+    bool IsFirst = true;
 
     public void ServerData(Vector3 data)
     {
+        if (IsFirst)
+        {
+            StartPosition = data;
+            EndPosition = data;
+            RigidBody.gravityScale = 0;
+            IsFirst = false;
+        }
         ServerQue.Enqueue(data);
     }
     protected Vector2 ServerMovement()
     {
-        if (ServerQue.IsEmpty == false)
+        time += Time.fixedDeltaTime;
+        Debug.Log(StartPosition.z + time + " " +  EndPosition.z);
+        if (StartPosition.z + time >= EndPosition.z)
         {
+            time = 0;
             StartPosition = EndPosition;
-            while (ServerQue.TryDequeue(out EndPosition))
+            while (ServerQue.Count != 0)
             {
+                EndPosition = ServerQue.Dequeue();
             }
-
+            Debug.Log("통과");
             var t = StartPosition;
             t.z = transform.position.z;
             transform.position = t;
         }
 
         Vector3 Distance = EndPosition - StartPosition;
-
+        
         if (Distance.z != 0)
         {
             return new Vector2(Distance.x * Time.fixedDeltaTime * (1.0f / Distance.z),
@@ -231,6 +244,8 @@ public class BaseCharacter : MonoBehaviour
         else
         {
             NextMovePosition = ServerMovement();
+            Debug.Log(NextMovePosition);
+            transform.Translate(NextMovePosition);
         }
         SetAnim(NextMovePosition);
     }

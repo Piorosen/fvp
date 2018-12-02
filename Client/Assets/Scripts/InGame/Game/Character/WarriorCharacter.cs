@@ -43,7 +43,10 @@ public class WarriorCharacter : BaseCharacter
     }
     public override void UseSkill(long SkillId)
     {
-        
+        if (NetworkManager.ClientNetworkId != NetworkId)
+        {
+            return;
+        }
         var skill = SkillManage[SkillId];
         skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
         skill.CastPosition = this.transform.position;

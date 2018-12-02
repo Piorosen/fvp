@@ -14,8 +14,7 @@ public class NetworkManager {
 
     public static string ClientName;
     public static long? ClientNetworkId;
-
-    ConcurrentQueue<PacketInfo> GameQueue = new ConcurrentQueue<PacketInfo>();
+    readonly ConcurrentQueue<PacketInfo> GameQueue = new ConcurrentQueue<PacketInfo>();
 
     public NetworkManager()
     {
@@ -58,13 +57,15 @@ public class NetworkManager {
     {
         if (Network != null)
         {
+            float t = Convert.ToSingle((DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond) % 10000000);
+            t /= 1000f;
             Packet.MoveReq move = new Packet.MoveReq
             {
                 Position = new Packet.Vector3()
                 {
                     X = Location.x,
                     Y = Location.y,
-                    Z = (DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond / 1000.0f)
+                    Z = t
                 }
             };
 
@@ -75,6 +76,10 @@ public class NetworkManager {
             Queue<PacketInfo> Result = new Queue<PacketInfo>();
             while (Network.TryGetPacket(out info))
             {
+                if (info.Type == Packet.Type.MoveAck)
+                {
+                    var q = Packet.MoveAck.Parser.ParseFrom(info.Payload);
+                }
                 Result.Enqueue(info);
             }
             return Result;
@@ -84,8 +89,10 @@ public class NetworkManager {
     }
 
     public void LogOut(){
-        Packet.Disconnect ack = new Packet.Disconnect();
-        ack.NetworkId = ClientNetworkId ?? -1;
+        Packet.Disconnect ack = new Packet.Disconnect
+        {
+            NetworkId = ClientNetworkId ?? -1
+        };
         Network.Send(Packet.Type.Disconnect, ack);
 
     }
