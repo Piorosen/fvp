@@ -41,19 +41,20 @@ namespace Packet {
             "GAIgASgFIikKC01ha2VSb29tQWNrEhoKBHJvb20YASABKAsyDC5wYWNrZXQu",
             "Um9vbSIfCgxFbnRlclJvb21SZXESDwoHcm9vbV9pZBgBIAEoAyI7CgxFbnRl",
             "clJvb21BY2sSDwoHcm9vbV9pZBgBIAEoAxIaCgRyb29tGAIgASgLMgwucGFj",
-            "a2V0LlJvb20iIQoNUmVuYW1lUm9vbVJlcRIQCghuZXdfbmFtZRgBIAEoCSJI",
-            "Cg9Nb3ZlUm9vbVVzZXJSZXESEgoKbmV0d29ya19pZBgBIAEoAxIhCghwb3Np",
-            "dGlvbhgCIAEoCzIPLnBhY2tldC5WZWN0b3IzIkgKD01vdmVSb29tVXNlckFj",
-            "axISCgpuZXR3b3JrX2lkGAEgASgDEiEKCHBvc2l0aW9uGAIgASgLMg8ucGFj",
-            "a2V0LlZlY3RvcjMiJQoPRXhpdFJvb21Vc2VyUmVxEhIKCm5ldHdvcmtfaWQY",
-            "ASABKAMiJQoPRXhpdFJvb21Vc2VyQWNrEhIKCm5ldHdvcmtfaWQYASABKAMi",
-            "hQEKDENhc3RTa2lsbFJlcRISCgpuZXR3b3JrX2lkGAEgASgDEhAKCHNraWxs",
-            "X2lkGAIgASgDEiYKDWNhc3RfcG9zaXRpb24YAyABKAsyDy5wYWNrZXQuVmVj",
-            "dG9yMxInCg5jYXN0X2RpcmVjdGlvbhgEIAEoCzIPLnBhY2tldC5WZWN0b3Iz",
-            "IoUBCgxDYXN0U2tpbGxBY2sSEgoKbmV0d29ya19pZBgBIAEoAxIQCghza2ls",
-            "bF9pZBgCIAEoAxImCg1jYXN0X3Bvc2l0aW9uGAMgASgLMg8ucGFja2V0LlZl",
-            "Y3RvcjMSJwoOY2FzdF9kaXJlY3Rpb24YBCABKAsyDy5wYWNrZXQuVmVjdG9y",
-            "M2IGcHJvdG8z"));
+            "a2V0LlJvb20iOQoTRW50ZXJOZXdSb29tVXNlckFjaxIiCghuZXdfdXNlchgB",
+            "IAEoCzIQLnBhY2tldC5Sb29tVXNlciIhCg1SZW5hbWVSb29tUmVxEhAKCG5l",
+            "d19uYW1lGAEgASgJIkgKD01vdmVSb29tVXNlclJlcRISCgpuZXR3b3JrX2lk",
+            "GAEgASgDEiEKCHBvc2l0aW9uGAIgASgLMg8ucGFja2V0LlZlY3RvcjMiSAoP",
+            "TW92ZVJvb21Vc2VyQWNrEhIKCm5ldHdvcmtfaWQYASABKAMSIQoIcG9zaXRp",
+            "b24YAiABKAsyDy5wYWNrZXQuVmVjdG9yMyIlCg9FeGl0Um9vbVVzZXJSZXES",
+            "EgoKbmV0d29ya19pZBgBIAEoAyIlCg9FeGl0Um9vbVVzZXJBY2sSEgoKbmV0",
+            "d29ya19pZBgBIAEoAyKFAQoMQ2FzdFNraWxsUmVxEhIKCm5ldHdvcmtfaWQY",
+            "ASABKAMSEAoIc2tpbGxfaWQYAiABKAMSJgoNY2FzdF9wb3NpdGlvbhgDIAEo",
+            "CzIPLnBhY2tldC5WZWN0b3IzEicKDmNhc3RfZGlyZWN0aW9uGAQgASgLMg8u",
+            "cGFja2V0LlZlY3RvcjMihQEKDENhc3RTa2lsbEFjaxISCgpuZXR3b3JrX2lk",
+            "GAEgASgDEhAKCHNraWxsX2lkGAIgASgDEiYKDWNhc3RfcG9zaXRpb24YAyAB",
+            "KAsyDy5wYWNrZXQuVmVjdG9yMxInCg5jYXN0X2RpcmVjdGlvbhgEIAEoCzIP",
+            "LnBhY2tldC5WZWN0b3IzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Packet.PacketTypeReflection.Descriptor, global::Packet.PacketDataReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -72,6 +73,7 @@ namespace Packet {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MakeRoomAck), global::Packet.MakeRoomAck.Parser, new[]{ "Room" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterRoomReq), global::Packet.EnterRoomReq.Parser, new[]{ "RoomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterRoomAck), global::Packet.EnterRoomAck.Parser, new[]{ "RoomId", "Room" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packet.EnterNewRoomUserAck), global::Packet.EnterNewRoomUserAck.Parser, new[]{ "NewUser" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.RenameRoomReq), global::Packet.RenameRoomReq.Parser, new[]{ "NewName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MoveRoomUserReq), global::Packet.MoveRoomUserReq.Parser, new[]{ "NetworkId", "Position" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packet.MoveRoomUserAck), global::Packet.MoveRoomUserAck.Parser, new[]{ "NetworkId", "Position" }, null, null, null),
@@ -2205,6 +2207,141 @@ namespace Packet {
 
   }
 
+  public sealed partial class EnterNewRoomUserAck : pb::IMessage<EnterNewRoomUserAck> {
+    private static readonly pb::MessageParser<EnterNewRoomUserAck> _parser = new pb::MessageParser<EnterNewRoomUserAck>(() => new EnterNewRoomUserAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<EnterNewRoomUserAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EnterNewRoomUserAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EnterNewRoomUserAck(EnterNewRoomUserAck other) : this() {
+      newUser_ = other.newUser_ != null ? other.newUser_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EnterNewRoomUserAck Clone() {
+      return new EnterNewRoomUserAck(this);
+    }
+
+    /// <summary>Field number for the "new_user" field.</summary>
+    public const int NewUserFieldNumber = 1;
+    private global::Packet.RoomUser newUser_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Packet.RoomUser NewUser {
+      get { return newUser_; }
+      set {
+        newUser_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as EnterNewRoomUserAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(EnterNewRoomUserAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(NewUser, other.NewUser)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (newUser_ != null) hash ^= NewUser.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (newUser_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(NewUser);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (newUser_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(NewUser);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(EnterNewRoomUserAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.newUser_ != null) {
+        if (newUser_ == null) {
+          newUser_ = new global::Packet.RoomUser();
+        }
+        NewUser.MergeFrom(other.NewUser);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (newUser_ == null) {
+              newUser_ = new global::Packet.RoomUser();
+            }
+            input.ReadMessage(newUser_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class RenameRoomReq : pb::IMessage<RenameRoomReq> {
     private static readonly pb::MessageParser<RenameRoomReq> _parser = new pb::MessageParser<RenameRoomReq>(() => new RenameRoomReq());
     private pb::UnknownFieldSet _unknownFields;
@@ -2213,7 +2350,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2342,7 +2479,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2505,7 +2642,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2668,7 +2805,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2797,7 +2934,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2926,7 +3063,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3151,7 +3288,7 @@ namespace Packet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Packet.PacketReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
