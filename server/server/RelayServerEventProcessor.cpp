@@ -27,7 +27,7 @@ void RelayServerEventProcessor::HandleCastSkillReq(int64_t networkId, const pack
 
 	packet::CastSkillAck ack;
 	ack.set_network_id(networkId);
-	ack.set_skill_id(message.network_id());
+	ack.set_skill_id(message.skill_id());
 	*ack.mutable_cast_position() = message.cast_position();
 	*ack.mutable_cast_direction() = message.cast_direction();
 
