@@ -73,7 +73,7 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.CastSkillAck)
                 {
                     Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
-
+                    Debug.Log(castSkill.SkillId);
                     if (SkillManager.IsActiveSkill(castSkill.SkillId))
                     {
                         var skill = (SkillManager.SkillInfo[Convert.ToInt32(castSkill.SkillId)] as ActiveSkill);

@@ -165,7 +165,7 @@ public class BaseCharacter : MonoBehaviour
         Debug.Log(StartPosition.z + time + " " +  EndPosition.z);
         if (StartPosition.z + time >= EndPosition.z)
         {
-            time = 0;
+            time = Time.fixedDeltaTime;
             StartPosition = EndPosition;
             while (ServerQue.Count != 0)
             {

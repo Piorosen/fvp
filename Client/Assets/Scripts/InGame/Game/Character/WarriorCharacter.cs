@@ -50,10 +50,11 @@ public class WarriorCharacter : BaseCharacter
         var skill = SkillManage[SkillId];
         skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
         skill.CastPosition = this.transform.position;
-
         if (SkillManage.OnUseSkill(this, skill))
         {
             StartCoroutine(AttackMotion(0.5f));
+            if (NetworkManager.Instance != null)
+                NetworkManager.Instance.CastSkill(transform.position, skill);
         }
     }
 

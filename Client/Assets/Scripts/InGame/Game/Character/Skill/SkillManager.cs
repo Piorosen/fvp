@@ -55,6 +55,7 @@ public class SkillManager {
     {
         SkillInfo.Add(new ActiveSkill
         {
+            SkillId = 0,
             Distance = 5,
             PhysicsDamage = 40,
             CastEnergyPoint = 40,
@@ -64,6 +65,7 @@ public class SkillManager {
         });
         SkillInfo.Add(new ActiveSkill
         {
+            SkillId = 1,
             Distance = 5,
             PhysicsDamage = 40,
             CastEnergyPoint = 100,
