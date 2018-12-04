@@ -68,13 +68,12 @@ public class ObjectManager : MonoBehaviour
                     {
                         w = moveAck.NetworkId
                     };
-
                     PlayerManage.MovementQueue.Enqueue(data);
                 }
                 else if (info.Type == Packet.Type.CastSkillAck)
                 {
                     Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
-
+                    Debug.Log(castSkill.SkillId);
                     if (SkillManager.IsActiveSkill(castSkill.SkillId))
                     {
                         var skill = (SkillManager.SkillInfo[Convert.ToInt32(castSkill.SkillId)] as ActiveSkill);
@@ -98,8 +97,8 @@ public class ObjectManager : MonoBehaviour
                 }
                 else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {
-                    Packet.EnterNewUserAck enter = Packet.EnterNewUserAck.Parser.ParseFrom(info.Payload);
-                    PlayerManage.AddPlayer(0, 0, enter.NewUserName, enter.NewUser.NetworkId);
+                    Packet.EnterNewRoomUserAck enter = Packet.EnterNewRoomUserAck.Parser.ParseFrom(info.Payload);
+                    PlayerManage.AddPlayer(0, 0, enter.NewUser.Name, enter.NewUser.NetworkId);
                     Debug.Log("새로운 유저 입장");
                 }
                 else if (info.Type == Packet.Type.Disconnect)
@@ -113,7 +112,8 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.6f));
+            
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
         }
     }
 

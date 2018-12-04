@@ -11,8 +11,6 @@ public class ActiveSkill : Skill
             player.HealthPoint -= this.CastHealthPoint;
             player.EnergyPoint -= this.CastEnergyPoint;
             Delay = MaxDelay;
-            if (NetworkManager.Instance != null)
-                NetworkManager.Instance.CastSkill(player.transform.position, this);
             return true;
         }
         return false;
