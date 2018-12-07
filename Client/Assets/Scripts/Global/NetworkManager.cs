@@ -24,7 +24,7 @@ public class NetworkManager {
         }
     }
 
-    public Packet.LoginAck Login(string PlayerName)
+    public async Task<Packet.LoginAck> Login(string PlayerName)
     {
         try
         {
@@ -42,12 +42,8 @@ public class NetworkManager {
             Network = null;
             return null;
         }
-
-        return Packet.LoginAck
-                     .Parser
-                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.LoginAck)
-                                .Value
-                                .Payload);
+        var payload = await SetTimeOut(5.0f, Packet.Type.LoginAck);
+        return Packet.LoginAck.Parser.ParseFrom(payload?.Payload);
     }
 
 
@@ -91,20 +87,17 @@ public class NetworkManager {
 
     }
 
-    public Packet.GetRoomListAck GetRoomList()
+    public async Task<Packet.GetRoomListAck> GetRoomList()
     {
         Packet.GetRoomListReq request = new Packet.GetRoomListReq();
         
         Network.Send(Packet.Type.GetRoomListReq, request);
 
-        return Packet.GetRoomListAck
-                     .Parser
-                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.GetRoomListAck)
-                                .Value
-                                .Payload);
+        var payload = await SetTimeOut(5.0f, Packet.Type.GetRoomListAck);
+        return Packet.GetRoomListAck.Parser.ParseFrom(payload?.Payload);
     }
 
-    public Packet.EnterRoomAck EnterRoom(long RoomId)
+    public async Task<Packet.EnterRoomAck> EnterRoom(long RoomId)
     {
 
         Packet.EnterRoomReq enterRoom = new Packet.EnterRoomReq
@@ -112,15 +105,11 @@ public class NetworkManager {
             RoomId = RoomId
         };
         Network.Send(Packet.Type.EnterRoomReq, enterRoom);
-        
-        return Packet.EnterRoomAck
-                     .Parser
-                     .ParseFrom(SetTimeOut(1.0f, Packet.Type.EnterRoomAck)
-                                .Value
-                                .Payload);
+        var payload = await SetTimeOut(1.0f, Packet.Type.EnterRoomAck);
+        return Packet.EnterRoomAck.Parser.ParseFrom(payload?.Payload);
     }
 
-    public Packet.MakeRoomAck MakeRoom(string RoomName, int MaxUser)
+    public async Task<Packet.MakeRoomAck> MakeRoom(string RoomName, int MaxUser)
     {
         Packet.MakeRoomReq makeRoom = new Packet.MakeRoomReq
         {
@@ -128,15 +117,13 @@ public class NetworkManager {
             RoomName = RoomName
         };
         Network.Send(Packet.Type.MakeRoomReq, makeRoom);
-
+        var payload = await SetTimeOut(5.0f, Packet.Type.MakeRoomAck);
         return Packet.MakeRoomAck
                      .Parser
-                     .ParseFrom(SetTimeOut(5.0f, Packet.Type.MakeRoomAck)
-                                .Value
-                                .Payload);
+                     .ParseFrom(payload?.Payload);
     }
 
-    public Packet.ExitRoomUserAck ExitRoom()
+    public async Task<Packet.ExitRoomUserAck> ExitRoom()
     {
         Packet.ExitRoomUserReq exitRoom = new Packet.ExitRoomUserReq
         {
@@ -144,11 +131,10 @@ public class NetworkManager {
         };
         Network.Send(Packet.Type.ExitRoomUserReq, exitRoom);
 
+        var payload = await SetTimeOut(5.0f, Packet.Type.ExitRoomUserAck);
         return Packet.ExitRoomUserAck
                       .Parser
-                      .ParseFrom(SetTimeOut(5.0f, Packet.Type.ExitRoomUserAck)
-                                .Value
-                                .Payload);
+                      .ParseFrom(payload?.Payload);
     }
 
     public void CastSkill(NetworkSkill skill)
@@ -174,7 +160,7 @@ public class NetworkManager {
     }
 
 
-    PacketInfo? SetTimeOut(float TimeOut, Packet.Type type)
+    async Task<PacketInfo?> SetTimeOut(float TimeOut, Packet.Type type)
     {
         while (TimeOut > 0)
         {
@@ -185,11 +171,11 @@ public class NetworkManager {
                 Debug.Log(info.Type.ToString());
                 if (info.Type == type)
                 {
-                    return info;
+                    return await Task.FromResult(info);
                 }
             }
-            Thread.Sleep(100);
-            TimeOut -= Time.deltaTime + 0.1f;
+            await Task.Delay(100);
+            TimeOut -= 0.1f;
         }
         return null;
     }

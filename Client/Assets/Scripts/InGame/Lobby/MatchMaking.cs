@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Threading.Tasks;
 
 public class MatchMaking : MonoBehaviour {
     NetworkManager NetworkManage;
@@ -19,14 +20,14 @@ public class MatchMaking : MonoBehaviour {
     }
 
 
-    Packet.GetRoomListAck GetRoomList()
+    async Task<Packet.GetRoomListAck> GetRoomList()
     {
-        return NetworkManage.GetRoomList();
+        return await NetworkManage.GetRoomList();
     }
 
 
-    public void Login(){
-        var data = NetworkManage.Login(PlayerName.text);
+    public async void Login(){
+        var data = await NetworkManage.Login(PlayerName.text);
         if (data != null)
         {
             NetworkManager.ClientNetworkId = data.NetworkId;
@@ -40,18 +41,18 @@ public class MatchMaking : MonoBehaviour {
         }
     }
 
-    public void CreateRoom(){
+    public async void CreateRoom(){
         Debug.Log(RoomName.text);
-        var data = NetworkManage.MakeRoom(RoomName.text, 8);
+        var data = await NetworkManage.MakeRoom(RoomName.text, 8);
         Debug.Log($"{data.Room.MasterUserNetworkId} {data.Room.Id} {data.Room.Name} {data.Room.RoomUsers.Count}");
         PlayerPrefs.SetString("UserList", data.Room.ToString());
 
         SceneManager.LoadScene("InGame");
     }
 
-    public void ExitRoom()
+    public async void ExitRoom()
     {
-        var getlist = NetworkManage.GetRoomList();
+        var getlist = await NetworkManage.GetRoomList();
         foreach (var t in getlist.Rooms)
         {
             Debug.Log(t.Id + " " + t.Name + " ");
@@ -59,10 +60,10 @@ public class MatchMaking : MonoBehaviour {
 
     }
 
-    public void JoinGame() {
+    public async void JoinGame() {
         try
         {
-            var t = GetRoomList();
+            var t = await GetRoomList();
             foreach (var data in t.Rooms)
             {
                 Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
@@ -75,7 +76,7 @@ public class MatchMaking : MonoBehaviour {
              *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
              * 
              */
-            var e = NetworkManage.EnterRoom(RoomId);    
+            var e = await NetworkManage.EnterRoom(RoomId);    
             PlayerPrefs.SetString("UserList", e.Room.ToString());
         }
         catch (Exception)
