@@ -59,6 +59,14 @@ public class SkillManager {
 
     public static Skill GetSkill(long SkillId)
     {
-        return SkillInfo[SkillId];
+        try
+        {
+            return SkillInfo[SkillId];
+        }
+        catch (Exception)
+        {
+            Debug.Log($"ID : {SkillId}");
+            return null;
+        }
     }
 }

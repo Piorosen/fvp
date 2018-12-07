@@ -75,10 +75,9 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.CastSkillAck)
                 {
                     Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
-                    Debug.Log(castSkill.SkillId);
                     if (SkillManager.IsActiveSkill(castSkill.SkillId))
                     {
-                        var skill = (SkillManager.SkillInfo[Convert.ToInt32(castSkill.SkillId)] as ActiveSkill);
+                        var skill = (SkillManager.GetSkill(castSkill.SkillId) as ActiveSkill);
                         skill.CastPosition = new Vector2
                         {
                             x = castSkill.CastPosition.X,
@@ -114,7 +113,6 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            
             
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
         }

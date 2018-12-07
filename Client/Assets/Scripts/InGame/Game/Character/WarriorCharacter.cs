@@ -48,17 +48,20 @@ public class WarriorCharacter : BaseCharacter
             return;
         }
         var skill = SkillManager.GetSkill(SkillId);
-        skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
-        skill.CastPosition = this.transform.position;
-        if (SkillManage.OnUseSkill(this, skill))
+        if (skill != null)
         {
-            StartCoroutine(AttackMotion(0.5f));
+            skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
+            skill.CastPosition = this.transform.position;
+            if (SkillManage.OnUseSkill(this, skill))
+            {
+                StartCoroutine(AttackMotion(0.5f));
 
-            this.HealthPoint -= skill.CastHealthPoint;
-            this.EnergyPoint -= skill.CastEnergyPoint;
+                this.HealthPoint -= skill.CastHealthPoint;
+                this.EnergyPoint -= skill.CastEnergyPoint;
 
-            if (NetworkManager.Instance != null)
-                NetworkManager.Instance.CastSkill(skill);
+                if (NetworkManager.Instance != null)
+                    NetworkManager.Instance.CastSkill(skill);
+            }
         }
     }
 
