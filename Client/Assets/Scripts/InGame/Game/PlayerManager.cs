@@ -8,7 +8,7 @@ using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    List<BaseCharacter> Pool = new List<BaseCharacter>(8);
+    List<BaseCharacter> Pool;
     public List<GameObject> Prefab;
     public List<Vector2> SpawnLocation;
     public UIManager UserInterface;
@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
+        Pool = new List<BaseCharacter>();
         for (int i = 0; i < 8; i++)
         {
             Pool.Add(null);
@@ -26,9 +27,10 @@ public class PlayerManager : MonoBehaviour
     public void Initialize()
     {
         UserInterface.PlayerName.text = NetworkManager.ClientName;
-        Pool[ClientPlayerIndex].ChangeHP += (float now, float max) => UserInterface.ChangeHP(now, max);
-        Pool[ClientPlayerIndex].ChangeMP += (float now, float max) => UserInterface.ChangeMP(now, max);
+        Pool[ClientPlayerIndex].ChangeHP += UserInterface.ChangeHP;
+        Pool[ClientPlayerIndex].ChangeMP += UserInterface.ChangeMP;
     }
+
     #region Property
     /// <summary>
     /// 클라이언트의 플레이어 정보를 가져옵니다.
@@ -195,12 +197,7 @@ public class PlayerManager : MonoBehaviour
         ServerMove();
     }
 
-    public long? AddPlayer(int Object, int Location, string PlayerName, long? NetworkId)
-    {
-        Vector2 location = SpawnLocation[Location];
-        return AddPlayer(Object, location, PlayerName, NetworkId);
-    }
-    public long? AddPlayer(int Object, Vector2 Location, string PlayerName, long? NetworkId)
+    public long? AddPlayer(int Object, Vector2 Location, string PlayerName, long NetworkId)
     {
         for (int i = 0; i < Pool.Count; i++)
         {
@@ -210,13 +207,19 @@ public class PlayerManager : MonoBehaviour
                 location.z = -1;
 
                 Pool[i] = Instantiate(Prefab[Object], location, Quaternion.identity).GetComponent<BaseCharacter>();
-                Pool[i].PlayerName = PlayerName;
-                Pool[i].NetworkId = NetworkId;
+                Pool[i].Initialize(NetworkId, PlayerName);
                 return Pool[i].NetworkId;
             }
         }
         return null;
     }
+
+    public long? AddPlayer(int Object, int Location, string PlayerName, long? NetworkId)
+    {
+        Vector2 locations = SpawnLocation[Location];
+        return AddPlayer(Object, locations, PlayerName, NetworkId.Value);
+    }
+
     
     public bool DelPlayer(BaseCharacter @object)
     {

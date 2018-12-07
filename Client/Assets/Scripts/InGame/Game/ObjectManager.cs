@@ -10,7 +10,7 @@ public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
     public InGameCamera Camera;
-    public PlayerManager PlayerManage = new PlayerManager();
+    public PlayerManager PlayerManage;
 
     void Awake() {
         if (Instance == null)
@@ -51,6 +51,8 @@ public class ObjectManager : MonoBehaviour
             NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
             PlayerManage.Initialize();
+
+            Debug.Log(NetworkManager.ClientNetworkId);
             yield break;
         }
 

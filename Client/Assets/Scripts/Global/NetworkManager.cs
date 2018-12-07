@@ -11,10 +11,8 @@ public class NetworkManager {
     public static NetworkManager Instance = null;
         
     NetClient Network = null;
-
     public static string ClientName;
     public static long? ClientNetworkId;
-    readonly ConcurrentQueue<PacketInfo> GameQueue = new ConcurrentQueue<PacketInfo>();
 
     public NetworkManager()
     {
@@ -76,10 +74,6 @@ public class NetworkManager {
             Queue<PacketInfo> Result = new Queue<PacketInfo>();
             while (Network.TryGetPacket(out info))
             {
-                if (info.Type == Packet.Type.MoveAck)
-                {
-                    var q = Packet.MoveAck.Parser.ParseFrom(info.Payload);
-                }
                 Result.Enqueue(info);
             }
             return Result;
@@ -157,28 +151,27 @@ public class NetworkManager {
                                 .Payload);
     }
 
-    public void CastSkill(Vector3 position, Skill skill)
+    public void CastSkill(NetworkSkill skill)
     {
         Packet.CastSkillReq castSkill = new Packet.CastSkillReq
         {
             NetworkId = ClientNetworkId.Value,
+            SkillId = skill.SkillId,
             CastPosition = new Packet.Vector3
             {
-                X = position.x,
-                Y = position.y,
-                Z = position.z
+                X = skill.CastPosition.x,
+                Y = skill.CastPosition.y,
+                Z = -1
             },
             CastDirection = new Packet.Vector3
             {
                 X = skill.CastDirection.x,
                 Y = skill.CastDirection.y,
-                Z = position.z
-            },
-            SkillId = skill.SkillId
+                Z = -1
+            }
         };
         Network.Send(Packet.Type.CastSkillReq, castSkill);
     }
-
 
 
     PacketInfo? SetTimeOut(float TimeOut, Packet.Type type)

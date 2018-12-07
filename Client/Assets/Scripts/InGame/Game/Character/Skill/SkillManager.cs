@@ -5,19 +5,19 @@ using System;
 using System.Linq;
 
 public class SkillManager {
-    public static List<Skill> SkillInfo;
+    public static Dictionary<long, Skill> SkillInfo;
     List<Skill> SkillQueue;
     
     public static bool IsActiveSkill(long Skill)
     {
-        return SkillInfo[Convert.ToInt32(Skill)] is ActiveSkill;
+        return GetSkill(Skill) is ActiveSkill;
     }
 
     public SkillManager()
     {
         if (SkillInfo == null)
         {
-            SkillInfo = new List<Skill>();
+            SkillInfo = new Dictionary<long, Skill>();
             LoadSkill();
         }
         SkillQueue = new List<Skill>();
@@ -28,8 +28,8 @@ public class SkillManager {
         var result = SkillQueue.FirstOrDefault((i) => i.SkillId == Skill.SkillId);
         if (result == null)
         {
-            if (this[Skill.SkillId].OnUseSkill(player))
-                SkillQueue.Add(this[Skill.SkillId]);
+            if (GetSkill(Skill.SkillId).OnUseSkill(player))
+                SkillQueue.Add(GetSkill(Skill.SkillId));
             return true;
         }
         return false;
@@ -53,33 +53,12 @@ public class SkillManager {
 
     void LoadSkill()
     {
-        SkillInfo.Add(new ActiveSkill
-        {
-            SkillId = 0,
-            Distance = 5,
-            PhysicsDamage = 40,
-            CastEnergyPoint = 40,
-            HitHealthPoint = 30,
-            Knockback = 8000,
-            MaxDelay = 1.5f,
-        });
-        SkillInfo.Add(new ActiveSkill
-        {
-            SkillId = 1,
-            Distance = 5,
-            PhysicsDamage = 40,
-            CastEnergyPoint = 100,
-            HitHealthPoint = 100,
-            Knockback = 8000,
-            MaxDelay = 2.0f,
-        });
+        SkillInfo.Add(key: (long)JobType.Warrior.ActBasicSkill,
+                      value: new BasicSkill());
     }
 
-    public Skill this[long SkillId]
+    public static Skill GetSkill(long SkillId)
     {
-        get
-        {
-            return SkillInfo[Convert.ToInt32(SkillId)];
-        }
+        return SkillInfo[SkillId];
     }
 }

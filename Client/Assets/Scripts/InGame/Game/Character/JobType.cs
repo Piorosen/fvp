@@ -2,7 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum JobType
+public static class JobType
 {
-    Warrior
+    public enum Warrior
+    {
+        ActBasicSkill = 0,
+        ActLesserAttack,
+        ActFrontDash,
+        ActDaggerDown,
+        ActEnergyEffect,
+        ActPerfectDefence,
+
+        PsvAllKnockback,
+        PsvLesserDagger,
+        PsvFiveStack
+
+    }
 }
