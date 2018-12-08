@@ -63,7 +63,9 @@
     <Compile Include="Assets\Scripts\Global\Global.cs" />
     <Compile Include="Assets\Scripts\Global\NetClient.cs" />
     <Compile Include="Assets\Scripts\Global\NetworkManager.cs" />
-    <Compile Include="Assets\Scripts\Global\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Global\Sound\Audio.cs" />
+    <Compile Include="Assets\Scripts\Global\Sound\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Global\Sound\SoundName.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\Character\BaseCharacter.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\Character\Character.cs" />
     <Compile Include="Assets\Scripts\InGame\Game\Character\JobType.cs" />

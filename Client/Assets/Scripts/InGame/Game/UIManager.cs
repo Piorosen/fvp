@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour {
     // 실시간으로 처리합니다.
     void Update()
     {
-        // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowHP, MaxHP, 0.99f) <= HealthPoint.value
-            && HealthPoint.value <= Convert(NowHP, MaxHP, 1.01f))
+        // 값이 0.999 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
+        if (Convert(NowHP, MaxHP, 0.999f) <= HealthPoint.value
+            && HealthPoint.value <= Convert(NowHP, MaxHP, 1.001f))
         {
             HealthPoint.value = Convert(NowHP, MaxHP);
         }
@@ -52,8 +52,8 @@ public class UIManager : MonoBehaviour {
         }
 
         // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowMP, MaxMP, 0.99f) <= EnergyPoint.value
-            && EnergyPoint.value <= Convert(NowMP, MaxMP, 1.01f))
+        if (Convert(NowMP, MaxMP, 0.999f) <= EnergyPoint.value
+            && EnergyPoint.value <= Convert(NowMP, MaxMP, 1.001f))
         {
             EnergyPoint.value = Convert(NowMP, MaxMP);
         }

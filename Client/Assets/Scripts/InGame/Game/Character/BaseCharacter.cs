@@ -15,6 +15,7 @@ public class BaseCharacter : Character
     protected SpriteRenderer Renderer;
     protected Animator Anim;
     protected Rigidbody2D RigidBody;
+    public SoundManager Sound;
 
     public override void Initialize(long NetworkId, string PlayerName)
     {
@@ -23,6 +24,8 @@ public class BaseCharacter : Character
         HealthObject = transform.GetChild(1).GetChild(0).GetComponent<Slider>();
         Text = transform.GetChild(1).GetChild(1).GetComponent<Text>();
         RigidBody = GetComponent<Rigidbody2D>();
+        Sound = GetComponent<SoundManager>();
+
         this.NetworkId = NetworkId;
         this.PlayerName = PlayerName;
 
@@ -32,7 +35,6 @@ public class BaseCharacter : Character
             EndPosition = new Vector3();
             RigidBody.gravityScale = 0.0f;
         }
-
         HealthPoint = MaxHealth;
         EnergyPoint = MaxEnergy;
     }
@@ -59,13 +61,17 @@ public class BaseCharacter : Character
     {
         if (animData.x > 0)
         {
+            Sound.StopSound(SoundName.Warrior.Walk);
             Renderer.flipX = true;
             Anim.SetBool("Walking", true);
+            Sound.PlaySound(SoundName.Warrior.Walk);
         }
         else if (animData.x < 0)
         {
+            Sound.StopSound(SoundName.Warrior.Walk);
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
+            Sound.PlaySound(SoundName.Warrior.Walk);
         }
         else
         {

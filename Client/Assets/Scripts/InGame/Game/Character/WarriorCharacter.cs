@@ -9,7 +9,6 @@ using System.Linq;
 
 public class WarriorCharacter : BaseCharacter
 {
-
     SkillManager SkillManage;
 
     private void Awake()

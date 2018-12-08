@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 61743630633792150}
   - component: {fileID: 61100853923391996}
   - component: {fileID: 50757026429355848}
+  - component: {fileID: 114860334617967180}
   m_Layer: 9
   m_Name: Warrior
   m_TagString: Untagged
@@ -140,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449313510279888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.253002, y: -193.73566, z: -1}
+  m_LocalPosition: {x: -251.28395, y: -171.70143, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555017902452070}
@@ -396,6 +397,22 @@ MonoBehaviour:
   m_Text: '
 
 '
+--- !u!114 &114860334617967180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1449313510279888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0431d953d3b014cb0ac5118ef193abf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound:
+  - Sound: {fileID: 8300000, guid: 071899638c7594aa28322a5d68468acc, type: 3}
+    Loop: 0
+    Volume: 1
+    Name: 1
 --- !u!114 &114890066385279004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,6 +430,7 @@ MonoBehaviour:
   JumpPower: 10000
   Accelerate: 10000
   Speed: 0
+  Sound: {fileID: 0}
   MaxJumpCount: 1
 --- !u!114 &114902939150330478
 MonoBehaviour:
@@ -484,7 +502,7 @@ SpriteRenderer:
   m_Size: {x: 0.93, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212893990547829130
