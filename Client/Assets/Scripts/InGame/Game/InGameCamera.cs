@@ -29,7 +29,7 @@ public class InGameCamera : MonoBehaviour {
 	void Start ()
     {
         Target = new Vector3();
-        CameraInfo = GetComponent<Camera>();
+        // CameraInfo = GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +42,6 @@ public class InGameCamera : MonoBehaviour {
         }
         // 카메라 크기를 변화 합니다.
         // 플레이어가 2명일 경우 카메라가 동적으로 시야각이 넓어집니다.
-        CameraInfo.orthographicSize = Lerp();
+        // CameraInfo.orthographicSize = Lerp();
 	}
 }
