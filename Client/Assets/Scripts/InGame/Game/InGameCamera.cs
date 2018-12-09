@@ -16,14 +16,14 @@ public class InGameCamera : MonoBehaviour {
 
     public Vector2 NeedSize;
 
-    Camera CameraInfo;
+    // Camera CameraInfo;
 
-    float Lerp(){
-        float max = NeedSize.x > NeedSize.y ? NeedSize.x : NeedSize.y;
-        return Mathf.Lerp(CameraInfo.orthographicSize, 
-                          Mathf.Clamp(max, MinSize, MaxSize), 
-                          Speed * Time.deltaTime);
-    }
+    // float Lerp(){
+    //     float max = NeedSize.x > NeedSize.y ? NeedSize.x : NeedSize.y;
+    //     return Mathf.Lerp(CameraInfo.orthographicSize, 
+    //                       Mathf.Clamp(max, MinSize, MaxSize), 
+    //                       Speed * Time.deltaTime);
+    // }
 
 	// Use this for initialization
 	void Start ()

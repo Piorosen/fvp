@@ -113,8 +113,8 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -123,7 +123,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (NetworkManager.ClientNetworkId != null)
         {
-            Camera.Target = PlayerManage.LocationAverage;
+            Camera.Target = PlayerManage.ClientPlayer.transform.position;
             Camera.NeedSize = PlayerManage.LocationCamera;
         }
     }

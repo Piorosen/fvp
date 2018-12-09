@@ -31,8 +31,6 @@ public class BaseCharacter : Character
 
         if (NetworkId != NetworkManager.ClientNetworkId)
         {
-            StartPosition = new Vector3();
-            EndPosition = new Vector3();
             RigidBody.gravityScale = 0.0f;
         }
         HealthPoint = MaxHealth;
@@ -92,30 +90,38 @@ public class BaseCharacter : Character
             Anim.SetBool("Down", false);
         }
     }
-
-
-
+    
     #region Server 캐릭터 관련 이동 처리
     private Queue<Vector3> ServerQue = new Queue<Vector3>();
     Vector3 StartPosition;
     Vector3 EndPosition;
 
     float time;
-
+    bool Check = false;
     public void ServerData(Vector3 data)
     {
+        if (Check == false)
+        {
+            StartPosition = data;
+            EndPosition = data;
+            RigidBody.gravityScale = 0.0f;
+            Check = true;
+        }
         ServerQue.Enqueue(data);
     }
     protected Vector2 ServerMovement()
     {
         time += Time.fixedDeltaTime;
+        Debug.Log($"{StartPosition.z} + {time} >= {EndPosition.z}");
         if (StartPosition.z + time >= EndPosition.z)
         {
             time = Time.fixedDeltaTime;
             StartPosition = EndPosition;
             while (ServerQue.Count != 0)
             {
+                
                 EndPosition = ServerQue.Dequeue();
+                Debug.Log(EndPosition);
             }
             var t = StartPosition;
             t.z = transform.position.z;
@@ -123,7 +129,6 @@ public class BaseCharacter : Character
         }
 
         Vector3 Distance = EndPosition - StartPosition;
-
         if (Distance.z != 0)
         {
             return new Vector2(Distance.x * Time.fixedDeltaTime * (1.0f / Distance.z),

@@ -15,7 +15,6 @@ public class Audio {
 
     public void Initailize(AudioSource source)
     {
-        Debug.Log(Sound);
         Player = source;
         Player.clip = Sound;
         Player.volume = Volume;
@@ -43,7 +42,6 @@ public class Audio {
     }
     public void Stop()
     {
-        Debug.Log(Time.time - RunningTime);
         if (Player.isPlaying && Time.time - RunningTime > 2.5f)
         {
             Player.Stop();
