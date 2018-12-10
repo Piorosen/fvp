@@ -59,14 +59,12 @@ public class BaseCharacter : Character
     {
         if (animData.x > 0)
         {
-            Sound.StopSound(SoundName.Warrior.Walk);
             Renderer.flipX = true;
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
         }
         else if (animData.x < 0)
         {
-            Sound.StopSound(SoundName.Warrior.Walk);
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
@@ -88,6 +86,11 @@ public class BaseCharacter : Character
         {
             Anim.SetBool("Jump", false);
             Anim.SetBool("Down", false);
+        }
+
+        if (animData.x != 0 && animData.y == 0)
+        {
+            Sound.StopSound(SoundName.Warrior.Walk);
         }
     }
     
