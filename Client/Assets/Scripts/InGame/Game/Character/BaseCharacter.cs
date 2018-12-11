@@ -1,9 +1,7 @@
 ﻿using System;
-using UnityEngine;
-using System.Collections.Concurrent;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public delegate void ChangeStatus(float now, float max);
 
@@ -66,13 +64,13 @@ public class BaseCharacter : Character
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
         }
-        else if (animData.x < 0)
+         if (animData.x < 0)
         {
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
         }
-        else
+        
         {
             Anim.SetBool("Walking", false);
         }
@@ -81,14 +79,17 @@ public class BaseCharacter : Character
         {
             Anim.SetBool("Jump", true);
         }
-        else if (animData.y < 0)
+        
         {
-            Anim.SetBool("Down", true);
-        }
-        else
-        {
-            Anim.SetBool("Jump", false);
-            Anim.SetBool("Down", false);
+            if (animData.y < 0)
+            {
+                Anim.SetBool("Down", true);
+            }
+            
+            {
+                Anim.SetBool("Jump", false);
+                Anim.SetBool("Down", false);
+            }
         }
 
         if (animData.x != 0 && animData.y == 0)
@@ -184,7 +185,7 @@ public class BaseCharacter : Character
             ClientMove();
             NextMovePosition = RigidBody.velocity;
         }
-        else
+        
         {
             NextMovePosition = ServerMovement();
             transform.Translate(NextMovePosition);

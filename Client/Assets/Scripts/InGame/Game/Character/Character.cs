@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
 /// <summary>
 /// 캐릭터의 체력, 기력, 네트워크 Id등 기본적인 이동 및 UI 등 기초 데이터 틀을 제공합니다.
@@ -15,15 +13,9 @@ public abstract class Character : MonoBehaviour
 
     // 이벤트 발생 시키는 함수
     // 체력이 변화 가 되었을 경우 UI에 변화를 주어야함.
-    protected void OnChangeHP(float now, float max)
-    {
-        ChangeHP?.Invoke(now, max);
-    }
+    protected void OnChangeHP(float now, float max) => ChangeHP?.Invoke(now, max);
     // 기력이 변화가 되었을 경우에 UI에 변화를 주는 함수.
-    protected void OnChangeMP(float now, float max)
-    {
-        ChangeMP?.Invoke(now, max);
-    }
+    protected void OnChangeMP(float now, float max) => ChangeMP?.Invoke(now, max);
 
     #region Property
     public float MaxHealth = 100.0f;

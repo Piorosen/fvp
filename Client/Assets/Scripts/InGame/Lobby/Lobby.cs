@@ -82,33 +82,28 @@ public class Lobby : MonoBehaviour {
 
     }
 
-    public async void JoinGame() {
-        try
+    public async void JoinGame()
+    {
+        if (NetworkManager.ClientNetworkId == null)
         {
-            var t = await GetRoomList();
-            foreach (var data in t.Rooms)
-            {
-                Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
-            }
+            return;
+        }
+        var t = await GetRoomList();
+        foreach (var data in t.Rooms)
+        {
+            Debug.Log(data.Id + " " + data.MaxUserCount + " " + data.RoomUsers.Count + " " + data.Name);
+        }
 
-            long RoomId = long.Parse(Join.text);
-            Debug.Log(RoomId);
-            /*
-             * 
-             *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
-             * 
-             */
-            var e = await NetworkManager.Instance.EnterRoom(RoomId);    
-            PlayerPrefs.SetString("UserList", e.Room.ToString());
-        }
-        catch (Exception)
-        {
-
-        }
-        finally
-        {
-            SceneManager.LoadScene("InGame", LoadSceneMode.Single);
-        }
+        long RoomId = long.Parse(Join.text);
+        Debug.Log(RoomId);
+        /*
+         * 
+         *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
+         * 
+         */
+        var e = await NetworkManager.Instance.EnterRoom(RoomId);
+        PlayerPrefs.SetString("UserList", e.Room.ToString());
+        SceneManager.LoadScene("InGame", LoadSceneMode.Single);
     }
 
 	// Use this for initialization
