@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 public delegate void ChangeStatus(float now, float max);
 
+/// <summary>
+/// 유니티의 컴포넌트와 통신을 위한 공간 입니다. 그 외 애니메이션, 서버처리, 이동처리가 여기서 진행이 됩니다.
+/// </summary>
 public class BaseCharacter : Character
 {
     // Components

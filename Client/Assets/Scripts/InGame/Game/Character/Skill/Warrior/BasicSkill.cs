@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// ActiveSkill을 상속을 받고 OnUseSkill을 구현합니.
+/// 모든 스킬 1개 마다 클래스를 구현하여 조금 더 다양한 스킬을 구현하는 방법입니다.
+/// </summary>
 public class BasicSkill : ActiveSkill
 {
     public override bool OnUseSkill(BaseCharacter player)

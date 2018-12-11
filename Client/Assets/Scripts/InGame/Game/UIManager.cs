@@ -17,19 +17,28 @@ public class UIManager : MonoBehaviour {
     float NowMP = 1;
     float MaxMP = 1;
 
-    // 값을 1 의 기준으로 변경을 한다.
+
+    /// <summary>
+    /// 값을 1 의 기준으로 변경을 한다.
+    /// </summary>
     float ConvertPercent(float a, float percent)
     {
         return a * percent;
     }
 
-    // Percent, 0~ 100 기준을 0 ~ 1의 기준으로 변경을 합니다.
+
+    /// <summary>
+    /// Percent, 0~ 100 기준을 0 ~ 1의 기준으로 변경을 합니다.
+    /// </summary>
     float ConvertPercentToNumber(float Now, float Max)
     {
         return Now / Max;
     }
 
-    // 위의 값을 현재값, 최대값을 기준으로 0 ~ 1로 바꿔 줍니다.
+    /// <summary>
+    /// 위의 값을 현재값, 최대값을 기준으로 0 ~ 1로 바꿔 줍니다.
+    /// </summary>
+    /// <returns>The convert.</returns>
     float Convert(float Now, float Max, float Percent = 1)
     {
         return ConvertPercentToNumber(ConvertPercent(Now, Percent), Max);

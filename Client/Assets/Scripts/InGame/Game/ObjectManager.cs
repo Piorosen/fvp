@@ -6,6 +6,10 @@ using System;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/// <summary>
+/// 인 게임에서 전반적인 데이터 처리를 담당하며 서버와 데이터를 받으면서 해당 데이터를 분배 합니다.
+/// 주로 서버와 통신, 카멜파 이동 처리를 담당합니다.
+/// </summary>
 public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
@@ -15,8 +19,8 @@ public class ObjectManager : MonoBehaviour
     void Awake() {
         if (Instance == null)
         {
-            Instance = this;
             StartCoroutine(ServerRequest());
+            Instance = this;
         }
         else
         {
@@ -28,31 +32,33 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     IEnumerator ServerRequest(){
-        if (NetworkManager.ClientNetworkId != null){
-            try
-            {
-                Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
-                PlayerPrefs.DeleteKey("UserList");
-                foreach (var item in room.RoomUsers)
-                {
-                    PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
-                }
-                PlayerManage.Initialize();
-            }catch (Exception){
-                NetworkManager.ClientNetworkId = 0;
-                NetworkManager.ClientName = "Offline";
-                PlayerManage.AddPlayer(0, 0, "Offline", 0);
-                PlayerManage.Initialize();
-                yield break;
-            }
-        }
-        else{
+        if (NetworkManager.ClientNetworkId == null)
+        {
             NetworkManager.ClientNetworkId = 0;
             NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
             PlayerManage.Initialize();
 
             Debug.Log(NetworkManager.ClientNetworkId);
+            yield break;
+        }
+
+        try
+        {
+            Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
+            PlayerPrefs.DeleteKey("UserList");
+            foreach (var item in room.RoomUsers)
+            {
+                PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
+            }
+            PlayerManage.Initialize();
+        }
+        catch (Exception)
+        {
+            NetworkManager.ClientNetworkId = 0;
+            NetworkManager.ClientName = "Offline";
+            PlayerManage.AddPlayer(0, 0, "Offline", 0);
+            PlayerManage.Initialize();
             yield break;
         }
 

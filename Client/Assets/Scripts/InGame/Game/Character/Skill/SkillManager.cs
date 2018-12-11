@@ -4,6 +4,10 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+/// <summary>
+/// 캐릭터 1명 당 1개씩 달리는 스킬 매니저 입니.
+/// 캐릭터가 스킬을 사용하게 될시 스킬의 쿨타임 및 상대방에게 데미지를 받는 것 역시 처리합니다.
+/// </summary>
 public class SkillManager {
     public static Dictionary<long, Skill> SkillInfo;
     List<Skill> SkillQueue;

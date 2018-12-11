@@ -21,6 +21,9 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
+    /// <summary>
+    /// 키보드 값 입력이 들어올 경우 처리를 합니다.
+    /// </summary>
     void CheckKeyboard()
     {
         if (InputVector.x == 0.0f)
@@ -65,6 +68,9 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
 
+    /// <summary>
+    /// UI를 통해 움직일 경우에 키보드의 값을 무시합니다.
+    /// </summary>
     void Update()
     {
         if (!IsDrag)
@@ -74,6 +80,7 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     bool IsDrag = false;
+    #region UI의 드래그 값을 지정합니다.
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 pos;
@@ -118,13 +125,11 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         }
     }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         IsDrag = true;
         OnDrag(eventData);
     }
-
     public void OnPointerUp(PointerEventData eventData)
     {
         image[0].color = new Color(1, 1, 1);
@@ -134,4 +139,5 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         InputVector = Vector3.zero;
         IsDrag = false;
     }
+    #endregion
 }

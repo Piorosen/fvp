@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+/// <summary>
+/// 플레이어의 네트워크 이동, 클라이언트의 이동, 플레이어의 스킬, 플레이어와 관련된 모든 처리를 진행합니다.
+/// 그 외 캐릭터의 HP, MP 와 같은 UI 역시 건들입니다.
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     List<BaseCharacter> Pool;

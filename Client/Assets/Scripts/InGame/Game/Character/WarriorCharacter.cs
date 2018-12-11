@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Linq;
 
+/// <summary>
+/// BaseCharacter을 상속을 받고 Warrior캐릭터를 구현합니다. 그리고 스킬 관련 또한 처리를 합니다.
+/// </summary>
 public class WarriorCharacter : BaseCharacter
 {
     SkillManager SkillManage;

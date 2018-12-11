@@ -2,6 +2,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// 캐릭터의 체력, 기력, 네트워크 Id등 기본적인 이동 및 UI 등 기초 데이터 틀을 제공합니다.
+/// </summary>
 public abstract class Character : MonoBehaviour
 {
     // 이벤트
