@@ -74,7 +74,7 @@ public class Lobby : MonoBehaviour {
 
     public async void ExitRoom()
     {
-        var getlist = await NetworkManage.GetRoomList();
+        var getlist = await NetworkManager.Instance.GetRoomList();
         foreach (var t in getlist.Rooms)
         {
             Debug.Log(t.Id + " " + t.Name + " ");
@@ -98,7 +98,7 @@ public class Lobby : MonoBehaviour {
              *  서버쪽 값이 넘어오지 않아서 처리가 안됨.
              * 
              */
-            var e = await NetworkManage.EnterRoom(RoomId);    
+            var e = await NetworkManager.Instance.EnterRoom(RoomId);    
             PlayerPrefs.SetString("UserList", e.Room.ToString());
         }
         catch (Exception)
