@@ -998,11 +998,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114860334617967180, guid: 60dbe2f3e93efb24fa1eca5838f17319,
-        type: 2}
-      propertyPath: Sound.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4201410191743328, guid: 60dbe2f3e93efb24fa1eca5838f17319, type: 2}
       propertyPath: m_LocalPosition.x
       value: -251.28395
@@ -1045,21 +1040,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114860334617967180, guid: 60dbe2f3e93efb24fa1eca5838f17319,
-        type: 2}
-      propertyPath: Sound.Array.data[2].Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: bbcd8bba61e91427990fb0ae02534861, type: 3}
-    - target: {fileID: 114860334617967180, guid: 60dbe2f3e93efb24fa1eca5838f17319,
-        type: 2}
-      propertyPath: Sound.Array.data[2].Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860334617967180, guid: 60dbe2f3e93efb24fa1eca5838f17319,
-        type: 2}
-      propertyPath: Sound.Array.data[1].Sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 071899638c7594aa28322a5d68468acc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60dbe2f3e93efb24fa1eca5838f17319, type: 2}
   m_IsPrefabAsset: 0
