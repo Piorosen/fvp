@@ -64,13 +64,13 @@ public class BaseCharacter : Character
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
         }
-         if (animData.x < 0)
+        else if (animData.x < 0)
         {
             Renderer.flipX = false;
             Anim.SetBool("Walking", true);
             Sound.PlaySound(SoundName.Warrior.Walk);
         }
-        
+        else
         {
             Anim.SetBool("Walking", false);
         }
@@ -79,13 +79,13 @@ public class BaseCharacter : Character
         {
             Anim.SetBool("Jump", true);
         }
-        
+        else
         {
             if (animData.y < 0)
             {
                 Anim.SetBool("Down", true);
             }
-            
+            else
             {
                 Anim.SetBool("Jump", false);
                 Anim.SetBool("Down", false);
@@ -118,6 +118,7 @@ public class BaseCharacter : Character
     }
     protected Vector2 ServerMovement()
     {
+        Debug.Log($"{NetworkId}  {NetworkManager.ClientNetworkId}");
         time += Time.fixedDeltaTime;
         Debug.Log($"{StartPosition.z} + {time} >= {EndPosition.z}");
         if (StartPosition.z + time >= EndPosition.z)
@@ -185,7 +186,7 @@ public class BaseCharacter : Character
             ClientMove();
             NextMovePosition = RigidBody.velocity;
         }
-        
+        else
         {
             NextMovePosition = ServerMovement();
             transform.Translate(NextMovePosition);

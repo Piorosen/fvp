@@ -62,7 +62,6 @@ public class ObjectManager : MonoBehaviour
             yield break;
         }
 
-
         while (true)
         {
             var Que = NetworkManager.Instance.ServerRequest(PlayerManage.ClientPlayer.transform.position);

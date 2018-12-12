@@ -410,9 +410,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sound:
   - Sound: {fileID: 8300000, guid: 071899638c7594aa28322a5d68468acc, type: 3}
+    Player: {fileID: 0}
     Loop: 0
     Volume: 1
     Name: 1
+  - Sound: {fileID: 8300000, guid: 071899638c7594aa28322a5d68468acc, type: 3}
+    Player: {fileID: 0}
+    Loop: 0
+    Volume: 0
+    Name: 0
 --- !u!114 &114890066385279004
 MonoBehaviour:
   m_ObjectHideFlags: 1
