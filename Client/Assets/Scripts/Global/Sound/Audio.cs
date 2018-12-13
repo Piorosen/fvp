@@ -10,8 +10,7 @@ public class Audio {
     public bool Loop = false;
     public float Volume = 1.0f;
     public SoundName.Warrior Name;
-
-    float RunningTime = 0;
+    
 
     public void Initailize(AudioSource source)
     {
@@ -20,29 +19,17 @@ public class Audio {
         Player.volume = Volume;
         Player.loop = Loop;
     }
-
-    async void SoundPlay()
+    
+    public void Play()
     {
         if (!Player.isPlaying)
         {
             Player.Play();
-            RunningTime = Time.time;
-            await Task.Delay(2500);
-            if (Player.isPlaying)
-            {
-                Player.Stop();
-            }
         }
-    }
-
-
-    public void Play()
-    {
-        SoundPlay();
     }
     public void Stop()
     {
-        if (Player.isPlaying && Time.time - RunningTime > 2.5f)
+        if (Player.isPlaying)
         {
             Player.Stop();
         }

@@ -91,9 +91,11 @@ public class BaseCharacter : Character
                 Anim.SetBool("Down", false);
             }
         }
+        Debug.Log(animData);
 
-        if (animData.x != 0 && animData.y == 0)
+        if (animData.x == 0 || animData.y != 0)
         {
+           
             Sound.StopSound(SoundName.Warrior.Walk);
         }
     }
