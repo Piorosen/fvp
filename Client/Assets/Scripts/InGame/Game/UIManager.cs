@@ -17,19 +17,28 @@ public class UIManager : MonoBehaviour {
     float NowMP = 1;
     float MaxMP = 1;
 
-    // 값을 1 의 기준으로 변경을 한다.
+
+    /// <summary>
+    /// 값을 1 의 기준으로 변경을 한다.
+    /// </summary>
     float ConvertPercent(float a, float percent)
     {
         return a * percent;
     }
 
-    // Percent, 0~ 100 기준을 0 ~ 1의 기준으로 변경을 합니다.
+
+    /// <summary>
+    /// Percent, 0~ 100 기준을 0 ~ 1의 기준으로 변경을 합니다.
+    /// </summary>
     float ConvertPercentToNumber(float Now, float Max)
     {
         return Now / Max;
     }
 
-    // 위의 값을 현재값, 최대값을 기준으로 0 ~ 1로 바꿔 줍니다.
+    /// <summary>
+    /// 위의 값을 현재값, 최대값을 기준으로 0 ~ 1로 바꿔 줍니다.
+    /// </summary>
+    /// <returns>The convert.</returns>
     float Convert(float Now, float Max, float Percent = 1)
     {
         return ConvertPercentToNumber(ConvertPercent(Now, Percent), Max);
@@ -38,9 +47,9 @@ public class UIManager : MonoBehaviour {
     // 실시간으로 처리합니다.
     void Update()
     {
-        // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowHP, MaxHP, 0.99f) <= HealthPoint.value
-            && HealthPoint.value <= Convert(NowHP, MaxHP, 1.01f))
+        // 값이 0.999 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
+        if (Convert(NowHP, MaxHP, 0.999f) <= HealthPoint.value
+            && HealthPoint.value <= Convert(NowHP, MaxHP, 1.001f))
         {
             HealthPoint.value = Convert(NowHP, MaxHP);
         }
@@ -52,8 +61,8 @@ public class UIManager : MonoBehaviour {
         }
 
         // 값이 0.99 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
-        if (Convert(NowMP, MaxMP, 0.99f) <= EnergyPoint.value
-            && EnergyPoint.value <= Convert(NowMP, MaxMP, 1.01f))
+        if (Convert(NowMP, MaxMP, 0.999f) <= EnergyPoint.value
+            && EnergyPoint.value <= Convert(NowMP, MaxMP, 1.001f))
         {
             EnergyPoint.value = Convert(NowMP, MaxMP);
         }

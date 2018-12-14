@@ -16,20 +16,20 @@ public class InGameCamera : MonoBehaviour {
 
     public Vector2 NeedSize;
 
-    Camera CameraInfo;
+    // Camera CameraInfo;
 
-    float Lerp(){
-        float max = NeedSize.x > NeedSize.y ? NeedSize.x : NeedSize.y;
-        return Mathf.Lerp(CameraInfo.orthographicSize, 
-                          Mathf.Clamp(max, MinSize, MaxSize), 
-                          Speed * Time.deltaTime);
-    }
+    // float Lerp(){
+    //     float max = NeedSize.x > NeedSize.y ? NeedSize.x : NeedSize.y;
+    //     return Mathf.Lerp(CameraInfo.orthographicSize, 
+    //                       Mathf.Clamp(max, MinSize, MaxSize), 
+    //                       Speed * Time.deltaTime);
+    // }
 
 	// Use this for initialization
 	void Start ()
     {
         Target = new Vector3();
-        CameraInfo = GetComponent<Camera>();
+        // CameraInfo = GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +42,6 @@ public class InGameCamera : MonoBehaviour {
         }
         // 카메라 크기를 변화 합니다.
         // 플레이어가 2명일 경우 카메라가 동적으로 시야각이 넓어집니다.
-        CameraInfo.orthographicSize = Lerp();
+        // CameraInfo.orthographicSize = Lerp();
 	}
 }

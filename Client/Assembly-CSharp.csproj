@@ -56,21 +56,25 @@
      <Compile Include="Assets\Scripts\Global\Global.cs" />
      <Compile Include="Assets\Scripts\Global\NetClient.cs" />
      <Compile Include="Assets\Scripts\Global\NetworkManager.cs" />
-     <Compile Include="Assets\Scripts\Global\SoundManager.cs" />
+     <Compile Include="Assets\Scripts\Global\Sound\Audio.cs" />
+     <Compile Include="Assets\Scripts\Global\Sound\SoundManager.cs" />
+     <Compile Include="Assets\Scripts\Global\Sound\SoundName.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\BaseCharacter.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Character.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\JobType.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\ActiveSkill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\NetworkSkill.cs" />
-     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\ActiveSkill.cs" />
-     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\PassiveSkill.cs" />
-     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Skill.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\PassiveSkill.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\Skill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\SkillManager.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\BasicSkill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\WarriorCharacter.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\InGameCamera.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\InputManager.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\ObjectManager.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\UIManager.cs" />
-     <Compile Include="Assets\Scripts\InGame\Lobby\MatchMaking.cs" />
+     <Compile Include="Assets\Scripts\InGame\Lobby\Lobby.cs" />
      <Compile Include="Assets\Scripts\InGame\MainMenu\LoginManager.cs" />
      <Compile Include="Assets\Scripts\InGame\MainMenu\StartGame.cs" />
      <Compile Include="Assets\Scripts\Packet.cs" />
@@ -79,6 +83,9 @@
      <Compile Include="Assets\Scripts\PacketType.cs" />
      <None Include="Assets\Asset\Things need to add in Beta.txt" />
      <None Include="Assets\Asset\Standard Information.txt" />
+ <Reference Include="Cinemachine">
+ <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -87,6 +94,9 @@
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
  <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

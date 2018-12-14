@@ -6,17 +6,21 @@ using System;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/// <summary>
+/// 인 게임에서 전반적인 데이터 처리를 담당하며 서버와 데이터를 받으면서 해당 데이터를 분배 합니다.
+/// 주로 서버와 통신, 카멜파 이동 처리를 담당합니다.
+/// </summary>
 public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance = null;
     public InGameCamera Camera;
-    public PlayerManager PlayerManage = new PlayerManager();
+    public PlayerManager PlayerManage;
 
     void Awake() {
         if (Instance == null)
         {
-            Instance = this;
             StartCoroutine(ServerRequest());
+            Instance = this;
         }
         else
         {
@@ -28,32 +32,35 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     IEnumerator ServerRequest(){
-        if (NetworkManager.ClientNetworkId != null){
-            try
-            {
-                Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
-                PlayerPrefs.DeleteKey("UserList");
-                foreach (var item in room.RoomUsers)
-                {
-                    PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
-                }
-                PlayerManage.Initialize();
-            }catch (Exception){
-                NetworkManager.ClientNetworkId = 0;
-                NetworkManager.ClientName = "Offline";
-                PlayerManage.AddPlayer(0, 0, "Offline", 0);
-                PlayerManage.Initialize();
-                yield break;
-            }
+        if (NetworkManager.ClientNetworkId == null)
+        {
+            NetworkManager.ClientNetworkId = 0;
+            NetworkManager.ClientName = "Offline";
+            PlayerManage.AddPlayer(0, 0, "Offline", 0);
+            PlayerManage.Initialize();
+
+            Debug.Log(NetworkManager.ClientNetworkId);
+            yield break;
         }
-        else{
+
+        try
+        {
+            Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
+            PlayerPrefs.DeleteKey("UserList");
+            foreach (var item in room.RoomUsers)
+            {
+                PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
+            }
+            PlayerManage.Initialize();
+        }
+        catch (Exception)
+        {
             NetworkManager.ClientNetworkId = 0;
             NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
             PlayerManage.Initialize();
             yield break;
         }
-
 
         while (true)
         {
@@ -73,10 +80,9 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.CastSkillAck)
                 {
                     Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
-                    Debug.Log(castSkill.SkillId);
                     if (SkillManager.IsActiveSkill(castSkill.SkillId))
                     {
-                        var skill = (SkillManager.SkillInfo[Convert.ToInt32(castSkill.SkillId)] as ActiveSkill);
+                        var skill = (SkillManager.GetSkill(castSkill.SkillId) as ActiveSkill);
                         skill.CastPosition = new Vector2
                         {
                             x = castSkill.CastPosition.X,
@@ -112,8 +118,8 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -122,7 +128,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (NetworkManager.ClientNetworkId != null)
         {
-            Camera.Target = PlayerManage.LocationAverage;
+            Camera.Target = PlayerManage.ClientPlayer.transform.position;
             Camera.NeedSize = PlayerManage.LocationCamera;
         }
     }
