@@ -91,7 +91,7 @@ public class BaseCharacter : Character
                 Anim.SetBool("Down", false);
             }
         }
-        Debug.Log(animData);
+        // Debug.Log(animData);
 
         if (animData.x == 0 || animData.y != 0)
         {
@@ -120,18 +120,17 @@ public class BaseCharacter : Character
     }
     protected Vector2 ServerMovement()
     {
-        Debug.Log($"{NetworkId}  {NetworkManager.ClientNetworkId}");
+        //Debug.Log($"{NetworkId}  {NetworkManager.ClientNetworkId}");
         time += Time.fixedDeltaTime;
-        Debug.Log($"{StartPosition.z} + {time} >= {EndPosition.z}");
+        //Debug.Log($"{StartPosition.z} + {time} >= {EndPosition.z}");
         if (StartPosition.z + time >= EndPosition.z)
         {
             time = Time.fixedDeltaTime;
             StartPosition = EndPosition;
             while (ServerQue.Count != 0)
             {
-                
                 EndPosition = ServerQue.Dequeue();
-                Debug.Log(EndPosition);
+                //Debug.Log(EndPosition);
             }
             var t = StartPosition;
             t.z = transform.position.z;

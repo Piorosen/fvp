@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: ff3e883ae9b1c4f0784063cf87684544
+guid: 1941fb96e61724f97b1ed573dea079c7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\uC228\uC26C\uAE30 2_0"
+    21300000: BasicAttack_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -107,21 +107,21 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC228\uC26C\uAE30 2_0"
+      name: BasicAttack_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 25
-        width: 21
-        height: 35
+        y: 13
+        width: 27
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c6d7344a57d7f946a87c9f38c6e3956
+      spriteID: 850db82876252d847b5e28f2f282da7c
       vertices: []
       indices: 
       edges: []
@@ -129,7 +129,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 74f5d3f4348f248aa89c8f7f02104520
+    spriteID: 9c2a752703423402d98d77f030d56408
     vertices: []
     indices: 
     edges: []

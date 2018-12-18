@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: a59128e2dbc3c41289078937a1917df3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\uAE30\uBCF8\uACF5\uACA9 3"
+    21300000: BasicAttack_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -107,7 +107,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uAE30\uBCF8\uACF5\uACA9 3"
+      name: BasicAttack_2
       rect:
         serializedVersion: 2
         x: 2

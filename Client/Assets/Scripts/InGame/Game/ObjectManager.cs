@@ -96,10 +96,6 @@ public class ObjectManager : MonoBehaviour
                         skill.NetworkId = castSkill.NetworkId;
                         PlayerManage.CastSkill(skill);
                     }
-                    //
-                    //  캐스트 스킬 이벤트 추가해야함.
-                    //
-                    //
                 }
                 else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {

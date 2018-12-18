@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: 78bee7381cd5d4cb6a1e41c0c8714a64
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\uAE30\uBCF8\uACF5\uACA9 1"
+    21300000: BasicAttack_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -107,7 +107,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uAE30\uBCF8\uACF5\uACA9 1"
+      name: BasicAttack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,7 +115,7 @@ TextureImporter:
         width: 21
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

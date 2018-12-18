@@ -191,7 +191,7 @@ public class PlayerManager : MonoBehaviour
 
     public void CastSkill(ActiveSkill Skill)
     {
-        Debug.Log("스킬 받음");
+        Debug.Log("스킬 사용 함");
     }
 
 

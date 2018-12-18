@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 1941fb96e61724f97b1ed573dea079c7
+guid: a88b1178cdfe143df91d2e614f4a4fa9
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\uAE30\uBCF8\uACF5\uACA9 2"
+    21300000: Idle_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -107,21 +107,21 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uAE30\uBCF8\uACF5\uACA9 2"
+      name: Idle_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 13
-        width: 27
-        height: 47
+        x: 1
+        y: 3
+        width: 20
+        height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 850db82876252d847b5e28f2f282da7c
+      spriteID: 9b2d9c84def1f1048af6beea6164803a
       vertices: []
       indices: 
       edges: []
@@ -129,7 +129,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9c2a752703423402d98d77f030d56408
+    spriteID: ad911a66804ba40bb950940fa8ed5a8b
     vertices: []
     indices: 
     edges: []
