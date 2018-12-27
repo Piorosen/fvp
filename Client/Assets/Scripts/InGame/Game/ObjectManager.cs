@@ -19,7 +19,10 @@ public class ObjectManager : MonoBehaviour
     void Awake() {
         if (Instance == null)
         {
-            StartCoroutine(ServerRequest());
+            if (PlayerInit())
+            {
+                StartCoroutine(ServerRequest());
+            }
             Instance = this;
         }
         else
@@ -28,40 +31,47 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
-    /// </summary>
-    IEnumerator ServerRequest(){
+    bool PlayerInit()
+    {
+        bool Result = true;
         if (NetworkManager.ClientNetworkId == null)
         {
             NetworkManager.ClientNetworkId = 0;
             NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
-            PlayerManage.Initialize();
 
             Debug.Log(NetworkManager.ClientNetworkId);
-            yield break;
+            Result = false;
         }
 
-        try
+        if (Result)
         {
-            Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
-            PlayerPrefs.DeleteKey("UserList");
-            foreach (var item in room.RoomUsers)
+            try
             {
-                PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
-            }
-            PlayerManage.Initialize();
-        }
-        catch (Exception)
-        {
-            NetworkManager.ClientNetworkId = 0;
-            NetworkManager.ClientName = "Offline";
-            PlayerManage.AddPlayer(0, 0, "Offline", 0);
-            PlayerManage.Initialize();
-            yield break;
-        }
+                Packet.Room room = Packet.Room.Parser.ParseJson(PlayerPrefs.GetString("UserList"));
 
+                foreach (var item in room.RoomUsers)
+                {
+                    PlayerManage.AddPlayer(0, new Vector2(item.Position.X, item.Position.Y), item.Name, item.NetworkId);
+                }
+            }
+            catch (Exception)
+            {
+                NetworkManager.ClientNetworkId = 0;
+                NetworkManager.ClientName = "Offline";
+                PlayerManage.AddPlayer(0, 0, "Offline", 0);
+                Result = false;
+            }
+        }
+        PlayerPrefs.DeleteKey("UserList");
+        PlayerManage.Initialize();
+        return Result;
+    }
+
+    /// <summary>
+    /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
+    /// </summary>
+    IEnumerator ServerRequest(){
         while (true)
         {
             var Que = NetworkManager.Instance.ServerRequest(PlayerManage.ClientPlayer.transform.position);
@@ -108,14 +118,14 @@ public class ObjectManager : MonoBehaviour
                     Packet.Disconnect disconnect = Packet.Disconnect.Parser.ParseFrom(info.Payload);
                     PlayerManage.DelPlayer(disconnect.NetworkId);
                 }
-                
                 else
                 {
                     Debug.Log(info.Type);
                 }
             }
-
-            yield return new WaitForSeconds(0.1f);
+            float ping = UnityEngine.Random.Range(0.001f, 0.1f);
+            PlayerManage.OnChangePing((int)(ping * 1000));
+            yield return new WaitForSeconds(ping);
         }
     }
 

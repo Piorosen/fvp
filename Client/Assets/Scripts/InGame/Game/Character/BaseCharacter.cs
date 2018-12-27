@@ -38,6 +38,12 @@ public class BaseCharacter : Character
         EnergyPoint = MaxEnergy;
     }
 
+    public void OnUpdateUiInfo()
+    {
+        OnChangeHP(HealthPoint, MaxHealth);
+        OnChangeMP(EnergyPoint, MaxEnergy);
+    }
+
     // 플레이어 이름
     public string PlayerName
     {

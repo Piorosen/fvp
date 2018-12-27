@@ -5,8 +5,14 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Slider HealthPoint;
+    public Text HealthText;
     public Slider EnergyPoint;
+    public Text EnergyText;
     public Text PlayerName;
+
+
+    public Text Ping;
+    public Text NextTime;
 
     // 체력바, 기력바의 변화량 속도
     public float Speed;
@@ -17,6 +23,7 @@ public class UIManager : MonoBehaviour {
     float NowMP = 1;
     float MaxMP = 1;
 
+    float timer = 0.0f;
 
     /// <summary>
     /// 값을 1 의 기준으로 변경을 한다.
@@ -47,6 +54,10 @@ public class UIManager : MonoBehaviour {
     // 실시간으로 처리합니다.
     void Update()
     {
+        timer += Time.deltaTime;
+        int tmp = (int)timer;
+        NextTime.text = $"시간 : {tmp / 60:00} : {tmp % 60:00}";
+
         // 값이 0.999 <= value 일 경우 value의 값을 1 로 바꿔줍니다.
         if (Convert(NowHP, MaxHP, 0.999f) <= HealthPoint.value
             && HealthPoint.value <= Convert(NowHP, MaxHP, 1.001f))
@@ -75,14 +86,21 @@ public class UIManager : MonoBehaviour {
 
     }
 
+    public void ChangePing(int ping)
+    {
+        Ping.text = $"Ping : {ping}";
+    }
+
     // Character의 이벤트를 받은 PlayerManager에서 연결된 함수입니다.
     public void ChangeHP(float now, float maxValue){
         NowHP = now;
         MaxHP = maxValue;
+        HealthText.text = $"{(int)now} / {maxValue}";
     }
     public void ChangeMP(float now, float maxValue){
         
         NowMP = now;
         MaxMP = maxValue;
+        EnergyText.text = $"{(int)now} / {maxValue}";
     }
 }

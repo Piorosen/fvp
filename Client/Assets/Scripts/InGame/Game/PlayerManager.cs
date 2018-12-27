@@ -18,6 +18,11 @@ public class PlayerManager : MonoBehaviour
     public UIManager UserInterface;
     public Queue<Vector4> MovementQueue = new Queue<Vector4>();
 
+    public void OnChangePing(int ping)
+    {
+        UserInterface.ChangePing(ping);
+    }
+
 
     void Awake()
     {
@@ -31,8 +36,10 @@ public class PlayerManager : MonoBehaviour
     public void Initialize()
     {
         UserInterface.PlayerName.text = NetworkManager.ClientName;
+       
         Pool[ClientPlayerIndex].ChangeHP += UserInterface.ChangeHP;
         Pool[ClientPlayerIndex].ChangeMP += UserInterface.ChangeMP;
+        Pool[ClientPlayerIndex].OnUpdateUiInfo();
     }
 
     #region Property
