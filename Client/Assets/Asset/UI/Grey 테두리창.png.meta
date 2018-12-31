@@ -99,10 +99,10 @@ TextureImporter:
       name: "Grey \uD14C\uB450\uB9AC\uCC3D_0"
       rect:
         serializedVersion: 2
-        x: 27
+        x: 26
         y: 135
-        width: 367
-        height: 316
+        width: 369
+        height: 317
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

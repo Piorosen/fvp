@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3792331521
+    locked: 0
+  - name: Ground
+    uniqueID: 2272899035
+    locked: 0
+  - name: Emermy
+    uniqueID: 3654859769
+    locked: 0
+  - name: Player
+    uniqueID: 575523901
+    locked: 0
+  - name: Fog
+    uniqueID: 1174147935
+    locked: 0
+  - name: UI
+    uniqueID: 950760733
+    locked: 0
