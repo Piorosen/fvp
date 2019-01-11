@@ -32,6 +32,12 @@ public class WarriorCharacter : BaseCharacter
         {
             UseSkill((long)JobType.Warrior.ActFrontDash);
         }
+
+        if (Input.GetKeyUp(KeyCode.R) == true)
+        {
+            HitSkill((long)JobType.Warrior.ActBasicSkill);
+        }
+
     }
 
     IEnumerator AttackMotion(float time)
@@ -70,6 +76,11 @@ public class WarriorCharacter : BaseCharacter
     public override void HitSkill(long SkillId)
     {
         var skill = SkillManager.GetSkill(SkillId);
+
+        skill.NetworkId = NetworkManager.ClientNetworkId.Value;
+        if (NetworkManager.Instance != null)
+                    NetworkManager.Instance.CastSkillHit(skill);
+
 
         HealthPoint -= skill.CastHealthPoint;
         EnergyPoint -= skill.CastEnergyPoint;
