@@ -119,6 +119,14 @@ public class NetworkManager {
     }
 
     /// <summary>
+    /// Close
+    /// </summary>
+    public void LogOut()
+    {
+        Network?.Close();
+    }
+
+    /// <summary>
     /// 방의 목록을 가져옵니다
     /// </summary>
     /// <returns>방의 목록</returns>
