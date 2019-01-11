@@ -32,8 +32,9 @@ public class SkillManager {
         var result = SkillQueue.FirstOrDefault((i) => i.SkillId == Skill.SkillId);
         if (result == null)
         {
-            if (GetSkill(Skill.SkillId).OnUseSkill(player))
-                SkillQueue.Add(GetSkill(Skill.SkillId));
+            var skill = GetSkill(Skill.SkillId);
+            if (skill.OnUseSkill(player))
+                SkillQueue.Add(skill);
             return true;
         }
         return false;
