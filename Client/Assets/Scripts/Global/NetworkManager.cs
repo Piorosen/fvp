@@ -121,7 +121,7 @@ public class NetworkManager {
     /// <summary>
     /// Close
     /// </summary>
-    public void LogOut()
+    public void Close()
     {
         Network?.Close();
     }
