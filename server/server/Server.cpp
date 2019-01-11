@@ -20,6 +20,6 @@ void Server::Run()
   ThreadPool::GetInstance().Run(std::thread::hardware_concurrency());
   RelayServerEventProcessor::GetInstance().Run();
 
-  nta::tcp_server<UserSession> server("127.0.0.1", 16333);
+  nta::tcp_server<UserSession> server("0.0.0.0", 16333);
   server.run();
 }

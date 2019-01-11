@@ -290,7 +290,7 @@ void RelayServerEventProcessor::HandleDisconnect(int64_t networkId, const packet
 	const int64_t roomId = GetUserRoomId(networkId);
 
 	Room* room = GetRoom(roomId);
-	if (room == nullptr)
+	if (room != nullptr)
 	{
 		packet::ExitRoomUserReq req;
 		
