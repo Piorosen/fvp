@@ -29,8 +29,10 @@ public class SkillManager {
         {
             var skill = SkillInfo.Insatence[Skill.SkillId];
             if (skill.OnUseSkill(player))
+            {
                 SkillQueue.Add(skill);
-            return true;
+                return true;
+            }
         }
         return false;
     }

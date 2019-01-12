@@ -198,7 +198,7 @@ public class PlayerManager : MonoBehaviour
 
     public void CastSkill(ActiveSkill Skill)
     {
-        Debug.Log("스킬 사용 함");
+        FindPlayer(Skill.NetworkId).UseSkillAck(Skill.SkillId);
     }
 
     public void CastHitSkill(Skill skill)
