@@ -30,7 +30,7 @@ public class SkillInfo : SingleTon<SkillInfo>
             }
             catch (Exception)
             {
-                Debug.Log($"ID : {index}");
+                Debug.Log($"미구현 : ID : {index}");
                 return null;
             }
         }

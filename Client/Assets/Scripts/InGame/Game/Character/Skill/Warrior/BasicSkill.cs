@@ -30,5 +30,6 @@ public class BasicSkill : ActiveSkill
         this.PhysicsDamage = 65.0f;
         this.CastEnergyPoint = 100.0f;
         this.CastHealthPoint = 50.0f;
+        this.Knockback = 3000;
     }
 }

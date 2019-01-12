@@ -226,7 +226,7 @@ public class NetworkManager {
     {
         Packet.CastSkillHitReq castSkill = new Packet.CastSkillHitReq
         {
-            NetworkId = ClientNetworkId.Value,
+            NetworkId = skill.NetworkId,
             SkillId = skill.SkillId,
             CastPosition = new Packet.Vector3
             {

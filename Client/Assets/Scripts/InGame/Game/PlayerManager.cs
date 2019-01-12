@@ -199,11 +199,13 @@ public class PlayerManager : MonoBehaviour
     public void CastSkill(ActiveSkill Skill)
     {
         FindPlayer(Skill.NetworkId).UseSkillAck(Skill.SkillId);
+        Debug.Log($"{Skill.SkillId} {Skill.NetworkId} CastSkill");
     }
 
     public void CastHitSkill(Skill skill)
     {
         FindPlayer(skill.NetworkId).HitSkillAck(skill.SkillId);
+        Debug.Log($"{skill.SkillId} {skill.NetworkId} CastHitSkill");
     }
 
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.

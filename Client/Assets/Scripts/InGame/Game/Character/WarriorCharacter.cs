@@ -92,20 +92,18 @@ public class WarriorCharacter : BaseCharacter
                 this.EnergyPoint -= skill.CastEnergyPoint;
 
                 NetworkManager.Instance?.CastSkill(skill);
+                
+                
+                var result = Physics2D.RaycastAll(transform.position, skill.CastDirection, 4000);
+                Debug.DrawRay(transform.position, skill.CastDirection * 40, Color.red, 5);
 
-                var result = new RaycastHit2D[10];
-
-                Physics2D.Raycast(transform.position,
-                                  new Vector2(transform.position.x, transform.position.y) + skill.CastDirection, new ContactFilter2D(), result);
-
+                Debug.Log(result.Length);
                 foreach (var user in result)
                 {
-                    if (user.collider != null)
+                    if (user.collider != null && user.collider.gameObject.layer == 9 && user.collider.GetComponent<Character>().NetworkId.Value != NetworkManager.ClientNetworkId.Value)
                     {
-                        if (user.collider.gameObject.layer == 10)
-                        {
-                            HitSkillReq(user.collider.GetComponent<Character>().NetworkId.Value, skill.SkillId);
-                        }
+                        Debug.Log($"{user.collider.GetComponent<Character>().NetworkId.Value} {NetworkManager.ClientNetworkId}");
+                        HitSkillReq(user.collider.GetComponent<Character>().NetworkId.Value, skill.SkillId);
                     }
                 }
 
@@ -121,7 +119,7 @@ public class WarriorCharacter : BaseCharacter
     public override void HitSkillAck(long SkillId)
     {
         var skill = SkillInfo.Insatence[SkillId];
-        if ((skill is ActiveSkill) == false)
+        if ((skill is ActiveSkill) == true)
         {
             var cast = (skill as ActiveSkill);
             HealthPoint -= cast.PhysicsDamage;
@@ -137,6 +135,7 @@ public class WarriorCharacter : BaseCharacter
     public override void HitSkillReq(long NetworkId, long SkillId)
     {
         var skill = SkillInfo.Insatence[SkillId];
+        skill.NetworkId = NetworkId;
         NetworkManager.Instance?.CastSkillHit(skill);
     }
 

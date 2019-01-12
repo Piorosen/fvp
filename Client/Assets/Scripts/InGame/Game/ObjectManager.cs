@@ -110,8 +110,10 @@ public class ObjectManager : MonoBehaviour
                 else if (info.Type == Packet.Type.CastSkillHitAck)
                 {
                     var castHitSkill = Packet.CastSkillHitAck.Parser.ParseFrom(info.Payload);
-
-                    PlayerManage.CastHitSkill(SkillInfo.Insatence[castHitSkill.SkillId]);
+                    var skill = SkillInfo.Insatence[castHitSkill.SkillId];
+                    skill.NetworkId = castHitSkill.NetworkId;
+                    Debug.Log($"Type : {skill.NetworkId}");
+                    PlayerManage.CastHitSkill(skill);
                 }
                 else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {
