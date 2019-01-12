@@ -92,7 +92,7 @@ public class ObjectManager : MonoBehaviour
                     Packet.CastSkillAck castSkill = Packet.CastSkillAck.Parser.ParseFrom(info.Payload);
                     if (SkillManager.IsActiveSkill(castSkill.SkillId))
                     {
-                        var skill = (SkillManager.GetSkill(castSkill.SkillId) as ActiveSkill);
+                        var skill = (SkillInfo.Insatence[castSkill.SkillId] as ActiveSkill);
                         skill.CastPosition = new Vector2
                         {
                             x = castSkill.CastPosition.X,
@@ -106,6 +106,12 @@ public class ObjectManager : MonoBehaviour
                         skill.NetworkId = castSkill.NetworkId;
                         PlayerManage.CastSkill(skill);
                     }
+                }
+                else if (info.Type == Packet.Type.CastSkillHitAck)
+                {
+                    var castHitSkill = Packet.CastSkillHitAck.Parser.ParseFrom(info.Payload);
+
+                    PlayerManage.CastHitSkill(SkillInfo.Insatence[castHitSkill.SkillId]);
                 }
                 else if (info.Type == Packet.Type.EnterNewRoomUserAck)
                 {

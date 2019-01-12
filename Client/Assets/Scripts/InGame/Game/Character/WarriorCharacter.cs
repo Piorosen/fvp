@@ -35,7 +35,7 @@ public class WarriorCharacter : BaseCharacter
 
         if (Input.GetKeyUp(KeyCode.R) == true)
         {
-            HitSkill((long)JobType.Warrior.ActBasicSkill);
+            HitSkillAck((long)JobType.Warrior.ActBasicSkill);
         }
 
     }
@@ -49,13 +49,35 @@ public class WarriorCharacter : BaseCharacter
         Anim.SetBool("Attack", false);
     }
 
-    public override void UseSkill(long SkillId)
+    public override void UseSkillAck(long SkillId)
     {
         if (NetworkManager.ClientNetworkId != NetworkId)
         {
             return;
         }
-        var skill = SkillManager.GetSkill(SkillId);
+        var skill = SkillInfo.Insatence[SkillId];
+        if (skill != null)
+        {
+            skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
+            skill.CastPosition = this.transform.position;
+            if (SkillManage.OnUseSkill(this, skill))
+            {
+                StartCoroutine(AttackMotion(0.5f));
+
+                this.HealthPoint -= skill.CastHealthPoint;
+                this.EnergyPoint -= skill.CastEnergyPoint;
+
+                NetworkManager.Instance?.CastSkill(skill);
+            }
+        }
+    }
+    public override void UseSkillReq(long SkillId)
+    {
+        if (NetworkManager.ClientNetworkId == NetworkId)
+        {
+            return;
+        }
+        var skill = SkillInfo.Insatence[SkillId];
         if (skill != null)
         {
             skill.CastDirection = Renderer.flipX ? Vector2.right : Vector2.left;
@@ -67,14 +89,17 @@ public class WarriorCharacter : BaseCharacter
                 this.HealthPoint -= skill.CastHealthPoint;
                 this.EnergyPoint -= skill.CastEnergyPoint;
                 
-                NetworkManager.Instance?.CastSkill(skill);
             }
         }
     }
 
-    public override void HitSkill(long SkillId)
+    /// <summary>
+    /// 데미지 입을 사랑 요청
+    /// </summary>
+    /// <param name="SkillId"></param>
+    public override void HitSkillAck(long SkillId)
     {
-        var skill = SkillManager.GetSkill(SkillId);
+        var skill = SkillInfo.Insatence[SkillId];
 
         skill.NetworkId = NetworkManager.ClientNetworkId.Value;
 
@@ -83,5 +108,21 @@ public class WarriorCharacter : BaseCharacter
         HealthPoint -= skill.CastHealthPoint;
         EnergyPoint -= skill.CastEnergyPoint;
     }
+    /// <summary>
+    /// 데미지 입었을 때 처리를 합니다.
+    /// </summary>
+    /// <param name="SkillId"></param>
+    public override void HitSkillReq(long SkillId)
+    {
+        var skill = SkillInfo.Insatence[SkillId];
+
+        skill.NetworkId = NetworkManager.ClientNetworkId.Value;
+
+        NetworkManager.Instance?.CastSkillHit(skill);
+
+        HealthPoint -= skill.CastHealthPoint;
+        EnergyPoint -= skill.CastEnergyPoint;
+    }
+
 
 }

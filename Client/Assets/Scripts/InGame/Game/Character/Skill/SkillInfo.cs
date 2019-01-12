@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,17 @@ public class SkillInfo : SingleTon<SkillInfo>
 
     public Skill this[long index]
     {
-        get => list[index];
+        get
+        {
+            try
+            {
+                return list[index];
+            }
+            catch (Exception)
+            {
+                Debug.Log($"ID : {index}");
+                return null;
+            }
+        }
     }
 }

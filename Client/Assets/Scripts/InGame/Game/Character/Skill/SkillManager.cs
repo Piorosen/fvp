@@ -14,7 +14,7 @@ public class SkillManager {
     
     public static bool IsActiveSkill(long Skill)
     {
-        return GetSkill(Skill) is ActiveSkill;
+        return SkillInfo.Insatence[Skill] is ActiveSkill;
     }
 
     public SkillManager()
@@ -27,7 +27,7 @@ public class SkillManager {
         var result = SkillQueue.FirstOrDefault((i) => i.SkillId == Skill.SkillId);
         if (result == null)
         {
-            var skill = GetSkill(Skill.SkillId);
+            var skill = SkillInfo.Insatence[Skill.SkillId];
             if (skill.OnUseSkill(player))
                 SkillQueue.Add(skill);
             return true;
@@ -53,16 +53,5 @@ public class SkillManager {
 
     
 
-    public static Skill GetSkill(long SkillId)
-    {
-        try
-        {
-            return SkillInfo.Insatence[SkillId];
-        }
-        catch (Exception)
-        {
-            Debug.Log($"ID : {SkillId}");
-            return null;
-        }
-    }
+    
 }

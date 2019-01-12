@@ -211,13 +211,24 @@ public class BaseCharacter : Character
         CanJumpCount = MaxJumpCount;
     }
 
-    public virtual void UseSkill(long SkillId)
+    public virtual void UseSkillAck(long SkillId)
+    {
+        throw new NotImplementedException();
+    }
+    public virtual void UseSkillReq(long SkillId)
     {
         throw new NotImplementedException();
     }
 
-    public virtual void HitSkill(long SkillId)
+    public virtual void HitSkillAck(long SkillId)
     {
         throw new NotImplementedException();
     }
+
+    public virtual void HitSkillReq(long NetworkId, long SkillId)
+    {
+        throw new NotImplementedException();
+
+    }
+
 }

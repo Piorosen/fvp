@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     /// <param name="NetworkId">네트워크 아이디를 입력받습니다.</param>
     /// <returns></returns>
-    public BaseCharacter FindPlayer(long? NetworkId)
+    public BaseCharacter FindPlayer(long NetworkId)
     {
         return Pool.First((item) => item.NetworkId == NetworkId);
     }
@@ -201,6 +201,10 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("스킬 사용 함");
     }
 
+    public void CastHitSkill(Skill skill)
+    {
+        FindPlayer(skill.NetworkId).HitSkillAck(skill.SkillId);
+    }
 
     // 클라이언트에서 물리적인 동작이 있으므로 Fixed에 처리합니다.
     private void FixedUpdate()
