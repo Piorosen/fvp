@@ -9,7 +9,7 @@ using System.Linq;
 /// 캐릭터가 스킬을 사용하게 될시 스킬의 쿨타임 및 상대방에게 데미지를 받는 것 역시 처리합니다.
 /// </summary>
 public class SkillManager {
-    public static Dictionary<long, Skill> SkillInfo;
+    
     List<Skill> SkillQueue;
     
     public static bool IsActiveSkill(long Skill)
@@ -19,11 +19,6 @@ public class SkillManager {
 
     public SkillManager()
     {
-        if (SkillInfo == null)
-        {
-            SkillInfo = new Dictionary<long, Skill>();
-            LoadSkill();
-        }
         SkillQueue = new List<Skill>();
     }
 
@@ -56,17 +51,13 @@ public class SkillManager {
         }
     }
 
-    void LoadSkill()
-    {
-        SkillInfo.Add(key: (long)JobType.Warrior.ActBasicSkill,
-                      value: new BasicSkill());
-    }
+    
 
     public static Skill GetSkill(long SkillId)
     {
         try
         {
-            return SkillInfo[SkillId];
+            return SkillInfo.Insatence[SkillId];
         }
         catch (Exception)
         {

@@ -66,9 +66,8 @@ public class WarriorCharacter : BaseCharacter
 
                 this.HealthPoint -= skill.CastHealthPoint;
                 this.EnergyPoint -= skill.CastEnergyPoint;
-
-                if (NetworkManager.Instance != null)
-                    NetworkManager.Instance.CastSkill(skill);
+                
+                NetworkManager.Instance?.CastSkill(skill);
             }
         }
     }
@@ -78,9 +77,8 @@ public class WarriorCharacter : BaseCharacter
         var skill = SkillManager.GetSkill(SkillId);
 
         skill.NetworkId = NetworkManager.ClientNetworkId.Value;
-        if (NetworkManager.Instance != null)
-                    NetworkManager.Instance.CastSkillHit(skill);
 
+        NetworkManager.Instance?.CastSkillHit(skill);
 
         HealthPoint -= skill.CastHealthPoint;
         EnergyPoint -= skill.CastEnergyPoint;

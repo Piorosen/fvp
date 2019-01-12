@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\NetworkSkill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\PassiveSkill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\Skill.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\SkillInfo.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\SkillManager.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\BasicSkill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\WarriorCharacter.cs" />
@@ -82,6 +83,7 @@
      <Compile Include="Assets\Scripts\PacketData.cs" />
      <Compile Include="Assets\Scripts\PacketInternal.cs" />
      <Compile Include="Assets\Scripts\PacketType.cs" />
+     <Compile Include="Assets\Scripts\Pattern\SingleTon.cs" />
      <None Include="Assets\Asset\Things need to add in Beta.txt" />
      <None Include="Assets\Asset\Standard Information.txt" />
  <Reference Include="Cinemachine">
