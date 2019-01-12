@@ -241,6 +241,9 @@ public class NetworkManager {
                 Z = -1
             }
         };
+        castSkill.NetworkId = skill.NetworkId;
+
+        Debug.Log($"NetHit : {skill.NetworkId}");
         Network.Send(Packet.Type.CastSkillHitReq, castSkill);
     }
 
