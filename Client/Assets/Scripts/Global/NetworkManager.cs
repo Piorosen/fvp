@@ -219,6 +219,32 @@ public class NetworkManager {
     }
 
     /// <summary>
+    /// 스킬을 사용 Hit 시 서버에게 전달합니다.
+    /// </summary>
+    /// <param name="skill">스킬 데이터를 넘깁니다.</param>
+    public void CastSkillHit(NetworkSkill skill)
+    {
+        Packet.CastSkillHitReq castSkill = new Packet.CastSkillHitReq
+        {
+            NetworkId = ClientNetworkId.Value,
+            SkillId = skill.SkillId,
+            CastPosition = new Packet.Vector3
+            {
+                X = skill.CastPosition.x,
+                Y = skill.CastPosition.y,
+                Z = -1
+            },
+            CastDirection = new Packet.Vector3
+            {
+                X = skill.CastDirection.x,
+                Y = skill.CastDirection.y,
+                Z = -1
+            }
+        };
+        Network.Send(Packet.Type.CastSkillHitReq, castSkill);
+    }
+
+    /// <summary>
     /// 서버와 최대 대기 할수 있는 시간을 지정합니다.
     /// </summary>
     /// <returns>패킷 데이터를 리턴합니다. (시간 초과시 널이 리턴됨)</returns>

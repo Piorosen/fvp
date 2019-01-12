@@ -133,3 +133,19 @@ message CastSkillAck
   Vector3 cast_position = 3;
   Vector3 cast_direction = 4;
 }
+
+message CastSkillHitReq
+{
+  int64 network_id = 1;
+  int64 skill_id = 2;
+  Vector3 cast_position = 3;
+  Vector3 cast_direction = 4;
+}
+
+message CastSkillHitAck
+{
+  int64 network_id = 1;
+  int64 skill_id = 2;
+  Vector3 cast_position = 3;
+  Vector3 cast_direction = 4;
+}

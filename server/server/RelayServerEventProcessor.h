@@ -25,6 +25,7 @@ public:
 	void HandleMoveRoomUserReq(int64_t networkId, const packet::MoveRoomUserReq& message);
 	void HandleExitRoomUserReq(int64_t networkId, const packet::ExitRoomUserReq& message);
 	void HandleCastSkillReq(int64_t networkId, const packet::CastSkillReq& message);
+	void HandleCastSkillHitReq(int64_t networkId, const packet::CastSkillHitReq& message);
 
 	void Send(int64_t networkId, packet::Type type, const google::protobuf::Message& message);
 	void Send(int64_t networkId, const void* data, int dataSize);
