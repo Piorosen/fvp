@@ -7,7 +7,7 @@ public class Global
 {
     public static class Network
     {
-        public static string IPAdress => "127.0.0.1";
+        public static string IPAdress => "222.114.234.12";
         public static int Port => 16333;
     }
 }

@@ -72,6 +72,7 @@ public class ObjectManager : MonoBehaviour
     /// 이것을 이제 개인 클라이언트에게 값을 던져줘야함.
     /// </summary>
     IEnumerator ServerRequest(){
+        float T1 = Time.time, T2;
         while (true)
         {
             var Que = NetworkManager.Instance.ServerRequest(PlayerManage.ClientPlayer.transform.position);
@@ -131,9 +132,17 @@ public class ObjectManager : MonoBehaviour
                     Debug.Log(info.Type);
                 }
             }
-            float ping = UnityEngine.Random.Range(0.001f, 0.1f);
-            PlayerManage.OnChangePing((int)(ping * 1000));
-            yield return new WaitForSeconds(ping);
+            T2 = Time.time;
+            int ping = 0;
+            if ((T2 - T1) != 0)
+            {
+                ping = (int)(1.0f / (T2 - T1));
+            }
+            T1 = Time.time;
+
+            PlayerManage.OnChangePing(ping);
+            yield return new WaitForSeconds(0.001f);
+
         }
     }
 
