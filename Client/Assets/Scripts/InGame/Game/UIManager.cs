@@ -98,7 +98,6 @@ public class UIManager : MonoBehaviour {
         HealthText.text = $"{(int)now} / {maxValue}";
     }
     public void ChangeMP(float now, float maxValue){
-        
         NowMP = now;
         MaxMP = maxValue;
         EnergyText.text = $"{(int)now} / {maxValue}";

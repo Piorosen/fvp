@@ -36,6 +36,13 @@ public class BaseCharacter : Character
         }
         HealthPoint = MaxHealth;
         EnergyPoint = MaxEnergy;
+        ChangeHP += ChangeHPEvent;
+    }
+
+    protected void ChangeHPEvent(float now, float max)
+    {
+        Debug.Log($"{now}");
+        HealthObject.value = now / max;
     }
 
     public void OnUpdateUiInfo()

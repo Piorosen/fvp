@@ -9,7 +9,7 @@ public class EditorQuit : MonoBehaviour
     static bool WantsToQuit()
     {
         Debug.Log("Player  quitting. NetworkManager.Instance.Close()");
-        NetworkManager.Instance.Close();
+        NetworkManager.Instance?.Close();
         return true;
     }
 
