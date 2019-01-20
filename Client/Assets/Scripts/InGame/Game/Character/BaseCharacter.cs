@@ -41,7 +41,6 @@ public class BaseCharacter : Character
 
     protected void ChangeHPEvent(float now, float max)
     {
-        Debug.Log($"{now}");
         HealthObject.value = now / max;
     }
 

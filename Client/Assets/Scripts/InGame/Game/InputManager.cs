@@ -26,45 +26,41 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     /// </summary>
     void CheckKeyboard()
     {
-        if (InputVector.x == 0.0f)
+        if (!IsDrag)
         {
             if (Input.GetKey(KeyCode.A) == true)
             {
                 InputVector.x = -1;
             }
-            else if (Input.GetKey(KeyCode.D) == true)
+            else
             {
-                InputVector.x = 1;
+                if (Input.GetKey(KeyCode.D) == true)
+                {
+                    InputVector.x = 1;
+                }
+                else
+                {
+                    InputVector.x = 0;
+                }
             }
-        }
-        if (InputVector.y == 0.0f)
-        {
             if (Input.GetKey(KeyCode.S) == true)
             {
                 InputVector.y = -1;
             }
-            else if (Input.GetKey(KeyCode.W) == true)
+            else
             {
-                InputVector.y = 1;
+                if (Input.GetKey(KeyCode.W) == true)
+                {
+                    InputVector.y = 1;
+                }
+                else
+                {
+                    InputVector.y = 0;
+                }
             }
+            
         }
-
-        if (Input.GetKey(KeyCode.A) == false && InputVector.x == -1)
-        {
-            InputVector.x = 0;
-        }
-        if (Input.GetKey(KeyCode.D) == false && InputVector.x == 1)
-        {
-            InputVector.x = 0;
-        }
-        if (Input.GetKey(KeyCode.W) == false && InputVector.y == 1)
-        {
-            InputVector.y = 0;
-        }
-        if (Input.GetKey(KeyCode.S) == false && InputVector.y == -1)
-        {
-            InputVector.y = 0;
-        }
+        SetButtonColor();
     }
 
 
@@ -73,9 +69,36 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     /// </summary>
     void Update()
     {
-        if (!IsDrag)
+        CheckKeyboard();
+    }
+
+    void SetButtonColor()
+    {
+        if (InputVector.y >= 0.5)
         {
-            CheckKeyboard();
+            image[0].color = new Color(130.0f / 255.0f, 0, 0);
+            image[3].color = new Color(1, 1, 1);
+        }
+        if (InputVector.x > 0)
+        {
+            image[1].color = new Color(1, 1, 1);
+            image[2].color = new Color(130.0f / 255.0f, 0, 0);
+        }
+        if (InputVector.x < 0)
+        {
+            image[1].color = new Color(130.0f / 255.0f, 0, 0);
+            image[2].color = new Color(1, 1, 1);
+        }
+        if (InputVector.y <= -0.5)
+        {
+            image[0].color = new Color(1, 1, 1);
+            image[3].color = new Color(130.0f / 255.0f, 0, 0);
+        }
+
+        if (-0.5 <= InputVector.y && InputVector.y < 0.5)
+        {
+            image[0].color = new Color(1, 1, 1);
+            image[3].color = new Color(1, 1, 1);
         }
     }
 
@@ -99,30 +122,8 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                             : InputVector;
 
 
-
-            if (InputVector.y >= 0.5)
-            {
-                image[0].color = new Color(130.0f/255.0f, 0, 0);
-                image[3].color = new Color(1, 1, 1);
-            }if (InputVector.x > 0)
-            {
-                image[1].color = new Color(1, 1, 1);
-                image[2].color = new Color(130.0f / 255.0f, 0, 0);
-            }if (InputVector.x < 0)
-            {
-                image[1].color = new Color(130.0f / 255.0f, 0, 0);
-                image[2].color = new Color(1, 1, 1);
-            }if (InputVector.y <= -0.5)
-            {
-                image[0].color = new Color(1, 1, 1);
-                image[3].color = new Color(130.0f / 255.0f, 0, 0);
-            }
-
-            if (-0.5 <= InputVector.y && InputVector.y < 0.5){
-                image[0].color = new Color(1, 1, 1);
-                image[3].color = new Color(1, 1, 1);
-            }
-
+            SetButtonColor();
+            
         }
     }
     public void OnPointerDown(PointerEventData eventData)

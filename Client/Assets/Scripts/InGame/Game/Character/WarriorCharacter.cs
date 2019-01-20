@@ -22,8 +22,8 @@ public class WarriorCharacter : BaseCharacter
     private void Update()
     {
         SkillManage.Update();
-        HealthPoint += 10 * Time.deltaTime;
-        EnergyPoint += 50 * Time.deltaTime;
+        HealthPoint += 5 * Time.deltaTime;
+        EnergyPoint += 10 * Time.deltaTime;
         if (Input.GetKey(KeyCode.Q) == true)
         {
             UseSkillReq((long)JobType.Warrior.ActBasicSkill);
@@ -33,10 +33,10 @@ public class WarriorCharacter : BaseCharacter
             UseSkillReq((long)JobType.Warrior.ActFrontDash);
         }
 
-        if (Input.GetKeyUp(KeyCode.R) == true)
-        {
-            HitSkillAck((long)JobType.Warrior.ActBasicSkill);
-        }
+        //if (Input.GetKeyUp(KeyCode.R) == true)
+        //{
+        //    HitSkillAck((long)JobType.Warrior.ActBasicSkill);
+        //}
 
     }
 

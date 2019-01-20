@@ -40,7 +40,6 @@ public class ObjectManager : MonoBehaviour
             NetworkManager.ClientName = "Offline";
             PlayerManage.AddPlayer(0, 0, "Offline", 0);
 
-            Debug.Log(NetworkManager.ClientNetworkId);
             Result = false;
         }
 

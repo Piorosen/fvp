@@ -27,9 +27,9 @@ public class BasicSkill : ActiveSkill
         this.SkillId = (long)JobType.Warrior.ActBasicSkill;
         this.MaxDelay = 1.5f;
         this.Distance = 2.0f;
-        this.PhysicsDamage = 65.0f;
-        this.CastEnergyPoint = 100.0f;
-        this.CastHealthPoint = 50.0f;
+        this.PhysicsDamage = 60.0f;
+        this.CastEnergyPoint = 40.0f;
+        this.CastHealthPoint = 0.0f;
         this.Knockback = 3000;
     }
 }
