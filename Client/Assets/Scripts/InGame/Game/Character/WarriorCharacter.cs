@@ -93,9 +93,8 @@ public class WarriorCharacter : BaseCharacter
 
                 NetworkManager.Instance?.CastSkill(skill);
                 
-                
-                var result = Physics2D.RaycastAll(transform.position, skill.CastDirection, 4000);
-                Debug.DrawRay(transform.position, skill.CastDirection * 40, Color.red, 5);
+                var result = Physics2D.RaycastAll(transform.position, skill.CastDirection, skill.Distance);
+                Debug.DrawRay(transform.position, skill.CastDirection * skill.Distance, Color.red, 2);
 
                 Debug.Log(result.Length);
                 foreach (var user in result)

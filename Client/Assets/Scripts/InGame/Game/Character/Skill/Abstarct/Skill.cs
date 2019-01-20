@@ -11,6 +11,8 @@ public abstract class Skill : NetworkSkill
 {
     public abstract bool OnUseSkill(BaseCharacter player);
 
+    // 블럭 1칸당 크기
+    public float Distance = 24;
     public float CastEnergyPoint = 0;
     public float CastHealthPoint = 0;
 }
