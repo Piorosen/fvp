@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 500
   MaxEnergy: 300
-  MaxSpeed: 0
+  MaxSpeed: 200
   JumpPower: 10000
   Accelerate: 10000
   Speed: 0

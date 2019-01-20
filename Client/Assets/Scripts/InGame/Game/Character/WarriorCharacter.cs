@@ -137,6 +137,14 @@ public class WarriorCharacter : BaseCharacter
         skill.NetworkId = NetworkId;
         NetworkManager.Instance?.CastSkillHit(skill);
     }
+    public override void DeadAck()
+    {
 
-   
+    }
+
+    public override void DeadReq()
+    {
+
+    }
+
 }

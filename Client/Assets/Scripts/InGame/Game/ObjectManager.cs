@@ -121,7 +121,9 @@ public class ObjectManager : MonoBehaviour
                     PlayerManage.AddPlayer(0, 0, enter.NewUser.Name, enter.NewUser.NetworkId);
                     Debug.Log("새로운 유저 입장");
                 }
-                else if (info.Type == Packet.Type.Disconnect)
+                else if (info.Type == Packet.Type.Disconnect
+                    || info.Type == Packet.Type.ExitRoomUserAck
+                    || info.Type == Packet.Type.LogoutAck)
                 {
                     Packet.Disconnect disconnect = Packet.Disconnect.Parser.ParseFrom(info.Payload);
                     PlayerManage.DelPlayer(disconnect.NetworkId);
@@ -141,7 +143,6 @@ public class ObjectManager : MonoBehaviour
 
             PlayerManage.OnChangePing(ping);
             yield return new WaitForSeconds(0.001f);
-
         }
     }
 

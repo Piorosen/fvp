@@ -100,6 +100,12 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             image[0].color = new Color(1, 1, 1);
             image[3].color = new Color(1, 1, 1);
         }
+        if (-0.5 <= InputVector.x && InputVector.x < 0.5)
+        {
+            image[1].color = new Color(1, 1, 1);
+            image[2].color = new Color(1, 1, 1);
+        }
+
     }
 
     bool IsDrag = false;

@@ -245,10 +245,11 @@ public class PlayerManager : MonoBehaviour
         Destroy(Pool[index]);
         return (Pool[index] = null);
     }
-    public bool DelPlayer(long? UID)
+    public bool DelPlayer(long UID)
     {
-        //var player = FindPlayer(UID);
-        //Destroy(player);
+        var player = FindPlayer(UID);
+        DelPlayer(player);
+        Destroy(player);
         return (true);
     }
 

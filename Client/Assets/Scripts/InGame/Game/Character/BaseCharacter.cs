@@ -179,6 +179,15 @@ public class BaseCharacter : Character
     protected float ClientMove()
     {
         float Acc = Accelerate * Time.fixedDeltaTime;
+
+        // Debug.Log(RigidBody.velocity);
+        // Debug.Log(RigidBody.velocity.magnitude);
+        // Debug.Log(RigidBody.velocity.normalized * MaxSpeed);
+
+        if (RigidBody.velocity.magnitude > MaxSpeed)
+        {
+            RigidBody.velocity = RigidBody.velocity.normalized * MaxSpeed;
+        }
         // 이동관련 함수 처리
         RigidBody.AddForce(new Vector2(InputManager.InputVector.x * Acc, 0));
 
@@ -204,6 +213,7 @@ public class BaseCharacter : Character
             NextMovePosition = ServerMovement();
             transform.Translate(NextMovePosition);
         }
+        
         SetAnim(NextMovePosition);
     }
 
@@ -216,6 +226,7 @@ public class BaseCharacter : Character
         IsGround = true;
         CanJumpCount = MaxJumpCount;
     }
+
 
     public virtual void UseSkillAck(long SkillId)
     {
@@ -234,7 +245,15 @@ public class BaseCharacter : Character
     public virtual void HitSkillReq(long NetworkId, long SkillId)
     {
         throw new NotImplementedException();
+    }
 
+    public virtual void DeadReq()
+    {
+        throw new NotImplementedException();
+    }
+    public virtual void DeadAck()
+    {
+        throw new NotImplementedException();
     }
 
 }
