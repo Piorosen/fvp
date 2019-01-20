@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public static class JobType
 {
-    public enum Warrior
+    public enum Warrior : long
     {
-        ActBasicSkill = 0,
+        ActBasicSkill = 0L,
         ActLesserAttack,
         ActFrontDash,
         ActDaggerDown,

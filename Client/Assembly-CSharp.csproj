@@ -68,7 +68,15 @@
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Abstarct\Skill.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\SkillInfo.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\SkillManager.cs" />
-     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\BasicSkill.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\BasicSkill.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\DaggerDown.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\EnergyEffect.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\FrontDash.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\LesserAttack.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Active\PerfectDefence.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Passive\AllKnckback.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Passive\FiveStack.cs" />
+     <Compile Include="Assets\Scripts\InGame\Game\Character\Skill\Warrior\Passive\LesserDagger.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\Character\WarriorCharacter.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\InGameCamera.cs" />
      <Compile Include="Assets\Scripts\InGame\Game\InputManager.cs" />
@@ -85,6 +93,8 @@
      <Compile Include="Assets\Scripts\PacketType.cs" />
      <Compile Include="Assets\Scripts\Pattern\SingleTon.cs" />
      <None Include="Assets\Asset\Things need to add in Beta.txt" />
+     <None Include="Assets\Asset\Item Explanation.txt" />
+     <None Include="Assets\Asset\warrior.txt" />
      <None Include="Assets\Asset\Standard Information.txt" />
  <Reference Include="Cinemachine">
  <HintPath>C:/Users/aoika/Desktop/git/fvp/Client/Library/ScriptAssemblies/Cinemachine.dll</HintPath>

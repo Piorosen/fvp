@@ -14,6 +14,4 @@ public abstract class ActiveSkill : Skill
     public float PhysicsDamage;
     public float MaxDelay;
     public float Delay;
-    // 블럭 1칸당 크기
-    public float Distance = 24;
 }
