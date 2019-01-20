@@ -84,6 +84,9 @@ public abstract class Character : MonoBehaviour
     // 현재 속도
     public float Speed;
 
-    protected abstract void SetAnim(Vector2 animData);
+    public bool Dead = false;
+    public float RigidTime = 0.0f;
+
+    protected abstract void SetAnim(Vector2 animData, bool check);
     public abstract void Movement();
 }

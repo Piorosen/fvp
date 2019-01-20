@@ -48,10 +48,7 @@ public class WarriorCharacter : BaseCharacter
         yield return new WaitForSeconds(time);
         Anim.SetBool("Attack", false);
     }
-
-
-
-
+    
     public override void UseSkillAck(long SkillId)
     {
         if (NetworkManager.ClientNetworkId == NetworkId)
@@ -111,32 +108,6 @@ public class WarriorCharacter : BaseCharacter
     }
     
     
-    /// <summary>
-    /// 데미지 입었을 때 처리를 합니다.
-    /// </summary>
-    /// <param name="SkillId"></param>
-    public override void HitSkillAck(long SkillId)
-    {
-        var skill = SkillInfo.Insatence[SkillId];
-        if ((skill is ActiveSkill) == true)
-        {
-            var cast = (skill as ActiveSkill);
-            HealthPoint -= cast.PhysicsDamage;
-            RigidBody.velocity = new Vector2();
-            RigidBody.AddForce(cast.CastDirection * cast.Knockback);
-        }
-    }
-
-    /// <summary>
-    /// 데미지 입을 사랑 요청
-    /// </summary>
-    /// <param name="SkillId"></param>
-    public override void HitSkillReq(long NetworkId, long SkillId)
-    {
-        var skill = SkillInfo.Insatence[SkillId];
-        skill.NetworkId = NetworkId;
-        NetworkManager.Instance?.CastSkillHit(skill);
-    }
     public override void DeadAck()
     {
 

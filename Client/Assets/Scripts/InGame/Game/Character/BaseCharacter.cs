@@ -68,8 +68,13 @@ public class BaseCharacter : Character
     protected bool IsHiding = false;
     protected bool IsGround = false;
 
-    protected override void SetAnim(Vector2 animData)
+    protected override void SetAnim(Vector2 animData, bool check = false)
     {
+        if (Check == true)
+        {
+            return;
+        }
+
         if (animData.x > 0)
         {
             Renderer.flipX = true;
@@ -107,7 +112,6 @@ public class BaseCharacter : Character
 
         if (animData.x == 0 || animData.y != 0)
         {
-           
             Sound.StopSound(SoundName.Warrior.Walk);
         }
     }
@@ -171,6 +175,7 @@ public class BaseCharacter : Character
             RigidBody.AddForce(new Vector2(0, JumpPower));
             RigidBody.velocity = new Vector2(RigidBody.velocity.x, 0);
             JumpDelay = 0.3f;
+            EnergyPoint -= 5;
             CanJumpCount--;
         }
         JumpDelay -= Time.fixedDeltaTime;
@@ -190,7 +195,7 @@ public class BaseCharacter : Character
         }
         // 이동관련 함수 처리
         RigidBody.AddForce(new Vector2(InputManager.InputVector.x * Acc, 0));
-
+        EnergyPoint -= 3;
         return RigidBody.velocity.x;
     }
     #endregion
@@ -201,20 +206,36 @@ public class BaseCharacter : Character
     public override void Movement()
     {
         Vector2 NextMovePosition = new Vector2();
+        bool check = false;
+
 
         if (NetworkId == NetworkManager.ClientNetworkId)
         {
-            Jump();
-            ClientMove();
-            NextMovePosition = RigidBody.velocity;
+            if (RigidTime <= 0.0f)
+            {
+                Jump();
+                ClientMove();
+                NextMovePosition = RigidBody.velocity;
+            }
+            else
+            {
+                RigidTime -= Time.deltaTime;
+                if (Dead == true && RigidTime <= 0.0f)
+                {
+                    HealthPoint = MaxHealth;
+                    EnergyPoint = MaxEnergy;
+                }
+            }
         }
         else
         {
+            
             NextMovePosition = ServerMovement();
+            check = !IsGround && NextMovePosition.magnitude == 0.0f;
             transform.Translate(NextMovePosition);
         }
         
-        SetAnim(NextMovePosition);
+        SetAnim(NextMovePosition, check);
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
@@ -237,14 +258,35 @@ public class BaseCharacter : Character
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// 데미지 입었을 때 처리를 합니다.
+    /// </summary>
+    /// <param name="SkillId"></param>
     public virtual void HitSkillAck(long SkillId)
     {
-        throw new NotImplementedException();
-    }
+        var skill = SkillInfo.Insatence[SkillId];
+        if ((skill is ActiveSkill) == true)
+        {
+            var cast = (skill as ActiveSkill);
+            HealthPoint -= cast.PhysicsDamage;
+            RigidBody.velocity = new Vector2();
+            RigidBody.AddForce(cast.CastDirection * cast.Knockback);
+        }
 
+        if (HealthPoint == 0.0f && Dead == false)
+        {
+            RigidTime = 10.0f;
+        }
+    }
+    /// <summary>
+    /// 데미지 입을 사랑 요청
+    /// </summary>
+    /// <param name="SkillId"></param>
     public virtual void HitSkillReq(long NetworkId, long SkillId)
     {
-        throw new NotImplementedException();
+        var skill = SkillInfo.Insatence[SkillId];
+        skill.NetworkId = NetworkId;
+        NetworkManager.Instance?.CastSkillHit(skill);
     }
 
     public virtual void DeadReq()

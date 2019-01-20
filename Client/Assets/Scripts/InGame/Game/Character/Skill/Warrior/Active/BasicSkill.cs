@@ -28,7 +28,7 @@ public class BasicSkill : ActiveSkill
         this.MaxDelay = 1.5f;
         this.Distance *= 1.0f;
         this.PhysicsDamage = 65.0f;
-        this.CastEnergyPoint = 0.0f;
+        this.CastEnergyPoint = 10.0f;
         this.CastHealthPoint = 0.0f;
         this.Knockback = 3000;
     }
